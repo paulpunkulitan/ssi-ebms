@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_ph_com_smesoft_hms_domain_Floor" items="${floors}" z="ehQzRD5svIMBYXwkoRJ6rsgmvKA=">
+        <table:table data="${floors}" id="l_ph_com_smesoft_hms_domain_Floor" path="/floors" z="juDiMwnkW6rVZqMYRlAiW0fJEKc=">
+            <table:column id="c_ph_com_smesoft_hms_domain_Floor_floorNumber" property="floorNumber" z="/Q8+mUPQPDF7NAbTtqqTf0v+7Ts="/>
+            <table:column id="c_ph_com_smesoft_hms_domain_Floor_description" property="description" z="eSqkCq/8qhJ//6ncivuM1VYQYO4="/>
+        </table:table>
+    </page:list>
+</div>

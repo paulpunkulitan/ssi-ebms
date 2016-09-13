@@ -1,0 +1,10 @@
+﻿#txtSearch{
+	background-color: gray;
+	color: white;
+}
+.btnEnrolls{
+	padding: 0px;
+}
+table.dataTable tbody tr {
+    background-color: #282828;
+}
