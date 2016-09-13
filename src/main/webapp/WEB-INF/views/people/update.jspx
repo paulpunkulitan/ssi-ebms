@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_ph_com_smesoft_hms_domain_Person" modelAttribute="person" path="/people" versionField="Version" z="uNnh8kjLKh/wB5WMjn6l4O869p8=">
+        <field:input field="palmusId" id="c_ph_com_smesoft_hms_domain_Person_palmusId" max="30" min="3" required="true" z="EQ2xfe/6vDUrmU9sn8ZZgthNfFo="/>
+        <field:textarea field="firstName" id="c_ph_com_smesoft_hms_domain_Person_firstName" z="75d1Mn5QQ4Z4r3tdVE7kEBN+6Y8="/>
+        <field:textarea field="middleName" id="c_ph_com_smesoft_hms_domain_Person_middleName" z="CAUHUdhmGzVw0vCcsQb805S04Bk="/>
+        <field:textarea field="lastName" id="c_ph_com_smesoft_hms_domain_Person_lastName" z="GYa+LFbzNtRMv1YW6TadbL/5HFI="/>
+        <field:datetime dateTimePattern="${person_birthdate_date_format}" field="birthDate" id="c_ph_com_smesoft_hms_domain_Person_birthDate" past="true" required="true" z="lciBetr2ZSoZFz8jkjtyMO5rsxA="/>
+        <field:select field="gender" id="c_ph_com_smesoft_hms_domain_Person_gender" items="${persontypes}" path="persontypes" required="true" z="85NXGtuQzP2vz+8Qh4vR75J+9VI="/>
+        <field:select field="personType" id="c_ph_com_smesoft_hms_domain_Person_personType" items="${genders}" path="genders" required="true" z="Vz7e539QHd4SSG7bHoquR4iy2mE="/>
+    </form:update>
+</div>

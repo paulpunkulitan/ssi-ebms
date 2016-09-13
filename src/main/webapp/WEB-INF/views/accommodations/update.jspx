@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_ph_com_smesoft_hms_domain_Accommodation" modelAttribute="accommodation" path="/accommodations" versionField="Version" z="NADeSmQ7YlR4O8cztj7G/H/zBOc=">
+        <field:datetime dateTimePattern="${accommodation_startdate_date_format}" field="startDate" id="c_ph_com_smesoft_hms_domain_Accommodation_startDate" required="true" z="RWbshSx29bMZUPGaQ28v6KUJQZM="/>
+        <field:datetime dateTimePattern="${accommodation_enddate_date_format}" field="endDate" id="c_ph_com_smesoft_hms_domain_Accommodation_endDate" required="true" z="01MsHx81Anl5Q/Hqyb0ufmJ1Cc8="/>
+        <field:select field="person" id="c_ph_com_smesoft_hms_domain_Accommodation_person" itemValue="id" items="${people}" path="/people" z="KeOBF+cmf0F1arohPFbEn9vjY48="/>
+        <field:select field="room" id="c_ph_com_smesoft_hms_domain_Accommodation_room" itemValue="id" items="${rooms}" path="/rooms" z="ERFjm6S3/e0xQMzz6pZ4jAzTHEM="/>
+    </form:update>
+</div>

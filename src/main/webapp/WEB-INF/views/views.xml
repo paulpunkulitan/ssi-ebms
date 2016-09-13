@@ -5,10 +5,6 @@
 
 <tiles-definitions>
 
-  <definition name="home" extends="bare">
-    <put-attribute name="body" value="/WEB-INF/views/homepage.jspx" />
-  </definition>
-
   <definition name="index" extends="default">
     <put-attribute name="body" value="/WEB-INF/views/index.jspx" />
   </definition>

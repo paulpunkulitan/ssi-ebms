@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_ph_com_smesoft_hms_domain_Person" object="${person}" path="/people" z="SKRUYXaiZJA9udJYMi/r5ECpQh4=">
+        <field:display field="palmusId" id="s_ph_com_smesoft_hms_domain_Person_palmusId" object="${person}" z="a5fU0bHgTMjdB1HcdYdRxbVOP4U="/>
+        <field:display field="firstName" id="s_ph_com_smesoft_hms_domain_Person_firstName" object="${person}" z="qo0u2I5YVI2AHbu3SauoM9OCarQ="/>
+        <field:display field="middleName" id="s_ph_com_smesoft_hms_domain_Person_middleName" object="${person}" z="pacbj0Wv9On8wb75b83MPliteug="/>
+        <field:display field="lastName" id="s_ph_com_smesoft_hms_domain_Person_lastName" object="${person}" z="Ut143Y71xOCF34NLWZf+rV9eK3o="/>
+        <field:display date="true" dateTimePattern="${person_birthdate_date_format}" field="birthDate" id="s_ph_com_smesoft_hms_domain_Person_birthDate" object="${person}" z="xRwhaloWeFZ6HWLTcsufwtQfnmM="/>
+        <field:display field="gender" id="s_ph_com_smesoft_hms_domain_Person_gender" object="${person}" z="ki213FEbNPR2HdQ4n4XpxCCNN3M="/>
+        <field:display field="personType" id="s_ph_com_smesoft_hms_domain_Person_personType" object="${person}" z="dVxRB39kREwT/FtxDKZQHF3lbyk="/>
+    </page:show>
+</div>

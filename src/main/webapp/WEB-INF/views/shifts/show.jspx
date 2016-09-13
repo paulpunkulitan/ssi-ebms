@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_ph_com_smesoft_hms_domain_Shift" object="${shift}" path="/shifts" z="LMlgyOWuoc9xGapcUIQj0g11c2g=">
+        <field:display date="true" dateTimePattern="${shift_shiftdate_date_format}" field="shiftDate" id="s_ph_com_smesoft_hms_domain_Shift_shiftDate" object="${shift}" z="ZA4gJykZ+dPyhB3YvSz0tLOML1E="/>
+        <field:display field="person" id="s_ph_com_smesoft_hms_domain_Shift_person" object="${shift}" z="zM58X34wrQJ1tATiTz8LnHYt5zc="/>
+        <field:display field="floor" id="s_ph_com_smesoft_hms_domain_Shift_floor" object="${shift}" z="unMqT3LqX8wBnhRzs9FIibU7AA8="/>
+    </page:show>
+</div>

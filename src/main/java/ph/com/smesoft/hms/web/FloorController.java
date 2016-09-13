@@ -3,7 +3,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +19,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 import ph.com.smesoft.hms.domain.Floor;
-import ph.com.smesoft.hms.service.FloorService;
 
 @Controller
 @RequestMapping("/floors")
@@ -32,7 +30,7 @@ public class FloorController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         try {
-            Floor floor = floorService.findFloor(id);
+            Floor floor = Floor.findFloor(id);
             if (floor == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
@@ -48,7 +46,7 @@ public class FloorController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         try {
-            List<Floor> result = floorService.findAllFloors();
+            List<Floor> result = Floor.findAllFloors();
             return new ResponseEntity<String>(Floor.toJsonArray(result), headers, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -61,7 +59,7 @@ public class FloorController {
         headers.add("Content-Type", "application/json");
         try {
             Floor floor = Floor.fromJsonToFloor(json);
-            floorService.saveFloor(floor);
+            floor.persist();
             RequestMapping a = (RequestMapping) getClass().getAnnotation(RequestMapping.class);
             headers.add("Location",uriBuilder.path(a.value()[0]+"/"+floor.getId().toString()).build().toUriString());
             return new ResponseEntity<String>(headers, HttpStatus.CREATED);
@@ -76,7 +74,7 @@ public class FloorController {
         headers.add("Content-Type", "application/json");
         try {
             for (Floor floor: Floor.fromJsonArrayToFloors(json)) {
-                floorService.saveFloor(floor);
+                floor.persist();
             }
             return new ResponseEntity<String>(headers, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -91,7 +89,7 @@ public class FloorController {
         try {
             Floor floor = Floor.fromJsonToFloor(json);
             floor.setId(id);
-            if (floorService.updateFloor(floor) == null) {
+            if (floor.merge() == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<String>(headers, HttpStatus.OK);
@@ -105,19 +103,16 @@ public class FloorController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         try {
-            Floor floor = floorService.findFloor(id);
+            Floor floor = Floor.findFloor(id);
             if (floor == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
-            floorService.deleteFloor(floor);
+            floor.remove();
             return new ResponseEntity<String>(headers, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-	@Autowired
-    FloorService floorService;
 
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(@Valid Floor floor, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -126,7 +121,7 @@ public class FloorController {
             return "floors/create";
         }
         uiModel.asMap().clear();
-        floorService.saveFloor(floor);
+        floor.persist();
         return "redirect:/floors/" + encodeUrlPathSegment(floor.getId().toString(), httpServletRequest);
     }
 
@@ -138,7 +133,7 @@ public class FloorController {
 
 	@RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("floor", floorService.findFloor(id));
+        uiModel.addAttribute("floor", Floor.findFloor(id));
         uiModel.addAttribute("itemId", id);
         return "floors/show";
     }
@@ -149,7 +144,7 @@ public class FloorController {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
             uiModel.addAttribute("floors", Floor.findFloorEntries(firstResult, sizeNo, sortFieldName, sortOrder));
-            float nrOfPages = (float) floorService.countAllFloors() / sizeNo;
+            float nrOfPages = (float) Floor.countFloors() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
             uiModel.addAttribute("floors", Floor.findAllFloors(sortFieldName, sortOrder));
@@ -164,20 +159,20 @@ public class FloorController {
             return "floors/update";
         }
         uiModel.asMap().clear();
-        floorService.updateFloor(floor);
+        floor.merge();
         return "redirect:/floors/" + encodeUrlPathSegment(floor.getId().toString(), httpServletRequest);
     }
 
 	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, floorService.findFloor(id));
+        populateEditForm(uiModel, Floor.findFloor(id));
         return "floors/update";
     }
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        Floor floor = floorService.findFloor(id);
-        floorService.deleteFloor(floor);
+        Floor floor = Floor.findFloor(id);
+        floor.remove();
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());

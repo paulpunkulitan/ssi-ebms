@@ -3,9 +3,25 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
-        <menu:category id="c_floor" z="mq4r35EPYTSNnjcgS9PhUYj19Uc=">
-            <menu:item id="i_floor_new" messageCode="global_menu_new" url="/floors?form" z="linYHVt57vLPqcdXzwp2Ymmc5lI="/>
-            <menu:item id="i_floor_list" messageCode="global_menu_list" url="/floors?page=1&amp;size=${empty param.size ? 10 : param.size}" z="BotzBiBvnnvcEjetwo0nrInOv7Y="/>
+        <menu:category id="c_shift" z="fZ2CQvdcjbKlTIwy8CFSv8jPJZE=">
+            <menu:item id="i_shift_new" messageCode="global_menu_new" url="/shifts?form" z="0CZgzcW7tVrGQihcCZG2pTKu45w="/>
+            <menu:item id="i_shift_list" messageCode="global_menu_list" url="/shifts?page=1&amp;size=${empty param.size ? 10 : param.size}" z="pDLLViQzLCG1iYK+nFprusaKls0="/>
+        </menu:category>
+        <menu:category id="c_accommodation" z="vGYJojDP0wrx7dMCljloLK6kXP8=">
+            <menu:item id="i_accommodation_new" messageCode="global_menu_new" url="/accommodations?form" z="M/qQekQhj7+RNYxiv25+GS3KtIQ="/>
+            <menu:item id="i_accommodation_list" messageCode="global_menu_list" url="/accommodations?page=1&amp;size=${empty param.size ? 10 : param.size}" z="MD00+MowgHY2T9wvIUM8WG33YSo="/>
+        </menu:category>
+        <menu:category id="c_floor" z="/VLSibUp6tQBZK0Sx7tRAwSrRNo=">
+            <menu:item id="i_floor_new" messageCode="global_menu_new" url="/floors?form" z="YZbP7N8anWGAcXqB4zJwAB8wyFI="/>
+            <menu:item id="i_floor_list" messageCode="global_menu_list" url="/floors?page=1&amp;size=${empty param.size ? 10 : param.size}" z="LmvRfbDkWBE8kh55JBf3SHcRF7E="/>
+        </menu:category>
+        <menu:category id="c_room" z="e3e6qTdks0EVUaGbVSSNbM0HcXc=">
+            <menu:item id="i_room_new" messageCode="global_menu_new" url="/rooms?form" z="fvAkKg908k/4/1ftKfhIuAeNmjE="/>
+            <menu:item id="i_room_list" messageCode="global_menu_list" url="/rooms?page=1&amp;size=${empty param.size ? 10 : param.size}" z="M5XFOS8myAtDzhNTcTwqAph0QtQ="/>
+        </menu:category>
+        <menu:category id="c_person" z="Cz66KzcF6GdyygpbYfiE+EkFFFA=">
+            <menu:item id="i_person_new" messageCode="global_menu_new" url="/people?form" z="IlD8NFD64X8egaRrgHbQeWKT68I="/>
+            <menu:item id="i_person_list" messageCode="global_menu_list" url="/people?page=1&amp;size=${empty param.size ? 10 : param.size}" z="MFjeqYeiMgVzk2P/OWfFpXZhhS4="/>
         </menu:category>
     </menu:menu>
 </div>
