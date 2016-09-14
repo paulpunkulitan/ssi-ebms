@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Associate Floor to Room</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/Site.css">
+	<link rel="stylesheet" type="text/css" href="css/dashboard-navbar.css">
+    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <nav class="navbar navbar-inverse navbar-fixed-top navbar-custom" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#"><img src="css/images/HMSss.png" alt="HMS" /></a>
+                </div>
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul id="active" class="nav navbar-nav side-nav">
+                        <li><a href="Index.html" class="hvr-bounce-to-right"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;Dashboard</a></li>
+                        <li><a href="ListOfRoom.html" class="hvr-bounce-to-right"><i class="fa fa-bed" aria-hidden="true"></i>&nbsp;&nbsp;Room</a></li>
+                        <li><a href="ListOfPerson.html" class="hvr-bounce-to-right"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;Person</a></li>
+                        <li><a href="ListOfFloor.html" class="hvr-bounce-to-right"><i class="fa fa-building" aria-hidden="true"></i>&nbsp;&nbsp;Floor</a></li>
+                        <li><a href="ListOfAssociatedFloorToRoom.html" class="hvr-bounce-to-right"><i class="fa fa-share-alt" aria-hidden="true"></i>&nbsp;&nbsp;Associate Floor to Room</a></li>
+                        <li><a href="EmployeeShiftList.html" class="hvr-bounce-to-right"><i class="fa fa-tasks" aria-hidden="true"></i>&nbsp;&nbsp;Shift Management</a></li>
+                        <li><a href="ListOfAccommodation.html" class="hvr-bounce-to-right"><i class="fa fa-check-square" aria-hidden="true"></i>&nbsp;&nbsp;Check In</a></li>
+                    </ul>
+<!--                     <ul class="nav navbar-nav navbar-right navbar-user">
+						<li><a href="#" class="hvr-underline-from-center"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;Log Out</a></li>
+                    </ul> -->
+                </div>
+            </div>
+        </nav>
+		
+	<div class="container-fluid">
+		<header class="row">
+			<div class="col-lg-12">
+				<h2>Associate Floor to Room</h2>
+			</div>
+		</header>
+		<hr class="hrdesign">
+		<br>
+			<div class="col-lg-12">
+				<div class="col-lg-6">
+							<form role="form">							  
+								<div>
+									<div class="form-group row" id="divSearchEnrollment">		
+									<label class="col-lg-offset-2 col-lg-4 control-label">Floor ID:</label>
+									<div class="col-lg-6 dropdown pull-left">
+											<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">FLR-00001
+											<span class="caret" id="cmbCaret"></span></button>
+											<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+											  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">FLR-00002</a></li>
+											  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">FLR-00003</a></li>
+											  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">FLR-00004</a></li>
+											  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">FLR-00005</a></li>
+											  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">FLR-00006</a></li>
+											  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">FLR-00007</a></li>
+											  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">FLR-00008</a></li>
+											  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">FLR-00009</a></li>
+											  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">FLR-00010</a></li>
+											</ul>
+									</div>
+									</div>
+									<div class="form-group row" id="divSearchEnrollment">		
+									<label class="col-lg-offset-2 col-lg-4 control-label">Room ID:</label>
+									<div class="col-lg-6 dropdown pull-left">
+											<button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">RM-00101
+											<span class="caret" id="cmbCaret"></span></button>
+											<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+											  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">RM-00110</a></li>
+											  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">RM-00220</a></li>
+											  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">RM-00222</a></li>
+											  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">RM-00315</a></li>
+											  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">RM-00320</a></li>
+											  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">RM-00420</a></li>
+											  <li role="presentation"><a role="menuitem" tabindex="-1" href="#">RM-00440</a></li>
+											</ul>
+									</div>
+									</div>
+									<br>
+								   <div class="form-group row">
+									<div class="col-lg-offset-5 col-lg-6">
+										<a href="ListOfAssociatedFloorToRoom.html" type="button" class="btn btn-primary pull-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Save &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+									</div>
+								  </div>
+								</div>	
+							</form>
+				</div>		
+			</div>
+	</div>
+
+		<br><br>
+		
+        <footer>
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6  col-md-4 col-sm-4 col-xs-4">
+                            <h3> Company Background </h3>
+                            <p>
+                                SMESoft Inc. (SSI) is a duly registered company in the Philippines Securities and Exchange Commission (SEC). Established in 2008 and registered in 2011, the company has developed its product line of Business Management Solutions for Small to Medium Enterprise.
+                                Part of the company's expansion is the acquisition of authority to distribute the products and trainings of the internationally renowned RMC Project Management Inc. headquartered in Minnesota, USA. It encompasses product distribution and training conduct with RMC trademark across the country and nearby territories (subject to RMC approval).
+                                Two years ago, SSI started extending an advocacy campaign to raise awareness of the Project Management discipline which the founder believes will benefit the people by applying the necessary skills and concepts for a better future.
+
+                            </p>
+                        </div>
+
+                        <div class="col-lg-3  col-md-3 col-sm-4 col-xs-4 ">
+                            <h3> Keep Connected </h3>
+                            <ul class="social">
+                                <li> <a href="#" class="icoFacebook"> <i class=" fa fa-facebook"></i> &nbsp;&nbsp;Like Us on Facebook</a></li>
+                                <li> <a href="#" class="icoInstagram"> <i class="fa fa-instagram"></i> &nbsp;&nbsp;Follow Us on Instagram</a> </li>
+                                <li> <a href="#" class="icoLinkedin"> <i class="fa fa-linkedin"></i> &nbsp;&nbsp;Follow Us on LinkedIn</a></li>
+                                <li> <a href="#" class="icoPinterest"> <i class="fa fa-pinterest"></i> &nbsp;&nbsp;Follow Us on Pinterest</a></li>
+                                <li> <a href="#" class="icoTwitter"> <i class="fa fa-twitter"></i> &nbsp;&nbsp;Follow Us on Twitter</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="col-lg-3  col-md-3 col-sm-4 col-xs-4">
+                            <h3> Contact Information </h3>
+                            <ul>
+                                <li>
+                                    <span class="fa fa-home" aria-hidden="true"></span>
+                                    &nbsp;&nbsp;Unit 511-512 VGP Center,
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Legaspi Ayala Avenue,</p>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Village Makati City </p>
+                                </li>
+
+                                <li>
+                                    <span class="fa fa-mobile" aria-hidden="true"></span>
+                                    &nbsp;&nbsp;+63 933.049.8890 (SMART)
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+63 906.297.0995 (GLOBE)</p>
+                                </li>
+
+                                <li>
+                                    <span class="fa fa-phone" aria-hidden="true"></span>
+                                    &nbsp;&nbsp;886-9775 | 512-5955
+                                </li>
+
+                                <li>
+                                    <span class="fa fa-envelope-o" aria-hidden="true"></span>
+                                    &nbsp;&nbsp;inquire@smesoft.com.ph
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;marketing@smesoft.com.ph</p>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sales@smesoft.com.ph</p>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;support@smesoft.com.ph</p>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!--/.row-->
+                </div>
+                <!--/.container-->
+            </div>
+            <!--/.footer-->
+
+            <div class="footer-bottom">
+                <div class="container">
+                    <center><p>&copy; 2016 SMESoft Inc. All Rights Reserved</p></center>
+                </div>
+            </div>
+            <!--/.footer-bottom-->
+        </footer>
+	</div> 
+	
+</body>
+</html>
