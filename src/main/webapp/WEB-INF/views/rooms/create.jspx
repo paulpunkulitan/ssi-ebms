@@ -3,9 +3,25 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_ph_com_smesoft_hms_domain_Room" modelAttribute="room" path="/rooms" render="${empty dependencies}" z="Sn/t1NySQBVhBWlBi6YcEQbFmjg=">
-        <field:input field="rooNumber" id="c_ph_com_smesoft_hms_domain_Room_rooNumber" max="30" min="3" required="true" z="tb3nOIVKwwR85c+bmZylAOzUjRU="/>
-        <field:textarea field="description" id="c_ph_com_smesoft_hms_domain_Room_description" required="true" z="ROWJhoadaMztNGCS0htz/0KIAKA="/>
-        <field:select field="floor" id="c_ph_com_smesoft_hms_domain_Room_floor" itemValue="id" items="${floors}" path="/floors" z="BO2RLJSaIYxNwRbKJMRipi883S8="/>
+        
+  <div class="form-group row"> <br /> <label
+     class=" col-lg-1 control-label">Room Number</label>
+    <div class="col-lg-6">
+     <input name="rooNumber" class="form-control" type="text"
+      placeholder="RM100000101" />
+    </div>
+  </div>
+        
+   <div class="form-group row">
+   <br /> <label class=" col-lg-1 control-label">Description
+    </label>
+   <div class="col-lg-6">
+    <textarea name="description" class="form-control" rows="4"
+     id="comment"> VIP SUITE</textarea>
+   </div>
+  </div>
+
+    <field:select field="floor" id="c_ph_com_smesoft_hms_domain_Room_floor" itemValue="id" items="${floors}" path="/floors" z="BO2RLJSaIYxNwRbKJMRipi883S8="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_ph_com_smesoft_hms_domain_Room" render="${not empty dependencies}" z="uSbNu+TSZuB/0VJ9QYEiKDH3ks0="/>
 </div>

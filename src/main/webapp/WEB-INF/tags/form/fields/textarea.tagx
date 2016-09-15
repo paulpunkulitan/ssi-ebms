@@ -33,7 +33,7 @@
 
     <script type="text/javascript">dojo.require("dijit.form.SimpleTextarea");</script>
     <div id="_${fn:escapeXml(id)}_id">
-      <label for="_${sec_field}_id">
+      <label class="col-lg-offset-1 col-lg-2 control-label" for="_${sec_field}_id">
         <c:choose>
           <c:when test="${empty renderLabel or renderLabel}">
             <c:out value="${fn:escapeXml(label)}" />
@@ -44,7 +44,7 @@
           </c:otherwise>
         </c:choose>
       </label>
-      <form:textarea id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" />
+      <form:textarea class="form-control" id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" />
       <br />
       <form:errors cssClass="errors" id="_${sec_field}_error_id" path="${sec_field}" />
       <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType : 'dijit.form.SimpleTextarea', widgetAttrs : {disabled : ${disabled}}})); </script>

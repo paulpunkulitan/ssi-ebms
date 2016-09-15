@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <h2>List of Floor</h2>
+	<hr class="hrdesign"/>	
+    <a href="/hms/floors?form" type="button" class="btn btn-primary">Create Floor</a>
+    <br/>
+    <br/>
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_ph_com_smesoft_hms_domain_Floor" items="${floors}" z="ifXqhISmAmlrfkHffySQ+4bBcYo=">
@@ -9,3 +14,4 @@
         </table:table>
     </page:list>
 </div>
+	
