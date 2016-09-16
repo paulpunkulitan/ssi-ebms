@@ -5,6 +5,7 @@
  xmlns:jsp="http://java.sun.com/JSP/Page"
  xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
+
  <div id="wrapper">
   <div class="container-fluid">
    <header class="row">
@@ -25,7 +26,7 @@
    <label class="col-lg-offset-1 col-lg-2 control-label">Description:</label>
     
     <div class="col-lg-6">
-     <textarea name="description" class="form-control" rows="4" id="comment">Description</textarea>
+     <textarea name="description" class="form-control" rows="4" id="comment"><jsp:text /></textarea>
     </div>
    </div>
    <div class="form-group row">

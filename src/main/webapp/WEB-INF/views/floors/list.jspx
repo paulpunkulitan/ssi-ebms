@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
-    <h2>List of Floor</h2>
+    <h1>List of Floor</h1>
 	<hr class="hrdesign"/>	
     <a href="/hms/floors?form" type="button" class="btn btn-primary">Create Floor</a>
     <br/>
