@@ -2,8 +2,19 @@
 <div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
+     <div id="wrapper">
+  <div class="container-fluid">
+   <header class="row">
+    <div class="col-lg-12">
+     <h1>Update Floor</h1>
+    </div>
+   </header>
+   <hr class="hrdesign" />
+   <br />
     <form:update id="fu_ph_com_smesoft_hms_domain_Floor" modelAttribute="floor" path="/floors" versionField="Version" z="6mc8+Ngs3i0ZG3FtgkK3Y+1v7mk=">
         <field:input field="floorNumber" id="c_ph_com_smesoft_hms_domain_Floor_floorNumber" max="30" min="3" required="true" z="3vmUlYFFjDWc8M4E+ngHynVJ7h4="/>
         <field:textarea field="description" id="c_ph_com_smesoft_hms_domain_Floor_description" required="true" z="5HQbb/sGgY8NNGSD3UeOoEvdbD4="/>
     </form:update>
+      </div>
+ </div>
 </div>

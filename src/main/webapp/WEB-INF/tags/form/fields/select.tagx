@@ -15,7 +15,6 @@
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
   <jsp:directive.attribute name="renderLabel" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of the label should be rendered (default 'true')" />
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
-
   <c:if test="${empty render or render}">
 
     <c:if test="${empty disabled}">
@@ -42,13 +41,10 @@
       <spring:escapeBody htmlEscape="true" >${itemLabel}</spring:escapeBody>
     </c:set>
 
-
-    <div class="form-group row">
-
+    <div id="_${fn:escapeXml(id)}_id">
       <c:choose>
         <c:when test="${not empty items}">
-          <label class="col-lg-offset-1 col-lg-2 control-label" for="_${sec_field}_id">
-          
+          <label for="_${sec_field}_id">
             <c:choose>
               <c:when test="${empty renderLabel or renderLabel}">
                 <c:out value="${fn:escapeXml(label)}" />
@@ -58,13 +54,8 @@
                 &amp;nbsp;
               </c:otherwise>
             </c:choose>
-          </label>
-          
+             </label>
           <c:choose>
-          
-          <div class="col-lg-6">
-          
-          
             <c:when test="${empty itemValue}">
               <c:choose>
                 <c:when test="${disableFormBinding}">
@@ -103,7 +94,7 @@
                     </c:otherwise>
                   </c:choose>
                 </c:when>
-                <c:otherwise>
+                 <c:otherwise>
                   <c:choose>
                     <c:when test="${empty itemLabel}">
                       <c:choose>
@@ -198,8 +189,6 @@
               </c:choose>
             </c:otherwise>
           </c:choose>
-          </div>
-          
           <c:choose>
             <c:when test="${multiple == false}">
               <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>

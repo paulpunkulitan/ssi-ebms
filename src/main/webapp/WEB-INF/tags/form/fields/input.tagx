@@ -20,7 +20,6 @@
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
   <jsp:directive.attribute name="renderLabel" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of the label should be rendered (default 'true')" />
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
-  
   <c:if test="${empty render or render}">
   
     <c:if test="${empty type}">
@@ -75,7 +74,7 @@
       </label>
       <c:choose>
         <c:when test="${disableFormBinding}">
-        	<input class="form-control" id="_${sec_field}_id" name="${sec_field}" type="${fn:escapeXml(type)}" />
+         <input class="form-control" id="_${sec_field}_id" name="${sec_field}" type="${fn:escapeXml(type)}" />
         </c:when>
         <c:otherwise>
           <c:choose>
@@ -85,8 +84,7 @@
             <c:otherwise>
            <form:input class="form-control" id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" readonly="${readonly}" />
             </c:otherwise>
-            
-          </c:choose>
+             </c:choose>
           <br />
           <form:errors cssClass="errors" id="_${sec_field}_error_id" path="${sec_field}" />
         </c:otherwise>

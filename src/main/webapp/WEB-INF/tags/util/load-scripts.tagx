@@ -2,6 +2,8 @@
 
   <jsp:output omit-xml-declaration="yes" />
 
+ <spring:url value="/resources/dojo/dojo.js" var="dojo_url" />
+  <spring:url value="/resources/dijit/themes/tundra/tundra.css" var="tundra_url" />
   <spring:url value="/webapp/styles/dataTables.bootstrap.min.css" var="datatableCss" />
   <spring:url value="/webapp/styles/js/jquery-1.12.3.js" var="jqueryJs" />
   <spring:url value="/webapp/styles/js/jquery.dataTables.min.js" var="jquerydatatableJs" /> 
@@ -10,15 +12,21 @@
   <spring:url value="/resources/images/favicon.ico" var="favicon" />
   <link rel="stylesheet" type="text/css" href="${datatableCss}" />
   <link rel="SHORTCUT ICON" href="${favicon}" />
+  <link rel="stylesheet" type="text/css" href="${tundra_url}" />
+  <link rel="stylesheet" type="text/css" media="screen" href="${roo_css_url}" />
 
   <!-- Get the user local from the page context (it was set by Spring MVC's locale resolver) -->
   <c:set var="userLocale">
     <c:set var="plocale">${pageContext.response.locale}</c:set>
     <c:out value="${fn:replace(plocale, '_', '-')}" default="en" />
   </c:set>
-
+  <script type="text/javascript">var djConfig = {parseOnLoad: false, isDebug: false, locale: '${fn:toLowerCase(userLocale)}'};</script>
+<script src="${spring_url}" type="text/javascript"><!-- /required for FF3 and Opera --></script>
+ <script src="${dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
   <script src="${spring_url}" type="text/javascript"><!-- /required for FF3 and Opera --></script>
-  <script src="${jqueryJs}" type="text/javascript"></script>
+  <script src="${spring_dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
+  <script language="JavaScript" type="text/javascript">dojo.require("dojo.parser");</script>
+<script src="${jqueryJs}" type="text/javascript"></script>
  <script src="${jquerydatatableJs}" type="text/javascript"></script>
  <script src="${bootstrapdatatableJs}" type="text/javascript"></script>
 <script type="text/javascript">
