@@ -2,13 +2,14 @@
 
   <jsp:output omit-xml-declaration="yes" />
 
- <spring:url value="/resources/dojo/dojo.js" var="dojo_url" />
+  <spring:url value="/resources/dojo/dojo.js" var="dojo_url" />
   <spring:url value="/resources/dijit/themes/tundra/tundra.css" var="tundra_url" />
   <spring:url value="/webapp/styles/dataTables.bootstrap.min.css" var="datatableCss" />
   <spring:url value="/webapp/styles/js/jquery-1.12.3.js" var="jqueryJs" />
   <spring:url value="/webapp/styles/js/jquery.dataTables.min.js" var="jquerydatatableJs" /> 
  <spring:url value="/webapp/styles/js/dataTables.bootstrap.min.js" var="bootstrapdatatableJs" /> 
   <spring:url value="/resources/spring/Spring.js" var="spring_url" />
+  <spring:url value="/resources/spring/Spring-Dojo.js" var="spring_dojo_url" />
   <spring:url value="/resources/images/favicon.ico" var="favicon" />
   <link rel="stylesheet" type="text/css" href="${datatableCss}" />
   <link rel="SHORTCUT ICON" href="${favicon}" />
