@@ -53,14 +53,20 @@ public class FloorController {
         }
     }
 
+	
+	
 	@RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> createFromJson(@RequestBody String json, UriComponentsBuilder uriBuilder) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
+        
         try {
             Floor floor = Floor.fromJsonToFloor(json);
             floor.persist();
             RequestMapping a = (RequestMapping) getClass().getAnnotation(RequestMapping.class);
+            
+            System.out.println(">>>" + uriBuilder.path(a.value()[0]+"/"+floor.getId().toString()).build().toUriString());
+            
             headers.add("Location",uriBuilder.path(a.value()[0]+"/"+floor.getId().toString()).build().toUriString());
             return new ResponseEntity<String>(headers, HttpStatus.CREATED);
         } catch (Exception e) {

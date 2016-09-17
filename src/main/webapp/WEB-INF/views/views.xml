@@ -5,8 +5,8 @@
 
 <tiles-definitions>
 
-  <definition name="index" extends="default">
-    <put-attribute name="body" value="/WEB-INF/views/index.jspx" />
+  <definition name="dashboard" extends="default">
+    <put-attribute name="body" value="/WEB-INF/views/dashboard.jspx" />
   </definition>
 
   <definition name="dataAccessFailure" extends="public">
@@ -19,6 +19,10 @@
 
   <definition name="uncaughtException" extends="public">
     <put-attribute name="body" value="/WEB-INF/views/uncaughtException.jspx" />
+  </definition>
+  
+  <definition name="dashboard" extends="default">
+    <put-attribute name="body" value="/WEB-INF/views/dashboard.jspx" />
   </definition>
 
 </tiles-definitions>

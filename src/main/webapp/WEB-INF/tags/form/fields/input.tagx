@@ -62,7 +62,7 @@
     </c:set>
     
     <div id="_${fn:escapeXml(id)}_id">
-      <label for="_${sec_field}_id">
+      <label class="col-lg-offset-1 col-lg-2 control-label" for="_${sec_field}_id">
         <c:choose>
           <c:when test="${empty renderLabel or renderLabel}">
             <c:out value="${fn:escapeXml(label)}" />
@@ -75,7 +75,7 @@
       </label>
       <c:choose>
         <c:when test="${disableFormBinding}">
-          <input id="_${sec_field}_id" name="${sec_field}" type="${fn:escapeXml(type)}" />
+        	<input class="form-control" id="_${sec_field}_id" name="${sec_field}" type="${fn:escapeXml(type)}" />
         </c:when>
         <c:otherwise>
           <c:choose>
@@ -83,8 +83,9 @@
               <form:password id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" readonly="${readonly}" />
             </c:when>
             <c:otherwise>
-              <form:input id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" readonly="${readonly}" />
+           <form:input class="form-control" id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" readonly="${readonly}" />
             </c:otherwise>
+            
           </c:choose>
           <br />
           <form:errors cssClass="errors" id="_${sec_field}_error_id" path="${sec_field}" />

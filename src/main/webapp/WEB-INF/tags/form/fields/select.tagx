@@ -42,10 +42,13 @@
       <spring:escapeBody htmlEscape="true" >${itemLabel}</spring:escapeBody>
     </c:set>
 
-    <div id="_${fn:escapeXml(id)}_id">
+
+    <div class="form-group row">
+
       <c:choose>
         <c:when test="${not empty items}">
-          <label for="_${sec_field}_id">
+          <label class="col-lg-offset-1 col-lg-2 control-label" for="_${sec_field}_id">
+          
             <c:choose>
               <c:when test="${empty renderLabel or renderLabel}">
                 <c:out value="${fn:escapeXml(label)}" />
@@ -56,7 +59,12 @@
               </c:otherwise>
             </c:choose>
           </label>
+          
           <c:choose>
+          
+          <div class="col-lg-6">
+          
+          
             <c:when test="${empty itemValue}">
               <c:choose>
                 <c:when test="${disableFormBinding}">
@@ -190,6 +198,8 @@
               </c:choose>
             </c:otherwise>
           </c:choose>
+          </div>
+          
           <c:choose>
             <c:when test="${multiple == false}">
               <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>

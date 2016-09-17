@@ -1,37 +1,79 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" id="footer" version="2.0">
-  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-  <jsp:output omit-xml-declaration="yes"/>
+<spring:url value="/styles/bootstrap.css" var="bootstrapCss" />
+<spring:url value="/styles/dashboard-navbar.css" var="dashboardCss" />
+<spring:url value="/styles/font-awesome/css/font-awesome.min.css" var="fontawesomeCss" />
+<link href="${bootstrapCss}" rel="stylesheet" type="text/css" media="screen" />
+<link href="${dashboardCss}" rel="stylesheet" type="text/css" media="screen" />
+<link href="${fontawesomeCss}" rel="stylesheet" type="text/css" media="screen" />
+<footer>
+            <div class="footer">
+                <div id="wrapper">
+                    <div class="row">
+                        <div class="col-lg-6  col-md-4 col-sm-4 col-xs-4">
+                            <h3> Company Background </h3>
+                            <p>
+                                SMESoft Inc. (SSI) is a duly registered company in the Philippines Securities and Exchange Commission (SEC). Established in 2008 and registered in 2011, the company has developed its product line of Business Management Solutions for Small to Medium Enterprise.
+                                Part of the company's expansion is the acquisition of authority to distribute the products and trainings of the internationally renowned RMC Project Management Inc. headquartered in Minnesota, USA. It encompasses product distribution and training conduct with RMC trademark across the country and nearby territories (subject to RMC approval).
+                                Two years ago, SSI started extending an advocacy campaign to raise awareness of the Project Management discipline which the founder believes will benefit the people by applying the necessary skills and concepts for a better future.
 
-  <spring:url value="/" var="home"/>
-  <span>
-    <a href="${home}">
-      <spring:message code="button_home"/>
-    </a>
-  </span>
-  <c:if test="${pageContext['request'].userPrincipal != null}">
-    <c:out value=" | "/>
-    <span>
-      <spring:url value="/resources/j_spring_security_logout" var="logout"/>
-      <a href="${logout}">
-        <spring:message code="security_logout"/>
-      </a>
-    </span>
-  </c:if>
+                            </p>
+                        </div>
 
-  <span id="language">
-    <c:out value=" | "/>
-    <spring:message code="global_language"/>
-    <c:out value=": "/>
-  <util:language label="English" locale="en"/>
-    </span>
-  <util:theme/>
+                        <div class="col-lg-3  col-md-3 col-sm-4 col-xs-4 ">
+                            <h3> Keep Connected </h3>
+                            <ul class="icons-ul">
+								  <li><a href="#" class="icoFacebook"><i class="fa fa-facebook">Like Us on Facebook</i></a></li>
+								  <li><a href="#" class="icoInstagram"><i class="fa fa-instagram">Follow Us on Instagram</i></a></li>
+								  <li><a href="#" class="icoLinkedin"><i class="fa fa-linkedin">Follow Us on LinkedIn</i></a></li>
+								  <li><a href="#" class="icoPinterest"><i class="fa fa-pinterest">Follow Us on Pinterest</i></a></li>
+								  <li><a href="#" class="icoTwitter"><i class="fa fa-twitter">Follow Us on Twitter</i></a></li>
+							</ul>
+                           
+                        </div>
 
-  <spring:url value="/resources/images/springsource-logo.png" var="logo"/>
-  <spring:message code="global_sponsored" htmlEscape="false" var="sponsored"/>
-  <span>
-    <a href="http://springsource.com" title="${fn:escapeXml(sponsored)}">
-      <img align="right" alt="${fn:escapeXml(sponsored)}" src="${logo}"/>
-    </a>
-  </span>
+                        <div class="col-lg-3  col-md-3 col-sm-4 col-xs-4">
+                            <h3> Contact Information </h3>
+                            <ul>
+                                <li>
+                                 Unit 511-512 VGP Center,
+                                    <p>Legaspi Ayala Avenue,</p>
+                                    <p>Village Makati City </p>
+                                </li>
+
+                                <li>
+                                    
+                                    +63 933.049.8890 (SMART)
+                                    <p>+63 906.297.0995 (GLOBE)</p>
+                                </li>
+
+                                <li>
+                                    
+                                    886-9775 | 512-5955
+                                </li>
+
+                                <li>
+                                    
+                                    inquire@smesoft.com.ph
+                                    <p>marketing@smesoft.com.ph</p>
+                                    <p>sales@smesoft.com.ph</p>
+                                    <p>support@smesoft.com.ph</p>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!--/.row-->
+                </div>
+                <!--/.container-->
+            </div>
+            <!--/.footer-->
+
+            <div class="footer-bottom">
+                <div class="container">
+                    <center><p>2016 SMESoft Inc. All Rights Reserved</p></center>
+                </div>
+            </div>
+            <!--/.footer-bottom-->
+        </footer>
 </div>

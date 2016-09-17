@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Person</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/Site.css">
+	<link rel="stylesheet" type="text/css" href="css/dashboard-navbar.css">
+    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+	<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){		  
+			$("#buttonManage").hide();
+			$("#buttonAccomodate").hide();		  
+			$("input:radio[name='optradio']").change(function(){  
+
+					if(this.value == 'personnel'){
+					  $("#buttonManage").show();
+					  $("#buttonAccomodate").hide();
+					}else{
+					  $("#buttonAccomodate").show();
+					  $("#buttonManage").hide();
+					}
+			});
+		});
+	</script>
+</head>
+
+<body>
+		
+	<div class="container-fluid">
+		<header class="row">
+			<div class="col-lg-12">
+				<h2>Create Person</h2>
+			</div>
+		</header>
+		<hr class="hrdesign">
+		<br>
+			<div class="col-lg-12">
+				<div class="col-lg-6">
+							<form role="form">							  
+								<div>
+									<div class="form-group row" id="type">
+										<label class="col-lg-5 control-label">Type:</label>
+										<div class="col-lg-7">
+											<label class="radio-inline">
+											  <input type="radio" name="optradio" value="personnel">Personnel
+											</label>
+											<label class="radio-inline" value="customer">
+											  <input type="radio" name="optradio" value="customer">Customer
+											</label>
+										</div>
+									</div>
+									  <div class="form-group row">
+										<label class="col-lg-5 control-label">First Name:</label>
+										<div class="col-lg-7">
+										  <input class="form-control" type="text" placeholder="Luke">
+										</div>
+									  </div>
+									  <div class="form-group row">
+										<label class="col-lg-5 control-label">Middle Name:</label>
+										<div class="col-lg-7">
+										  <input class="form-control" type="text" placeholder="Robert">
+										</div>
+									  </div>
+									  <div class="form-group row">
+										<label class="col-lg-5 control-label">Last Name:</label>
+										<div class="col-lg-7">
+										  <input class="form-control" type="text" placeholder="Hemmings">
+										</div>
+									  </div>
+										<div class="form-group row">
+											<label class="col-lg-5 control-label">Gender:</label>
+											<div class="col-lg-7">
+												<label class="radio-inline">
+												  <input type="radio" name="genradio">Male
+												</label>
+												<label class="radio-inline">
+												  <input type="radio" name="genradio">Female
+												</label>
+											</div>
+										</div>
+									  <div class="form-group row">
+										<label class="col-lg-5 control-label">Birthday:</label>
+										<div class="col-lg-7">
+										  <input type="date" name="bday">
+										</div>
+									  </div>
+										<br>
+									   <div class="form-group row">
+										<div class="col-lg-offset-4 col-lg-8">
+											<div  id="buttonManage">
+												<div class="col-lg-6">
+													<a href="ShiftManagement.html" type="button" class="btn btn-primary pull-right">&nbsp; Manage Shift &nbsp;</a>
+												</div>
+												<div class="col-lg-6">
+													<a href="LIST.html" type="button" class="btn btn-primary pull-right">&nbsp; Save &nbsp;</a>
+												</div>
+											</div>
+											
+											<div id="buttonAccomodate">
+												<div class="col-lg-6">
+													<a href="Accommodation.html" type="button" class="btn btn-primary pull-right">&nbsp; Check In &nbsp;</a>
+												</div>
+												<div class="col-lg-6">
+													<a href="LIST.html" type="button" class="btn btn-primary pull-right">&nbsp; Save &nbsp;</a>
+												</div>
+											</div>
+										</div>
+									  </div>
+								</div>	
+							</form>
+				</div>		
+			</div>
+	</div>
+	
+</body>
+</html>
