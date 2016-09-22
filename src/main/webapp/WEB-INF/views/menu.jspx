@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" version="2.0">
 <div class="collapse navbar-collapse navbar-ex1-collapse">
-     <ul id="active" class="nav navbar-nav side-nav nav-size">
-         <li><a href="/hms" class="hvr-bounce-to-right"><i class="fa fa-home" aria-hidden="true">Dashboard</i></a></li>
-         <li><a href="/hms/floors?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><i class="fa fa-building" aria-hidden="true">  Floor</i></a></li>
-         <li><a href="/hms/rooms?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><i class="fa fa-bed" aria-hidden="true">  Room</i></a></li>
-         <li><a href="/hms/people?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><i class="fa fa-user" aria-hidden="true">  Person</i></a></li>
-         <li><a href="/hms/shifts?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><i class="fa fa-tasks" aria-hidden="true">  Shift Management</i></a></li>
-         <li><a href="/hms/accommodations?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><i class="fa fa-check-square" aria-hidden="true">  Accommodation</i></a></li>
+     <ul id="active" class="nav navbar-nav side-nav">
+         <li><a href="/hms/" class="hvr-bounce-to-right">Dashboard</a></li>
+         <li><a href="/hms/rooms?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right">  Room</a></li>
+         <li><a href="/hms/people?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"> Person </a></li>
+         <li><a href="/hms/floors?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"> Floor</a></li>
+         <li><a href="/hms/shifts?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right">  Shift Management </a></li>
+         <li><a href="/hms/accommodations?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"> Check In </a></li>
      </ul>
-
 </div>
 </div>

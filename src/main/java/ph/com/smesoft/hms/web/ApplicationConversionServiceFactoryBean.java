@@ -7,11 +7,13 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 
 import ph.com.smesoft.hms.domain.Accommodation;
+import ph.com.smesoft.hms.domain.Door;
 import ph.com.smesoft.hms.domain.Floor;
 import ph.com.smesoft.hms.domain.Person;
 import ph.com.smesoft.hms.domain.Room;
 import ph.com.smesoft.hms.domain.Shift;
 import ph.com.smesoft.hms.service.AccommodationService;
+import ph.com.smesoft.hms.service.DoorService;
 import ph.com.smesoft.hms.service.PersonService;
 import ph.com.smesoft.hms.service.RoomService;
 import ph.com.smesoft.hms.service.ShiftService;
@@ -39,6 +41,9 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 
 	@Autowired
     ShiftService shiftService;
+	
+	@Autowired
+	DoorService doorService;
 
 	public Converter<Accommodation, String> getAccommodationToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<ph.com.smesoft.hms.domain.Accommodation, java.lang.String>() {
@@ -159,6 +164,37 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
             }
         };
     }
+	
+	
+	
+	public Converter<Door, String> getDoorToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<ph.com.smesoft.hms.domain.Door, java.lang.String>() {
+            public String convert(Door door) {
+                return new StringBuilder().append(door.getDoorNumber()).append(' ').append(door.getDescription()).append(' ').toString();
+            }
+        };
+    }
+
+	public Converter<Long, Door> getIdToDoorConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, ph.com.smesoft.hms.domain.Door>() {
+            public ph.com.smesoft.hms.domain.Door convert(java.lang.Long id) {
+                return doorService.findDoor(id);
+            }
+        };
+    }
+
+	public Converter<String, Door> getStringToDoorConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, ph.com.smesoft.hms.domain.Door>() {
+            public ph.com.smesoft.hms.domain.Door convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Door.class);
+            }
+        };
+    }
+	
+	
+	
+	
+	
 
 	public void installLabelConverters(FormatterRegistry registry) {
         registry.addConverter(getAccommodationToStringConverter());

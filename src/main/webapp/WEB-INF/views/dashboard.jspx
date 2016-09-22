@@ -5,9 +5,9 @@
  xmlns:c="http://java.sun.com/jsp/jstl/core"
  xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
- <spring:url var="Enroll"
-  value="/resources/images/Enroll.png" />
- <spring:url var="Identify"
+ <spring:url var="ListOfPerson"
+  value="/resources/images/Authenticate.png" />
+ <spring:url var="IdentifyPersonDetails"
   value="/resources/images/Identify.png" />
 
  <div class="container-fluid">
@@ -20,8 +20,8 @@
   <br />
   <center>
    <div class="col-lg-12">
-    <a href="#">
-    <img src="${Enroll}" alt="Enroll" width="700" height="auto" /></a> <br />
+    <a href="ListOfPerson.html"><img src="${ListOfPerson}"
+     alt="Authenticate" width="700" height="auto" /></a> <br />
     <br />
     <br />
    </div>
@@ -33,7 +33,9 @@
 
   <center>
    <div class="col-lg-12">
-    <a href="#"><img src="${Identify}" alt="Identify" width="700" height="auto" /></a> <br />
+    <a href="IdentifyPersonDetails.html"><img
+     src="${IdentifyPersonDetails}" alt="Identify" width="700"
+     height="auto" /></a> <br />
    </div>
   </center>
  </div>
