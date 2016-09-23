@@ -55,6 +55,7 @@ public class ShiftController {
         return pathSegment;
     }
 
+	/*Get shift based on given Id*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
     @ResponseBody
     public ResponseEntity<String> showJson(@PathVariable("id") Long id) {
@@ -71,6 +72,7 @@ public class ShiftController {
         }
     }
 
+	/*List of Shift*/
 	@RequestMapping(headers = "Accept=application/json")
     @ResponseBody
     public ResponseEntity<String> listJson() {
@@ -84,6 +86,7 @@ public class ShiftController {
         }
     }
 
+	/*Create shift details*/
 	@RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> createFromJson(@RequestBody String json, UriComponentsBuilder uriBuilder) {
         HttpHeaders headers = new HttpHeaders();
@@ -99,6 +102,7 @@ public class ShiftController {
         }
     }
 
+	/*Multiple create of shift*/
 	@RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> createFromJsonArray(@RequestBody String json) {
         HttpHeaders headers = new HttpHeaders();
@@ -113,6 +117,7 @@ public class ShiftController {
         }
     }
 
+	/*Update shift details*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, headers = "Accept=application/json")
     public ResponseEntity<String> updateFromJson(@RequestBody String json, @PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
@@ -129,6 +134,7 @@ public class ShiftController {
         }
     }
 
+	/*Delete shift*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
     public ResponseEntity<String> deleteFromJson(@PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();

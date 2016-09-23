@@ -39,7 +39,14 @@ public class Door {
     @ManyToOne
     private Room room;
     
-    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
+
+	@Version
+    @Column(name = "version")
+    private Integer version;
 
 	public String getDoorNumber() {
         return this.doorNumber;
@@ -57,7 +64,6 @@ public class Door {
         this.description = description;
     }
 	
-	
 	public Room getRoom() {
         return this.room;
     }
@@ -65,18 +71,14 @@ public class Door {
 	public void setRoom(Room room) {
         this.room = room;
     }
-	
-	
 
+	public Integer getVersion() {
+		return version;
+	}
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
-
-	@Version
-    @Column(name = "version")
-    private Integer version;
+	public void setVersion(Integer version) {
+		this.version = version;
+	}
 
 	public Long getId() {
         return this.id;
@@ -85,41 +87,7 @@ public class Door {
 	public void setId(Long id) {
         this.id = id;
     }
-
-	public String toJson() {
-        return new JSONSerializer()
-        .exclude("*.class").deepSerialize(this);
-    }
-
-	public String toJson(String[] fields) {
-        return new JSONSerializer()
-        .include(fields).exclude("*.class").deepSerialize(this);
-    }
-
-	public static Door fromJsonToDoor(String json) {
-        return new JSONDeserializer<Door>()
-        .use(null, Door.class).deserialize(json);
-    }
-
-	public static String toJsonArray(Collection<Door> collection) {
-        return new JSONSerializer()
-        .exclude("*.class").deepSerialize(collection);
-    }
-
-	public static String toJsonArray(Collection<Door> collection, String[] fields) {
-        return new JSONSerializer()
-        .include(fields).exclude("*.class").deepSerialize(collection);
-    }
-
-	public static Collection<Door> fromJsonArrayToDoors(String json) {
-        return new JSONDeserializer<List<Door>>()
-        .use("values", Door.class).deserialize(json);
-    }
-
-	public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
-
+	
 	@PersistenceContext
     transient EntityManager entityManager;
 
@@ -206,4 +174,39 @@ public class Door {
         this.entityManager.flush();
         return merged;
     }
+	
+	public String toJson() {
+        return new JSONSerializer()
+        .exclude("*.class").deepSerialize(this);
+    }
+
+	public String toJson(String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").deepSerialize(this);
+    }
+
+	public static Door fromJsonToDoor(String json) {
+        return new JSONDeserializer<Door>()
+        .use(null, Door.class).deserialize(json);
+    }
+
+	public static String toJsonArray(Collection<Door> collection) {
+        return new JSONSerializer()
+        .exclude("*.class").deepSerialize(collection);
+    }
+
+	public static String toJsonArray(Collection<Door> collection, String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").deepSerialize(collection);
+    }
+
+	public static Collection<Door> fromJsonArrayToDoors(String json) {
+        return new JSONDeserializer<List<Door>>()
+        .use("values", Door.class).deserialize(json);
+    }
+
+	public String toString() {
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
+
 }

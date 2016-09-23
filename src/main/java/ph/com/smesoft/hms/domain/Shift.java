@@ -29,11 +29,11 @@ public class Shift {
 
     /**
      */
-    @NotNull
+  /*  @NotNull
     @Past
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
-    private Date shiftDate;
+    private Date shiftDate;*/
 
     /**
      */
@@ -44,14 +44,23 @@ public class Shift {
      */
     @ManyToOne
     private Floor floor;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
 
-	public Date getShiftDate() {
+	@Version
+    @Column(name = "version")
+    private Integer version;
+
+	/*public Date getShiftDate() {
         return this.shiftDate;
     }
 
 	public void setShiftDate(Date shiftDate) {
         this.shiftDate = shiftDate;
-    }
+    }*/
 
 	public Person getPerson() {
         return this.person;
@@ -67,6 +76,22 @@ public class Shift {
 
 	public void setFloor(Floor floor) {
         this.floor = floor;
+    }
+	
+	public Long getId() {
+        return this.id;
+    }
+
+	public void setId(Long id) {
+        this.id = id;
+    }
+
+	public Integer getVersion() {
+        return this.version;
+    }
+
+	public void setVersion(Integer version) {
+        this.version = version;
     }
 
 	@PersistenceContext
@@ -184,31 +209,6 @@ public class Shift {
 	public static Collection<Shift> fromJsonArrayToShifts(String json) {
         return new JSONDeserializer<List<Shift>>()
         .use("values", Shift.class).deserialize(json);
-    }
-
-	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
-
-	@Version
-    @Column(name = "version")
-    private Integer version;
-
-	public Long getId() {
-        return this.id;
-    }
-
-	public void setId(Long id) {
-        this.id = id;
-    }
-
-	public Integer getVersion() {
-        return this.version;
-    }
-
-	public void setVersion(Integer version) {
-        this.version = version;
     }
 
 	public String toString() {

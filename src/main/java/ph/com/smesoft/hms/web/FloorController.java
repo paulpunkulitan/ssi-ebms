@@ -2,6 +2,7 @@ package ph.com.smesoft.hms.web;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,18 +17,38 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 import ph.com.smesoft.hms.domain.Floor;
+import ph.com.smesoft.hms.service.FloorService;
 
 @Controller
 @RequestMapping("/floors")
 public class FloorController {
 
+	@Autowired
+    FloorService floorService;
+	
+	void populateEditForm(Model uiModel, Floor floor) {
+        uiModel.addAttribute("floor", floor);
+    }
+
+	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
+        String enc = httpServletRequest.getCharacterEncoding();
+        if (enc == null) {
+            enc = WebUtils.DEFAULT_CHARACTER_ENCODING;
+        }
+        try {
+            pathSegment = UriUtils.encodePathSegment(pathSegment, enc);
+        } catch (UnsupportedEncodingException uee) {}
+        return pathSegment;
+    }
+	
+	/*Get floor based on given Id*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
     @ResponseBody
     public ResponseEntity<String> showJson(@PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         try {
-            Floor floor = Floor.findFloor(id);
+            Floor floor = floorService.findFloor(id);
             if (floor == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
@@ -37,21 +58,21 @@ public class FloorController {
         }
     }
 
+	/*List of Floors*/
 	@RequestMapping(headers = "Accept=application/json")
     @ResponseBody
     public ResponseEntity<String> listJson() {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         try {
-            List<Floor> result = Floor.findAllFloors();
+            List<Floor> result = floorService.findAllFloors();
             return new ResponseEntity<String>(Floor.toJsonArray(result), headers, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 	
-	
+	/*Create floor details*/
 	@RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> createFromJson(@RequestBody String json, UriComponentsBuilder uriBuilder) {
         HttpHeaders headers = new HttpHeaders();
@@ -71,6 +92,7 @@ public class FloorController {
         }
     }
 
+	/*Multiple create of floor*/
 	@RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> createFromJsonArray(@RequestBody String json) {
         HttpHeaders headers = new HttpHeaders();
@@ -85,6 +107,7 @@ public class FloorController {
         }
     }
 
+	/*Update floor details*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, headers = "Accept=application/json")
     public ResponseEntity<String> updateFromJson(@RequestBody String json, @PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
@@ -101,12 +124,13 @@ public class FloorController {
         }
     }
 
+	/*Delete floor*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
     public ResponseEntity<String> deleteFromJson(@PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         try {
-            Floor floor = Floor.findFloor(id);
+            Floor floor = floorService.findFloor(id);
             if (floor == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
@@ -115,21 +139,5 @@ public class FloorController {
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-
-	void populateEditForm(Model uiModel, Floor floor) {
-        uiModel.addAttribute("floor", floor);
-    }
-
-	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
-        String enc = httpServletRequest.getCharacterEncoding();
-        if (enc == null) {
-            enc = WebUtils.DEFAULT_CHARACTER_ENCODING;
-        }
-        try {
-            pathSegment = UriUtils.encodePathSegment(pathSegment, enc);
-        } catch (UnsupportedEncodingException uee) {}
-        return pathSegment;
     }
 }

@@ -25,6 +25,7 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import ph.com.smesoft.hms.domain.Accommodation;
+import ph.com.smesoft.hms.domain.Person;
 import ph.com.smesoft.hms.service.AccommodationService;
 import ph.com.smesoft.hms.service.PersonService;
 import ph.com.smesoft.hms.service.RoomService;
@@ -65,14 +66,15 @@ public class AccommodationController {
         return pathSegment;
     }
 
+	/*Get accommodation based on given Id*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
     @ResponseBody
     public ResponseEntity<String> showJson(@PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         try {
-            Accommodation accommodation = accommodationService.findAccommodation(id);
-            if (accommodation == null) {
+           Accommodation accommodation = accommodationService.findAccommodation(id);
+        	if (accommodation == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<String>(accommodation.toJson(), headers, HttpStatus.OK);
@@ -81,6 +83,7 @@ public class AccommodationController {
         }
     }
 
+	/*List of Accommodation*/
 	@RequestMapping(headers = "Accept=application/json")
     @ResponseBody
     public ResponseEntity<String> listJson() {
@@ -94,6 +97,7 @@ public class AccommodationController {
         }
     }
 
+	/*Create accommodation details*/
 	@RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> createFromJson(@RequestBody String json, UriComponentsBuilder uriBuilder) {
         HttpHeaders headers = new HttpHeaders();
@@ -109,6 +113,7 @@ public class AccommodationController {
         }
     }
 
+	/*Multiple create of accommodation*/
 	@RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> createFromJsonArray(@RequestBody String json) {
         HttpHeaders headers = new HttpHeaders();
@@ -122,7 +127,8 @@ public class AccommodationController {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+	
+	/*Update accommodation details*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, headers = "Accept=application/json")
     public ResponseEntity<String> updateFromJson(@RequestBody String json, @PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
@@ -139,6 +145,7 @@ public class AccommodationController {
         }
     }
 
+	/*Delete accommodation*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
     public ResponseEntity<String> deleteFromJson(@PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();

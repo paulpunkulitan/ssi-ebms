@@ -44,14 +44,15 @@ public class RoomController {
         return pathSegment;
     }
 
+	/*Get room based on given Id*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
     @ResponseBody
     public ResponseEntity<String> showJson(@PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         try {
-          //  Room room = roomService.findRoom(id);
-            Floor floor = new Floor();
+            Room room = roomService.findRoom(id);
+           /* Floor floor= new Floor();
             floor.setId(1L);
             floor.setFloorNumber("FLR-001");
             floor.setDescription("First Floor");
@@ -59,10 +60,10 @@ public class RoomController {
             
             Room room = new Room();
             room.setId(1L);
-            room.setRooNumber("RM-001");
+            room.setRoomNumber("RM-001");
             room.setDescription("Room 001 in First Floor");
             room.setFloor(floor);
-            room.setVersion(1);
+            room.setVersion(1);*/
             
             if (room == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
@@ -73,6 +74,7 @@ public class RoomController {
         }
     }
 
+	/*List of Rooms*/
 	@RequestMapping(headers = "Accept=application/json")
     @ResponseBody
     public ResponseEntity<String> listJson() {
@@ -86,6 +88,7 @@ public class RoomController {
         }
     }
 
+	/*Create room details*/
 	@RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> createFromJson(@RequestBody String json, UriComponentsBuilder uriBuilder) {
         HttpHeaders headers = new HttpHeaders();
@@ -101,6 +104,7 @@ public class RoomController {
         }
     }
 
+	/*Multiple create of room*/
 	@RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> createFromJsonArray(@RequestBody String json) {
         HttpHeaders headers = new HttpHeaders();
@@ -114,7 +118,8 @@ public class RoomController {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+	
+	/*Update room details*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, headers = "Accept=application/json")
     public ResponseEntity<String> updateFromJson(@RequestBody String json, @PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
@@ -131,6 +136,7 @@ public class RoomController {
         }
     }
 
+	/*Delete room*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
     public ResponseEntity<String> deleteFromJson(@PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();

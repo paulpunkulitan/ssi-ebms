@@ -1,6 +1,7 @@
 package ph.com.smesoft.hms.web;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.joda.time.format.DateTimeFormat;
@@ -25,13 +26,12 @@ import ph.com.smesoft.hms.reference.PersonType;
 import ph.com.smesoft.hms.service.PersonService;
 
 @Controller
-@RequestMapping("/people")
+@RequestMapping("/persons")
 public class PersonController {
 
 	@Autowired
     PersonService personService;
-
-
+	
 	void addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("person_birthdate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
     }
@@ -54,14 +54,30 @@ public class PersonController {
         return pathSegment;
     }
 
+	/*Get person based on given Id*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
     @ResponseBody
     public ResponseEntity<String> showJson(@PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         try {
-            Person person = personService.findPerson(id);
-            if (person == null) {
+            //Person person = personService.findPerson(id);
+        	/*Gender gender = null;
+        	PersonType persontype;*/
+        //	Date bdate= new Date();
+        	Person person = new Person();
+            person.setId(1L);
+            person.setPalmusId("PALMUS-0001");
+            person.setFirstName("Kimberly Jean");
+            person.setMiddleName("Agpi");
+            person.setLastName("Senados");
+            //person.setBirthDate(bdate);
+           person.setGender(Gender.Female);
+           person.setPersonType(PersonType.Customer);
+           person.setVersion(1);
+           
+        	
+        	if (person == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<String>(person.toJson(), headers, HttpStatus.OK);
@@ -70,6 +86,7 @@ public class PersonController {
         }
     }
 
+	/*List of Persons*/
 	@RequestMapping(headers = "Accept=application/json")
     @ResponseBody
     public ResponseEntity<String> listJson() {
@@ -83,6 +100,7 @@ public class PersonController {
         }
     }
 
+	/*Create person details*/
 	@RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> createFromJson(@RequestBody String json, UriComponentsBuilder uriBuilder) {
         HttpHeaders headers = new HttpHeaders();
@@ -98,6 +116,7 @@ public class PersonController {
         }
     }
 
+	/*Multiple create of person*/
 	@RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> createFromJsonArray(@RequestBody String json) {
         HttpHeaders headers = new HttpHeaders();
@@ -112,6 +131,7 @@ public class PersonController {
         }
     }
 
+	/*Update person details*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, headers = "Accept=application/json")
     public ResponseEntity<String> updateFromJson(@RequestBody String json, @PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
@@ -128,6 +148,7 @@ public class PersonController {
         }
     }
 
+	/*Delete person*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
     public ResponseEntity<String> deleteFromJson(@PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
