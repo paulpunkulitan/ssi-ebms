@@ -2,12 +2,15 @@ package ph.com.smesoft.hms.web;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -145,7 +148,7 @@ public class FloorController {
         }
     }
 	
-	/*List- UI*/
+	/*List- View*/
 	@RequestMapping(produces = "text/html")
     public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, @RequestParam(value = "sortFieldName", required = false) String sortFieldName, @RequestParam(value = "sortOrder", required = false) String sortOrder, Model uiModel) {
         if (page != null || size != null) {
@@ -158,5 +161,24 @@ public class FloorController {
             uiModel.addAttribute("floors", Floor.findAllFloors(sortFieldName, sortOrder));
         }
         return "floors/list";
+    }
+	
+	/*POST Create floor-  View */
+	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
+    public String create(@Valid Floor floor, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            populateEditForm(uiModel, floor);
+            return "floors/create";
+        }
+        uiModel.asMap().clear();
+        floor.persist();
+        return "redirect:/floors/" + encodeUrlPathSegment(floor.getId().toString(), httpServletRequest);
+    }
+
+	/*Create floor-  View */
+	@RequestMapping(params = "form", produces = "text/html")
+    public String createForm(Model uiModel) {
+        populateEditForm(uiModel, new Floor());
+        return "floors/create";
     }
 }

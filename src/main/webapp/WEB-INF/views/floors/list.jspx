@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" 
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	 xmlns:jsp="http://java.sun.com/JSP/Page" 
 	 xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
 	 xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" 
 	 version="2.0">
@@ -10,14 +11,20 @@
 		    </h1>
 			<hr class="hrdesign"/>	
 	        <br/>
-	    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-	    <jsp:output omit-xml-declaration="yes"/>
-	    <page:list id="pl_ph_com_smesoft_hms_domain_Floor" items="${floors}" z="ifXqhISmAmlrfkHffySQ+4bBcYo=">
-	        <table:table data="${floors}" id="l_ph_com_smesoft_hms_domain_Floor" path="/floors" z="a6trP3FvAqtZP1x6tP2r8q5YMbA=">
-	            <table:column id="c_ph_com_smesoft_hms_domain_Floor_floorNumber" property="floorNumber" z="OPYg7stwqJG8FuRXLT7r/iJnu6Q="/>
-	            <table:column id="c_ph_com_smesoft_hms_domain_Floor_description" property="description" z="vDoF8LKIhTsb1JcRc0YFGa6OMCw="/>
-	        </table:table>
-	    </page:list>
+	    <table class="table table-striped">
+           <tr>
+                <th>ID</th>
+                <th>Floor Number</th>
+                <th>Description</th>
+            </tr>
+            <c:forEach var="floor" items="${floors}">
+                <tr>
+                    <td><c:out value="${floor.id}" /></td>
+                    <td><c:out value="${floor.floorNumber}" /></td>
+                    <td><c:out value="${floor.description}" /></td>
+                </tr>
+            </c:forEach>
+        </table>
 	    </div>
 	 </div>   
 </div>
