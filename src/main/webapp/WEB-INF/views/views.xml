@@ -4,7 +4,7 @@
 	"http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
 
 <tiles-definitions>
-
+  
   <definition name="dashboard" extends="default">
     <put-attribute name="body" value="/WEB-INF/views/dashboard.jspx" />
   </definition>
@@ -19,10 +19,6 @@
 
   <definition name="uncaughtException" extends="public">
     <put-attribute name="body" value="/WEB-INF/views/uncaughtException.jspx" />
-  </definition>
-  
-  <definition name="dashboard" extends="default">
-    <put-attribute name="body" value="/WEB-INF/views/dashboard.jspx" />
   </definition>
 
 </tiles-definitions>

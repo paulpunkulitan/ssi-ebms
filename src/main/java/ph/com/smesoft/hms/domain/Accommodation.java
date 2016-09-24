@@ -28,17 +28,17 @@ public class Accommodation {
 
     /**
      */
-    @NotNull
+    /*@NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
-    private Date startDate;
+    private Date startDate;*/
 
     /**
      */
-    @NotNull
+    /*@NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
-    private Date endDate;
+    private Date endDate;*/
 
     /**
      */
@@ -75,7 +75,7 @@ public class Accommodation {
         this.version = version;
     }
 
-	public Date getStartDate() {
+	/*public Date getStartDate() {
         return this.startDate;
     }
 
@@ -89,7 +89,7 @@ public class Accommodation {
 
 	public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }
+    }*/
 
 	public Person getPerson() {
         return this.person;

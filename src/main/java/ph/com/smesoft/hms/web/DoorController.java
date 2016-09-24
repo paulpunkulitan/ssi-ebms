@@ -2,9 +2,7 @@ package ph.com.smesoft.hms.web;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,30 +16,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
-import ph.com.smesoft.hms.domain.Floor;
-import ph.com.smesoft.hms.domain.Shift;
-import ph.com.smesoft.hms.service.PersonService;
-import ph.com.smesoft.hms.service.ShiftService;
+import ph.com.smesoft.hms.domain.Door;
+import ph.com.smesoft.hms.service.RoomService;
+import ph.com.smesoft.hms.service.DoorService;
 
 @Controller
-@RequestMapping("/shifts")
-public class ShiftController {
+@RequestMapping("/doors")
+public class DoorController {
+	
+	@Autowired
+    DoorService doorService;
 
 	@Autowired
-    ShiftService shiftService;
+    RoomService roomService;
 
-	@Autowired
-    PersonService personService;
-
-	void addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("shift_shiftdate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-    }
-
-	void populateEditForm(Model uiModel, Shift shift) {
-        uiModel.addAttribute("shift", shift);
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("floors", Floor.findAllFloors());
-        uiModel.addAttribute("people", personService.findAllPeople());
+	void populateEditForm(Model uiModel, Door door) {
+        uiModel.addAttribute("door", door);
+        uiModel.addAttribute("rooms", roomService.findAllRooms());
     }
 
 	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
@@ -55,61 +46,68 @@ public class ShiftController {
         return pathSegment;
     }
 
-	/*Get shift based on given Id*/
+	/*Get door based on given Id*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
     @ResponseBody
     public ResponseEntity<String> showJson(@PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         try {
-            Shift shift = shiftService.findShift(id);
-            if (shift == null) {
+        	
+       Door door = doorService.findDoor(id);
+		/*Door door = new Door();
+		door.setId(1L);
+		door.setDoorNumber("DR-101");
+		door.setDescription("Door 1 to Room 1");*/
+       doorService.saveDoor(door);
+        	
+        	if (door == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
-            return new ResponseEntity<String>(shift.toJson(), headers, HttpStatus.OK);
+            return new ResponseEntity<String>(door.toJson(), headers, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-	/*List of Shift*/
+	/*List of Doors*/
 	@RequestMapping(headers = "Accept=application/json")
     @ResponseBody
     public ResponseEntity<String> listJson() {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         try {
-            List<Shift> result = shiftService.findAllShifts();
-            return new ResponseEntity<String>(Shift.toJsonArray(result), headers, HttpStatus.OK);
+            List<Door> result = doorService.findAllDoors();
+            return new ResponseEntity<String>(Door.toJsonArray(result), headers, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-	/*Create shift details*/
+	/*Create door details*/
 	@RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> createFromJson(@RequestBody String json, UriComponentsBuilder uriBuilder) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         try {
-            Shift shift = Shift.fromJsonToShift(json);
-            shiftService.saveShift(shift);
+            Door door = Door.fromJsonToDoor(json);
+            doorService.saveDoor(door);
             RequestMapping a = (RequestMapping) getClass().getAnnotation(RequestMapping.class);
-            headers.add("Location",uriBuilder.path(a.value()[0]+"/"+shift.getId().toString()).build().toUriString());
+            headers.add("Location",uriBuilder.path(a.value()[0]+"/"+door.getId().toString()).build().toUriString());
             return new ResponseEntity<String>(headers, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-	/*Multiple create of shift*/
+	/*Multiple create of door*/
 	@RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> createFromJsonArray(@RequestBody String json) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         try {
-            for (Shift shift: Shift.fromJsonArrayToShifts(json)) {
-                shiftService.saveShift(shift);
+            for (Door door: Door.fromJsonArrayToDoors(json)) {
+                doorService.saveDoor(door);
             }
             return new ResponseEntity<String>(headers, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -117,15 +115,15 @@ public class ShiftController {
         }
     }
 
-	/*Update shift details*/
+	/*Update door details*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, headers = "Accept=application/json")
     public ResponseEntity<String> updateFromJson(@RequestBody String json, @PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         try {
-            Shift shift = Shift.fromJsonToShift(json);
-            shift.setId(id);
-            if (shiftService.updateShift(shift) == null) {
+            Door door = Door.fromJsonToDoor(json);
+            door.setId(id);
+            if (doorService.updateDoor(door) == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<String>(headers, HttpStatus.OK);
@@ -134,17 +132,17 @@ public class ShiftController {
         }
     }
 
-	/*Delete shift*/
+	/*Delete door*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
     public ResponseEntity<String> deleteFromJson(@PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         try {
-            Shift shift = shiftService.findShift(id);
-            if (shift == null) {
+            Door door = doorService.findDoor(id);
+            if (door == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
-            shiftService.deleteShift(shift);
+            doorService.deleteDoor(door);
             return new ResponseEntity<String>(headers, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);

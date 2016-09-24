@@ -24,14 +24,14 @@
 
                         <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 ">
                             <h3> Keep Connected </h3>
-                            <ul class="icons-ul">
-								  <li><a href="#" class="icoFacebook"><i class="fa fa-facebook">Like Us on Facebook</i></a></li>
-								  <li><a href="#" class="icoInstagram"><i class="fa fa-instagram">Follow Us on Instagram</i></a></li>
-								  <li><a href="#" class="icoLinkedin"><i class="fa fa-linkedin">Follow Us on LinkedIn</i></a></li>
-								  <li><a href="#" class="icoPinterest"><i class="fa fa-pinterest">Follow Us on Pinterest</i></a></li>
-								  <li><a href="#" class="icoTwitter"><i class="fa fa-twitter">Follow Us on Twitter</i></a></li>
-							</ul>
-                           
+                            <ul class="social">
+                             
+                                <li><a href="#" class="icoFacebook">Like Us on Facebook</a></li>
+                                <li><a href="#" class="icoInstagram">Follow Us on Instagram</a> </li>
+                                <li><a href="#" class="icoLinkedin">Follow Us on LinkedIn</a></li>
+                                <li><a href="#" class="icoPinterest">Follow Us on Pinterest</a></li>
+                                <li><a href="#" class="icoTwitter">Follow Us on Twitter</a></li>
+                            </ul>
                         </div>
 
                         <div class="col-lg-3  col-md-3 col-sm-4 col-xs-4">
