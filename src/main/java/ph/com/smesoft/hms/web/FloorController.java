@@ -181,4 +181,11 @@ public class FloorController {
         populateEditForm(uiModel, new Floor());
         return "floors/create";
     }
+	
+	@RequestMapping(value = "/{id}", produces = "text/html")
+    public String show(@PathVariable("id") Long id, Model uiModel) {
+        uiModel.addAttribute("floor", Floor.findFloor(id));
+        uiModel.addAttribute("itemId", id);
+        return "floors/show";
+    }
 }

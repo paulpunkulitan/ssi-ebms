@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:spring="http://www.springframework.org/tags" 
 	 xmlns:jsp="http://java.sun.com/JSP/Page" 
 	 xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
 	 xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" 
@@ -16,12 +17,19 @@
                 <th>ID</th>
                 <th>Floor Number</th>
                 <th>Description</th>
+                <th></th>
             </tr>
             <c:forEach var="floor" items="${floors}">
                 <tr>
                     <td><c:out value="${floor.id}" /></td>
                     <td><c:out value="${floor.floorNumber}" /></td>
                     <td><c:out value="${floor.description}" /></td>
+                    <td class="utilbox">
+                    	<spring:url value="/resources/images/show.png" var="show_image_url" />
+                    	<a href="/hms/floors/${floor.id}" >
+              				<img class="image" src="${show_image_url}"/>
+            			</a>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
