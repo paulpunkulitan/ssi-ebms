@@ -24,6 +24,7 @@ import ph.com.smesoft.hms.service.ShiftService;
  */
 public class ApplicationConversionServiceFactoryBean extends FormattingConversionServiceFactoryBean {
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void installFormatters(FormatterRegistry registry) {
 		super.installFormatters(registry);
