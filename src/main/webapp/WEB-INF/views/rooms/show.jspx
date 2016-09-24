@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+	 xmlns:jsp="http://java.sun.com/JSP/Page" 
+	 xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+	 version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-    <page:show id="ps_ph_com_smesoft_hms_domain_Room" object="${room}" path="/rooms" z="m0B8Pgug7BOPIFzPJimkUo3djNk=">
-        <field:display field="rooNumber" id="s_ph_com_smesoft_hms_domain_Room_rooNumber" object="${room}" z="x9lVP7044jBwrtCJ1Wrjej5luxY="/>
-        <field:display field="description" id="s_ph_com_smesoft_hms_domain_Room_description" object="${room}" z="k3HS+Lh5R0K4Fsdnnuu3lCXO1O8="/>
-        <field:display field="floor" id="s_ph_com_smesoft_hms_domain_Room_floor" object="${room}" z="XKuDZC7kIL/va8QDQIUEZohsBWs="/>
-    </page:show>
+    <div id="wrapper">
+	  	<div class="container-fluid">
+		  <header class="row">
+			 <div class="col-lg-12">
+			     <h1 >Room Information</h1>
+			 </div>
+		  </header>
+		  <hr class="hrdesign" />
+		  <br />
+		    <page:show id="ps_ph_com_smesoft_hms_domain_Room" object="${room}" path="/rooms" z="m0B8Pgug7BOPIFzPJimkUo3djNk=">
+		        <field:display field="rooNumber" id="s_ph_com_smesoft_hms_domain_Room_rooNumber" object="${room}" z="x9lVP7044jBwrtCJ1Wrjej5luxY="/>
+		        <field:display field="description" id="s_ph_com_smesoft_hms_domain_Room_description" object="${room}" z="k3HS+Lh5R0K4Fsdnnuu3lCXO1O8="/>
+		        <field:display field="floor" id="s_ph_com_smesoft_hms_domain_Room_floor" object="${room}" z="XKuDZC7kIL/va8QDQIUEZohsBWs="/>
+		    </page:show>
+	    </div>
+    </div>
 </div>

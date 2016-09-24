@@ -6,11 +6,13 @@
 <link href="${bootstrapCss}" rel="stylesheet" type="text/css" media="screen" />
 <link href="${dashboardCss}" rel="stylesheet" type="text/css" media="screen" />
 <link href="${fontawesomeCss}" rel="stylesheet" type="text/css" media="screen" />
+
+
 <footer>
             <div class="footer">
                 <div id="wrapper">
                     <div class="row">
-                        <div class="col-lg-6  col-md-4 col-sm-4 col-xs-4">
+                        <div class="col-lg-offset-1 col-lg-5  col-md-4 col-sm-4 col-xs-4">
                             <h3> Company Background </h3>
                             <p>
                                 SMESoft Inc. (SSI) is a duly registered company in the Philippines Securities and Exchange Commission (SEC). Established in 2008 and registered in 2011, the company has developed its product line of Business Management Solutions for Small to Medium Enterprise.
@@ -20,7 +22,7 @@
                             </p>
                         </div>
 
-                        <div class="col-lg-3  col-md-3 col-sm-4 col-xs-4 ">
+                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 ">
                             <h3> Keep Connected </h3>
                             <ul class="icons-ul">
 								  <li><a href="#" class="icoFacebook"><i class="fa fa-facebook">Like Us on Facebook</i></a></li>
@@ -42,7 +44,6 @@
                                 </li>
 
                                 <li>
-                                    
                                     +63 933.049.8890 (SMART)
                                     <p>+63 906.297.0995 (GLOBE)</p>
                                 </li>
@@ -69,7 +70,7 @@
             </div>
             <!--/.footer-->
 
-            <div class="footer-bottom">
+            <div class="footer-bottomHome">
                 <div class="container">
                     <center><p>2016 SMESoft Inc. All Rights Reserved</p></center>
                 </div>

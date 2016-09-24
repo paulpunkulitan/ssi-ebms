@@ -29,8 +29,17 @@ public class FloorController {
     public ResponseEntity<String> showJson(@PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
+        
+        
         try {
-            Floor floor = Floor.findFloor(id);
+           // Floor floor = Floor.findFloor(id);
+           
+            Floor floor = new Floor();
+            floor.setId(1L);
+            floor.setDescription("First Floor");
+            floor.setFloorNumber("FLR0001");
+            floor.setVersion(1);
+            
             if (floor == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }

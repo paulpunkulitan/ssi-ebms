@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" id="footer" version="2.0">
+<spring:url value="/styles/bootstrap.css" var="bootstrapCss" />
+<spring:url value="/styles/dashboard-navbar.css" var="dashboardCss" />
+<spring:url value="/styles/font-awesome/css/font-awesome.min.css" var="fontawesomeCss" />
+<link href="${bootstrapCss}" rel="stylesheet" type="text/css" media="screen" />
+<link href="${dashboardCss}" rel="stylesheet" type="text/css" media="screen" />
+<link href="${fontawesomeCss}" rel="stylesheet" type="text/css" media="screen" />
+
+<spring:url value="/styles/Site.css" var="siteCss" />
+<link href="${siteCss}" rel="stylesheet" type="text/css" media="screen" />
+
+
+	<footer>
+	            <div class="footer-bottom">
+	                <div class="container">
+	                    <center>
+		                    <hr class="hrFooter"/>
+		                    <p>2016 SMESoft Inc. All Rights Reserved</p></center>
+	                </div>
+	            </div>
+	            <!--/.footer-bottom-->
+	</footer>
+
+</div>
