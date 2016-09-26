@@ -5,6 +5,12 @@
 	 version="2.0">
 	  <div id="wrapper">
 	  	<div class="container-fluid">
+	  		<div>
+			    <ol class="breadcrumb">
+				  <li class="disabled"><a>Floor</a></li>
+				  <li class="active"><span> List of Floor</span></li>
+			     </ol>
+			</div>
 		    <h1>List of Floor 
 		    	<a href="/hms/floors?form" type="button" class="btn btn-primary pull-right">Register Floor</a>
 		    </h1>
