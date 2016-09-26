@@ -71,7 +71,8 @@ public class PersonController {
             person.setFirstName("Kimberly Jean");
             person.setMiddleName("Agpi");
             person.setLastName("Senados");
-            person.setBirthDate(java.sql.Timestamp.valueOf("2013-09-04 13:30:00"));
+           /* person.setBirthDate(java.sql.Timestamp.valueOf("2013-09-04 13:30:00"));*/
+            person.setBirthDate(new Date());
            person.setGender(Gender.Female);
            person.setPersonType(PersonType.Customer);
            person.setVersion(1);

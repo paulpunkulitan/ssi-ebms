@@ -182,10 +182,41 @@ public class FloorController {
         return "floors/create";
     }
 	
+	/*Show floor*/
 	@RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {
         uiModel.addAttribute("floor", Floor.findFloor(id));
         uiModel.addAttribute("itemId", id);
         return "floors/show";
+    }
+	
+	/*POST Update floor- view*/
+	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
+    public String update(@Valid Floor floor, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            populateEditForm(uiModel, floor);
+            return "floors/update";
+        }
+        uiModel.asMap().clear();
+        floor.merge();
+        return "redirect:/floors/" + encodeUrlPathSegment(floor.getId().toString(), httpServletRequest);
+    }
+
+	/*Update floor- view*/
+	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
+    public String updateForm(@PathVariable("id") Long id, Model uiModel) {
+        populateEditForm(uiModel, Floor.findFloor(id));
+        return "floors/update";
+    }
+	
+	/*Delete floor*/
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
+    public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        Floor floor = Floor.findFloor(id);
+        floor.remove();
+        uiModel.asMap().clear();
+        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
+        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+        return "redirect:/floors";
     }
 }
