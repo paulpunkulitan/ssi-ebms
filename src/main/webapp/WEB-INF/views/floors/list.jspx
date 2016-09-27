@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" 
 	xmlns:spring="http://www.springframework.org/tags" 
-	 xmlns:jsp="http://java.sun.com/JSP/Page" 
-	 xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
-	 xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" 
 	 version="2.0">
 	  <div id="wrapper">
 	  	<div class="container-fluid">
@@ -24,6 +21,8 @@
                 <th>Floor Number</th>
                 <th>Description</th>
                 <th></th>
+                <th></th>
+                <th></th>
             </tr>
             <c:forEach var="floor" items="${floors}">
                 <tr>
@@ -32,9 +31,26 @@
                     <td><c:out value="${floor.description}" /></td>
                     <td class="utilbox">
                     	<spring:url value="/resources/images/show.png" var="show_image_url" />
-                    	<a href="/hms/floors/${floor.id}" >
+                    	<a href="/hms/floors/${floor.id}" title="Show">
               				<img class="image" src="${show_image_url}"/>
             			</a>
+                    </td>
+                    <td class="utilbox">
+                    	<spring:url value="/resources/images/update.png" var="update_image_url" />
+                    	<a href="/hms/floors/${floor.id}?form" title="Update">
+              				<img class="image" src="${update_image_url}"/>
+            			</a>
+                    </td>
+                    <td class="utilbox">
+                    	<spring:url value="/resources/images/delete.png" var="delete_image_url" />
+                    	<form action="/hms/floors?id=${floor.id}" method="DELETE">
+               				<c:set var="delete_confirm_msg">
+			                  <spring:escapeBody javaScriptEscape="true">
+			                    <spring:message code="entity_delete_confirm" />
+			                  </spring:escapeBody>
+		                	</c:set>
+		                	 <input src="${delete_image_url}" title="Delete" type="image" onclick="return confirm('${delete_confirm_msg}');" />
+               			</form>
                     </td>
                 </tr>
             </c:forEach>

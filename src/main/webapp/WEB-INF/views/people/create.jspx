@@ -15,65 +15,80 @@
 			</header>
 			<hr class="hrdesign" />
 			<br />
-			<form:create id="fc_ph_com_smesoft_hms_domain_Person"
-				modelAttribute="person" path="/people"
-				render="${empty dependencies}" z="ihjLVZv5fFJ7N3sgXXzmDqFhLQI=">
+			
+
+
+			<form action="/hms/persons" method="POST">
 				<div class="form-group row">
-					<label class="col-lg-offset-1 col-lg-2 control-label">Palmus
-						ID:</label>
+					<label class="col-lg-offset-1 col-lg-2 control-label">Palmus ID :</label>
 					<div class="col-lg-6">
 						<input name="palmusId" class="form-control" type="text"
-							placeholder="PALMUS100000101" />
+							placeholder="PLMS0001" />
 					</div>
 				</div>
+				
 				<div class="form-group row">
-					<div class="col-lg-offset-3 col-lg-6">
-						<field:select field="gender"
-							id="c_ph_com_smesoft_hms_domain_Person_personType"
-							items="${persontypes}" path="persontypes" required="true"
-							z="85NXGtuQzP2vz+8Qh4vR75J+9VI=" />
-					</div>
-				</div>
-				<div class="form-group row">
-					<label class="col-lg-offset-1 col-lg-2 control-label">First
-						Name:</label>
+					<label class="col-lg-offset-1 col-lg-2 control-label">First Name</label>
 					<div class="col-lg-6">
-						<input name="firstName" class="form-control" type="text"
-							placeholder="Luke" />
+						<input name="firstName" class="form-control" type="text" />
 					</div>
 				</div>
+				
 				<div class="form-group row">
-					<label class="col-lg-offset-1 col-lg-2 control-label">Middle
-						Name:</label>
+					<label class="col-lg-offset-1 col-lg-2 control-label">Middle Name</label>
 					<div class="col-lg-6">
-						<input name="middleName" class="form-control" type="text"
-							placeholder="Robert" />
+						<input name="middleName" class="form-control" type="text"/>
 					</div>
 				</div>
+				
 				<div class="form-group row">
-					<label class="col-lg-offset-1 col-lg-2 control-label">Last
-						Name:</label>
+					<label class="col-lg-offset-1 col-lg-2 control-label">Last Name</label>
 					<div class="col-lg-6">
-						<input name="lastName" class="form-control" type="text"
-							placeholder="Hemmings" />
+						<input name="lastName" class="form-control" type="text"/>
 					</div>
 				</div>
+				
+				
 				<div class="form-group row">
-					<div class="col-lg-offset-3 col-lg-6">
-						<field:datetime dateTimePattern="${person_birthdate_date_format}"
-							field="birthDate"
-							id="c_ph_com_smesoft_hms_domain_Person_birthDate" past="true"
-							required="true" z="lciBetr2ZSoZFz8jkjtyMO5rsxA=" />
+				     <label class="col-lg-offset-1 col-lg-2 control-label">Person Type</label>
+				     <div class="col-lg-6">
+				      <select class="form-control" name="personType">
+				             <option value="Customer">Customer</option>
+				             <option value="Personnel">Personnel</option>
+				         </select> 
+				     </div>
+    			</div>
+    			
+    			
+    			
+    			
+    			<div class="form-group row">
+					<label class="col-lg-offset-1 col-lg-2 control-label">Birthday</label>
+					<div class="col-lg-6">
+						<input name="birthDate" type="date" class="form-control"/>
 					</div>
 				</div>
+    			
+    			
+    			<div class="form-group row">
+				     <label class="col-lg-offset-1 col-lg-2 control-label">Gender</label>
+				     <div class="col-lg-6">
+				      <select class="form-control" name="gender">
+				              <option value="Male">Male</option>
+				             <option value="Female">Female</option>
+				        </select> 
+				     </div>
+    			</div>
+    			
+		
 				<div class="form-group row">
-					<div class="col-lg-offset-3 col-lg-6">
-						<field:select field="personType"
-							id="c_ph_com_smesoft_hms_domain_Person_gender" items="${genders}"
-							path="genders" required="true" z="Vz7e539QHd4SSG7bHoquR4iy2mE=" />
+					<div class="col-lg-offset-5 col-lg-6">
+						<input class="btn btn-primary" type="submit" value="Save" />
 					</div>
 				</div>
-			</form:create>
+			</form>
+
+
 		</div>
 		<!-- container-fluid -->
 	</div>
