@@ -30,11 +30,6 @@ import ph.com.smesoft.hms.reference.Gender;
 @Configurable
 public class Person {
 
-	/**
-     */
-    @Size(min = 3, max = 30)
-    private String pvId;
-	
     /**
      */
     @Size(min = 3, max = 30)
@@ -57,48 +52,27 @@ public class Person {
 
     /**
      */
-    /*@NotNull*/
-   /* @Past
+    @NotNull
+    @Past
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
-    private Date birthDate;*/
+    private Date birthDate;
 
     /**
      */
     @NotNull
     @Enumerated
-    private PersonType personType;
+    private PersonType gender;
 
     /**
      */
     @NotNull
     @Enumerated
-    private Gender gender;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+    private Gender personType;
 
-	@Version
-    @Column(name = "version")
-    private Integer version;
-
-	public Long getId() {
-        return this.id;
+	public String toString() {
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
-
-	public void setId(Long id) {
-        this.id = id;
-    }
-
-	public String getPvId() {
-		return pvId;
-	}
-
-	public void setPvId(String pvId) {
-		this.pvId = pvId;
-	}
 
 	public String getPalmusId() {
         return this.palmusId;
@@ -131,39 +105,61 @@ public class Person {
 	public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-	
-	public PersonType getPersonType() {
-		return personType;
-	}
 
-	public void setPersonType(PersonType personType) {
-		this.personType = personType;
-	}
-
-	public Gender getGender() {
-		return gender;
-	}
-
-	public void setGender(Gender gender) {
-		this.gender = gender;
-	}
-
-	public Integer getVersion() {
-        return this.version;
-    }
-
-	public void setVersion(Integer version) {
-        this.version = version;
-    }
-	
-/*	public Date getBirthDate() {
+	public Date getBirthDate() {
         return this.birthDate;
     }
 
 	public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
-*/
+
+	public PersonType getGender() {
+        return this.gender;
+    }
+
+	public void setGender(PersonType gender) {
+        this.gender = gender;
+    }
+
+	public Gender getPersonType() {
+        return this.personType;
+    }
+
+	public void setPersonType(Gender personType) {
+        this.personType = personType;
+    }
+
+	public String toJson() {
+        return new JSONSerializer()
+        .exclude("*.class").deepSerialize(this);
+    }
+
+	public String toJson(String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").deepSerialize(this);
+    }
+
+	public static Person fromJsonToPerson(String json) {
+        return new JSONDeserializer<Person>()
+        .use(null, Person.class).deserialize(json);
+    }
+
+	public static String toJsonArray(Collection<Person> collection) {
+        return new JSONSerializer()
+        .exclude("*.class").deepSerialize(collection);
+    }
+
+	public static String toJsonArray(Collection<Person> collection, String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").deepSerialize(collection);
+    }
+
+	public static Collection<Person> fromJsonArrayToPeople(String json) {
+        return new JSONDeserializer<List<Person>>()
+        .use("values", Person.class).deserialize(json);
+    }
+
 	@PersistenceContext
     transient EntityManager entityManager;
 
@@ -250,38 +246,29 @@ public class Person {
         this.entityManager.flush();
         return merged;
     }
-	
-	public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
+
+	@Version
+    @Column(name = "version")
+    private Integer version;
+
+	public Long getId() {
+        return this.id;
     }
 
-	public String toJson() {
-        return new JSONSerializer()
-        .exclude("*.class").deepSerialize(this);
+	public void setId(Long id) {
+        this.id = id;
     }
 
-	public String toJson(String[] fields) {
-        return new JSONSerializer()
-        .include(fields).exclude("*.class").deepSerialize(this);
+	public Integer getVersion() {
+        return this.version;
     }
 
-	public static Person fromJsonToPerson(String json) {
-        return new JSONDeserializer<Person>()
-        .use(null, Person.class).deserialize(json);
-    }
-
-	public static String toJsonArray(Collection<Person> collection) {
-        return new JSONSerializer()
-        .exclude("*.class").deepSerialize(collection);
-    }
-
-	public static String toJsonArray(Collection<Person> collection, String[] fields) {
-        return new JSONSerializer()
-        .include(fields).exclude("*.class").deepSerialize(collection);
-    }
-
-	public static Collection<Person> fromJsonArrayToPeople(String json) {
-        return new JSONDeserializer<List<Person>>()
-        .use("values", Person.class).deserialize(json);
+	public void setVersion(Integer version) {
+        this.version = version;
     }
 }

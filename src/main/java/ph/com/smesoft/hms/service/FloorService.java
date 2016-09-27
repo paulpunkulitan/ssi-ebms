@@ -1,11 +1,9 @@
 package ph.com.smesoft.hms.service;
-
 import java.util.List;
-
 import ph.com.smesoft.hms.domain.Floor;
 
 public interface FloorService {
-	
+
 	public abstract long countAllFloors();
 
 
@@ -25,4 +23,5 @@ public interface FloorService {
 
 
 	public abstract Floor updateFloor(Floor floor);
+
 }

@@ -23,17 +23,17 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PersistenceContext;
 
-@Entity
 @Configurable
+@Entity
 public class Shift {
 
     /**
      */
-  /*  @NotNull
+    @NotNull
     @Past
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
-    private Date shiftDate;*/
+    private Date shiftDate;
 
     /**
      */
@@ -44,55 +44,6 @@ public class Shift {
      */
     @ManyToOne
     private Floor floor;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
-
-	@Version
-    @Column(name = "version")
-    private Integer version;
-
-	/*public Date getShiftDate() {
-        return this.shiftDate;
-    }
-
-	public void setShiftDate(Date shiftDate) {
-        this.shiftDate = shiftDate;
-    }*/
-
-	public Person getPerson() {
-        return this.person;
-    }
-
-	public void setPerson(Person person) {
-        this.person = person;
-    }
-
-	public Floor getFloor() {
-        return this.floor;
-    }
-
-	public void setFloor(Floor floor) {
-        this.floor = floor;
-    }
-	
-	public Long getId() {
-        return this.id;
-    }
-
-	public void setId(Long id) {
-        this.id = id;
-    }
-
-	public Integer getVersion() {
-        return this.version;
-    }
-
-	public void setVersion(Integer version) {
-        this.version = version;
-    }
 
 	@PersistenceContext
     transient EntityManager entityManager;
@@ -181,6 +132,10 @@ public class Shift {
         return merged;
     }
 
+	public String toString() {
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
+
 	public String toJson() {
         return new JSONSerializer()
         .exclude("*.class").deepSerialize(this);
@@ -211,7 +166,52 @@ public class Shift {
         .use("values", Shift.class).deserialize(json);
     }
 
-	public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
+
+	@Version
+    @Column(name = "version")
+    private Integer version;
+
+	public Long getId() {
+        return this.id;
+    }
+
+	public void setId(Long id) {
+        this.id = id;
+    }
+
+	public Integer getVersion() {
+        return this.version;
+    }
+
+	public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+	public Date getShiftDate() {
+        return this.shiftDate;
+    }
+
+	public void setShiftDate(Date shiftDate) {
+        this.shiftDate = shiftDate;
+    }
+
+	public Person getPerson() {
+        return this.person;
+    }
+
+	public void setPerson(Person person) {
+        this.person = person;
+    }
+
+	public Floor getFloor() {
+        return this.floor;
+    }
+
+	public void setFloor(Floor floor) {
+        this.floor = floor;
     }
 }

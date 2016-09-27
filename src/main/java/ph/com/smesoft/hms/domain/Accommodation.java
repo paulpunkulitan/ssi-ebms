@@ -22,23 +22,23 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PersistenceContext;
 
-@Configurable
 @Entity
+@Configurable
 public class Accommodation {
 
     /**
      */
-    /*@NotNull
+    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
-    private Date startDate;*/
+    private Date startDate;
 
     /**
      */
-    /*@NotNull
+    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
-    private Date endDate;*/
+    private Date endDate;
 
     /**
      */
@@ -75,7 +75,41 @@ public class Accommodation {
         this.version = version;
     }
 
-	/*public Date getStartDate() {
+	public String toString() {
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
+
+	public String toJson() {
+        return new JSONSerializer()
+        .exclude("*.class").deepSerialize(this);
+    }
+
+	public String toJson(String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").deepSerialize(this);
+    }
+
+	public static Accommodation fromJsonToAccommodation(String json) {
+        return new JSONDeserializer<Accommodation>()
+        .use(null, Accommodation.class).deserialize(json);
+    }
+
+	public static String toJsonArray(Collection<Accommodation> collection) {
+        return new JSONSerializer()
+        .exclude("*.class").deepSerialize(collection);
+    }
+
+	public static String toJsonArray(Collection<Accommodation> collection, String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").deepSerialize(collection);
+    }
+
+	public static Collection<Accommodation> fromJsonArrayToAccommodations(String json) {
+        return new JSONDeserializer<List<Accommodation>>()
+        .use("values", Accommodation.class).deserialize(json);
+    }
+
+	public Date getStartDate() {
         return this.startDate;
     }
 
@@ -89,7 +123,7 @@ public class Accommodation {
 
 	public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }*/
+    }
 
 	public Person getPerson() {
         return this.person;
@@ -192,39 +226,5 @@ public class Accommodation {
         Accommodation merged = this.entityManager.merge(this);
         this.entityManager.flush();
         return merged;
-    }
-
-	public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
-
-	public String toJson() {
-        return new JSONSerializer()
-        .exclude("*.class").deepSerialize(this);
-    }
-
-	public String toJson(String[] fields) {
-        return new JSONSerializer()
-        .include(fields).exclude("*.class").deepSerialize(this);
-    }
-
-	public static Accommodation fromJsonToAccommodation(String json) {
-        return new JSONDeserializer<Accommodation>()
-        .use(null, Accommodation.class).deserialize(json);
-    }
-
-	public static String toJsonArray(Collection<Accommodation> collection) {
-        return new JSONSerializer()
-        .exclude("*.class").deepSerialize(collection);
-    }
-
-	public static String toJsonArray(Collection<Accommodation> collection, String[] fields) {
-        return new JSONSerializer()
-        .include(fields).exclude("*.class").deepSerialize(collection);
-    }
-
-	public static Collection<Accommodation> fromJsonArrayToAccommodations(String json) {
-        return new JSONDeserializer<List<Accommodation>>()
-        .use("values", Accommodation.class).deserialize(json);
     }
 }

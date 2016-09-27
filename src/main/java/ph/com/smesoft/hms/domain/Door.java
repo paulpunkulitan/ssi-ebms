@@ -4,6 +4,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.transaction.annotation.Transactional;
 import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
 import java.util.Collection;
@@ -17,16 +18,15 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Version;
-import javax.validation.constraints.NotNull;
 
-@Configurable
 @Entity
+@Configurable
 public class Door {
 
     /**
      */
     @Size(min = 3, max = 30)
-    private String doorNumber;
+    private String rooNumber;
 
     /**
      */
@@ -37,9 +37,9 @@ public class Door {
     /**
      */
     @ManyToOne
-    private Room room;
-    
-    @Id
+    private Floor floor;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
@@ -48,38 +48,6 @@ public class Door {
     @Column(name = "version")
     private Integer version;
 
-	public String getDoorNumber() {
-        return this.doorNumber;
-    }
-
-	public void setDoorNumber(String doorNumber) {
-        this.doorNumber = doorNumber;
-    }
-
-	public String getDescription() {
-        return this.description;
-    }
-
-	public void setDescription(String description) {
-        this.description = description;
-    }
-	
-	public Room getRoom() {
-        return this.room;
-    }
-
-	public void setRoom(Room room) {
-        this.room = room;
-    }
-
-	public Integer getVersion() {
-		return version;
-	}
-
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
-
 	public Long getId() {
         return this.id;
     }
@@ -87,11 +55,49 @@ public class Door {
 	public void setId(Long id) {
         this.id = id;
     }
-	
+
+	public Integer getVersion() {
+        return this.version;
+    }
+
+	public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+	public String toJson() {
+        return new JSONSerializer()
+        .exclude("*.class").deepSerialize(this);
+    }
+
+	public String toJson(String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").deepSerialize(this);
+    }
+
+	public static Door fromJsonToDoor(String json) {
+        return new JSONDeserializer<Door>()
+        .use(null, Door.class).deserialize(json);
+    }
+
+	public static String toJsonArray(Collection<Door> collection) {
+        return new JSONSerializer()
+        .exclude("*.class").deepSerialize(collection);
+    }
+
+	public static String toJsonArray(Collection<Door> collection, String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").deepSerialize(collection);
+    }
+
+	public static Collection<Door> fromJsonArrayToDoors(String json) {
+        return new JSONDeserializer<List<Door>>()
+        .use("values", Door.class).deserialize(json);
+    }
+
 	@PersistenceContext
     transient EntityManager entityManager;
 
-	public static final List<String> fieldNames4OrderClauseFilter = java.util.Arrays.asList("doorNumber", "description", "room");
+	public static final List<String> fieldNames4OrderClauseFilter = java.util.Arrays.asList("rooNumber", "description", "floor");
 
 	public static final EntityManager entityManager() {
         EntityManager em = new Door().entityManager;
@@ -174,39 +180,32 @@ public class Door {
         this.entityManager.flush();
         return merged;
     }
-	
-	public String toJson() {
-        return new JSONSerializer()
-        .exclude("*.class").deepSerialize(this);
+
+	public String getRooNumber() {
+        return this.rooNumber;
     }
 
-	public String toJson(String[] fields) {
-        return new JSONSerializer()
-        .include(fields).exclude("*.class").deepSerialize(this);
+	public void setRooNumber(String rooNumber) {
+        this.rooNumber = rooNumber;
     }
 
-	public static Door fromJsonToDoor(String json) {
-        return new JSONDeserializer<Door>()
-        .use(null, Door.class).deserialize(json);
+	public String getDescription() {
+        return this.description;
     }
 
-	public static String toJsonArray(Collection<Door> collection) {
-        return new JSONSerializer()
-        .exclude("*.class").deepSerialize(collection);
+	public void setDescription(String description) {
+        this.description = description;
     }
 
-	public static String toJsonArray(Collection<Door> collection, String[] fields) {
-        return new JSONSerializer()
-        .include(fields).exclude("*.class").deepSerialize(collection);
+	public Floor getFloor() {
+        return this.floor;
     }
 
-	public static Collection<Door> fromJsonArrayToDoors(String json) {
-        return new JSONDeserializer<List<Door>>()
-        .use("values", Door.class).deserialize(json);
+	public void setFloor(Floor floor) {
+        this.floor = floor;
     }
 
 	public String toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
-
 }

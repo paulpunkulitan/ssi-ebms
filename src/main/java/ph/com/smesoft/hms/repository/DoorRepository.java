@@ -5,7 +5,5 @@ import org.springframework.stereotype.Repository;
 import ph.com.smesoft.hms.domain.Door;
 
 @Repository
-public interface DoorRepository extends JpaRepository<Door, Long>, 
-
-JpaSpecificationExecutor<Door> {
+public interface DoorRepository extends JpaSpecificationExecutor<Door>, JpaRepository<Door, Long> {
 }

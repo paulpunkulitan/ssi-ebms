@@ -18,8 +18,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
-@Entity
 @Configurable
+@Entity
 public class Floor {
 
     /**
@@ -32,47 +32,6 @@ public class Floor {
     @NotNull
     @Size(max = 1000)
     private String description;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
-
-	@Version
-    @Column(name = "version")
-    private Integer version;
-    
-    public String getFloorNumber() {
-        return this.floorNumber;
-    }
-
-	public void setFloorNumber(String floorNumber) {
-        this.floorNumber = floorNumber;
-    }
-
-	public String getDescription() {
-        return this.description;
-    }
-
-	public void setDescription(String description) {
-        this.description = description;
-    }
-    
-	public Long getId() {
-        return this.id;
-    }
-
-	public void setId(Long id) {
-        this.id = id;
-    }
-
-	public Integer getVersion() {
-        return this.version;
-    }
-
-	public void setVersion(Integer version) {
-        this.version = version;
-    }
 
 	@PersistenceContext
     transient EntityManager entityManager;
@@ -161,6 +120,51 @@ public class Floor {
         return merged;
     }
 
+	public String toString() {
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
+
+	public String getFloorNumber() {
+        return this.floorNumber;
+    }
+
+	public void setFloorNumber(String floorNumber) {
+        this.floorNumber = floorNumber;
+    }
+
+	public String getDescription() {
+        return this.description;
+    }
+
+	public void setDescription(String description) {
+        this.description = description;
+    }
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
+
+	@Version
+    @Column(name = "version")
+    private Integer version;
+
+	public Long getId() {
+        return this.id;
+    }
+
+	public void setId(Long id) {
+        this.id = id;
+    }
+
+	public Integer getVersion() {
+        return this.version;
+    }
+
+	public void setVersion(Integer version) {
+        this.version = version;
+    }
+
 	public String toJson() {
         return new JSONSerializer()
         .exclude("*.class").deepSerialize(this);
@@ -189,9 +193,5 @@ public class Floor {
 	public static Collection<Floor> fromJsonArrayToFloors(String json) {
         return new JSONDeserializer<List<Floor>>()
         .use("values", Floor.class).deserialize(json);
-    }
-
-	public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 }
