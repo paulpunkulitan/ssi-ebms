@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
-	 xmlns:jsp="http://java.sun.com/JSP/Page" 
-	 xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
-	 version="2.0">
-    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-    <jsp:output omit-xml-declaration="yes"/>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" 
+ xmlns:spring="http://www.springframework.org/tags" 
+ xmlns:c="http://java.sun.com/jsp/jstl/core" 
+  version="2.0">
+     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+     <jsp:output omit-xml-declaration="yes"/>
     <div id="wrapper">
 	  	<div class="container-fluid">
 		  <header class="row">
@@ -14,11 +14,74 @@
 		  </header>
 		  <hr class="hrdesign" />
 		  <br />
-		    <page:show id="ps_ph_com_smesoft_hms_domain_Room" object="${room}" path="/rooms" z="m0B8Pgug7BOPIFzPJimkUo3djNk=">
-		        <field:display field="rooNumber" id="s_ph_com_smesoft_hms_domain_Room_rooNumber" object="${room}" z="x9lVP7044jBwrtCJ1Wrjej5luxY="/>
-		        <field:display field="description" id="s_ph_com_smesoft_hms_domain_Room_description" object="${room}" z="k3HS+Lh5R0K4Fsdnnuu3lCXO1O8="/>
-		        <field:display field="floor" id="s_ph_com_smesoft_hms_domain_Room_floor" object="${room}" z="XKuDZC7kIL/va8QDQIUEZohsBWs="/>
-		    </page:show>
+		
+		  <div class="form-group row">
+		    <label class="col-lg-offset-1 col-lg-2 control-label">Room Number:</label>
+			    <div class="col-lg-6">
+				    <textbox class="form-control" width="50" disabled="true">
+				    ${room.roomNumber}
+				    </textbox>
+			    </div>
+		   </div>
+		   <div class="form-group row">
+		    <label class="col-lg-offset-1 col-lg-2 control-label">Description:</label>
+			    <div class="col-lg-6">
+				    <textbox class="form-control" disabled="true">
+				    ${room.description}
+				    </textbox>
+			    </div>
+		   </div>
+		   <div class="form-group row">
+		    <label class="col-lg-offset-1 col-lg-2 control-label">Floor:</label>
+			    <div class="col-lg-6">
+			   <textbox class="form-control" width="50" disabled="true">
+			    ${room.floor.floorNumber}
+			   </textbox>
+			    </div>
+		   </div>
+		   
+		   
+		     <div class="quicklinks">
+   			 <span>
+             <spring:url value="/resources/images/delete.png" var="delete_image_url" />
+                     <form action="/hms/rooms?id=${room.id}" method="DELETE">
+                   <c:set var="delete_confirm_msg">
+                     <spring:escapeBody javaScriptEscape="true">
+                       <spring:message code="entity_delete_confirm" />
+                     </spring:escapeBody>
+                   </c:set>
+                    <input src="${delete_image_url}" title="Delete" type="image" onclick="return confirm('${delete_confirm_msg}');" />
+                  </form>
+            </span>
+             <span>
+             <spring:url value="/resources/images/create.png" var="create_image_url" />
+                    <a href="/hms/rooms?form" title="Create">
+                 <img class="image" src="${create_image_url}"/>
+              </a>
+            </span>
+             <span>
+             <spring:url value="/resources/images/update.png" var="update_image_url" />
+                    <a href="/hms/rooms/${room.id}?form" title="Update">
+                 <img class="image" src="${update_image_url}"/>
+              </a>
+            </span>
+   <span>
+    <spring:url value="/resources/images/list.png" var="list_image_url" />
+                 <a href="/hms/rooms" title="List">
+                 <img class="image" src="${list_image_url}"/>
+              </a>
+            </span>
+           
+           
+           
+    
+   </div>
+		   
+		   
+		   
+		   
+		   
+		  
 	    </div>
     </div>
 </div>

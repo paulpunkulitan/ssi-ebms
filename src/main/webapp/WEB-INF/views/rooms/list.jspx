@@ -1,24 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" 
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:spring="http://www.springframework.org/tags" 
+	 xmlns:jsp="http://java.sun.com/JSP/Page" 
 	 xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
 	 xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" 
 	 version="2.0">
-	<div id="wrapper">
+	  <div id="wrapper">
 	  	<div class="container-fluid">
-			<h1>List of Rooms
-				  <a href="/hms/rooms?form" type="button" class="btn btn-primary pull-right">Register Room</a>
-			</h1>
+		    <h1>List of Rooms 
+		    	<a href="/hms/rooms?form" type="button" class="btn btn-primary pull-right">Register Room</a>
+		    </h1>
 			<hr class="hrdesign"/>	
-		    <br/>
-		    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-		    <jsp:output omit-xml-declaration="yes"/>
-		    <page:list id="pl_ph_com_smesoft_hms_domain_Room" items="${rooms}" z="3gC/TDKppELPiNeJHVkc0ns29Tg=">
-		        <table:table data="${rooms}" id="l_ph_com_smesoft_hms_domain_Room" path="/rooms" z="+njSeaj7XtFgzbcgcHOXfxC/Xts=">
-		            <table:column id="c_ph_com_smesoft_hms_domain_Room_rooNumber" property="rooNumber" z="+Av7HcTkFVhuip7JoIoUr4+MNqM="/>
-		            <table:column id="c_ph_com_smesoft_hms_domain_Room_description" property="description" z="w4pX7h+V+Fnwj33bcKs+Tt69YQo="/>
-		            <table:column id="c_ph_com_smesoft_hms_domain_Room_floor" property="floor" z="Sr5vag/qxBzuYqrwxeFsG9mK5go="/>
-		        </table:table>
-		    </page:list>
+	        <br/>
+	    <table class="table table-striped">
+           <tr>
+                <th>ID</th>
+                <th>Room Number</th>
+                <th>Description</th>
+				<th>Floor Number</th>
+                <th></th>
+            </tr>
+            <c:forEach var="room" items="${rooms}">
+                <tr>
+                    <td><c:out value="${room.id}" /></td>
+                    <td><c:out value="${room.roomNumber}" /></td>
+                    <td><c:out value="${room.description}" /></td>
+					<td><c:out value="${room.floor.floorNumber}" /></td>
+                    <td class="utilbox">
+                    	<spring:url value="/resources/images/show.png" var="show_image_url" />
+                    	<a href="/hms/rooms/${room.id}" >
+              				<img class="image" src="${show_image_url}"/>
+            			</a>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
 	    </div>
-    </div>
+	 </div>   
 </div>
+	

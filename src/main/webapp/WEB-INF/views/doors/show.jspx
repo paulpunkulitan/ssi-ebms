@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
+	<jsp:directive.page contentType="text/html;charset=UTF-8" />
+	<jsp:output omit-xml-declaration="yes" />
+	<div id="wrapper">
+		<div class="container-fluid">
+			<header class="row">
+				<div class="col-lg-12">
+					<h1>Door Information</h1>
+				</div>
+			</header>
+			<hr class="hrdesign" />
+			<br />
+			<form action="/hms/doors" method="GET">
+				<div class="form-group row">
+					<label class="col-lg-offset-1 col-lg-2 control-label">Door
+						Number:</label>
+					<div class="col-lg-6">
+						<p>${door.doorNumber}</p>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-lg-offset-1 col-lg-2 control-label">Description:</label>
+					<div class="col-lg-6">
+						<p>${door.description}</p>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-lg-offset-1 col-lg-2 control-label">Room:</label>
+					<div class="col-lg-6">
+						<p>${door.room.roomNumber}</p>
+					</div>
+				</div>
+				<div class="quicklinks">
+					<span> <spring:url value="/resources/images/delete.png"
+							var="delete_image_url" />
+						<form action="/hms/doors?id=${door.id}" method="DELETE">
+							<c:set var="delete_confirm_msg">
+								<spring:escapeBody javaScriptEscape="true">
+									<spring:message code="entity_delete_confirm" />
+								</spring:escapeBody>
+							</c:set>
+							<input src="${delete_image_url}" title="Delete" type="image"
+								onclick="return confirm('${delete_confirm_msg}');" />
+						</form>
+					</span> <span> <spring:url value="/resources/images/create.png"
+							var="create_image_url" /> <a href="/hms/doors?form"
+						title="Create"> <img class="image" src="${create_image_url}" />
+					</a>
+					</span> <span> <spring:url value="/resources/images/update.png"
+							var="update_image_url" /> <a href="/hms/doors/${door.id}?form"
+						title="Update"> <img class="image" src="${update_image_url}" />
+					</a>
+					</span> <span> <spring:url value="/resources/images/list.png"
+							var="list_image_url" /> <a href="/hms/doors" title="List"> <img
+							class="image" src="${list_image_url}" />
+					</a>
+					</span>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
