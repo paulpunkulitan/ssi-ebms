@@ -28,18 +28,26 @@ public class Accommodation {
 
     /**
      */
-    /*@NotNull
+    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
-    private Date startDate;*/
+    private Date startDate;
 
     /**
      */
-    /*@NotNull
+    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
-    private Date endDate;*/
+    private Date endDate;
 
+    @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "h:mm a")
+    private Date startTime;
+    
+    @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "h:mm a")
+    private Date endTime;
+    
     /**
      */
     @ManyToOne
@@ -75,7 +83,7 @@ public class Accommodation {
         this.version = version;
     }
 
-	/*public Date getStartDate() {
+	public Date getStartDate() {
         return this.startDate;
     }
 
@@ -89,7 +97,23 @@ public class Accommodation {
 
 	public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }*/
+    }
+	
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
 
 	public Person getPerson() {
         return this.person;
