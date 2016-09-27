@@ -27,14 +27,7 @@ import javax.persistence.PersistenceContext;
 @Configurable
 public class Shift {
 
-    /**
-     */
-  /*  @NotNull
-    @Past
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
-    private Date shiftDate;*/
-
+  
     /**
      */
     @ManyToOne
@@ -53,15 +46,48 @@ public class Shift {
 	@Version
     @Column(name = "version")
     private Integer version;
+	
+/*	@Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm a")
+    private Date startTime;
+    
+	
+    @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm a")
+    private Date endTime;*/
+	
+    @NotNull
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "M-")
+    private Date shiftDate;
+    
 
-	/*public Date getShiftDate() {
+	public Date getShiftDate() {
         return this.shiftDate;
     }
 
 	public void setShiftDate(Date shiftDate) {
         this.shiftDate = shiftDate;
-    }*/
+    }
+	
+	
+/*	public Date getStartTime() {
+        return this.startTime;
+    }
 
+	public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+	
+	public Date getEndTime() {
+        return this.endTime;
+    }
+
+	public void getEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+	*/
+	
 	public Person getPerson() {
         return this.person;
     }
