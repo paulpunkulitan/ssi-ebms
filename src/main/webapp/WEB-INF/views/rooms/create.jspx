@@ -8,6 +8,13 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<div id="wrapper">
 		<div class="container-fluid">
+			<div>
+			    <ol class="breadcrumb">
+				  <li class="disabled"><a>Rooms</a></li>
+				  <li><a href="/hms/rooms?page=1&amp;size=${empty param.size ? 10 : param.size}"> List of Rooms</a></li>
+			 	  <li class="active"><span>Register Room</span></li>
+			     </ol>
+			</div>
 			<header class="row">
 				<div class="col-lg-12">
 					<h1>Register Room</h1>

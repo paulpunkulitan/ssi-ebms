@@ -3817,8 +3817,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     float: left;
   }
   .navbar-nav > li > a {
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 8px;
+    padding-bottom: 0px;
   }
   .navbar-nav.navbar-right:last-child {
     margin-right: -15px;
@@ -5961,7 +5961,7 @@ table.tablesorter thead tr th:hover {
 
   .side-nav {
 	margin-left: -120px;
-	padding-bottom:90px;
+	padding-bottom:-50px;
 	left: 120px;
 	width: 140px;
 	position: fixed;
@@ -6558,7 +6558,18 @@ table.tablesorter thead tr th:hover {
 /*added*/
 .quicklinks {
  clear:both; 
- padding-bottom: 15px
+ padding-bottom: 15px;
+ width:120px;
+ /* background:pink; */
+ text-align:center;
 }
 .quicklinks span {
  float: right;
+ padding-right:10px;
+}
+
+.showDesign
+{
+	font-size:16px;
+	color:#fff;
+}

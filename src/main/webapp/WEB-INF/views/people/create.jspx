@@ -8,6 +8,13 @@
 	<jsp:output omit-xml-declaration="yes" />
 	<div id="wrapper">
 		<div class="container-fluid">
+		<div>
+			    <ol class="breadcrumb">
+				  <li class="disabled"><a>Person</a></li>
+				  <li><a href="/hms/persons?page=1&amp;size=${empty param.size ? 10 : param.size}"> List of Persons</a></li>
+			 	  <li class="active"><span>Register Person</span></li>
+			     </ol>
+			</div>
 			<header class="row">
 				<div class="col-lg-12">
 					<h1>Register Person</h1>
@@ -15,9 +22,6 @@
 			</header>
 			<hr class="hrdesign" />
 			<br />
-			
-
-
 			<form action="/hms/persons" method="POST">
 				<div class="form-group row">
 					<label class="col-lg-offset-1 col-lg-2 control-label">Palmus ID :</label>
