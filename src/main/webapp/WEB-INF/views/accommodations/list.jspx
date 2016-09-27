@@ -1,25 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" 
-	 xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
-	 xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" 
-	 version="2.0">
-	   	<div id="wrapper">
-		  	<div class="container-fluid">
-			   <h1>List of Accommodation
-			       <a href="/hms/accommodations?form" type="button" class="btn btn-primary pull-right">Create Accommodation</a>
-			   </h1>
-		 	   <hr class="hrdesign"/> 
-		    	<br/>    
-			    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-			    <jsp:output omit-xml-declaration="yes"/>
-			    <page:list id="pl_ph_com_smesoft_hms_domain_Accommodation" items="${accommodations}" z="wHyTDYd5oASdCMaMhdzrWJRyXjg=">
-			        <table:table data="${accommodations}" id="l_ph_com_smesoft_hms_domain_Accommodation" path="/accommodations" z="8RHJIHhEkndMexrEczUhUjID9Ds=">
-			            <table:column date="true" dateTimePattern="${accommodation_startdate_date_format}" id="c_ph_com_smesoft_hms_domain_Accommodation_startDate" property="startDate" z="a4lMhdicJqaPJjLvECaRM0+62uA="/>
-			            <table:column date="true" dateTimePattern="${accommodation_enddate_date_format}" id="c_ph_com_smesoft_hms_domain_Accommodation_endDate" property="endDate" z="y2U747O8miNQeaJ3DKpVV6D0kKU="/>
-			            <table:column id="c_ph_com_smesoft_hms_domain_Accommodation_person" property="person" z="+lMr1hbKw7qB3ZThwvWIM+Q7iZo="/>
-			            <table:column id="c_ph_com_smesoft_hms_domain_Accommodation_room" property="room" z="6npeU24dHUQERzXOo39UhBxKQSA="/>
-			        </table:table>
-			    </page:list>
-		    </div>
-	    </div>
+<div  xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	  xmlns:jsp="http://java.sun.com/JSP/Page" 
+	  xmlns:spring="http://www.springframework.org/tags" 
+	  xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	  version="2.0">	
+	  <div id="wrapper">
+	  	<div class="container-fluid">
+		 	<h1>List of Accommodations
+		 		    <a href="/hms/accommodations?form" type="button" class="btn btn-primary pull-right">Create Accommodation</a>
+		 	</h1>
+		 	<hr class="hrdesign"/> 
+		    <br/>
+			<table class="table table-striped">
+				<tr>
+					<th>Start Date</th>
+					<th>Start Time</th>
+					<th>End Date</th>
+					<th>End Time</th>
+					<th>Customer Name</th>
+					<th>Room Number</th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+				
+				<c:forEach var="accommodation" items="${accommodations}">
+					<tr>
+						<td><fmt:formatDate value="${accommodation.startDate}" pattern="MMMM dd, yyyy" /></td>
+						<td><fmt:formatDate value="${accommodation.startTime}" pattern="h:mm a" /></td>
+						<td><fmt:formatDate value="${accommodation.endDate}" pattern="MMMM dd, yyyy" /></td>
+						<td><fmt:formatDate value="${accommodation.endTime}" pattern="h:mm a" /></td>
+						<td><c:out value="${accommodation.person.firstName} ${accommodation.person.middleName} ${accommodation.person.lastName}"/></td>
+						<td><c:out value="${accommodation.room.roomNumber}" /></td>
+						<td class="utilbox">
+						<spring:url value="/resources/images/show.png" var="show_image_url" /> <a
+							href="/hms/accommodations/${accommodation.id}" title="Show"> <img
+								class="image" src="${show_image_url}" />
+						</a></td>
+						<td class="utilbox"><spring:url
+								value="/resources/images/update.png" var="update_image_url" />
+							<a href="/hms/accommodations/${accommodation.id}?form" title="Update"> <img
+								class="image" src="${update_image_url}" />
+						</a></td>
+						<td class="utilbox"><spring:url
+								value="/resources/images/delete.png" var="delete_image_url" />
+							<form action="/hms/persons?id=${people.id}" method="DELETE">
+								<c:set var="delete_confirm_msg">
+									<spring:escapeBody javaScriptEscape="true">
+										<spring:message code="entity_delete_confirm" />
+									</spring:escapeBody>
+								</c:set>
+								<input src="${delete_image_url}" title="Delete" type="image"
+									onclick="return confirm('${delete_confirm_msg}');" />
+							</form></td>
+					</tr>
+				</c:forEach>
+			</table>
+
+		</div>
+    </div>
 </div>

@@ -58,10 +58,10 @@ public class Person {
     /**
      */
     /*@NotNull*/
-    @Past
+   /* @Past
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
-    private Date birthDate;
+    private Date birthDate;*/
 
     /**
      */
@@ -156,14 +156,14 @@ public class Person {
         this.version = version;
     }
 	
-	public Date getBirthDate() {
+/*	public Date getBirthDate() {
         return this.birthDate;
     }
 
 	public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
-
+*/
 	@PersistenceContext
     transient EntityManager entityManager;
 

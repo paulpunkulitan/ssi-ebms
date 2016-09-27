@@ -7,6 +7,12 @@
 	 version="2.0">
 	  <div id="wrapper">
 	  	<div class="container-fluid">
+	  	<div>
+			    <ol class="breadcrumb">
+				  <li class="disabled"><a>Rooms</a></li>
+				  <li class="active"><span> List of Rooms</span></li>
+			     </ol>
+			</div>
 		    <h1>List of Rooms 
 		    	<a href="/hms/rooms?form" type="button" class="btn btn-primary pull-right">Register Room</a>
 		    </h1>
@@ -29,30 +35,25 @@
                     <td><c:out value="${room.description}" /></td>
 					<td><c:out value="${room.floor.floorNumber}" /></td>
                     <td class="utilbox">
-                    	<spring:url value="/resources/images/show.png" var="show_image_url" />
+                    	<spring:url value="/resources/images/showicon.png" var="show_image_url" />
                     	<a href="/hms/rooms/${room.id}" >
-              				<img class="image" src="${show_image_url}"/>
+              				<img class="shadowEffect" src="${show_image_url}" height="20" width="15"/>
             			</a>
                     </td>
                      <td class="utilbox">
-                    	<spring:url value="/resources/images/update.png" var="update_image_url" />
-                    	<a href="/hms/rooms/${room.id}?form" title="Update">
-              				<img class="image" src="${update_image_url}"/>
-            			</a>
-                    </td>
-                    <td class="utilbox">
-                    	<spring:url value="/resources/images/delete.png" var="delete_image_url" />
-                    	<form action="/hms/rooms?id=${room.id}" method="DELETE">
                				<c:set var="delete_confirm_msg">
 			                  <spring:escapeBody javaScriptEscape="true">
 			                    <spring:message code="entity_delete_confirm" />
 			                  </spring:escapeBody>
 		                	</c:set>
-		                	 <input src="${delete_image_url}" title="Delete" type="image" onclick="return confirm('${delete_confirm_msg}');" />
+
                			</form>
                     </td>
                 </tr>
             </c:forEach>
+            
+            
+            
         </table>
 	    </div>
 	 </div>   

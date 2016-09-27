@@ -1,5 +1,8 @@
 package ph.com.smesoft.hms.web;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +10,7 @@ import javax.validation.Valid;
 
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +31,6 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import ph.com.smesoft.hms.domain.Accommodation;
-import ph.com.smesoft.hms.domain.Person;
 import ph.com.smesoft.hms.service.AccommodationService;
 import ph.com.smesoft.hms.service.PersonService;
 import ph.com.smesoft.hms.service.RoomService;
@@ -42,6 +47,13 @@ public class AccommodationController {
 
 	@Autowired
     RoomService roomService;
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	    dateFormat.setLenient(false);
+	    binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	}
 
 	void addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("accommodation_startdate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
@@ -73,7 +85,16 @@ public class AccommodationController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         try {
-           Accommodation accommodation = accommodationService.findAccommodation(id);
+        	Calendar cal = Calendar.getInstance();
+          // Accommodation accommodation = accommodationService.findAccommodation(id);
+        	 Accommodation accommodation = new Accommodation();
+        	 accommodation.setStartDate(new Date());
+        	 accommodation.setStartTime(cal.getTime());
+        	 accommodation.setEndDate(new Date());
+        	 accommodation.setEndTime(cal.getTime());
+        	
+        	
+        	
         	if (accommodation == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
@@ -161,4 +182,79 @@ public class AccommodationController {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+	
+	//List view
+	@RequestMapping(produces = "text/html")
+    public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, @RequestParam(value = "sortFieldName", required = false) String sortFieldName, @RequestParam(value = "sortOrder", required = false) String sortOrder, Model uiModel) {
+        if (page != null || size != null) {
+            int sizeNo = size == null ? 10 : size.intValue();
+            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
+            uiModel.addAttribute("accommodations", Accommodation.findAccommodationEntries(firstResult, sizeNo, sortFieldName, sortOrder));
+            float nrOfPages = (float) accommodationService.countAllAccommodations() / sizeNo;
+            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+        } else {
+            uiModel.addAttribute("accommodations", Accommodation.findAllAccommodations(sortFieldName, sortOrder));
+        }
+        addDateTimeFormatPatterns(uiModel);
+        return "accommodations/list";
+    }
+	
+	//Create accommodation -POST
+	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
+    public String create(@Valid Accommodation accommodation, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            populateEditForm(uiModel, accommodation);
+            return "accommodations/create";
+        }
+        uiModel.asMap().clear();
+        accommodationService.saveAccommodation(accommodation);
+        return "redirect:/accommodations/" + encodeUrlPathSegment(accommodation.getId().toString(), httpServletRequest);
+    }
+
+	//Create view
+	@RequestMapping(params = "form", produces = "text/html")
+    public String createForm(Model uiModel) {
+        populateEditForm(uiModel, new Accommodation());
+        return "accommodations/create";
+    }
+	
+	//Show accommodation
+	@RequestMapping(value = "/{id}", produces = "text/html")
+    public String show(@PathVariable("id") Long id, Model uiModel) {
+        addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("accommodation", accommodationService.findAccommodation(id));
+        uiModel.addAttribute("itemId", id);
+        return "accommodations/show";
+    }
+	
+	//Update accommodation - PUT
+	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
+    public String update(@Valid Accommodation accommodation, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            populateEditForm(uiModel, accommodation);
+            return "accommodations/update";
+        }
+        uiModel.asMap().clear();
+        accommodationService.updateAccommodation(accommodation);
+        return "redirect:/accommodations/" + encodeUrlPathSegment(accommodation.getId().toString(), httpServletRequest);
+    }
+
+	//Update view
+	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
+    public String updateForm(@PathVariable("id") Long id, Model uiModel) {
+        populateEditForm(uiModel, accommodationService.findAccommodation(id));
+        return "accommodations/update";
+    }
+	
+	//Delete
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
+    public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
+        Accommodation accommodation = accommodationService.findAccommodation(id);
+        accommodationService.deleteAccommodation(accommodation);
+        uiModel.asMap().clear();
+        uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
+        uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
+        return "redirect:/accommodations";
+    }
+
 }
