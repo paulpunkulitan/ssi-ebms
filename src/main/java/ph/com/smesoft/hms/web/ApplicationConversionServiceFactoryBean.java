@@ -5,15 +5,18 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
+
 import ph.com.smesoft.hms.domain.Accommodation;
 import ph.com.smesoft.hms.domain.Door;
 import ph.com.smesoft.hms.domain.Floor;
 import ph.com.smesoft.hms.domain.Person;
+import ph.com.smesoft.hms.domain.Room;
 import ph.com.smesoft.hms.domain.Shift;
 import ph.com.smesoft.hms.service.AccommodationService;
 import ph.com.smesoft.hms.service.DoorService;
 import ph.com.smesoft.hms.service.FloorService;
 import ph.com.smesoft.hms.service.PersonService;
+import ph.com.smesoft.hms.service.RoomService;
 import ph.com.smesoft.hms.service.ShiftService;
 
 @Configurable
@@ -141,21 +144,26 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
             }
         };
     }
-
+	
 	public Converter<Room, String> getRoomToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<ph.com.smesoft.hms.domain.Room, java.lang.String>() {
             public String convert(Room room) {
-                return new StringBuilder().append(room.getDoorNumber()).append(' ').append(room.getDescription()).toString();
+                return new StringBuilder().append(room.getRoomNumber()).append(' ').append(room.getDescription()).toString();
             }
         };
     }
 
 	public Converter<Long, Room> getIdToRoomConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, ph.com.smesoft.hms.domain.Room>() {
+            public ph.com.smesoft.hms.domain.Room convert(java.lang.Long id) {
                 return roomService.findRoom(id);
             }
         };
     }
 
 	public Converter<String, Room> getStringToRoomConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, ph.com.smesoft.hms.domain.Room>() {
+            public ph.com.smesoft.hms.domain.Room convert(String id) {
                 return getObject().convert(getObject().convert(id, Long.class), Room.class);
             }
         };
