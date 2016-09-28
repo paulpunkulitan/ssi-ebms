@@ -1,24 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" 
-	 xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
-	 xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" 
-	 version="2.0">	
-	<div id="wrapper">
+<div  xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	  xmlns:jsp="http://java.sun.com/JSP/Page" 
+	  xmlns:spring="http://www.springframework.org/tags" 
+	  xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	  version="2.0">	
+	  <div id="wrapper">
 	  	<div class="container-fluid">
-		    <h1>Employee Shift List
-		    	<a href="/hms/shifts?form" type="button" class="btn btn-primary pull-right">Manage Employee Shift</a>
-		    </h1>
-			<hr class="hrdesign"/>	
+		 	<h1>List of Personnel Shift
+		 	<a href="/hms/shifts?form" type="button" class="btn btn-primary pull-right">Create Personnel Shift</a>
+		 	</h1>
+		 	<hr class="hrdesign"/> 
 		    <br/>
-		    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-		    <jsp:output omit-xml-declaration="yes"/>
-		    <page:list id="pl_ph_com_smesoft_hms_domain_Shift" items="${shifts}" z="lkernQCga6v1x1pFFjrimcRyBd4=">
-		        <table:table data="${shifts}" id="l_ph_com_smesoft_hms_domain_Shift" path="/shifts" z="4FvaTaKoiE/dubJG6NGssrdfszw=">
-		            <table:column date="true" dateTimePattern="${shift_shiftdate_date_format}" id="c_ph_com_smesoft_hms_domain_Shift_shiftDate" property="shiftDate" z="4BLtGs184lxYj63k1rSEWk+4j7Y="/>
-		            <table:column id="c_ph_com_smesoft_hms_domain_Shift_person" property="person" z="82EMXUdaN5oik6JYLcrlxT3HdpE="/>
-		            <table:column id="c_ph_com_smesoft_hms_domain_Shift_floor" property="floor" z="zZ7zcguDozwz0aQvg/3RaHHmoEc="/>
-		        </table:table>
-		    </page:list>
-	    </div>
+		    
+			<table class="table table-striped">
+				<tr>
+					<th>First Name</th>
+					<th>Middle Name</th>
+					<th>Last Name</th>
+					<th>Floor No.</th>
+					<th>Shift Date</th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+				
+				<c:forEach var="shift" items="${shifts}">
+					<tr>
+						<td><c:out value="${shift.people.firstName}" /></td>
+						<td><c:out value="${shift.people.middleName}" /></td>
+						<td><c:out value="${shift.people.lastName}" /></td>
+						<td><c:out value="${shift.floor.floorNumber}" /></td>
+						<td><fmt:formatDate value="${shift.shiftDate}" pattern="MMMM dd, yyyy" /></td>
+						<td class="utilbox"><spring:url
+								value="/resources/images/show.png" var="show_image_url" /> <a
+							href="/hms/persons/${shift.id}" title="Show"> <img
+								class="image" src="${show_image_url}" />
+						</a></td>
+						<td class="utilbox"><spring:url
+								value="/resources/images/update.png" var="update_image_url" />
+							<a href="/hms/persons/${shift.id}?form" title="Update"> <img
+								class="image" src="${update_image_url}" />
+						</a></td>
+						<td class="utilbox"><spring:url
+								value="/resources/images/delete.png" var="delete_image_url" />
+							<form action="/hms/persons?id=${shift.id}" method="DELETE">
+								<c:set var="delete_confirm_msg">
+									<spring:escapeBody javaScriptEscape="true">
+										<spring:message code="entity_delete_confirm" />
+									</spring:escapeBody>
+								</c:set>
+								<input src="${delete_image_url}" title="Delete" type="image"
+									onclick="return confirm('${delete_confirm_msg}');" />
+							</form></td>
+					</tr>
+				</c:forEach>
+			</table>
+
+		</div>
     </div>
 </div>

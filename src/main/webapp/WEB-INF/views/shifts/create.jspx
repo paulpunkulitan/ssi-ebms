@@ -6,46 +6,58 @@
 	xmlns:spring="http://www.springframework.org/tags" version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8" />
 	<jsp:output omit-xml-declaration="yes" />
-	<spring:url value="/styles/Site.css" var="siteCss" />
-	<link href="${siteCss}" rel="stylesheet" type="text/css" media="screen" />
 	<div id="wrapper">
 		<div class="container-fluid">
 			<header class="row">
 				<div class="col-lg-12">
-					<h1>Manage Employee Shift</h1>
+					<h1>Manage Personnel Schedule</h1>
 				</div>
 			</header>
 			<hr class="hrdesign" />
 			<br />
-			<form:create id="fc_ph_com_smesoft_hms_domain_Shift"
-				modelAttribute="shift" path="/shifts" render="${empty dependencies}"
-				z="VuJlECgihg7GujjyN5ux67ZFGsE=">
+			
+
+			<form action="/hms/persons" method="POST">
 				<div class="form-group row">
-					<div class="col-lg-offset-3 col-lg-6">
-						<field:select field="person"
-							id="c_ph_com_smesoft_hms_domain_Shift_person" itemValue="id"
-							items="${people}" path="/people" z="GN7/D+Z/39Dt6+jDxnTiATwlf2Q=" />
+					     <label class="col-lg-offset-1 col-lg-2 control-label">Personnel Name</label>
+						 <div class="col-lg-6">
+						  <select class="form-control" name="person">
+								  <c:forEach var="item" items="${people}">
+								   <option value="${item.id}">${item.firstName} ${item.middleName} ${item.lastName}</option>
+								  </c:forEach>
+							 </select> 
+						 </div>
+				</div>
+
+				
+				
+				<div class="form-group row">
+					<label class="col-lg-offset-1 col-lg-2 control-label">Floor</label>
+					<div class="col-lg-6">
+						<select class="form-control" name="floor">
+				          <c:forEach var="item" items="${floors}">
+				           <option value="${item.id}">${item.floorNumber}</option>
+				          </c:forEach>
+				    	</select> 
 					</div>
 				</div>
-				<div class="form-group row">
-					<div class="col-lg-offset-3 col-lg-6">
-						<field:datetime dateTimePattern="${shift_shiftdate_date_format}"
-							field="shiftDate"
-							id="c_ph_com_smesoft_hms_domain_Shift_shiftDate" past="true"
-							required="true" z="HnFPVs4w/NdNCc6bwUS5zfE0ZFA=" />
+				
+    			<div class="form-group row">
+					<label class="col-lg-offset-1 col-lg-2 control-label">Shift Date</label>
+					<div class="col-lg-6">
+						<input name="shiftDate" type="date" class="form-control"/>
 					</div>
 				</div>
+    			
+		
 				<div class="form-group row">
-					<div class="col-lg-offset-3 col-lg-6">
-						<field:select field="floor"
-							id="c_ph_com_smesoft_hms_domain_Shift_floor" itemValue="id"
-							items="${floors}" path="/floors" z="6z0l+fGFs4e/9wrhRLq0QE+O1Dk=" />
+					<div class="col-lg-offset-5 col-lg-6">
+						<input class="btn btn-primary" type="submit" value="Save" />
 					</div>
 				</div>
-			</form:create>
-			<form:dependency dependencies="${dependencies}"
-				id="d_ph_com_smesoft_hms_domain_Shift"
-				render="${not empty dependencies}" z="OHqfsmatwnUEw9Q9KY6kz6i/3ak=" />
+			</form>
+
+
 		</div>
 		<!-- container-fluid -->
 	</div>

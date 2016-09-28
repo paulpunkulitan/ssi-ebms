@@ -3,7 +3,7 @@
 	xmlns:spring="http://www.springframework.org/tags"
 	xmlns:jsp="http://java.sun.com/JSP/Page"
 	xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
-	xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+	xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0"/>
 	<div id="wrapper">
 		<div class="container-fluid">
 			<div>
