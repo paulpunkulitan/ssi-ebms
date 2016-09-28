@@ -26,7 +26,7 @@ public class Room {
     /**
      */
     @Size(min = 3, max = 30)
-    private String roomNumber;
+    private String doorNumber;
 
     /**
      */
@@ -64,12 +64,12 @@ public class Room {
         this.version = version;
     }
 
-	public String getRoomNumber() {
-        return this.roomNumber;
+	public String getDoorNumber() {
+        return this.doorNumber;
     }
 
-	public void setRoomNumber(String doorNumber) {
-        this.roomNumber = doorNumber;
+	public void setDoorNumber(String doorNumber) {
+        this.doorNumber = doorNumber;
     }
 
 	public String getDescription() {

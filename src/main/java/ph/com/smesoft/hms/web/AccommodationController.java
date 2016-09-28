@@ -1,16 +1,10 @@
 package ph.com.smesoft.hms.web;
 import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,8 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,56 +21,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
-
 import ph.com.smesoft.hms.domain.Accommodation;
 import ph.com.smesoft.hms.service.AccommodationService;
 import ph.com.smesoft.hms.service.PersonService;
-import ph.com.smesoft.hms.service.RoomService;
 
 @Controller
 @RequestMapping("/accommodations")
 public class AccommodationController {
 
-	@Autowired
-    AccommodationService accommodationService;
-
-	@Autowired
-    PersonService personService;
-
-	@Autowired
-    RoomService roomService;
-	
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-	    dateFormat.setLenient(false);
-	    binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-	}
-
-//	void addDateTimeFormatPatterns(Model uiModel) {
-//        uiModel.addAttribute("accommodation_startdate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-//        uiModel.addAttribute("accommodation_enddate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-//    }
-//
-//	void populateEditForm(Model uiModel, Accommodation accommodation) {
-//        uiModel.addAttribute("accommodation", accommodation);
-//        addDateTimeFormatPatterns(uiModel);
-//        uiModel.addAttribute("people", personService.findAllPeople());
-//        uiModel.addAttribute("rooms", roomService.findAllRooms());
-//    }
-//
-//	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
-//        String enc = httpServletRequest.getCharacterEncoding();
-//        if (enc == null) {
-//            enc = WebUtils.DEFAULT_CHARACTER_ENCODING;
-//        }
-//        try {
-//            pathSegment = UriUtils.encodePathSegment(pathSegment, enc);
-//        } catch (UnsupportedEncodingException uee) {}
-//        return pathSegment;
-//    }
-
-	/*Get accommodation based on given Id*/
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, headers = "Accept=application/json")
     @ResponseBody
     public ResponseEntity<String> showJson(@PathVariable("id") Long id) {
@@ -86,18 +36,7 @@ public class AccommodationController {
         headers.add("Content-Type", "application/json; charset=utf-8");
         try {
             Accommodation accommodation = accommodationService.findAccommodation(id);
-
-//            	Calendar cal = Calendar.getInstance();
-          // Accommodation accommodation = accommodationService.findAccommodation(id);
-//        	 Accommodation accommodation = new Accommodation();
-//        	 accommodation.setStartDate(new Date());
-//        	 accommodation.setStartTime(cal.getTime());
-//        	 accommodation.setEndDate(new Date());
-//        	 accommodation.setEndTime(cal.getTime());
-        	
-        	
-        	
-        	if (accommodation == null) {
+            if (accommodation == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<String>(accommodation.toJson(), headers, HttpStatus.OK);
@@ -180,7 +119,15 @@ public class AccommodationController {
         }
     }
 
-	//Create accommodation -POST
+	@Autowired
+    AccommodationService accommodationService;
+
+	@Autowired
+    PersonService personService;
+
+	@Autowired
+    RoomService roomService;
+
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(@Valid Accommodation accommodation, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -192,14 +139,12 @@ public class AccommodationController {
         return "redirect:/accommodations/" + encodeUrlPathSegment(accommodation.getId().toString(), httpServletRequest);
     }
 
-	//Create view
 	@RequestMapping(params = "form", produces = "text/html")
     public String createForm(Model uiModel) {
         populateEditForm(uiModel, new Accommodation());
         return "accommodations/create";
     }
-	
-	//Show accommodation
+
 	@RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {
         addDateTimeFormatPatterns(uiModel);
@@ -223,8 +168,6 @@ public class AccommodationController {
         return "accommodations/list";
     }
 
-	
-	//Update accommodation - PUT
 	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String update(@Valid Accommodation accommodation, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -236,13 +179,12 @@ public class AccommodationController {
         return "redirect:/accommodations/" + encodeUrlPathSegment(accommodation.getId().toString(), httpServletRequest);
     }
 
-	//Update view
 	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, accommodationService.findAccommodation(id));
         return "accommodations/update";
     }
-	//Delete
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         Accommodation accommodation = accommodationService.findAccommodation(id);

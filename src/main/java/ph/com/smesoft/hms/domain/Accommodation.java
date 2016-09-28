@@ -40,15 +40,6 @@ public class Accommodation {
     @DateTimeFormat(style = "M-")
     private Date endDate;
 
-    // *********
-    @Temporal(TemporalType.TIME)
-    @DateTimeFormat(pattern = "h:mm a")
-    private Date startTime;
-    
-    @Temporal(TemporalType.TIME)
-    @DateTimeFormat(pattern = "h:mm a")
-    private Date endTime;
-    
     /**
      */
     @ManyToOne
@@ -133,22 +124,6 @@ public class Accommodation {
 	public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-
-	public Date getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
-
-	public Date getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
 
 	public Person getPerson() {
         return this.person;
