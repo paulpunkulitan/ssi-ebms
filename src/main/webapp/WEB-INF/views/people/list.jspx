@@ -6,6 +6,12 @@
 	  version="2.0">	
 	  <div id="wrapper">
 	  	<div class="container-fluid">
+	  		<div>
+			    <ol class="breadcrumb">
+				  <li class="disabled"><a>Person</a></li>
+				  <li class="active"><span> List of Persons</span></li>
+			     </ol>
+			</div>
 		 	<h1>List of Persons
 		 		    <a href="/hms/persons?form" type="button" class="btn btn-primary pull-right">Create Person Information</a>
 		 	</h1>
@@ -36,24 +42,24 @@
 						<td><c:out value="${people.gender}" /></td>
 						<td><c:out value="${people.personType}" /></td>
 						<td class="utilbox"><spring:url
-								value="/resources/images/show.png" var="show_image_url" /> <a
+								value="/resources/images/showicon.png" var="show_image_url" /> <a
 							href="/hms/persons/${people.id}" title="Show"> <img
-								class="image" src="${show_image_url}" />
+								class="shadowEffect" src="${show_image_url}" height="20" width="15"/>
 						</a></td>
 						<td class="utilbox"><spring:url
-								value="/resources/images/update.png" var="update_image_url" />
+								value="/resources/images/updateicon.png" var="update_image_url" />
 							<a href="/hms/persons/${people.id}?form" title="Update"> <img
-								class="image" src="${update_image_url}" />
+								class="shadowEffect" src="${update_image_url}" height="20" width="20"/>
 						</a></td>
 						<td class="utilbox"><spring:url
-								value="/resources/images/delete.png" var="delete_image_url" />
+								value="/resources/images/deleteicon.png" var="delete_image_url" />
 							<form action="/hms/persons?id=${people.id}" method="DELETE">
 								<c:set var="delete_confirm_msg">
 									<spring:escapeBody javaScriptEscape="true">
 										<spring:message code="entity_delete_confirm" />
 									</spring:escapeBody>
 								</c:set>
-								<input src="${delete_image_url}" title="Delete" type="image"
+								<input src="${delete_image_url}" title="Delete" class="shadowEffect" height="20" width="20" type="image"
 									onclick="return confirm('${delete_confirm_msg}');" />
 							</form></td>
 					</tr>

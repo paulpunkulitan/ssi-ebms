@@ -1,25 +1,62 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
-	 xmlns:jsp="http://java.sun.com/JSP/Page" 
-	 xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+<div xmlns:jsp="http://java.sun.com/JSP/Page" 
+	xmlns:spring="http://www.springframework.org/tags" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
 	 version="2.0">
-    	<jsp:directive.page contentType="text/html;charset=UTF-8"/>
-   	    <jsp:output omit-xml-declaration="yes"/>
 	    <div id="wrapper">
 		  	<div class="container-fluid">
-			  	 <header class="row">
-				    <div class="col-lg-12">
-				     <h1 >Accomodation Details</h1>
-				    </div>
-				 </header>
-			     <hr class="hrdesign" />
-			     <br />
-			     <page:show id="ps_ph_com_smesoft_hms_domain_Accommodation" object="${accommodation}" path="/accommodations" z="NGzgXAtsiSMYmxrJRjQ8qvmKLJM=">
-			        <field:display date="true" dateTimePattern="${accommodation_startdate_date_format}" field="startDate" id="s_ph_com_smesoft_hms_domain_Accommodation_startDate" object="${accommodation}" z="/a72pHMuxTFfkpUZ3nzif2F5FIM="/>
-			        <field:display date="true" dateTimePattern="${accommodation_enddate_date_format}" field="endDate" id="s_ph_com_smesoft_hms_domain_Accommodation_endDate" object="${accommodation}" z="cRUM7T9s9wvOEqaaYWmzw7G3hpA="/>
-			        <field:display field="person" id="s_ph_com_smesoft_hms_domain_Accommodation_person" object="${accommodation}" z="86HYqi1nI1LKfQfSUfgtwibkbMQ="/>
-			        <field:display field="room" id="s_ph_com_smesoft_hms_domain_Accommodation_room" object="${accommodation}" z="8W1bib6wLXyD3vYWUWZWf4DGFaA="/>
-			      </page:show>
-			 </div>
-		 </div>	
+		    <header class="row">
+			    <div class="col-lg-12">
+			    	 <h1>Accommodation Information</h1>
+			    </div>
+			</header>
+			<hr class="hrdesign" />
+			<br />
+		   Start Date : <fmt:formatDate value="${accommodation.startDate}" pattern="MMMM dd, yyyy" />
+		   <br/>
+		   End Date : <fmt:formatDate value="${accommodation.endDate}" pattern="MMMM dd, yyyy" />
+		   <br/>
+		   Customer Name : ${accommodation.person.firstName} ${accommodation.person.middleName} ${accommodation.person.lastName}
+		   <br/>
+		   Room Number : ${accommodation.room.roomNumber}
+
+			<div class="quicklinks">
+			 <span>
+            	<spring:url value="/resources/images/delete.png" var="delete_image_url" />
+                    	<form action="/hms/accommodations?id=${accommodation.id}" method="DELETE">
+               				<c:set var="delete_confirm_msg">
+			                  <spring:escapeBody javaScriptEscape="true">
+			                    <spring:message code="entity_delete_confirm" />
+			                  </spring:escapeBody>
+		                	</c:set>
+		                	 <input src="${delete_image_url}" title="Delete" type="image" onclick="return confirm('${delete_confirm_msg}');" />
+               			</form>
+            </span>
+             <span>
+            	<spring:url value="/resources/images/create.png" var="create_image_url" />
+                    <a href="/hms/accommodations?form" title="Create">
+              			<img class="image" src="${create_image_url}"/>
+            		</a>
+            </span>
+             <span>
+            	<spring:url value="/resources/images/update.png" var="update_image_url" />
+                    <a href="/hms/accommodations/${accommodation.id}?form" title="Update">
+              			<img class="image" src="${update_image_url}"/>
+            		</a>
+            </span>
+			<span>
+				<spring:url value="/resources/images/list.png" var="list_image_url" />
+	                <a href="/hms/accommodations" title="List">
+	              		<img class="image" src="${list_image_url}"/>
+	            	</a>
+            </span>
+           
+           
+           
+				
+			</div>
+		   		    
+		   	</div>
+	    </div>
 </div>
