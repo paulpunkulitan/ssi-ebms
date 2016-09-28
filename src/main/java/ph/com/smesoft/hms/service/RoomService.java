@@ -1,6 +1,8 @@
 package ph.com.smesoft.hms.service;
 import java.util.List;
 
+import ph.com.smesoft.hms.domain.Room;
+
 public interface RoomService {
 
 	public abstract long countAllRooms();

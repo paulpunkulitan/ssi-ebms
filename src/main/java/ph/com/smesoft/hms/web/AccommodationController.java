@@ -1,8 +1,10 @@
 package ph.com.smesoft.hms.web;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -21,9 +23,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
+
 import ph.com.smesoft.hms.domain.Accommodation;
 import ph.com.smesoft.hms.service.AccommodationService;
 import ph.com.smesoft.hms.service.PersonService;
+import ph.com.smesoft.hms.service.RoomService;
 
 @Controller
 @RequestMapping("/accommodations")
