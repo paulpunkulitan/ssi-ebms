@@ -76,7 +76,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	public Converter<Door, String> getDoorToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<ph.com.smesoft.hms.domain.Door, java.lang.String>() {
             public String convert(Door door) {
-                return new StringBuilder().append(door.getRooNumber()).append(' ').append(door.getDescription()).toString();
+                return new StringBuilder().append(door.getDoorNumber()).append(' ').append(door.getDescription()).toString();
             }
         };
     }
@@ -168,7 +168,6 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
             }
         };
     }
-
 
 	public Converter<Shift, String> getShiftToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<ph.com.smesoft.hms.domain.Shift, java.lang.String>() {

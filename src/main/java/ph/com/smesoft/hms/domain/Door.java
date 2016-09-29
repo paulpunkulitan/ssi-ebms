@@ -1,14 +1,7 @@
 package ph.com.smesoft.hms.domain;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.transaction.annotation.Transactional;
-import javax.validation.constraints.Size;
-import javax.validation.constraints.NotNull;
-import flexjson.JSONDeserializer;
-import flexjson.JSONSerializer;
 import java.util.Collection;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -18,6 +11,16 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.transaction.annotation.Transactional;
+
+import flexjson.JSONDeserializer;
+import flexjson.JSONSerializer;
 
 @Entity
 @Configurable
@@ -26,7 +29,7 @@ public class Door {
     /**
      */
     @Size(min = 3, max = 30)
-    private String rooNumber;
+    private String doorNumber;
 
     /**
      */
@@ -97,7 +100,7 @@ public class Door {
 	@PersistenceContext
     transient EntityManager entityManager;
 
-	public static final List<String> fieldNames4OrderClauseFilter = java.util.Arrays.asList("rooNumber", "description", "room");
+	public static final List<String> fieldNames4OrderClauseFilter = java.util.Arrays.asList("doorNumber", "description", "room");
 
 	public static final EntityManager entityManager() {
         EntityManager em = new Door().entityManager;
@@ -181,12 +184,12 @@ public class Door {
         return merged;
     }
 
-	public String getRooNumber() {
-        return this.rooNumber;
+	public String getDoorNumber() {
+        return this.doorNumber;
     }
 
-	public void setRooNumber(String rooNumber) {
-        this.rooNumber = rooNumber;
+	public void setDoorNumber(String doorNumber) {
+        this.doorNumber = doorNumber;
     }
 
 	public String getDescription() {

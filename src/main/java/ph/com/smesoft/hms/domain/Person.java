@@ -1,20 +1,8 @@
 package ph.com.smesoft.hms.domain;
-import org.springframework.transaction.annotation.Transactional;
-import javax.validation.constraints.Size;
-import flexjson.JSONDeserializer;
-import flexjson.JSONSerializer;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Version;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -23,8 +11,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PersistenceContext;
-import ph.com.smesoft.hms.reference.PersonType;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.transaction.annotation.Transactional;
+
+import flexjson.JSONDeserializer;
+import flexjson.JSONSerializer;
 import ph.com.smesoft.hms.reference.Gender;
+import ph.com.smesoft.hms.reference.PersonType;
 
 @Entity
 @Configurable
@@ -62,13 +65,13 @@ public class Person {
      */
     @NotNull
     @Enumerated
-    private PersonType gender;
+    private Gender gender;
 
     /**
      */
     @NotNull
     @Enumerated
-    private Gender personType;
+    private PersonType personType;
 
 	public String toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
@@ -114,19 +117,19 @@ public class Person {
         this.birthDate = birthDate;
     }
 
-	public PersonType getGender() {
+	public Gender getGender() {
         return this.gender;
     }
 
-	public void setGender(PersonType gender) {
+	public void setGender(Gender gender) {
         this.gender = gender;
     }
 
-	public Gender getPersonType() {
+	public PersonType getPersonType() {
         return this.personType;
     }
 
-	public void setPersonType(Gender personType) {
+	public void setPersonType(PersonType personType) {
         this.personType = personType;
     }
 
