@@ -70,7 +70,7 @@
 				<div class="quicklinks">
 					<span> <spring:url value="/resources/images/deleteicon.png"
 							var="delete_image_url" />
-						<form action="/hms/persons?id=${person.id}" method="DELETE">
+						<form action="/hms/people?id=${person.id}" method="DELETE">
 							<c:set var="delete_confirm_msg">
 								<spring:escapeBody javaScriptEscape="true">
 									<spring:message code="entity_delete_confirm" />
@@ -81,16 +81,16 @@
 						</form>
 					</span> 
 					<span> <spring:url value="/resources/images/addicon.png"
-							var="create_image_url" /> <a href="/hms/persons?form"
+							var="create_image_url" /> <a href="/hms/people?form"
 						title="Create"> <img class="image" src="${create_image_url}" height="20" width="20"/>
 					</a>
 					</span> <span> <spring:url value="/resources/images/updateicon.png"
 							var="update_image_url" /> <a
-						href="/hms/persons/${person.id}?form" title="Update"> <img
+						href="/hms/people/${person.id}?form" title="Update"> <img
 							class="shadowEffect" src="${update_image_url}" height="20" width="20"/>
 					</a>
 					</span> <span> <spring:url value="/resources/images/listicon.png"
-							var="list_image_url" /> <a href="/hms/persons" title="List">
+							var="list_image_url" /> <a href="/hms/people" title="List">
 							<img class="shadowEffect" src="${list_image_url}" height="20" width="20" />
 					</a>
 					</span>

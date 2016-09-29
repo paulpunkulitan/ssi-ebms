@@ -13,7 +13,7 @@
 			     </ol>
 			</div>
 		 	<h1>List of Persons
-		 		    <a href="/hms/persons?form" type="button" class="btn btn-primary pull-right">Create Person Information</a>
+		 		    <a href="/hms/people?form" type="button" class="btn btn-primary pull-right">Create Person Information</a>
 		 	</h1>
 		 	<hr class="hrdesign"/> 
 		    <br/>
@@ -26,6 +26,7 @@
 					<th>First Name</th>
 					<th>Middle Name</th>
 					<th>Last Name</th>
+					<th>Birthday</th>
 					<th>Gender</th>
 					<th>Person Type</th>
 					<th></th>
@@ -39,21 +40,22 @@
 						<td><c:out value="${people.firstName}" /></td>
 						<td><c:out value="${people.middleName}" /></td>
 						<td><c:out value="${people.lastName}" /></td>
+						<td><fmt:formatDate value="${people.birthDate}" pattern="MMMM dd, yyyy" /></td>
 						<td><c:out value="${people.gender}" /></td>
 						<td><c:out value="${people.personType}" /></td>
 						<td class="utilbox"><spring:url
 								value="/resources/images/showicon.png" var="show_image_url" /> <a
-							href="/hms/persons/${people.id}" title="Show"> <img
+							href="/hms/people/${people.id}" title="Show"> <img
 								class="shadowEffect" src="${show_image_url}" height="20" width="15"/>
 						</a></td>
 						<td class="utilbox"><spring:url
 								value="/resources/images/updateicon.png" var="update_image_url" />
-							<a href="/hms/persons/${people.id}?form" title="Update"> <img
+							<a href="/hms/people/${people.id}?form" title="Update"> <img
 								class="shadowEffect" src="${update_image_url}" height="20" width="20"/>
 						</a></td>
 						<td class="utilbox"><spring:url
 								value="/resources/images/deleteicon.png" var="delete_image_url" />
-							<form action="/hms/persons?id=${people.id}" method="DELETE">
+							<form action="/hms/people?id=${people.id}" method="DELETE">
 								<c:set var="delete_confirm_msg">
 									<spring:escapeBody javaScriptEscape="true">
 										<spring:message code="entity_delete_confirm" />

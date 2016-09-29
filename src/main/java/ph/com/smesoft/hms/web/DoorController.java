@@ -1,10 +1,8 @@
 package ph.com.smesoft.hms.web;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,10 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
-
 import ph.com.smesoft.hms.domain.Door;
 import ph.com.smesoft.hms.service.DoorService;
-import ph.com.smesoft.hms.service.RoomService;
+import ph.com.smesoft.hms.service.FloorService;
 
 @Controller
 @RequestMapping("/doors")
@@ -124,7 +121,7 @@ public class DoorController {
     DoorService doorService;
 
 	@Autowired
-    RoomService roomService;
+    FloorService floorService;
 
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(@Valid Door door, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -193,7 +190,7 @@ public class DoorController {
 
 	void populateEditForm(Model uiModel, Door door) {
         uiModel.addAttribute("door", door);
-        uiModel.addAttribute("rooms", roomService.findAllRooms());
+        uiModel.addAttribute("floors", floorService.findAllFloors());
     }
 
 	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
