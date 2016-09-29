@@ -4,24 +4,28 @@ import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.format.annotation.DateTimeFormat;
+import javax.persistence.ManyToOne;
+import javax.persistence.PersistenceContext;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.PersistenceContext;
+import javax.persistence.ManyToMany;
 
 @Configurable
 @Entity
@@ -30,9 +34,9 @@ public class Shift {
     /**
      */
     @NotNull
-    @Past
+    @Future
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss a")
     private Date shiftDate;
 
     /**
@@ -42,13 +46,18 @@ public class Shift {
 
     /**
      */
-    @ManyToOne
-    private Floor floor;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Floor> floors = new HashSet<Floor>();
+
+    /**
+     */
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Room> rooms = new HashSet<Room>();
 
 	@PersistenceContext
     transient EntityManager entityManager;
 
-	public static final List<String> fieldNames4OrderClauseFilter = java.util.Arrays.asList("shiftDate", "person", "floor");
+	public static final List<String> fieldNames4OrderClauseFilter = java.util.Arrays.asList("shiftDate", "person", "floors", "rooms");
 
 	public static final EntityManager entityManager() {
         EntityManager em = new Shift().entityManager;
@@ -207,11 +216,19 @@ public class Shift {
         this.person = person;
     }
 
-	public Floor getFloor() {
-        return this.floor;
+	public Set<Floor> getFloors() {
+        return this.floors;
     }
 
-	public void setFloor(Floor floor) {
-        this.floor = floor;
+	public void setFloors(Set<Floor> floors) {
+        this.floors = floors;
+    }
+
+	public Set<Room> getRooms() {
+        return this.rooms;
+    }
+
+	public void setRooms(Set<Room> rooms) {
+        this.rooms = rooms;
     }
 }

@@ -41,19 +41,24 @@
             			</a>
                     </td>
                      <td class="utilbox">
+                    	<spring:url value="/resources/images/update.png" var="update_image_url" />
+                    	<a href="/hms/rooms/${room.id}?form" title="Update">
+              				<img class="image" src="${update_image_url}"/>
+            			</a>
+                    </td>
+                    <td class="utilbox">
+                    	<spring:url value="/resources/images/delete.png" var="delete_image_url" />
+                    	<form action="/hms/rooms?id=${room.id}" method="DELETE">
                				<c:set var="delete_confirm_msg">
 			                  <spring:escapeBody javaScriptEscape="true">
 			                    <spring:message code="entity_delete_confirm" />
 			                  </spring:escapeBody>
 		                	</c:set>
-
+		                	 <input src="${delete_image_url}" title="Delete" type="image" onclick="return confirm('${delete_confirm_msg}');" />
                			</form>
                     </td>
                 </tr>
             </c:forEach>
-            
-            
-            
         </table>
 	    </div>
 	 </div>   

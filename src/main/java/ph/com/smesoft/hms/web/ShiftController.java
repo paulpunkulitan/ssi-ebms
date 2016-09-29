@@ -1,11 +1,11 @@
 package ph.com.smesoft.hms.web;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import org.joda.time.format.DateTimeFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
+
 import ph.com.smesoft.hms.domain.Shift;
 import ph.com.smesoft.hms.service.FloorService;
 import ph.com.smesoft.hms.service.PersonService;
+import ph.com.smesoft.hms.service.RoomService;
 import ph.com.smesoft.hms.service.ShiftService;
 
 @Controller
@@ -129,6 +131,9 @@ public class ShiftController {
 	@Autowired
     PersonService personService;
 
+	@Autowired
+    RoomService roomService;
+
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(@Valid Shift shift, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -197,7 +202,7 @@ public class ShiftController {
     }
 
 	void addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("shift_shiftdate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("shift_shiftdate_date_format", "yyyy-MM-dd hh:mm:ss a");
     }
 
 	void populateEditForm(Model uiModel, Shift shift) {
@@ -205,6 +210,7 @@ public class ShiftController {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("floors", floorService.findAllFloors());
         uiModel.addAttribute("people", personService.findAllPeople());
+        uiModel.addAttribute("rooms", roomService.findAllRooms());
     }
 
 	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

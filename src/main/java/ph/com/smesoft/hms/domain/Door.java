@@ -37,7 +37,7 @@ public class Door {
     /**
      */
     @ManyToOne
-    private Floor floor;
+    private Room room;
 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -97,7 +97,7 @@ public class Door {
 	@PersistenceContext
     transient EntityManager entityManager;
 
-	public static final List<String> fieldNames4OrderClauseFilter = java.util.Arrays.asList("rooNumber", "description", "floor");
+	public static final List<String> fieldNames4OrderClauseFilter = java.util.Arrays.asList("rooNumber", "description", "room");
 
 	public static final EntityManager entityManager() {
         EntityManager em = new Door().entityManager;
@@ -197,12 +197,12 @@ public class Door {
         this.description = description;
     }
 
-	public Floor getFloor() {
-        return this.floor;
+	public Room getRoom() {
+        return this.room;
     }
 
-	public void setFloor(Floor floor) {
-        this.floor = floor;
+	public void setRoom(Room room) {
+        this.room = room;
     }
 
 	public String toString() {
