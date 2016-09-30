@@ -23,6 +23,7 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import ph.com.smesoft.hms.domain.Room;
+import ph.com.smesoft.hms.service.FloorService;
 import ph.com.smesoft.hms.service.RoomService;
 
 @Controller
@@ -31,6 +32,9 @@ public class RoomController {
 
 	@Autowired
     RoomService roomService;
+
+	@Autowired
+    FloorService floorService;
 
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(@Valid Room room, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -99,7 +103,7 @@ public class RoomController {
 
 	void populateEditForm(Model uiModel, Room room) {
         uiModel.addAttribute("room", room);
-        uiModel.addAttribute("rooms", roomService.findAllRooms());
+        uiModel.addAttribute("floors", floorService.findAllFloors());
     }
 
 	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
