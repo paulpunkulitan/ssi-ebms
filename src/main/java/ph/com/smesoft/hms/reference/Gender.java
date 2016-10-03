@@ -1,6 +1,6 @@
 package ph.com.smesoft.hms.reference;
 
-public enum Gender {
+public enum Gender{
 
-    Male, Female
+	Male, Female
 }

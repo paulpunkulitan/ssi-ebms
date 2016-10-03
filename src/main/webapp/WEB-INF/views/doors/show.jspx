@@ -50,17 +50,17 @@
 						</form>
 					</span> 
 					<span> <spring:url value="/resources/images/addicon.png"
-							var="create_image_url" /> <a href="/hms/doors?form"
+							var="create_image_url" /> <a href="/hms/doors?form" class="utilbtnHover" 
 						title="Create"> 
 						<img class="shadowEffect" src="${create_image_url}" height="20" width="20"/>
 					</a>
 					</span> 
 					<span> <spring:url value="/resources/images/updateicon.png"
-							var="update_image_url" /> <a href="/hms/doors/${door.id}?form"
+							var="update_image_url" /> <a href="/hms/doors/${door.id}?form" class="utilbtnHover"
 						title="Update"> <img class="shadowEffect" src="${update_image_url}" height="20" width="20" />
 					</a>
 					</span> <span> <spring:url value="/resources/images/listicon.png"
-							var="list_image_url" /> <a href="/hms/doors" title="List"> <img
+							var="list_image_url" /> <a href="/hms/doors" class="utilbtnHover" title="List"> <img
 							class="shadowEffect" src="${list_image_url}" height="20" width="20"/>
 					</a>
 					</span>

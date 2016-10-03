@@ -42,9 +42,9 @@
 						<td><c:out value="${people.gender}" /></td>
 						<td><c:out value="${people.personType}" /></td>
 						<td class="utilbox"><spring:url
-								value="/resources/images/showicon.png" var="show_image_url" /> <a
-							href="/hms/persons/${people.id}" title="Show"> <img
-								class="shadowEffect" src="${show_image_url}" height="20" width="15"/>
+								value="/resources/images/showmore.png" var="show_image_url" /> <a
+							href="/hms/persons/${people.id}" title="Show Details"> <img
+								class="shadowEffect" src="${show_image_url}" height="20" width="20"/>
 						</a></td>
 						<td class="utilbox"><spring:url
 								value="/resources/images/updateicon.png" var="update_image_url" />

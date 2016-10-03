@@ -75,7 +75,7 @@ public class PersonController {
             person.setFirstName("Kimberly Jean");
             person.setMiddleName("Agpi");
             person.setLastName("Senados");
-           person.setGender(Gender.Female);
+           //person.setGender(PersonGender.Gender.Female);
            person.setPersonType(PersonType.Customer);
            person.setVersion(1);
            

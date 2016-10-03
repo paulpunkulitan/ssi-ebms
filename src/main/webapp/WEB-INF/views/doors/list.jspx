@@ -34,8 +34,8 @@
 						<td><c:out value="${door.doorNumber}" /></td>
 						<td><c:out value="${door.description}" /></td>
 						<td><c:out value="${door.room.roomNumber}" /></td>
-						<td class="utilbox"><spring:url value="/resources/images/showicon.png" var="show_image_url" /> 
-						<a href="/hms/doors/${door.id}"> <img class="shadowEffect" title="Show Details" src="${show_image_url}" height="20" width="15"/> </a></td>
+						<td class="utilbox"><spring:url value="/resources/images/showmore.png" var="show_image_url" /> 
+						<a href="/hms/doors/${door.id}"> <img class="shadowEffect" title="Show Details" src="${show_image_url}" height="20" width="20"/> </a></td>
 						
 						
 						

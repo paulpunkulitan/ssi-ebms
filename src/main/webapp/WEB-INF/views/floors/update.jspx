@@ -30,7 +30,7 @@
 									    <textarea name="description" class="form-control" rows="4" id="comment" required="true"><jsp:text />${floor.description}</textarea>
 						    	</div>
 							</div>
-							<input id="proceed" type="submit" class="btn btn-primary" value="Save" />
+							<input id="proceed" type="submit" class="col-lg-offset-5 col-lg-1 btn btn-primary" value="Save" />
 					   	 </form>
 				    </div>
 			  </div>

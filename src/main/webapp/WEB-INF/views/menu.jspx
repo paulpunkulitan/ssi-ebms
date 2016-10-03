@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
-<spring:url var="dashboard" value="/resources/images/dashboard.png" />
+<spring:url var="home" value="/resources/images/homeicon.png" />
 <spring:url var="floor" value="/resources/images/floors.png" />  		          	 	
 <spring:url var="room" value="/resources/images/rooms.png" />  	
 <spring:url var="person" value="/resources/images/personnel.png" />
@@ -32,7 +32,7 @@
 	          	 	
   	<center>     	 	
 	     <ul id="style-10" class="nav navbar-nav side-nav nav-size">
-	         <li><a href="/hms" class="hvr-bounce-to-right"><img src="${dashboard}" alt="eqweqw Inc." height="40" width="40" class="shadowEffect"/><p>Dashboard</p></a></li>
+	         <li><a href="/hms" class="hvr-bounce-to-right"><img src="${home}" alt="eqweqw Inc." height="40" width="40" class="shadowEffect"/><p>Home</p></a></li>
 	         <li><a href="/hms/floors?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${floor}" height="40" width="40" class="shadowEffect"/><p>Floor</p></a></li>
 	         <li><a href="/hms/rooms?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${room}" alt="eqweqw Inc." height="40" width="40" class="shadowEffect"/><p>Room</p></a></li>
 	         <li><a href="/hms/doors?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${door}" height="40" width="40" class="shadowEffect"/><p>Door</p></a></li>
