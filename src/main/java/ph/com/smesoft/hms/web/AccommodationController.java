@@ -1,5 +1,6 @@
 package ph.com.smesoft.hms.web;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,11 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import ph.com.smesoft.hms.domain.Accommodation;
+import ph.com.smesoft.hms.domain.Floor;
+import ph.com.smesoft.hms.domain.Person;
+import ph.com.smesoft.hms.domain.Room;
+import ph.com.smesoft.hms.reference.Gender;
+import ph.com.smesoft.hms.reference.PersonType;
 import ph.com.smesoft.hms.service.AccommodationService;
 import ph.com.smesoft.hms.service.PersonService;
 import ph.com.smesoft.hms.service.RoomService;
@@ -37,8 +43,38 @@ public class AccommodationController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         try {
-            Accommodation accommodation = accommodationService.findAccommodation(id);
-            if (accommodation == null) {
+            //Accommodation accommodation = accommodationService.findAccommodation(id);
+        	Person person = new Person();
+        	person.setId(1L);
+        	person.setFirstName("Kenski");
+        	person.setMiddleName("Agpi");
+        	person.setLastName("Senados");
+        	person.setBirthDate(new Date());
+        	person.setPalmusId("PLM-00001A");
+        	person.setGender(Gender.Female);
+        	person.setPersonType(PersonType.Customer);
+        	person.setVersion(1);
+        	
+        	Floor floor = new Floor();
+        	floor.setId(1L);
+        	floor.setFloorNumber("FLR-00001A");
+        	floor.setDescription("Floors");
+        	floor.setVersion(1);
+        	
+        	Room room = new Room();
+        	room.setId(1L);
+        	room.setRoomNumber("RM-00001A");
+        	room.setDescription("Rooms");
+        	room.setFloor(floor);
+        	room.setVersion(1);
+        	
+            Accommodation accommodation = new Accommodation();
+            accommodation.setId(1L);
+            accommodation.setEndDate(new Date());
+            accommodation.setStartDate(new Date());
+            accommodation.setPerson(person);
+            accommodation.setRoom(room);
+        	if (accommodation == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<String>(accommodation.toJson(), headers, HttpStatus.OK);
@@ -74,6 +110,7 @@ public class AccommodationController {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+	
 
 	@RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> createFromJsonArray(@RequestBody String json) {

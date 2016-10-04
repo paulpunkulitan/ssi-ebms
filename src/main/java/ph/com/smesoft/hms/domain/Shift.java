@@ -18,7 +18,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
@@ -37,9 +36,8 @@ public class Shift {
     /**
      */
     @NotNull
-    @Future
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss a")
+    @DateTimeFormat(style= "M-")
     private Date shiftDate;
 
     /**
@@ -49,12 +47,14 @@ public class Shift {
 
     /**
      */
-    @ManyToMany(cascade = CascadeType.ALL)
+    //@ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private Set<Floor> floors = new HashSet<Floor>();
 
     /**
      */
-    @ManyToMany(cascade = CascadeType.ALL)
+    //@ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private Set<Room> rooms = new HashSet<Room>();
 
 	@PersistenceContext
