@@ -33,17 +33,15 @@ public class Accommodation {
     /**
      */
     @NotNull
-    @Future
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss a")
+    @DateTimeFormat(style = "M-")
     private Date startDate;
 
     /**
      */
     @NotNull
-    @Future
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss a")
+    @DateTimeFormat(style = "M-")
     private Date endDate;
 
     /**
@@ -116,20 +114,20 @@ public class Accommodation {
     }
 
 	public Date getStartDate() {
-        return this.startDate;
-    }
+		return startDate;
+	}
 
 	public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
+		this.startDate = startDate;
+	}
 
 	public Date getEndDate() {
-        return this.endDate;
-    }
+		return endDate;
+	}
 
 	public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
+		this.endDate = endDate;
+	}
 
 	public Person getPerson() {
         return this.person;

@@ -17,7 +17,8 @@
 					<th>First Name</th>
 					<th>Middle Name</th>
 					<th>Last Name</th>
-					<th>Floor No.</th>
+					<!-- <th>Floor No.</th>
+					<th>Room No.</th> -->
 					<th>Shift Date</th>
 					<th></th>
 					<th></th>
@@ -29,7 +30,8 @@
 						<td><c:out value="${shift.person.firstName}" /></td>
 						<td><c:out value="${shift.person.middleName}" /></td>
 						<td><c:out value="${shift.person.lastName}" /></td>
-						<td><c:out value="${shift.floor.floorNumber}" /></td>
+						<!--<td><c:out value="${shift.floors.floorNumber}" /></td>  -->
+						<!--<td><c:out value="${shift.rooms.roomNumber}" /></td>  -->
 						<td><fmt:formatDate value="${shift.shiftDate}" pattern="MMMM dd, yyyy" /></td>
 						<td class="utilbox"><spring:url
 								value="/resources/images/showicon.png" var="show_image_url" /> <a

@@ -1,6 +1,9 @@
 package ph.com.smesoft.hms.web;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -22,7 +25,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
+import ph.com.smesoft.hms.domain.Floor;
+import ph.com.smesoft.hms.domain.Person;
+import ph.com.smesoft.hms.domain.Room;
 import ph.com.smesoft.hms.domain.Shift;
+import ph.com.smesoft.hms.reference.Gender;
+import ph.com.smesoft.hms.reference.PersonType;
 import ph.com.smesoft.hms.service.FloorService;
 import ph.com.smesoft.hms.service.PersonService;
 import ph.com.smesoft.hms.service.RoomService;
@@ -38,7 +46,45 @@ public class ShiftController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         try {
-            Shift shift = shiftService.findShift(id);
+            //Shift shift = shiftService.findShift(id);
+        	Person person = new Person();
+        	person.setId(1L);
+        	person.setFirstName("Kenski");
+        	person.setMiddleName("Agpi");
+        	person.setLastName("Senados");
+        	person.setBirthDate(new Date());
+        	person.setPalmusId("PLM-00001A");
+        	person.setGender(Gender.Female);
+        	person.setPersonType(PersonType.Customer);
+        	person.setVersion(1);
+        	
+        	Floor floors = new Floor();
+        	floors.setId(1L);
+        	floors.setFloorNumber("FLR-00001A");
+        	floors.setDescription("Floors");
+        	floors.setVersion(1);
+        	
+        	Room rooms = new Room();
+        	rooms.setId(1L);
+        	rooms.setRoomNumber("RM-00001A");
+        	rooms.setDescription("Rooms");
+        	rooms.setFloor(floors);
+        	rooms.setVersion(1);
+        	
+        	Set<Floor> titles1 = new HashSet<Floor>(); 
+            titles1.add(floors);  
+            
+            Set<Room> titles2 = new HashSet<Room>(); 
+            titles2.add(rooms);  
+            
+        	Shift shift = new Shift();
+        	shift.setId(1L);
+        	shift.setPerson(person);
+        	shift.setFloors(titles1);
+        	shift.setRooms(titles2);
+        	shift.setShiftDate(new Date());
+        	shift.setVersion(1);
+        	
             if (shift == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
