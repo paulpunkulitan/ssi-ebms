@@ -12,15 +12,16 @@ import ph.com.smesoft.hms.repository.FloorRepository;
 @Service
 @Transactional
 public class FloorServiceImpl implements FloorService {
+
 	@Autowired
-	FloorRepository floorRepository;
+    FloorRepository floorRepository;
 
 	public long countAllFloors() {
         return floorRepository.count();
     }
 
 	public void deleteFloor(Floor floor) {
-		floorRepository.delete(floor);
+        floorRepository.delete(floor);
     }
 
 	public Floor findFloor(Long id) {
@@ -36,7 +37,7 @@ public class FloorServiceImpl implements FloorService {
     }
 
 	public void saveFloor(Floor floor) {
-		floorRepository.save(floor);
+        floorRepository.save(floor);
     }
 
 	public Floor updateFloor(Floor floor) {

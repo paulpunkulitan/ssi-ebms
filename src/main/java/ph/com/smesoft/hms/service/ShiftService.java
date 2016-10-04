@@ -1,5 +1,6 @@
 package ph.com.smesoft.hms.service;
 import java.util.List;
+
 import ph.com.smesoft.hms.domain.Shift;
 
 public interface ShiftService {

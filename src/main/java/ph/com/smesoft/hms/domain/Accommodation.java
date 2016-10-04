@@ -1,18 +1,8 @@
 package ph.com.smesoft.hms.domain;
-import org.springframework.transaction.annotation.Transactional;
-import flexjson.JSONDeserializer;
-import flexjson.JSONSerializer;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Version;
-import javax.validation.constraints.NotNull;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -21,33 +11,41 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Version;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 
-@Configurable
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.transaction.annotation.Transactional;
+
+import flexjson.JSONDeserializer;
+import flexjson.JSONSerializer;
+
 @Entity
+@Configurable
 public class Accommodation {
 
     /**
      */
     @NotNull
+    @Future
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss a")
     private Date startDate;
 
     /**
      */
     @NotNull
+    @Future
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss a")
     private Date endDate;
 
-    @Temporal(TemporalType.TIME)
-    @DateTimeFormat(pattern = "h:mm a")
-    private Date startTime;
-    
-    @Temporal(TemporalType.TIME)
-    @DateTimeFormat(pattern = "h:mm a")
-    private Date endTime;
-    
     /**
      */
     @ManyToOne
@@ -83,6 +81,40 @@ public class Accommodation {
         this.version = version;
     }
 
+	public String toString() {
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
+
+	public String toJson() {
+        return new JSONSerializer()
+        .exclude("*.class").deepSerialize(this);
+    }
+
+	public String toJson(String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").deepSerialize(this);
+    }
+
+	public static Accommodation fromJsonToAccommodation(String json) {
+        return new JSONDeserializer<Accommodation>()
+        .use(null, Accommodation.class).deserialize(json);
+    }
+
+	public static String toJsonArray(Collection<Accommodation> collection) {
+        return new JSONSerializer()
+        .exclude("*.class").deepSerialize(collection);
+    }
+
+	public static String toJsonArray(Collection<Accommodation> collection, String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").deepSerialize(collection);
+    }
+
+	public static Collection<Accommodation> fromJsonArrayToAccommodations(String json) {
+        return new JSONDeserializer<List<Accommodation>>()
+        .use("values", Accommodation.class).deserialize(json);
+    }
+
 	public Date getStartDate() {
         return this.startDate;
     }
@@ -98,22 +130,6 @@ public class Accommodation {
 	public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-	
-	public Date getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
-
-	public Date getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
 
 	public Person getPerson() {
         return this.person;
@@ -216,39 +232,5 @@ public class Accommodation {
         Accommodation merged = this.entityManager.merge(this);
         this.entityManager.flush();
         return merged;
-    }
-
-	public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
-
-	public String toJson() {
-        return new JSONSerializer()
-        .exclude("*.class").deepSerialize(this);
-    }
-
-	public String toJson(String[] fields) {
-        return new JSONSerializer()
-        .include(fields).exclude("*.class").deepSerialize(this);
-    }
-
-	public static Accommodation fromJsonToAccommodation(String json) {
-        return new JSONDeserializer<Accommodation>()
-        .use(null, Accommodation.class).deserialize(json);
-    }
-
-	public static String toJsonArray(Collection<Accommodation> collection) {
-        return new JSONSerializer()
-        .exclude("*.class").deepSerialize(collection);
-    }
-
-	public static String toJsonArray(Collection<Accommodation> collection, String[] fields) {
-        return new JSONSerializer()
-        .include(fields).exclude("*.class").deepSerialize(collection);
-    }
-
-	public static Collection<Accommodation> fromJsonArrayToAccommodations(String json) {
-        return new JSONDeserializer<List<Accommodation>>()
-        .use("values", Accommodation.class).deserialize(json);
     }
 }

@@ -1,39 +1,46 @@
 package ph.com.smesoft.hms.domain;
-import org.springframework.transaction.annotation.Transactional;
-import flexjson.JSONDeserializer;
-import flexjson.JSONSerializer;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Version;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.format.annotation.DateTimeFormat;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Version;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 
-@Entity
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.transaction.annotation.Transactional;
+
+import flexjson.JSONDeserializer;
+import flexjson.JSONSerializer;
+
 @Configurable
+@Entity
 public class Shift {
 
     /**
      */
-  /*  @NotNull
-    @Past
+    @NotNull
+    @Future
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
-    private Date shiftDate;*/
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss a")
+    private Date shiftDate;
 
     /**
      */
@@ -42,62 +49,18 @@ public class Shift {
 
     /**
      */
-    @ManyToOne
-    private Floor floor;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Floor> floors = new HashSet<Floor>();
 
-	@Version
-    @Column(name = "version")
-    private Integer version;
-
-	/*public Date getShiftDate() {
-        return this.shiftDate;
-    }
-
-	public void setShiftDate(Date shiftDate) {
-        this.shiftDate = shiftDate;
-    }*/
-
-	public Person getPerson() {
-        return this.person;
-    }
-
-	public void setPerson(Person person) {
-        this.person = person;
-    }
-
-	public Floor getFloor() {
-        return this.floor;
-    }
-
-	public void setFloor(Floor floor) {
-        this.floor = floor;
-    }
-	
-	public Long getId() {
-        return this.id;
-    }
-
-	public void setId(Long id) {
-        this.id = id;
-    }
-
-	public Integer getVersion() {
-        return this.version;
-    }
-
-	public void setVersion(Integer version) {
-        this.version = version;
-    }
+    /**
+     */
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Room> rooms = new HashSet<Room>();
 
 	@PersistenceContext
     transient EntityManager entityManager;
 
-	public static final List<String> fieldNames4OrderClauseFilter = java.util.Arrays.asList("shiftDate", "person", "floor");
+	public static final List<String> fieldNames4OrderClauseFilter = java.util.Arrays.asList("shiftDate", "person", "floors", "rooms");
 
 	public static final EntityManager entityManager() {
         EntityManager em = new Shift().entityManager;
@@ -181,6 +144,10 @@ public class Shift {
         return merged;
     }
 
+	public String toString() {
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
+
 	public String toJson() {
         return new JSONSerializer()
         .exclude("*.class").deepSerialize(this);
@@ -211,7 +178,60 @@ public class Shift {
         .use("values", Shift.class).deserialize(json);
     }
 
-	public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private Long id;
+
+	@Version
+    @Column(name = "version")
+    private Integer version;
+
+	public Long getId() {
+        return this.id;
+    }
+
+	public void setId(Long id) {
+        this.id = id;
+    }
+
+	public Integer getVersion() {
+        return this.version;
+    }
+
+	public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+	public Date getShiftDate() {
+        return this.shiftDate;
+    }
+
+	public void setShiftDate(Date shiftDate) {
+        this.shiftDate = shiftDate;
+    }
+
+	public Person getPerson() {
+        return this.person;
+    }
+
+	public void setPerson(Person person) {
+        this.person = person;
+    }
+
+	public Set<Floor> getFloors() {
+        return this.floors;
+    }
+
+	public void setFloors(Set<Floor> floors) {
+        this.floors = floors;
+    }
+
+	public Set<Room> getRooms() {
+        return this.rooms;
+    }
+
+	public void setRooms(Set<Room> rooms) {
+        this.rooms = rooms;
     }
 }

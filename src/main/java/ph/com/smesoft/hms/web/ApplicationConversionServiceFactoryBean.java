@@ -14,6 +14,7 @@ import ph.com.smesoft.hms.domain.Room;
 import ph.com.smesoft.hms.domain.Shift;
 import ph.com.smesoft.hms.service.AccommodationService;
 import ph.com.smesoft.hms.service.DoorService;
+import ph.com.smesoft.hms.service.FloorService;
 import ph.com.smesoft.hms.service.PersonService;
 import ph.com.smesoft.hms.service.RoomService;
 import ph.com.smesoft.hms.service.ShiftService;
@@ -24,7 +25,6 @@ import ph.com.smesoft.hms.service.ShiftService;
  */
 public class ApplicationConversionServiceFactoryBean extends FormattingConversionServiceFactoryBean {
 
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void installFormatters(FormatterRegistry registry) {
 		super.installFormatters(registry);
@@ -35,6 +35,12 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
     AccommodationService accommodationService;
 
 	@Autowired
+    DoorService doorService;
+
+	@Autowired
+    FloorService floorService;
+
+	@Autowired
     PersonService personService;
 
 	@Autowired
@@ -42,17 +48,14 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 
 	@Autowired
     ShiftService shiftService;
-	
-	@Autowired
-	DoorService doorService;
 
-	/*public Converter<Accommodation, String> getAccommodationToStringConverter() {
+	public Converter<Accommodation, String> getAccommodationToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<ph.com.smesoft.hms.domain.Accommodation, java.lang.String>() {
             public String convert(Accommodation accommodation) {
                 return new StringBuilder().append(accommodation.getStartDate()).append(' ').append(accommodation.getEndDate()).toString();
             }
         };
-    }*/
+    }
 
 	public Converter<Long, Accommodation> getIdToAccommodationConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, ph.com.smesoft.hms.domain.Accommodation>() {
@@ -70,6 +73,30 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         };
     }
 
+	public Converter<Door, String> getDoorToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<ph.com.smesoft.hms.domain.Door, java.lang.String>() {
+            public String convert(Door door) {
+                return new StringBuilder().append(door.getDoorNumber()).append(' ').append(door.getDescription()).toString();
+            }
+        };
+    }
+
+	public Converter<Long, Door> getIdToDoorConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, ph.com.smesoft.hms.domain.Door>() {
+            public ph.com.smesoft.hms.domain.Door convert(java.lang.Long id) {
+                return doorService.findDoor(id);
+            }
+        };
+    }
+
+	public Converter<String, Door> getStringToDoorConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, ph.com.smesoft.hms.domain.Door>() {
+            public ph.com.smesoft.hms.domain.Door convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Door.class);
+            }
+        };
+    }
+
 	public Converter<Floor, String> getFloorToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<ph.com.smesoft.hms.domain.Floor, java.lang.String>() {
             public String convert(Floor floor) {
@@ -81,7 +108,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	public Converter<Long, Floor> getIdToFloorConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, ph.com.smesoft.hms.domain.Floor>() {
             public ph.com.smesoft.hms.domain.Floor convert(java.lang.Long id) {
-                return Floor.findFloor(id);
+                return floorService.findFloor(id);
             }
         };
     }
@@ -142,13 +169,13 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         };
     }
 
-	/*public Converter<Shift, String> getShiftToStringConverter() {
+	public Converter<Shift, String> getShiftToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<ph.com.smesoft.hms.domain.Shift, java.lang.String>() {
             public String convert(Shift shift) {
                 return new StringBuilder().append(shift.getShiftDate()).toString();
             }
         };
-    }*/
+    }
 
 	public Converter<Long, Shift> getIdToShiftConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, ph.com.smesoft.hms.domain.Shift>() {
@@ -165,42 +192,14 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
             }
         };
     }
-	
-	
-	
-	public Converter<Door, String> getDoorToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<ph.com.smesoft.hms.domain.Door, java.lang.String>() {
-            public String convert(Door door) {
-                return new StringBuilder().append(door.getDoorNumber()).append(' ').append(door.getDescription()).append(' ').toString();
-            }
-        };
-    }
-
-	public Converter<Long, Door> getIdToDoorConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, ph.com.smesoft.hms.domain.Door>() {
-            public ph.com.smesoft.hms.domain.Door convert(java.lang.Long id) {
-                return doorService.findDoor(id);
-            }
-        };
-    }
-
-	public Converter<String, Door> getStringToDoorConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, ph.com.smesoft.hms.domain.Door>() {
-            public ph.com.smesoft.hms.domain.Door convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), Door.class);
-            }
-        };
-    }
-	
-	
-	
-	
-	
 
 	public void installLabelConverters(FormatterRegistry registry) {
-       // registry.addConverter(getAccommodationToStringConverter());
+        registry.addConverter(getAccommodationToStringConverter());
         registry.addConverter(getIdToAccommodationConverter());
         registry.addConverter(getStringToAccommodationConverter());
+        registry.addConverter(getDoorToStringConverter());
+        registry.addConverter(getIdToDoorConverter());
+        registry.addConverter(getStringToDoorConverter());
         registry.addConverter(getFloorToStringConverter());
         registry.addConverter(getIdToFloorConverter());
         registry.addConverter(getStringToFloorConverter());
@@ -210,8 +209,8 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         registry.addConverter(getRoomToStringConverter());
         registry.addConverter(getIdToRoomConverter());
         registry.addConverter(getStringToRoomConverter());
-/*        registry.addConverter(getShiftToStringConverter());
-*/        registry.addConverter(getIdToShiftConverter());
+        registry.addConverter(getShiftToStringConverter());
+        registry.addConverter(getIdToShiftConverter());
         registry.addConverter(getStringToShiftConverter());
     }
 

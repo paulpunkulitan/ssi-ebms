@@ -1,14 +1,7 @@
 package ph.com.smesoft.hms.domain;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.transaction.annotation.Transactional;
-import javax.validation.constraints.Size;
-import javax.validation.constraints.NotNull;
-import flexjson.JSONDeserializer;
-import flexjson.JSONSerializer;
 import java.util.Collection;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -18,6 +11,16 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.transaction.annotation.Transactional;
+
+import flexjson.JSONDeserializer;
+import flexjson.JSONSerializer;
 
 @Entity
 @Configurable
@@ -36,7 +39,6 @@ public class Room {
 
     /**
      */
-   /* @ManyToOne(cascade=CascadeType.PERSIST)*/
     @ManyToOne
     private Floor floor;
 
@@ -56,7 +58,15 @@ public class Room {
 	public void setId(Long id) {
         this.id = id;
     }
-	
+
+	public Integer getVersion() {
+        return this.version;
+    }
+
+	public void setVersion(Integer version) {
+        this.version = version;
+    }
+
 	public String getRoomNumber() {
         return this.roomNumber;
     }
@@ -81,12 +91,38 @@ public class Room {
         this.floor = floor;
     }
 
-	public Integer getVersion() {
-        return this.version;
+	public String toString() {
+        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
-	public void setVersion(Integer version) {
-        this.version = version;
+	public String toJson() {
+        return new JSONSerializer()
+        .exclude("*.class").deepSerialize(this);
+    }
+
+	public String toJson(String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").deepSerialize(this);
+    }
+
+	public static Room fromJsonToRoom(String json) {
+        return new JSONDeserializer<Room>()
+        .use(null, Room.class).deserialize(json);
+    }
+
+	public static String toJsonArray(Collection<Room> collection) {
+        return new JSONSerializer()
+        .exclude("*.class").deepSerialize(collection);
+    }
+
+	public static String toJsonArray(Collection<Room> collection, String[] fields) {
+        return new JSONSerializer()
+        .include(fields).exclude("*.class").deepSerialize(collection);
+    }
+
+	public static Collection<Room> fromJsonArrayToRooms(String json) {
+        return new JSONDeserializer<List<Room>>()
+        .use("values", Room.class).deserialize(json);
     }
 
 	@PersistenceContext
@@ -175,39 +211,4 @@ public class Room {
         this.entityManager.flush();
         return merged;
     }
-	
-	public String toJson() {
-        return new JSONSerializer()
-        .exclude("*.class").deepSerialize(this);
-    }
-
-	public String toJson(String[] fields) {
-        return new JSONSerializer()
-        .include(fields).exclude("*.class").deepSerialize(this);
-    }
-
-	public static Room fromJsonToRoom(String json) {
-        return new JSONDeserializer<Room>()
-        .use(null, Room.class).deserialize(json);
-    }
-
-	public static String toJsonArray(Collection<Room> collection) {
-        return new JSONSerializer()
-        .exclude("*.class").deepSerialize(collection);
-    }
-
-	public static String toJsonArray(Collection<Room> collection, String[] fields) {
-        return new JSONSerializer()
-        .include(fields).exclude("*.class").deepSerialize(collection);
-    }
-
-	public static Collection<Room> fromJsonArrayToRooms(String json) {
-        return new JSONDeserializer<List<Room>>()
-        .use("values", Room.class).deserialize(json);
-    }
-
-	public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
-
 }
