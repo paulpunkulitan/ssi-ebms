@@ -1,4 +1,5 @@
 package ph.com.smesoft.hms.domain;
+
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -33,245 +34,252 @@ import ph.com.smesoft.hms.reference.PersonType;
 @Configurable
 public class Person {
 
-    /**
-     */
-    @Size(min = 3, max = 30)
-    private String palmusId;
+	/**
+	 */
+	@Size(min = 3, max = 30)
+	private String palmusId;
 
-    /**
-     */
-    @Size(max = 50)
-    private String firstName;
+	/**
+	 */
+	@Size(max = 50)
+	private String firstName;
 
-    /**
-     */
-    @Size(max = 50)
-    private String middleName;
+	/**
+	 */
+	@Size(max = 50)
+	private String middleName;
 
-    /**
-     */
-    @Size(max = 50)
-    private String lastName;
+	/**
+	 */
+	@Size(max = 50)
+	private String lastName;
 
-    /**
-     */
-    @NotNull
-    @Past
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
-    private Date birthDate;
+	/**
+	 */
+	@NotNull
+	@Past
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
+	private Date birthDate;
 
-    /**
-     */
-    @NotNull
-    @Enumerated
-    private Gender gender;
+	/**
+	 */
+	@NotNull
+	@Enumerated
+	private Gender gender;
 
-    /**
-     */
-    @NotNull
-    @Enumerated
-    private PersonType personType;
+	/**
+	 */
+	@NotNull
+	@Enumerated
+	private PersonType personType;
 
+	@Override
 	public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-    }
+		return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+	}
 
 	public String getPalmusId() {
-        return this.palmusId;
-    }
+		return this.palmusId;
+	}
 
 	public void setPalmusId(String palmusId) {
-        this.palmusId = palmusId;
-    }
+		this.palmusId = palmusId;
+	}
 
 	public String getFirstName() {
-        return this.firstName;
-    }
+		return this.firstName;
+	}
 
 	public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+		this.firstName = firstName;
+	}
 
 	public String getMiddleName() {
-        return this.middleName;
-    }
+		return this.middleName;
+	}
 
 	public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
+		this.middleName = middleName;
+	}
 
 	public String getLastName() {
-        return this.lastName;
-    }
+		return this.lastName;
+	}
 
 	public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+		this.lastName = lastName;
+	}
 
 	public Date getBirthDate() {
-        return this.birthDate;
-    }
+		return this.birthDate;
+	}
 
 	public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
+		this.birthDate = birthDate;
+	}
 
 	public Gender getGender() {
-        return this.gender;
-    }
+		return this.gender;
+	}
 
 	public void setGender(Gender gender) {
-        this.gender = gender;
-    }
+		this.gender = gender;
+	}
 
 	public PersonType getPersonType() {
-        return this.personType;
-    }
+		return this.personType;
+	}
 
 	public void setPersonType(PersonType personType) {
-        this.personType = personType;
-    }
+		this.personType = personType;
+	}
 
 	public String toJson() {
-        return new JSONSerializer()
-        .exclude("*.class").deepSerialize(this);
-    }
+		return new JSONSerializer().exclude("*.class").deepSerialize(this);
+	}
 
 	public String toJson(String[] fields) {
-        return new JSONSerializer()
-        .include(fields).exclude("*.class").deepSerialize(this);
-    }
+		return new JSONSerializer().include(fields).exclude("*.class").deepSerialize(this);
+	}
 
 	public static Person fromJsonToPerson(String json) {
-        return new JSONDeserializer<Person>()
-        .use(null, Person.class).deserialize(json);
-    }
+		return new JSONDeserializer<Person>().use(null, Person.class).deserialize(json);
+	}
 
 	public static String toJsonArray(Collection<Person> collection) {
-        return new JSONSerializer()
-        .exclude("*.class").deepSerialize(collection);
-    }
+		return new JSONSerializer().exclude("*.class").deepSerialize(collection);
+	}
 
 	public static String toJsonArray(Collection<Person> collection, String[] fields) {
-        return new JSONSerializer()
-        .include(fields).exclude("*.class").deepSerialize(collection);
-    }
+		return new JSONSerializer().include(fields).exclude("*.class").deepSerialize(collection);
+	}
 
 	public static Collection<Person> fromJsonArrayToPeople(String json) {
-        return new JSONDeserializer<List<Person>>()
-        .use("values", Person.class).deserialize(json);
-    }
+		return new JSONDeserializer<List<Person>>().use("values", Person.class).deserialize(json);
+	}
 
 	@PersistenceContext
-    transient EntityManager entityManager;
+	transient EntityManager entityManager;
 
-	public static final List<String> fieldNames4OrderClauseFilter = java.util.Arrays.asList("palmusId", "firstName", "middleName", "lastName", "birthDate", "gender", "personType");
+	public static final List<String> fieldNames4OrderClauseFilter = java.util.Arrays.asList("palmusId", "firstName",
+			"middleName", "lastName", "birthDate", "gender", "personType");
 
 	public static final EntityManager entityManager() {
-        EntityManager em = new Person().entityManager;
-        if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
-        return em;
-    }
+		EntityManager em = new Person().entityManager;
+		if (em == null)
+			throw new IllegalStateException(
+					"Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
+		return em;
+	}
 
 	public static long countPeople() {
-        return entityManager().createQuery("SELECT COUNT(o) FROM Person o", Long.class).getSingleResult();
-    }
+		return entityManager().createQuery("SELECT COUNT(o) FROM Person o", Long.class).getSingleResult();
+	}
 
 	public static List<Person> findAllPeople() {
-        return entityManager().createQuery("SELECT o FROM Person o", Person.class).getResultList();
-    }
+		return entityManager().createQuery("SELECT o FROM Person o", Person.class).getResultList();
+	}
 
 	public static List<Person> findAllPeople(String sortFieldName, String sortOrder) {
-        String jpaQuery = "SELECT o FROM Person o";
-        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
-            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
-            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
-                jpaQuery = jpaQuery + " " + sortOrder;
-            }
-        }
-        return entityManager().createQuery(jpaQuery, Person.class).getResultList();
-    }
+		String jpaQuery = "SELECT o FROM Person o";
+		if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+			jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+			if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+				jpaQuery = jpaQuery + " " + sortOrder;
+			}
+		}
+		return entityManager().createQuery(jpaQuery, Person.class).getResultList();
+	}
 
 	public static Person findPerson(Long id) {
-        if (id == null) return null;
-        return entityManager().find(Person.class, id);
-    }
+		if (id == null)
+			return null;
+		return entityManager().find(Person.class, id);
+	}
 
 	public static List<Person> findPersonEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM Person o", Person.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
-    }
+		return entityManager().createQuery("SELECT o FROM Person o", Person.class).setFirstResult(firstResult)
+				.setMaxResults(maxResults).getResultList();
+	}
 
-	public static List<Person> findPersonEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
-        String jpaQuery = "SELECT o FROM Person o";
-        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
-            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
-            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
-                jpaQuery = jpaQuery + " " + sortOrder;
-            }
-        }
-        return entityManager().createQuery(jpaQuery, Person.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
-    }
-
-	@Transactional
-    public void persist() {
-        if (this.entityManager == null) this.entityManager = entityManager();
-        this.entityManager.persist(this);
-    }
+	public static List<Person> findPersonEntries(int firstResult, int maxResults, String sortFieldName,
+			String sortOrder) {
+		String jpaQuery = "SELECT o FROM Person o";
+		if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+			jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+			if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+				jpaQuery = jpaQuery + " " + sortOrder;
+			}
+		}
+		return entityManager().createQuery(jpaQuery, Person.class).setFirstResult(firstResult).setMaxResults(maxResults)
+				.getResultList();
+	}
 
 	@Transactional
-    public void remove() {
-        if (this.entityManager == null) this.entityManager = entityManager();
-        if (this.entityManager.contains(this)) {
-            this.entityManager.remove(this);
-        } else {
-            Person attached = Person.findPerson(this.id);
-            this.entityManager.remove(attached);
-        }
-    }
+	public void persist() {
+		if (this.entityManager == null)
+			this.entityManager = entityManager();
+		this.entityManager.persist(this);
+	}
 
 	@Transactional
-    public void flush() {
-        if (this.entityManager == null) this.entityManager = entityManager();
-        this.entityManager.flush();
-    }
+	public void remove() {
+		if (this.entityManager == null)
+			this.entityManager = entityManager();
+		if (this.entityManager.contains(this)) {
+			this.entityManager.remove(this);
+		} else {
+			Person attached = Person.findPerson(this.id);
+			this.entityManager.remove(attached);
+		}
+	}
 
 	@Transactional
-    public void clear() {
-        if (this.entityManager == null) this.entityManager = entityManager();
-        this.entityManager.clear();
-    }
+	public void flush() {
+		if (this.entityManager == null)
+			this.entityManager = entityManager();
+		this.entityManager.flush();
+	}
 
 	@Transactional
-    public Person merge() {
-        if (this.entityManager == null) this.entityManager = entityManager();
-        Person merged = this.entityManager.merge(this);
-        this.entityManager.flush();
-        return merged;
-    }
+	public void clear() {
+		if (this.entityManager == null)
+			this.entityManager = entityManager();
+		this.entityManager.clear();
+	}
+
+	@Transactional
+	public Person merge() {
+		if (this.entityManager == null)
+			this.entityManager = entityManager();
+		Person merged = this.entityManager.merge(this);
+		this.entityManager.flush();
+		return merged;
+	}
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Long id;
 
 	@Version
-    @Column(name = "version")
-    private Integer version;
+	@Column(name = "version")
+	private Integer version;
 
 	public Long getId() {
-        return this.id;
-    }
+		return this.id;
+	}
 
 	public void setId(Long id) {
-        this.id = id;
-    }
+		this.id = id;
+	}
 
 	public Integer getVersion() {
-        return this.version;
-    }
+		return this.version;
+	}
 
 	public void setVersion(Integer version) {
-        this.version = version;
-    }
+		this.version = version;
+	}
 }
