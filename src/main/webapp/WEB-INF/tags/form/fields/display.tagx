@@ -21,8 +21,7 @@
       <c:set value="MM/dd/yyyy" var="dateTimePattern" />
     </c:if>
 
-    <div id="_${fn:escapeXml(id)}_id" class="showDesign">
-        <div class="form-group row">
+    <div id="_${fn:escapeXml(id)}_id" class="form-group row">
     
 	      <label for="_${fn:escapeXml(field)}_id" class="col-lg-offset-1 col-lg-2 control-label">
 	        <c:choose>
@@ -51,7 +50,6 @@
 	            <spring:eval expression="object[field]" />
 	          </c:otherwise>
 	        </c:choose>
-	      </div>
       </div>
       
     </div>

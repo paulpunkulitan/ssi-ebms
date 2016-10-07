@@ -13,12 +13,12 @@
                  </ol>
             </div>
 
-    <form:create id="fc_ph_com_smesoft_hms_domain_Room" modelAttribute="room" path="/rooms" render="${empty dependencies}" >
-        <field:input field="roomNumber" id="c_ph_com_smesoft_hms_domain_Room_roomNumber" max="30" min="3" required="true" />
-        <field:textarea field="description" id="c_ph_com_smesoft_hms_domain_Room_description" required="true" />
-        <field:select field="floor" id="c_ph_com_smesoft_hms_domain_Room_floor" itemValue="id" items="${floors}" path="/floors" />
-    </form:create>
-    <form:dependency dependencies="${dependencies}" id="d_ph_com_smesoft_hms_domain_Room" render="${not empty dependencies}" />
+		    <form:create id="fc_ph_com_smesoft_hms_domain_Room" modelAttribute="room" path="/rooms" render="${empty dependencies}" >
+		        <field:input field="roomNumber" id="c_ph_com_smesoft_hms_domain_Room_roomNumber" max="30" min="3" required="true" />
+		        <field:textarea field="description" id="c_ph_com_smesoft_hms_domain_Room_description" required="true" />
+		        <field:select field="floor" id="c_ph_com_smesoft_hms_domain_Room_floor" itemValue="id" items="${floors}" path="/floors" />
+		    </form:create>
+		    <form:dependency dependencies="${dependencies}" id="d_ph_com_smesoft_hms_domain_Room" render="${not empty dependencies}" />
 
         </div>   
     </div>   
