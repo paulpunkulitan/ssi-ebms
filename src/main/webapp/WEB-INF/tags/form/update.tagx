@@ -27,15 +27,16 @@
       <c:set var="enctype" value="multipart/form-data"/>
     </c:if>
     <spring:message arguments="${label}" code="entity_update" var="title_msg" htmlEscape="false" />
-    <util:panel id="${id}" title="${title_msg}" openPane="${openPane}">
+    <util:panel id="${id}" title="${title_msg}" >
       <spring:url value="${path}" var="form_url" />
       <form:form action="${form_url}" method="PUT" modelAttribute="${modelAttribute}" enctype="${enctype}">
         <form:errors cssClass="errors" delimiter="&lt;p/&gt;" />
         <jsp:doBody />
         <div class="submit" id="${fn:escapeXml(id)}_submit">
+        <div class="form-group row">
           <spring:message code="button_save" var="save_button" htmlEscape="false" />
-          <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
-          <input id="proceed" type="submit" value="${fn:escapeXml(save_button)}" />
+          <input id="proceed" type="submit" value="${fn:escapeXml(save_button)}" class="col-lg-offset-5 col-lg-1 btn btn-primary" />
+        </div>
         </div>
         <form:hidden id="_${fn:escapeXml(idField)}_id" path="${fn:escapeXml(idField)}" />
         <c:if test="${versionField ne 'none'}">

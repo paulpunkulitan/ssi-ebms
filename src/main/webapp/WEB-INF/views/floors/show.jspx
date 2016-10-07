@@ -1,72 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page"
-	xmlns:spring="http://www.springframework.org/tags"
-	xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
-	<jsp:directive.page contentType="text/html;charset=UTF-8" />
-	<jsp:output omit-xml-declaration="yes" />
-	<div id="wrapper">
-		<div class="container-fluid">
-			<header class="row">
-				<div class="col-lg-12">
-					<h1>Floor Information</h1>
-				</div>
-			</header>
-			<hr class="hrdesign" />
-			<br />
-			<div class="showDesign">
-				<div class="form-group row">
-					<label class="col-lg-offset-1 col-lg-2 control-label">
-						Floor Number :</label>
-					<div class="col-lg-6">
-						<p>${floor.floorNumber}</p>
-					</div>
-				</div>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+    <div id="wrapper">
+        <div class="container-fluid">
+            <div>
+                <ol class="breadcrumb">
+                  <li class="disabled"><a>Floor</a></li>
+                  <li><a href="/hms/floors?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Floor</a></li>
+                  <li class="active"><span>Floor Information</span></li>
+                 </ol>
+            </div>
+        
+		    <page:show id="ps_ph_com_smesoft_hms_domain_Floor" object="${floor}" path="/floors" z="XmgSUNTaw/S287IKejvqSXTBaWA=">
+		        <field:display field="floorNumber" id="s_ph_com_smesoft_hms_domain_Floor_floorNumber" object="${floor}" z="bpSs/fEBb5fUYBhFsl15fVNLxh0="/>
+		        <field:display field="description" id="s_ph_com_smesoft_hms_domain_Floor_description" object="${floor}" z="WiR3MbBW/TqqoI5bvdXG5bAI594="/>
+		    </page:show>
 
-				<div class="form-group row">
-					<label class="col-lg-offset-1 col-lg-2 control-label">
-						Description :</label>
-					<div class="col-lg-6">
-						<p>${floor.description}</p>
-					</div>
-				</div>
-			</div>
-			<center>
-				<div class="quicklinks">
-					<span> <spring:url value="/resources/images/deleteicon.png" 
-							var="delete_image_url" />
-						<form action="/hms/floors?id=${floor.id}" method="DELETE">
-							<c:set var="delete_confirm_msg">
-								<spring:escapeBody javaScriptEscape="true">
-									<spring:message code="entity_delete_confirm" />
-								</spring:escapeBody>
-							</c:set>
-							<input src="${delete_image_url}" title="Delete" type="image" height="20" width="20" 
-								onclick="return confirm('${delete_confirm_msg}');" />
-						</form>
-					</span> 
-					<span> <spring:url value="/resources/images/addicon.png"
-							var="create_image_url" /> <a href="/hms/floors?form"
-						title="Create" class="utilbtnHover"> <img class="shadowEffect" src="${create_image_url}" height="20" width="20"/>
-					</a>
-					</span> 
-					<span> <spring:url value="/resources/images/updateicon.png"
-							var="update_image_url" /> <a href="/hms/floors/${floor.id}?form" class="utilbtnHover"
-						title="Update"> 
-						<img class="shadowEffect" src="${update_image_url}" height="20" width="20"/>
-					</a>
-					</span> 
-					<span> <spring:url value="/resources/images/listicon.png"
-							var="list_image_url" /> <a href="/hms/floors" title="List" class="utilbtnHover">
-							<img class="shadowEffect" src="${list_image_url}" height="20" width="20"/>
-					</a>
-					</span>
-
-
-
-
-				</div>
-			</center>
-
-		</div>
-	</div>
+        </div>   
+    </div>   
 </div>

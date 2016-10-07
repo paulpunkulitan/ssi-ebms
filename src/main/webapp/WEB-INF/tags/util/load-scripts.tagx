@@ -1,42 +1,42 @@
-<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<jsp:root xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:jsp="http://java.sun.com/JSP/Page"
+	xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
-  <jsp:output omit-xml-declaration="yes" />
+    <jsp:output omit-xml-declaration="yes" />
 
-  <spring:theme code="styleSheet" var="roo_css" />
-  <spring:url value="/${roo_css}" var="roo_css_url" />
-  <spring:url value="/resources/dojo/dojo.js" var="dojo_url" />
-  <spring:url value="/resources/dijit/themes/tundra/tundra.css" var="tundra_url" />
-  <spring:url value="/webapp/styles/dataTables.bootstrap.min.css" var="datatableCss" />
-  <spring:url value="/webapp/styles/js/jquery-1.12.3.js" var="jqueryJs" />
-  <spring:url value="/webapp/styles/js/jquery.dataTables.min.js" var="jquerydatatableJs" /> 
- <spring:url value="/webapp/styles/js/dataTables.bootstrap.min.js" var="bootstrapdatatableJs" /> 
-  <spring:url value="/resources/spring/Spring.js" var="spring_url" />
-  <spring:url value="/resources/spring/Spring-Dojo.js" var="spring_dojo_url" />
-  <spring:url value="/resources/images/favicon.ico" var="favicon" />
-  <link rel="stylesheet" type="text/css" href="${datatableCss}" />
-  <link rel="stylesheet" type="text/css" href="${tundra_url}" />
-  <link rel="stylesheet" type="text/css" media="screen" href="${roo_css_url}" />
-  <link rel="SHORTCUT ICON" href="${favicon}" />
+	<spring:url value="/resources/styles/ssi-standard.css" var="siteCss" />
+	<link href="${siteCss}" rel="stylesheet" type="text/css" media="screen" />
 
-  <!-- Get the user local from the page context (it was set by Spring MVC's locale resolver) -->
-  <c:set var="userLocale">
-    <c:set var="plocale">${pageContext.response.locale}</c:set>
-    <c:out value="${fn:replace(plocale, '_', '-')}" default="en" />
-  </c:set>
+	<spring:url value="/resources/styles/bootstrap-3.3.7/css/bootstrap.min.css" var="bootstrap_min_css_url" />
+	<link href="${bootstrap_min_css_url}" media="screen,print" rel="stylesheet" type="text/css" />
 
-  <script type="text/javascript">var djConfig = {parseOnLoad: false, isDebug: false, locale: '${fn:toLowerCase(userLocale)}'};</script>
- 
-  <script src="${dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
-  <script src="${spring_url}" type="text/javascript"><!-- /required for FF3 and Opera --></script>
-  <script src="${spring_dojo_url}" type="text/javascript"><!-- required for FF3 and Opera --></script>
-  <script language="JavaScript" type="text/javascript">dojo.require("dojo.parser");</script>
-  <script src="${jqueryJs}" type="text/javascript"></script>
- <script src="${jquerydatatableJs}" type="text/javascript"></script>
- <script src="${bootstrapdatatableJs}" type="text/javascript"></script>
-<script type="text/javascript">
+	<spring:url value="/scripts/bootstrap-3.3.7/js/bootstrap.min.js" var="bootstrapJs" />
+	<link href="${bootstrapJs}" rel="stylesheet" type="text/css" media="screen" />
+
+	<spring:url value="/scripts/jquery-3.1.1/jquery-3.1.1.min.js" var="jqueryJs" />
+    <script src="${jqueryJs}" type="text/javascript"></script>
+    
+    <spring:url value="/resources/styles/dataTables-1.10.12/css/dataTables.bootstrap.min.css" var="datatableCss" />
+    <link href="${datatableCss}" rel="stylesheet" type="text/css" />
+
+    <spring:url value="/resources/scripts/dataTables-1.10.12/js/dataTables.bootstrap.min.js" var="jquerydatatableJs" /> 
+    <script src="${jquerydatatableJs}" type="text/javascript"></script>
+
+    <spring:url value="/resources/scripts/dataTables-1.10.12/js/jquery.dataTables.min.js" var="jquerydatatableJs" /> 
+    <script src="${jquerydatatableJs}" type="text/javascript"></script>
+  
+  
+    <spring:url value="/styles/dashboard-navbar.css" var="dashboardCss" />
+    <link href="${dashboardCss}" rel="stylesheet" type="text/css" media="screen" />
+
+   
+       <script type="text/javascript">
     $(document).ready(function() {
      $('#tblDesign').DataTable();
     } );
-	
+    
    </script>
+   
+
 </jsp:root>
