@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
-	 xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" 
-	 xmlns:jsp="http://java.sun.com/JSP/Page" 
-	 version="2.0">
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
 
@@ -16,25 +13,13 @@
                  </ol>
             </div>
     
-    
-		    <form:update id="fu_ph_com_smesoft_hms_domain_Room" modelAttribute="room" path="/rooms" versionField="Version" z="HZu1MmPTutV81jrvokM3oKFPc5o=">
-		       		<div class="form-group row"> 
-						 <div class="col-lg-12">
-		       				<field:input field="roomNumber" id="c_ph_com_smesoft_hms_domain_Room_roomNumber" max="30" min="3" required="true" z="tb3nOIVKwwR85c+bmZylAOzUjRU="/>
-						</div>
-					</div>
-					<div class="form-group row"> 
-						 <div class="col-lg-12">
-		        			<field:textarea field="description" id="c_ph_com_smesoft_hms_domain_Room_description" required="true" z="ROWJhoadaMztNGCS0htz/0KIAKA="/>
-						</div>
-					</div>
-					<div class="form-group row"> 
-						 <div class="col-lg-12">
-						     <field:select field="floor" id="c_ph_com_smesoft_hms_domain_Room_floor" itemValue="id" items="${floors}" path="/floors" z="BO2RLJSaIYxNwRbKJMRipi883S8="/>
-						</div>
-					</div>
+
+		    <form:update id="fu_ph_com_smesoft_hms_domain_Room" modelAttribute="room" path="/rooms" versionField="Version" z="7kXZLK/7AR13kpV1IWCl9991pfw=">
+		        <field:input field="roomNumber" id="c_ph_com_smesoft_hms_domain_Room_roomNumber" max="30" min="3" required="true" z="sSNMz7GSozwYnS2woBn+OfnQ+F8="/>
+		        <field:textarea field="description" id="c_ph_com_smesoft_hms_domain_Room_description" required="true" z="3vRUmKhO9BprW8oL7iKC1+QiC6A="/>
+		        <field:select field="floor" id="c_ph_com_smesoft_hms_domain_Room_floor" itemValue="id" items="${floors}" path="/floors" z="JSVPOGahrd/nOkGbSPzXxH0L/OM="/>
 		    </form:update>
-		    
+
         </div>   
     </div>   
 </div>
