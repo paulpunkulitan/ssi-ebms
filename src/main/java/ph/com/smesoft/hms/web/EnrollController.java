@@ -3,8 +3,6 @@ package ph.com.smesoft.hms.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +16,8 @@ import ph.com.smesoft.hms.service.PersonService;
 
 import java.util.Arrays;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.joda.time.format.DateTimeFormat;
 
 @Controller
@@ -49,15 +48,14 @@ public class EnrollController {
 		RestTemplate restTemplate = new RestTemplate();
 		String pvId = restTemplate.getForObject(url, String.class);
 		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		try {
-			
-			  Data pv_Id = mapper.readValue(pvId, Data.class); 
-			  String palmId = pv_Id.getPvId(); 
-			 System.out.println("PALM>>>>>"+palmId);
-			 
+
+			Data pv_Id = mapper.readValue(pvId, Data.class);
+			String palmId = pv_Id.getPvId();
+
 			Person person = new Person();
 			person.setPvId(palmId);
-			System.out.println("PERSON - PV>>>>>>" + person);
 			uiModel.addAttribute("pvId", palmId);
 			populateEditForm(uiModel, person);
 			return "people/create";
@@ -66,5 +64,4 @@ public class EnrollController {
 			return "{\"ERROR\":" + e.getMessage() + "\"}";
 		}
 	}
-
 }
