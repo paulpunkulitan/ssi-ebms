@@ -21,12 +21,12 @@
 	  
 		  <center>
 			   <div class="col-lg-6 hovereffect">
-			    <a href="#" class="hvr-bounce-to-right">
+			    <a href="/hms/enroll/callEnroll" class="hvr-bounce-to-right">
 			    <img src="${Enroll}" alt="Enroll" width="550" height="auto"/></a> <br />
 			   </div>
 			
 			   <div class="col-lg-6 hovereffect">
-			    <a href="/hms/identify/1" class="hvr-bounce-to-right"><img src="${Identify}" alt="Identify" width="550" height="auto" /></a> <br />
+			    <a href="/hms/identify/callIdentify" class="hvr-bounce-to-right"><img src="${Identify}" alt="Identify" width="550" height="auto" /></a> <br />
 			   </div>
 			   
 		  </center>

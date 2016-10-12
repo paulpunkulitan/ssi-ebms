@@ -26,6 +26,11 @@ import flexjson.JSONSerializer;
 @Configurable
 public class Door {
 
+	 /**
+     */
+    @Size(min = 3, max = 30)
+    private String palmusId;
+	
     /**
      */
     @Size(min = 3, max = 30)
@@ -58,6 +63,14 @@ public class Door {
 	public void setId(Long id) {
         this.id = id;
     }
+
+	public String getPalmusId() {
+		return palmusId;
+	}
+
+	public void setPalmusId(String palmusId) {
+		this.palmusId = palmusId;
+	}
 
 	public Integer getVersion() {
         return this.version;

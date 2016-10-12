@@ -24,6 +24,13 @@
 			<br />
 			<form action="/hms/doors" method="POST">
 				<div class="form-group row">
+					<label class="col-lg-offset-1 col-lg-2 control-label">PalmusId:</label>
+					<div class="col-lg-6">
+						<input name="palmusId" class="form-control" type="text"
+							placeholder="Palmus1001" />
+					</div>
+				</div>
+				<div class="form-group row">
 					<label class="col-lg-offset-1 col-lg-2 control-label">Door
 						Number:</label>
 					<div class="col-lg-6">

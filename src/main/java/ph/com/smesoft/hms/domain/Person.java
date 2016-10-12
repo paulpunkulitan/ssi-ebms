@@ -26,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
+import ph.com.smesoft.hms.dto.Data;
 import ph.com.smesoft.hms.reference.Gender;
 import ph.com.smesoft.hms.reference.PersonType;
 
@@ -33,8 +34,14 @@ import ph.com.smesoft.hms.reference.PersonType;
 @Configurable
 public class Person {
 
+	/**
+     */
+	//@Size(min = 3, max = 30)
+    private String pvId;
+	
     /**
      */
+	
     @Size(min = 3, max = 30)
     private String palmusId;
 
@@ -72,10 +79,33 @@ public class Person {
     @NotNull
     @Enumerated
     private PersonType personType;
+    
+   /* public Data data;
+    
+    public Person() {
+    	data=new Data();
+    }
+    
+    public String getPersonpvId() {
+        return data.getDatapvId();
+    }
+
+    public void setPersonpvId(String pvId) {
+    	data.setDatapvId(pvId);
+    }*/
+
 
 	public String toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
+
+	public String getPvId() {
+		return pvId;
+	}
+
+	public void setPvId(String pvId) {
+		this.pvId = pvId;
+	}
 
 	public String getPalmusId() {
         return this.palmusId;

@@ -19,9 +19,10 @@
 		    <br/>
 		    
 
-
+	
 			<table class="table table-striped">
 				<tr>
+					<th>PV ID</th>
 					<th>Palmus ID</th>
 					<th>First Name</th>
 					<th>Middle Name</th>
@@ -36,6 +37,7 @@
 				
 				<c:forEach var="people" items="${people}">
 					<tr>
+						<td><c:out value="${people.pvId}" /></td>
 						<td><c:out value="${people.palmusId}" /></td>
 						<td><c:out value="${people.firstName}" /></td>
 						<td><c:out value="${people.middleName}" /></td>

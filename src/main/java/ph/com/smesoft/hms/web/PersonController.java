@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.joda.time.format.DateTimeFormat;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +27,7 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 import ph.com.smesoft.hms.domain.Person;
+import ph.com.smesoft.hms.dto.Data;
 import ph.com.smesoft.hms.reference.Gender;
 import ph.com.smesoft.hms.reference.PersonType;
 import ph.com.smesoft.hms.service.PersonService;
@@ -62,13 +64,27 @@ public class PersonController {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+	
 	@RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> createFromJson(@RequestBody String json, UriComponentsBuilder uriBuilder) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         try {
+        	
+        	//Data passData = new Data();   
+        	//String pvId = passData.getPvId();
+        	//System.out.println(pvId);
             Person person = Person.fromJsonToPerson(json);
+            
+          /*  JSONObject obj = new JSONObject(person);
+            obj.put("pvId", "PV-0003");
+            obj.put("gender",person.getGender());
+            obj.put("personType",person.getPersonType());
+            
+            String convert = obj.toString();
+            Person personDetail = Person.fromJsonToPerson(convert);
+            System.out.println(obj);*/
+            
             personService.savePerson(person);
             RequestMapping a = (RequestMapping) getClass().getAnnotation(RequestMapping.class);
             headers.add("Location",uriBuilder.path(a.value()[0]+"/"+person.getId().toString()).build().toUriString());
@@ -126,26 +142,44 @@ public class PersonController {
 
 	@Autowired
     PersonService personService;
-
+	
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String create(@Valid Person person, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, person);
+        	//person.getPvId();
+        	populateEditForm(uiModel, person);
+        	/*person.getPvId();
+            System.out.println("Err>>>>>" + person);*/
             return "people/create";
         }
+      //  Data data = new Data();
         uiModel.asMap().clear();
+        //String pvId = person.getDatapvId();
+        String pvId = person.getPvId();
+        String name = person.getFirstName();
+        System.out.println("POST>>>>>" + pvId);
+        System.out.println("POST>>>>>" + name);
+        /*String pv = data.getPvId();
+        System.out.println("POST>>>>>" + pv);*/
         personService.savePerson(person);
+        System.out.println("SAVE>>>>>" + person);
         return "redirect:/people/" + encodeUrlPathSegment(person.getId().toString(), httpServletRequest);
     }
 
 	@RequestMapping(params = "form", produces = "text/html")
     public String createForm(Model uiModel) {
-        populateEditForm(uiModel, new Person());
+		populateEditForm(uiModel, new Person());
         return "people/create";
     }
 
 	@RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {
+		
+		for (Object value : uiModel.asMap().values()) {
+			System.out.println(">>>>>>>>>> " + (String)value);
+		}
+		
+		
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("person", personService.findPerson(id));
         uiModel.addAttribute("itemId", id);

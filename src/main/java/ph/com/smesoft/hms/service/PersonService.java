@@ -12,8 +12,7 @@ public interface PersonService {
 
 
 	public abstract Person findPerson(Long id);
-
-
+	
 	public abstract List<Person> findAllPeople();
 
 
@@ -24,5 +23,5 @@ public interface PersonService {
 
 
 	public abstract Person updatePerson(Person person);
-
+	
 }

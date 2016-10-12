@@ -21,6 +21,7 @@
 		<table class="table table-striped">
 			<tr>
 				<th>ID</th>
+				<th>Palmus Id</th>
 				<th>Door Number</th>
 				<th>Description</th>
 				<th>Room</th>
@@ -31,6 +32,7 @@
 			<c:forEach var="door" items="${doors}">
 				<tr>
 					<td><c:out value="${door.id}" /></td>
+					<td><c:out value="${door.palmusId}" /></td>
 					<td><c:out value="${door.doorNumber}" /></td>
 					<td><c:out value="${door.description}" /></td>
 					<td><c:out value="${door.room.roomNumber}" /></td>
