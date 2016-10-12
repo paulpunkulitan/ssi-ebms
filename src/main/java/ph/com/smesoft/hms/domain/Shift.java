@@ -19,6 +19,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -33,13 +34,14 @@ import flexjson.JSONSerializer;
 @Entity
 public class Shift {
 
-    /**
-     */
+    
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style= "M-")
-    private Date shiftDate;
-
+	@Past
+	//@DateTimeFormat(pattern = "MMMM dd, yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
+	private Date shiftDate;
+    
     /**
      */
     @ManyToOne
@@ -56,6 +58,7 @@ public class Shift {
     //@ManyToMany(cascade = CascadeType.ALL)
     @ManyToMany
     private Set<Room> rooms = new HashSet<Room>();
+    
 
 	@PersistenceContext
     transient EntityManager entityManager;

@@ -4,13 +4,13 @@
     <definition extends="defaultHome" name="rooms/list">
         <put-attribute name="body" value="/WEB-INF/views/rooms/list.jspx"/>
     </definition>
-	<definition extends="defaultHome" name="rooms/show">
+<definition extends="defaultHome" name="rooms/show">
         <put-attribute name="body" value="/WEB-INF/views/rooms/show.jspx"/>
     </definition>
-	<definition extends="defaultHome" name="rooms/create">
+<definition extends="defaultHome" name="rooms/create">
         <put-attribute name="body" value="/WEB-INF/views/rooms/create.jspx"/>
     </definition>
-	<definition extends="defaultHome" name="rooms/update">
+<definition extends="defaultHome" name="rooms/update">
         <put-attribute name="body" value="/WEB-INF/views/rooms/update.jspx"/>
     </definition>
 </tiles-definitions>

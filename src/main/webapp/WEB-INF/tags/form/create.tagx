@@ -8,8 +8,6 @@
   <jsp:directive.attribute name="multipart" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if this is a multipart form (default: false)" />
   <jsp:directive.attribute name="label" type="java.lang.String" required="false" rtexprvalue="true" description="The label used for this object, will default to a message bundle if not supplied"/>
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
-  <jsp:directive.attribute name="openPane" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Control if the title pane is opened or closed by default (default: true)"/>
-  <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)"/>
 	
   <c:if test="${empty render or render}">
     <c:if test="${empty label}">
@@ -20,40 +18,22 @@
       <c:set var="enctype" value="multipart/form-data"/>
     </c:if>
     <spring:message arguments="${label}" code="entity_create" var="title_msg" htmlEscape="false" />
-    <util:panel id="${id}" title="${title_msg}" openPane="${openPane}">
+    <util:panel id="${id}" title="${title_msg}" >
       <spring:url value="${path}" var="form_url"/>
       <c:set var="jsCall" value=""/>
       <c:if test="${not empty compositePkField}">
       	<c:set var="jsCall" value="encodePk()" />
       </c:if>
-      <form:form class="form-horizontal" action="${form_url}" method="POST" modelAttribute="${modelAttribute}" enctype="${enctype}" onsubmit="${jsCall}">
-        <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
+      <form:form action="${form_url}" method="POST" modelAttribute="${modelAttribute}" enctype="${enctype}" onsubmit="${jsCall}">
+        <form:errors delimiter="&lt;p/&gt;" class="errors col-lg-offset-5 col-lg-1" />
         <c:if test="${not empty compositePkField}">
-          <form:hidden id="_${fn:escapeXml(compositePkField)}_id" path="${fn:escapeXml(compositePkField)}" />
-          <script type="text/javascript">
-          <![CDATA[
-            dojo.require("dojox.encoding.base64");
-            function encodePk() {
-              var obj = new Object();
-              dojo.query("input[name^=\"${compositePkField}.\"]").forEach(function(node, index, nodelist){
-                obj[node.name.substring('${compositePkField}'.length + 1)] = node.value;
-              });
-              var json = dojo.toJson(obj);
-              var tokArr = [];
-              for (var i = 0; i < json.length; i++) {
-                tokArr.push(json.charCodeAt(i));
-              }
-              var encoded = dojox.encoding.base64.encode(tokArr);
-              dojo.byId('_${fn:escapeXml(compositePkField)}_id').value = encoded;
-            }
-          ]]>
-          </script>
         </c:if>
         <jsp:doBody />
         <div class="submit" id="${fn:escapeXml(id)}_submit">
-          <spring:message code="button_save" var="save_button" htmlEscape="false" />
-          <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
-          <input class="btn-primary" id="proceed" type="submit" value="${fn:escapeXml(save_button)}"/>
+           <div class="form-group row">
+	          <spring:message code="button_save" var="save_button" htmlEscape="false" />
+	          <input id="proceed" type="submit" value="${fn:escapeXml(save_button)}" class="col-lg-offset-5 col-lg-1 btn btn-primary" />
+	       </div>
         </div>
       </form:form>
     </util:panel>

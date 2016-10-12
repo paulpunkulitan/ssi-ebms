@@ -7,25 +7,36 @@
   <jsp:directive.attribute name="labelPlural" type="java.lang.String" required="false" rtexprvalue="true" description="The label used for this object, will default to a message bundle if not supplied" />
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
   <jsp:directive.attribute name="openPane" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Control if the title pane is opened or closed by default (default: true)" />
-  <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
+  <jsp:directive.attribute name="buttonAction" type="java.lang.String" required="false" description="Optional Action Button on the List level" />
+  <jsp:directive.attribute name="buttonLabel" type="java.lang.String" required="false" description="Label of the optional Action Button on the List level" />
 
   <c:if test="${empty render or render}">
     <c:if test="${empty label}">
       <spring:message code="label_${fn:toLowerCase(fn:substringAfter(id,'_'))}" var="label" htmlEscape="false" />
     </c:if>
+    
     <c:if test="${empty labelPlural}">
       <spring:message code="label_${fn:toLowerCase(fn:substringAfter(id,'_'))}_plural" var="labelPlural" htmlEscape="false" />
     </c:if>
+    
     <spring:message arguments="${labelPlural}" code="entity_list_all" var="title_msg" htmlEscape="false" />
-    <util:panel id="${id}" title="${title_msg}" openPane="${openPane}">
+    
+    <util:panel id="${id}" title="${title_msg}" buttonAction="${buttonAction}" buttonLabel="${buttonLabel}" >
+    
       <c:choose>
         <c:when test="${not empty items}">
+        
           <jsp:doBody />
+          
         </c:when>
+        
         <c:otherwise>
-          <spring:message arguments="${label}" code="entity_not_found" />
+          <jsp:doBody />
         </c:otherwise>
+        
       </c:choose>
     </util:panel>
+    
   </c:if>
+  
 </jsp:root>

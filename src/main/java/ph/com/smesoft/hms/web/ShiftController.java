@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,46 +47,8 @@ public class ShiftController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         try {
-            //Shift shift = shiftService.findShift(id);
-        	Person person = new Person();
-        	person.setId(1L);
-        	person.setFirstName("Kenski");
-        	person.setMiddleName("Agpi");
-        	person.setLastName("Senados");
-        	person.setBirthDate(new Date());
-        	person.setPalmusId("PLM-00001A");
-        	person.setGender(Gender.Female);
-        	person.setPersonType(PersonType.Customer);
-        	person.setVersion(1);
-        	
-        	Floor floors = new Floor();
-        	floors.setId(1L);
-        	floors.setFloorNumber("FLR-00001A");
-        	floors.setDescription("Floors");
-        	floors.setVersion(1);
-        	
-        	Room rooms = new Room();
-        	rooms.setId(1L);
-        	rooms.setRoomNumber("RM-00001A");
-        	rooms.setDescription("Rooms");
-        	rooms.setFloor(floors);
-        	rooms.setVersion(1);
-        	
-        	Set<Floor> titles1 = new HashSet<Floor>(); 
-            titles1.add(floors);  
-            
-            Set<Room> titles2 = new HashSet<Room>(); 
-            titles2.add(rooms);  
-            
-        	Shift shift = new Shift();
-        	shift.setId(1L);
-        	shift.setPerson(person);
-        	shift.setFloors(titles1);
-        	shift.setRooms(titles2);
-        	shift.setShiftDate(new Date());
-        	shift.setVersion(1);
-        	
-            if (shift == null) {
+            Shift shift = shiftService.findShift(id);
+        	if (shift == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<String>(shift.toJson(), headers, HttpStatus.OK);
@@ -250,6 +213,7 @@ public class ShiftController {
 	void addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("shift_shiftdate_date_format", "yyyy-MM-dd hh:mm:ss a");
     }
+	//@DateTimeFormat(pattern = "MMMM dd, yyyy")
 
 	void populateEditForm(Model uiModel, Shift shift) {
         uiModel.addAttribute("shift", shift);

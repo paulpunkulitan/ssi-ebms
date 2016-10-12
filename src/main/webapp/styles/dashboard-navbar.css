@@ -4129,6 +4129,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 
 /* END BREADCRUMBS */
 
+
 .pagination {
   display: inline-block;
   padding-left: 0;
@@ -6292,8 +6293,8 @@ table.tablesorter thead tr th:hover {
 	
 	.navbar-brand>img {
 	   max-height: 100px;
-	   height: 100px;
-	   width: 400px;
+	   height: 110px;
+	   width: 250px;
 	   margin-left: 1px;
        padding: 5px 0px 5px 0px;
 	}

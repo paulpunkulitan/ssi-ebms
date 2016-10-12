@@ -13,7 +13,7 @@
       <spring:message code="label_${fn:toLowerCase(fn:substringAfter(id,'_'))}" var="label" htmlEscape="false"/>
     </c:if>
     <spring:message arguments="${label}" code="entity_create" var="title_msg" htmlEscape="false" />
-    <util:panel id="${fn:escapeXml(id)}" title="${fn:escapeXml(title_msg)}" openPane="${openPane}">
+    <util:panel id="${fn:escapeXml(id)}" title="${fn:escapeXml(title_msg)}" >
     <spring:message code="entity_dependency_required"/>
     <c:forEach items="${dependencies}" var="dependency" >
       <p>

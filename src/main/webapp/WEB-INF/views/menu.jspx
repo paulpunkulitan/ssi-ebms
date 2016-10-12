@@ -1,48 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
-<spring:url var="dashboard" value="/resources/images/dashboard.png" />
-<spring:url var="floor" value="/resources/images/floors.png" />  		          	 	
-<spring:url var="room" value="/resources/images/rooms.png" />  	
-<spring:url var="person" value="/resources/images/personnel.png" />
-<spring:url var="shift" value="/resources/images/shift.png" />  		          	 	
-<spring:url var="accommodation" value="/resources/images/accommodation.png" />  
-<spring:url var="door" value="/resources/images/dooricon.png" />  
-
-	          	 	
-   		          	 	  
-<spring:url value="/styles/Site.css" var="siteCss" />
-<link href="${siteCss}" rel="stylesheet" type="text/css" media="screen" />
-
-
-<spring:url value="/styles/bootstrap.css" var="bootstrapCss" />
-<link href="${boostrapCss}" rel="stylesheet" type="text/css" media="screen" />
-   		          	 	  
-<spring:url value="/styles/dashboard-navbar.css" var="dashboardCss" />
-<link href="${dashboardCss}" rel="stylesheet" type="text/css" media="screen" />
-
-<spring:url value="/styles/js/bootstrap.min.js" var="bootstrapJs" />
-<link href="${bootstrapJs}" rel="stylesheet" type="text/css" media="screen" />
-
-<spring:url value="/styles/js/jquery-1.10.2.min.js" var="jqueryJs" />
-<link href="${jqueryJs}" rel="stylesheet" type="text/css" media="screen" />
-  		          	 	
-  		          	 	
-<div class="collapse navbar-collapse navbar-ex1-collapse">
-	          	 	
-  	<center>     	 	
-	     <ul id="style-10" class="nav navbar-nav side-nav nav-size">
-	         <li><a href="/hms" class="hvr-bounce-to-right"><img src="${dashboard}" alt="eqweqw Inc." height="40" width="40" class="shadowEffect"/><p>Dashboard</p></a></li>
-	         <li><a href="/hms/floors?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${floor}" height="40" width="40" class="shadowEffect"/><p>Floor</p></a></li>
-	         <li><a href="/hms/rooms?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${room}" alt="eqweqw Inc." height="40" width="40" class="shadowEffect"/><p>Room</p></a></li>
-	         <li><a href="/hms/doors?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${door}" height="40" width="40" class="shadowEffect"/><p>Door</p></a></li>
-	         <li><a href="/hms/people?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${person}" height="40" width="40" class="shadowEffect"/><p>Person</p></a></li>
-	         <li><a href="/hms/accommodations?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${accommodation}" class="shadowEffect" alt="eqweqw Inc." height="40" width="40"/><p>Accommodation</p></a></li>
-	         <li><a href="/hms/shifts?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${shift}" height="40" width="40" class="shadowEffect"/><p>Shift</p></a></li>
-	     </ul>
-	</center>	     
-
-</div>
-
+	<spring:url var="home" value="/resources/images/homeicon.png" />
+	<spring:url var="floor" value="/resources/images/floors.png" />  		          	 	
+	<spring:url var="room" value="/resources/images/rooms.png" />  	
+	<spring:url var="person" value="/resources/images/personnel.png" />
+	<spring:url var="shift" value="/resources/images/shift.png" />  		          	 	
+	<spring:url var="accommodation" value="/resources/images/accommodation.png" />  
+	<spring:url var="door" value="/resources/images/dooricon.png" />  
+	
+	<div class="collapse navbar-collapse navbar-ex1-collapse">
+	  	<center>     	 	
+		     <ul id="style-10" class="nav nav-pills navbar-nav side-nav nav-size">
+		         <li><a href="/hms" class="hvr-bounce-to-right"><img src="${home}" alt="eqweqw Inc." height="40" width="40" class="shadowEffect"/><p>Home</p></a></li>
+		         <li><a href="/hms/floors?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${floor}" height="40" width="40" class="shadowEffect"/><p>Floor</p></a></li>
+		         <li><a href="/hms/rooms?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${room}" alt="eqweqw Inc." height="40" width="40" class="shadowEffect"/><p>Room</p></a></li>
+		         <li><a href="/hms/doors?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${door}" height="40" width="40" class="shadowEffect"/><p>Door</p></a></li>
+		         <li><a href="/hms/people?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${person}" height="40" width="40" class="shadowEffect"/><p>Person</p></a></li>
+		         <li><a href="/hms/accommodations?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${accommodation}" class="shadowEffect" alt="eqweqw Inc." height="40" width="40"/><p>Accommodation</p></a></li>
+		         <li><a href="/hms/shifts?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${shift}" height="40" width="40" class="shadowEffect"/><p>Shift</p></a></li>
+		     </ul>
+		</center>	     
+	</div>
 </div>
   

@@ -8,67 +8,27 @@
 	version="2.0">
 	<jsp:directive.page contentType="text/html;charset=UTF-8"/>
 	<jsp:output omit-xml-declaration="yes" />
-	<div id="wrapper">
-		<div class="container-fluid">
-			<header class="row">
-				<div class="col-lg-12">
-					<h1>Accommodation</h1>
-				</div>
-			</header>
-			<hr class="hrdesign" />
-			<br />
-			<form action="/hms/accommodations" method="POST">
-				<div class="form-group row">
-					<label class="col-lg-offset-1 col-lg-2 control-label">Start Date</label>
-					<div class="col-lg-6">
-						<fmt:formatDate pattern="M-" value="${accommodation.startDate}" var="start"/>	
-						<input type="date" name="startDate" value="${start}"  class="form-control" />
-						
-					</div>
-				</div>
-				
-				
-				
-				<div class="form-group row">
-					<label class="col-lg-offset-1 col-lg-2 control-label">End Date</label>
-					<div class="col-lg-6">
-						<fmt:formatDate pattern="M-" value="${accommodation.endDate}" var="end"/>	
-						<input type="date" name="endDate" value="${end}"  class="form-control" />
-						
-					</div>
-				</div>
-				
-				
-			
-				<div class="form-group row">
-					<label class="col-lg-offset-1 col-lg-2 control-label">Customer Name</label>
-					<div class="col-lg-6">
-						<select class="form-control" name="person">
-				          <c:forEach var="item" items="${people}">
-				           <option value="${item.id}">${item.firstName} ${item.middleName} ${item.lastName}</option>
-				          </c:forEach>
-				    	</select> 
-					</div>
-				</div>
-				<div class="form-group row">
-					<label class="col-lg-offset-1 col-lg-2 control-label">Room Number</label>
-					<div class="col-lg-6">
-						<select class="form-control" name="room">
-				          <c:forEach var="item" items="${rooms}">
-				           <option value="${item.id}">${item.roomNumber}</option>
-				          </c:forEach>
-				    	</select> 
-					</div>
-				</div>
-				
-				<div class="form-group row">
-					<div class="col-lg-offset-5 col-lg-6">
-						<input class="btn btn-primary" type="submit" value="Save" />
-					</div>
-				</div>
-			</form>
-		</div>
-		<!-- container-fluid -->
-	</div>
-	<!--wrapper  -->
+	
+	
+    <div id="wrapper">
+        <div class="container-fluid">
+            <div>
+                <ol class="breadcrumb">
+                  <li class="disabled"><a>Accommodation</a></li>
+                  <li><a href="/hms/accommodations?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Accommodations</a></li>
+                  <li class="active"><span>Create Accommodation</span></li>
+                 </ol>
+            </div>
+
+   			<form:create id="fc_ph_com_smesoft_hms_domain_Accommodation" modelAttribute="accommodation" path="/accommodations" render="${empty dependencies}" >
+		        <field:datetime dateTimePattern="${accommodation_startdate_date_format}" field="startDate" id="c_ph_com_smesoft_hms_domain_Accommodation_startDate" past="true" required="true" />
+		        <field:datetime dateTimePattern="${accommodation_enddate_date_format}" field="endDate" id="c_ph_com_smesoft_hms_domain_Accommodation_endDate" past="true" required="true" />
+		        <field:select field="person" id="c_ph_com_smesoft_hms_domain_Accommodation_person" itemValue="id" items="${people}" path="/people" required="true"/>
+		        <field:select field="room" id="c_ph_com_smesoft_hms_domain_Accommodation_room" itemValue="id" items="${rooms}" path="/rooms" required="true"/>
+		    </form:create>
+		    <form:dependency dependencies="${dependencies}" id="d_ph_com_smesoft_hms_domain_Accommodation" render="${not empty dependencies}" />
+   			
+        </div>   
+    </div>   
+
 </div>

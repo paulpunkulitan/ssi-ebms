@@ -23,7 +23,7 @@
       </c:when>
     </c:choose>
     <spring:message arguments="${fn:escapeXml(label)}" code="entity_find" var="title_msg" htmlEscape="false" />
-    <util:panel id="${id}" title="${title_msg}" openPane="${openPane}">
+    <util:panel id="${id}" title="${title_msg}" >
       <spring:url value="${path}" var="form_url" />
       <form:form action="${form_url}" method="GET">
         <input type="hidden" name="find" value="${fn:escapeXml(finderName)}" />

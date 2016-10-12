@@ -6,7 +6,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,37 +45,7 @@ public class AccommodationController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         try {
-            //Accommodation accommodation = accommodationService.findAccommodation(id);
-        	Person person = new Person();
-        	person.setId(1L);
-        	person.setFirstName("Kenski");
-        	person.setMiddleName("Agpi");
-        	person.setLastName("Senados");
-        	person.setBirthDate(new Date());
-        	person.setPalmusId("PLM-00001A");
-        	person.setGender(Gender.Female);
-        	person.setPersonType(PersonType.Customer);
-        	person.setVersion(1);
-        	
-        	Floor floor = new Floor();
-        	floor.setId(1L);
-        	floor.setFloorNumber("FLR-00001A");
-        	floor.setDescription("Floors");
-        	floor.setVersion(1);
-        	
-        	Room room = new Room();
-        	room.setId(1L);
-        	room.setRoomNumber("RM-00001A");
-        	room.setDescription("Rooms");
-        	room.setFloor(floor);
-        	room.setVersion(1);
-        	
-            Accommodation accommodation = new Accommodation();
-            accommodation.setId(1L);
-            accommodation.setEndDate(new Date());
-            accommodation.setStartDate(new Date());
-            accommodation.setPerson(person);
-            accommodation.setRoom(room);
+            Accommodation accommodation = accommodationService.findAccommodation(id);
         	if (accommodation == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
@@ -235,8 +207,8 @@ public class AccommodationController {
     }
 
 	void addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("accommodation_startdate_date_format", "yyyy-MM-dd hh:mm:ss a");
-        uiModel.addAttribute("accommodation_enddate_date_format", "yyyy-MM-dd hh:mm:ss a");
+        uiModel.addAttribute("accommodation_startdate_date_format","yyyy-MM-dd");
+        uiModel.addAttribute("accommodation_enddate_date_format","yyyy-MM-dd");
     }
 
 	void populateEditForm(Model uiModel, Accommodation accommodation) {
@@ -246,6 +218,9 @@ public class AccommodationController {
         uiModel.addAttribute("rooms", roomService.findAllRooms());
     }
 
+	
+	
+	
 	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
         String enc = httpServletRequest.getCharacterEncoding();
         if (enc == null) {

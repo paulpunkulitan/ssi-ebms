@@ -124,7 +124,7 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
 	public Converter<Person, String> getPersonToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<ph.com.smesoft.hms.domain.Person, java.lang.String>() {
             public String convert(Person person) {
-                return new StringBuilder().append(person.getPalmusId()).append(' ').append(person.getFirstName()).append(' ').append(person.getMiddleName()).append(' ').append(person.getLastName()).toString();
+                return new StringBuilder().append(person.getFirstName()).append(' ').append(person.getMiddleName()).append(' ').append(person.getLastName()).toString();
             }
         };
     }

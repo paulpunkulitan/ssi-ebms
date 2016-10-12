@@ -12,10 +12,10 @@
                   <li class="active"><span>Register Person</span></li>
                  </ol>
             </div>
+
     		
 		    <form:create id="fc_ph_com_smesoft_hms_domain_Person" modelAttribute="person" path="/people" render="${empty dependencies}" >
 		        <field:inputHidden field="pvId" id="c_ph_com_smesoft_hms_domain_Person_pvid" object="${person}"/>
-		        <field:input field="palmusId" id="c_ph_com_smesoft_hms_domain_Person_palmusId" max="30" min="3" required="true" />
 		        <field:textarea field="firstName" id="c_ph_com_smesoft_hms_domain_Person_firstName" />
 		        <field:textarea field="middleName" id="c_ph_com_smesoft_hms_domain_Person_middleName" />
 		        <field:textarea field="lastName" id="c_ph_com_smesoft_hms_domain_Person_lastName" />
