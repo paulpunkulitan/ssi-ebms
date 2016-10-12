@@ -16,9 +16,9 @@
     		
 		    <form:create id="fc_ph_com_smesoft_hms_domain_Person" modelAttribute="person" path="/people" render="${empty dependencies}" >
 		        <field:inputHidden field="pvId" id="c_ph_com_smesoft_hms_domain_Person_pvid" object="${person}"/>
-		        <field:textarea field="firstName" id="c_ph_com_smesoft_hms_domain_Person_firstName" />
-		        <field:textarea field="middleName" id="c_ph_com_smesoft_hms_domain_Person_middleName" />
-		        <field:textarea field="lastName" id="c_ph_com_smesoft_hms_domain_Person_lastName" />
+		        <field:input field="firstName" id="c_ph_com_smesoft_hms_domain_Person_firstName" />
+		        <field:input field="middleName" id="c_ph_com_smesoft_hms_domain_Person_middleName" />
+		        <field:input field="lastName" id="c_ph_com_smesoft_hms_domain_Person_lastName" />
 		        <field:datetime dateTimePattern="${person_birthdate_date_format}" field="birthDate" id="c_ph_com_smesoft_hms_domain_Person_birthDate" past="true" required="true" />
 		        <field:select field="gender" id="c_ph_com_smesoft_hms_domain_Person_gender" items="${genders}" path="genders" required="true" />
 		        <field:select field="personType" id="c_ph_com_smesoft_hms_domain_Person_personType" items="${persontypes}" path="persontypes" required="true" />

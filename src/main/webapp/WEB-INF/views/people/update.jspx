@@ -17,15 +17,13 @@
     
 
 		    <form:update id="fu_ph_com_smesoft_hms_domain_Person" modelAttribute="person" path="/people" versionField="Version">
-		        <field:textarea field="firstName" id="c_ph_com_smesoft_hms_domain_Person_firstName" z="75d1Mn5QQ4Z4r3tdVE7kEBN+6Y8="/>
-		        <field:textarea field="middleName" id="c_ph_com_smesoft_hms_domain_Person_middleName" z="CAUHUdhmGzVw0vCcsQb805S04Bk="/>
-		        <field:textarea field="lastName" id="c_ph_com_smesoft_hms_domain_Person_lastName" z="GYa+LFbzNtRMv1YW6TadbL/5HFI="/>
+		        <field:input field="pvId" id="c_ph_com_smesoft_hms_domain_Person_pvid" disabled="pvId"/>
+		        <field:input field="firstName" id="c_ph_com_smesoft_hms_domain_Person_firstName" z="75d1Mn5QQ4Z4r3tdVE7kEBN+6Y8="/>
+		        <field:input field="middleName" id="c_ph_com_smesoft_hms_domain_Person_middleName" z="CAUHUdhmGzVw0vCcsQb805S04Bk="/>
+		        <field:input field="lastName" id="c_ph_com_smesoft_hms_domain_Person_lastName" z="GYa+LFbzNtRMv1YW6TadbL/5HFI="/>
 		        <field:datetime dateTimePattern="${person_birthdate_date_format}" field="birthDate" id="c_ph_com_smesoft_hms_domain_Person_birthDate" past="true" required="true" z="lciBetr2ZSoZFz8jkjtyMO5rsxA="/>
 		        <field:select field="gender" id="c_ph_com_smesoft_hms_domain_Person_gender" items="${genders}" path="genders" required="true" z="Vz7e539QHd4SSG7bHoquR4iy2mE="/>		        
 		        <field:select field="personType" id="c_ph_com_smesoft_hms_domain_Person_personType" items="${persontypes}" path="persontypes" required="true" z="85NXGtuQzP2vz+8Qh4vR75J+9VI="/>
-		        
-		       
-		       
 		    </form:update>		    
         </div>   
     </div>   
