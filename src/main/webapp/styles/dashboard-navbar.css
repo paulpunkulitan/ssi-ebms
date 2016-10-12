@@ -3822,6 +3822,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
   .navbar-nav.navbar-right:last-child {
     margin-right: -15px;
+    
   }
 }
 @media (min-width: 768px) {
