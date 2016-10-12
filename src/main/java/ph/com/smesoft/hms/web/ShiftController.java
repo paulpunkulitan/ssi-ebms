@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -250,6 +251,7 @@ public class ShiftController {
 	void addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("shift_shiftdate_date_format", "yyyy-MM-dd hh:mm:ss a");
     }
+	//@DateTimeFormat(pattern = "MMMM dd, yyyy")
 
 	void populateEditForm(Model uiModel, Shift shift) {
         uiModel.addAttribute("shift", shift);

@@ -215,8 +215,7 @@ public class PersonController {
 	}
 
 	void addDateTimeFormatPatterns(Model uiModel) {
-		uiModel.addAttribute("person_birthdate_date_format",
-				DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+		uiModel.addAttribute("person_birthdate_date_format",DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
 	}
 
 	void populateEditForm(Model uiModel, Person person) {

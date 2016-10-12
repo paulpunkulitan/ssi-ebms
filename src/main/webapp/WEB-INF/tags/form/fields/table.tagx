@@ -45,6 +45,8 @@
     <spring:eval var="colCounter" expression="1" />
 
     <table class="table table-striped">
+    
+    <!-- TABLE HEADER -->
       <thead>
         <tr>
           <c:forTokens items="${columnLabels}" delims="${'&#9999;'}" var="columnHeading" varStatus="num">
@@ -101,7 +103,10 @@
           </c:if>
         </tr>
       </thead>
+      <!-- TABLE HEADER End-->
       
+      
+      <!-- TABLE Body -->
       <c:choose>
         <c:when test="${not empty data}">
 			<c:forEach items="${data}" var="item">
@@ -135,6 +140,9 @@
 			      </td>
 			    </c:forTokens>
 			    <c:set var="itemId"><spring:eval expression="item[typeIdFieldName]"/></c:set>
+			    
+			    
+			    <!-- SHOW button -->
 			    <td class="utilbox">
 			      <spring:url value="${path}/${itemId}" var="show_form_url" />
 			      <spring:url value="/resources/images/showmore.png" var="show_image_url" />
@@ -143,6 +151,10 @@
 			        <img alt="${fn:escapeXml(show_label)}" class="shadowEffect" src="${show_image_url}" title="${fn:escapeXml(show_label)}" height="20" width="20"/>
 			      </a>
 			    </td>
+			    <!-- SHOW End -->
+			    
+			    
+			     <!-- UPDATE button -->
 			    <c:if test="${update}">
 			      <td class="utilbox">
 			        <spring:url value="${path}/${itemId}" var="update_form_url">
@@ -155,6 +167,10 @@
 			        </a>
 			      </td>
 			    </c:if>
+			    <!-- UPDATE End -->
+			    
+			    
+			     <!-- DELETE button -->
 			    <c:if test="${delete}">
 			      <td class="utilbox">
 			        <spring:url value="${path}/${itemId}" var="delete_form_url" />
@@ -176,11 +192,14 @@
 			        </form:form>
 			      </td>
 			    </c:if>
+			    <!-- DELETE End -->
+			    
 			  </tr>
 			</c:forEach>
-      
          </c:when>
       </c:choose>
+      <!-- TABLE Body End-->
+      
     </table>
   </c:if>
 </jsp:root>

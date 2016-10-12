@@ -58,10 +58,11 @@ public class Person {
 	 */
 	@NotNull
 	@Past
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "MMMM dd, yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date birthDate;
-
+	//@DateTimeFormat(pattern = "yyyy-MM-dd")
+	
 	/**
 	 */
 	@NotNull

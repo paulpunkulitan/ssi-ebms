@@ -6,7 +6,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -235,8 +237,8 @@ public class AccommodationController {
     }
 
 	void addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("accommodation_startdate_date_format", "yyyy-MM-dd hh:mm:ss a");
-        uiModel.addAttribute("accommodation_enddate_date_format", "yyyy-MM-dd hh:mm:ss a");
+        uiModel.addAttribute("accommodation_startdate_date_format","yyyy-MM-dd");
+        uiModel.addAttribute("accommodation_enddate_date_format","yyyy-MM-dd");
     }
 
 	void populateEditForm(Model uiModel, Accommodation accommodation) {
@@ -246,6 +248,9 @@ public class AccommodationController {
         uiModel.addAttribute("rooms", roomService.findAllRooms());
     }
 
+	
+	
+	
 	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
         String enc = httpServletRequest.getCharacterEncoding();
         if (enc == null) {

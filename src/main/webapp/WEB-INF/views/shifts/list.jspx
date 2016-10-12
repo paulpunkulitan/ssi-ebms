@@ -3,61 +3,31 @@
 	  xmlns:jsp="http://java.sun.com/JSP/Page" 
 	  xmlns:spring="http://www.springframework.org/tags" 
 	  xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	  xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields"
+	  xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
 	  version="2.0">	
-	  <div id="wrapper">
-	  	<div class="container-fluid">
-		 	<h1>List of Personnel Shift
-		 	<a href="/hms/shifts?form" type="button" class="btn btn-primary pull-right">Create Personnel Shift</a>
-		 	</h1>
-		 	<hr class="hrdesign"/> 
-		    <br/>
-		    
-			<table class="table table-striped">
-				<tr>
-					<th>First Name</th>
-					<th>Middle Name</th>
-					<th>Last Name</th>
-					<!-- <th>Floor No.</th>
-					<th>Room No.</th> -->
-					<th>Shift Date</th>
-					<th></th>
-					<th></th>
-					<th></th>
-				</tr>
-				
-				<c:forEach var="shift" items="${shifts}">
-					<tr>
-						<td><c:out value="${shift.person.firstName}" /></td>
-						<td><c:out value="${shift.person.middleName}" /></td>
-						<td><c:out value="${shift.person.lastName}" /></td>
-						<!--<td><c:out value="${shift.floors.floorNumber}" /></td>  -->
-						<!--<td><c:out value="${shift.rooms.roomNumber}" /></td>  -->
-						<td><fmt:formatDate value="${shift.shiftDate}" pattern="MMMM dd, yyyy" /></td>
-						<td class="utilbox"><spring:url
-								value="/resources/images/showicon.png" var="show_image_url" /> <a
-							href="/hms/shifts/${shift.id}" title="Show"> <img
-								class="image" src="${show_image_url}" height="20" width="15" />
-						</a></td>
-						<td class="utilbox"><spring:url
-								value="/resources/images/updateicon.png" var="update_image_url" />
-							<a href="/hms/shifts/${shift.id}?form" title="Update"> <img
-								class="image" src="${update_image_url}" height="20" width="20" />
-						</a></td>
-						<td class="utilbox"><spring:url
-								value="/resources/images/deleteicon.png" var="delete_image_url" />
-							<form action="/hms/shifts?id=${shift.id}" method="DELETE">
-								<c:set var="delete_confirm_msg">
-									<spring:escapeBody javaScriptEscape="true">
-										<spring:message code="entity_delete_confirm" />
-									</spring:escapeBody>
-								</c:set>
-								<input src="${delete_image_url}" title="Delete" type="image" height="20" width="20"
-									onclick="return confirm('${delete_confirm_msg}');" />
-							</form></td>
-					</tr>
-				</c:forEach>
-			</table>
-
-		</div>
-    </div>
+		  
+	
+			<div id="wrapper">
+		    <div class="container-fluid">
+				<div>
+					<ol class="breadcrumb">
+						<li class="disabled"><a>Person</a></li>
+						<li class="active"><span>List of Persons</span></li>
+					</ol>
+				</div>
+		
+			    <page:list id="pl_ph_com_smesoft_hms_domain_Shift" items="${shifts}" buttonAction="/hms/shifts?form" buttonLabel="Assign Shift">
+			        <table:table data="${shifts}" id="l_ph_com_smesoft_hms_domain_Shift" path="/shifts" >
+			            <table:column id="c_ph_com_smesoft_hms_domain_Shift_person" property="person" />
+			            <table:column id="c_ph_com_smesoft_hms_domain_Shift_floor" property="floors" />
+			            <table:column id="c_ph_com_smesoft_hms_domain_Shift_room" property="rooms" />
+			            <table:column id="c_ph_com_smesoft_hms_domain_Shift_shiftDate" property="shiftDate" />
+			        </table:table>
+			    </page:list>
+		
+		    </div>   
+		</div>   
+	  
+    
 </div>
