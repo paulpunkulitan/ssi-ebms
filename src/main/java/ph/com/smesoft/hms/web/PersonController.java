@@ -28,9 +28,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
+
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ph.com.smesoft.hms.domain.Person;
 import ph.com.smesoft.hms.dto.Data;
@@ -254,4 +258,62 @@ public class PersonController {
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
 	}
+	
+	@RequestMapping(value = "/{id}", params = "enrollForm",headers = "Accept=application/json")
+	public String personDetailsEnroll(@PathVariable("id")Long id, Model uiModel) {
+		Long transferId = id;
+		System.out.println("NAIPASANG ID" + transferId );
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type", "application/json; charset=utf-8");
+		System.out.println("PERSON 1");
+		String url = "http://localhost:8080/hacms/enrollperson/person";
+		RestTemplate restTemplate = new RestTemplate();
+		System.out.println("PERSON 2");
+		String pvId = restTemplate.getForObject(url, String.class);
+		System.out.println("PERSON 3");
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		try {
+			System.out.println("PERSON 4");
+			  Data pv_Id = mapper.readValue(pvId, Data.class); 
+			  System.out.println("PERSON 5");
+			  String palmId = pv_Id.getPvId(); 
+			  System.out.println("PERSON 6");
+			 System.out.println("PALM>>>>>"+palmId);
+			 
+			Person person = Person.findPerson(id);
+			System.out.println("FIND Person" + person);
+			person.setPvId(palmId);
+			System.out.println("ID dapat to>>>>>"+ person);
+			 
+			  //Person person = Person.fromJsonToPerson(json);
+	            
+	            JSONObject obj = new JSONObject(person);
+	            obj.put("pvId", palmId);
+	            obj.put("gender",person.getGender());
+	            obj.put("personType",person.getPersonType());
+	            System.out.println("JSONObject" + obj);
+	            
+	            String convert = obj.toString();
+	            Person personDetail = Person.fromJsonToPerson(convert);
+	            System.out.println("PERSONDETAILS" + personDetail);
+	            
+	            personService.updatePerson(personDetail);
+			//System.out.println("PERSON - IDDD>>>>>>" + id);
+			//System.out.println("PERSON - PV>>>>>>" + person);
+
+			//personService.updatePerson(person);
+			addDateTimeFormatPatterns(uiModel);
+			System.out.println("PERSONDETAILS 1111111");
+			uiModel.addAttribute("person", personService.findPerson(id));
+			System.out.println("PERSONDETAILS 22222222");
+			uiModel.addAttribute("itemId", id);
+			System.out.println("PERSONDETAILS 333333");
+			return "people/show";
+
+		} catch (Exception e) {
+			return "{\"ERROR\":" + e.getMessage() + "\"}";
+		}
+	}
+	
 }

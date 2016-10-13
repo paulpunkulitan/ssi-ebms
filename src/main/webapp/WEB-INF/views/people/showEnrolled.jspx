@@ -17,7 +17,7 @@
             </div>
         
     
-		    <page:show id="ps_ph_com_smesoft_hms_domain_Person" object="${person}" path="/people" conditionParam="${person[pvId]}">
+		    <page:show id="ps_ph_com_smesoft_hms_domain_Person" object="${person}" path="/people">
 		    	<field:display field="pvId" id="s_ph_com_smesoft_hms_domain_Person_pvid" object="${person}"/>
 		        <field:display field="firstName" id="s_ph_com_smesoft_hms_domain_Person_firstname" object="${person}"/>
 		        <field:display field="middleName" id="s_ph_com_smesoft_hms_domain_Person_middlename" object="${person}"/>

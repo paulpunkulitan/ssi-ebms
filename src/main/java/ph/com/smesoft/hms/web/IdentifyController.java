@@ -44,7 +44,9 @@ public class IdentifyController {
 		RestTemplate restTemplate = new RestTemplate();
 		String person = restTemplate.getForObject(url, String.class);
 		List<Person> result = personService.findAllPeople();
+		String viewfloor = "floors/list";
 		String viewtoreturn = "identify/notfound";
+		Person aPerson = null;
 		try {
 			String validtry = "Enter TRY!!";
 			String notFound = "Not Found";
@@ -53,7 +55,7 @@ public class IdentifyController {
 				return "identify/notIdentified";
 			} else {
 				for (int i = 0; i < result.size(); i++) {
-					Person aPerson = result.get(i);
+					 aPerson = result.get(i);
 
 					if (person.equalsIgnoreCase(aPerson.getPvId())) {
 
@@ -67,14 +69,28 @@ public class IdentifyController {
 							uiModel.addAttribute("itemId", aPerson.getId());
 							viewtoreturn = "people/show";
 						}
+						
+						/*else{
+							System.out.println("PUMASOK SA ELSE");
+							uiModel.addAttribute("person", aPerson);
+							System.out.println("PVID !" + aPerson.getPvId());
+							return viewtoreturn;
+						}*/
 
 					}
+					
 				}
 			}
 
 		} catch (Exception e) {
 			return "{\"ERROR\":" + e.getMessage() + "\"}";
 		}
-		return viewtoreturn;
+		//return viewtoreturn;
+		System.out.println("DEFAULT VIEW");
+		uiModel.addAttribute("person", person);
+		uiModel.addAttribute("itemId", aPerson.getId());
+		System.out.println("PVID !" + person);
+		return viewtoreturn = "people/show";
+		//return viewfloor;
 	}
 }

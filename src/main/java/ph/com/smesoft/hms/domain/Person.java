@@ -74,7 +74,7 @@ public class Person {
 	 */
 	@NotNull
 	@Enumerated
-	private PersonType personType;
+	public PersonType personType;
 
 	@Override
 	public String toString() {

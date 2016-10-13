@@ -64,4 +64,44 @@ public class EnrollController {
 			return "{\"ERROR\":" + e.getMessage() + "\"}";
 		}
 	}
+	
+/*	@RequestMapping(value = "/{id}", params = "form",headers = "Accept=application/json")
+	public String personDetailsEnroll(Long id, Model uiModel) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Type", "application/json; charset=utf-8");
+		System.out.println("PERSON 1");
+		String url = "http://localhost:8080/hacms/enrollperson/person";
+		RestTemplate restTemplate = new RestTemplate();
+		System.out.println("PERSON 2");
+		String pvId = restTemplate.getForObject(url, String.class);
+		System.out.println("PERSON 3");
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		try {
+			System.out.println("PERSON 4");
+			  Data pv_Id = mapper.readValue(pvId, Data.class); 
+			  System.out.println("PERSON 5");
+			  String palmId = pv_Id.getPvId(); 
+			  System.out.println("PERSON 6");
+			 System.out.println("PALM>>>>>"+palmId);
+			 
+			Person person = new Person();
+			person.setPvId(palmId);
+			 id = person.getId();
+			
+			
+			System.out.println("PERSON - IDDD>>>>>>" + id);
+			System.out.println("PERSON - PV>>>>>>" + person);
+
+			personService.updatePerson(person);
+			addDateTimeFormatPatterns(uiModel);
+			uiModel.addAttribute("person", personService.findPerson(id));
+			uiModel.addAttribute("itemId", id);
+			return "people/show";
+
+		} catch (Exception e) {
+			return "{\"ERROR\":" + e.getMessage() + "\"}";
+		}
+	}*/
+
 }
