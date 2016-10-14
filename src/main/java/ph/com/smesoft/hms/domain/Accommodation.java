@@ -60,7 +60,7 @@ public class Accommodation {
     /**
      */
     @ManyToOne
-    private Person person;
+    public Person person;
 
     /**
      */

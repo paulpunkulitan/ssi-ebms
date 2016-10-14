@@ -45,7 +45,7 @@ public class Door {
     /**
      */
     @ManyToOne
-    private Room room;
+    public Room room;
 
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
