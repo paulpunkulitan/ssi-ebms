@@ -99,7 +99,7 @@
               </c:if>
             </span>
 		
-		<c:out vslue"[${object.pvId}]" />
+		<c:out value"[${object.pvId}]" />
 	  <c:if test="${not empty conditionParam}">
             
             <span>
