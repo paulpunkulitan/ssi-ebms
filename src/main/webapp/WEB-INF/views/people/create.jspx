@@ -8,7 +8,7 @@
             <div>
                 <ol class="breadcrumb">
                   <li class="disabled"><a>Person</a></li>
-                  <li><a href="/hms/people?page=1&amp;size=${empty param.size ? 10 : param.size}">List of People</a></li>
+                  <li><a href="/hms/people?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Persons</a></li>
                   <li class="active"><span>Register Person</span></li>
                  </ol>
             </div>

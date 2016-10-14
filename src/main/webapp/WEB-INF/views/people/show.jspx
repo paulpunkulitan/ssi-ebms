@@ -8,8 +8,6 @@
 	<jsp:output omit-xml-declaration="yes" />
 	
 	
-	
-	
 	 <div id="wrapper">
         <div class="container-fluid">
             <div>
@@ -20,8 +18,7 @@
                  </ol>
             </div>
         
-    
-		    <page:show id="ps_ph_com_smesoft_hms_domain_Person" object="${person}" path="/people">
+		    <page:showenroll id="ps_ph_com_smesoft_hms_domain_Person" object="${person}" path="/people">
 		    	<field:display field="pvId" id="s_ph_com_smesoft_hms_domain_Person_pvid" object="${person}"/>
 		        <field:display field="firstName" id="s_ph_com_smesoft_hms_domain_Person_firstname" object="${person}"/>
 		        <field:display field="middleName" id="s_ph_com_smesoft_hms_domain_Person_middlename" object="${person}"/>
@@ -29,9 +26,8 @@
 		        <field:display field="birthDate" id="s_ph_com_smesoft_hms_domain_Person_birthdate" object="${person}"/>
 		        <field:display field="gender" id="s_ph_com_smesoft_hms_domain_Person_gender" object="${person}"/>
 		        <field:display field="personType" id="s_ph_com_smesoft_hms_domain_Person_persontype" object="${person}"/>	
-		        
-		        	        
-		    </page:show>
+		    </page:showenroll>
+
 
         </div>   
     </div>   

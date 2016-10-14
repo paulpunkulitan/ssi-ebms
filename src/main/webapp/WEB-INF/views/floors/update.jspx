@@ -9,7 +9,7 @@
                 <ol class="breadcrumb">
                   <li class="disabled"><a>Floor</a></li>
                   <li><a href="/hms/floors?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Floors</a></li>
-                  <li class="active"><span>Update Floor</span></li>
+                  <li class="active"><span>Update Floor Information</span></li>
                  </ol>
             </div>
     

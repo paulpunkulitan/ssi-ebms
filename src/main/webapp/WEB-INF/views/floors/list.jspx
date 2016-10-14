@@ -11,7 +11,7 @@ version="2.0">
 			<div>
 				<ol class="breadcrumb">
 					<li class="disabled"><a>Floor</a></li>
-					<li class="active"><span>List of Floor</span></li>
+					<li class="active"><span>List of Floors</span></li>
 				</ol>
 			</div>
 	
