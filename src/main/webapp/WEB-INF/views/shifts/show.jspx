@@ -15,7 +15,7 @@
         <div class="container-fluid">
             <div>
                 <ol class="breadcrumb">
-                  <li class="disabled"><a>Accommodation</a></li>
+                  <li class="disabled"><a>Shift</a></li>
                   <li><a href="/hms/shifts?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Shifts</a></li>
                   <li class="active"><span>Shift Information</span></li>
                  </ol>

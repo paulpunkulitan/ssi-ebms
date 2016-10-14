@@ -87,10 +87,8 @@ public class IdentifyController {
 		}
 		//return viewtoreturn;
 		System.out.println("DEFAULT VIEW");
-		uiModel.addAttribute("person", person);
-		uiModel.addAttribute("itemId", aPerson.getId());
-		System.out.println("PVID !" + person);
-		return viewtoreturn = "people/show";
+		
+		return viewtoreturn;
 		//return viewfloor;
 	}
 }

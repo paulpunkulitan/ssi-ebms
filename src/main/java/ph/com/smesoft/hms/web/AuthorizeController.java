@@ -78,9 +78,9 @@ public class AuthorizeController {
 		List<Door> doorList = doorService.findAllDoors();
 		List<Room> roomList = roomService.findAllRooms();
 		List<Floor> floorList = floorService.findAllFloors();
-		String isauthorized = "False";
-		System.out.println(pvId);
-		System.out.println(palmusId);
+		String isauthorized = "INVALID";
+		System.out.println("pvId : " + pvId);
+		System.out.println("palmusId : " + palmusId);
 		System.out.println("TEST-1");
 		try {
 			
@@ -90,33 +90,34 @@ public class AuthorizeController {
 				Person person = personList.get(i);
 				System.out.println(person);
 				Long idd = person.getId();
-				System.out.println(idd);
+				System.out.println("person.getId() : " + idd);
 				String pID = person.getPvId();
-				System.out.println(pID);
+				System.out.println("pID : " + pID);
 				
 				if (pvId.equalsIgnoreCase(person.getPvId())) {
+					System.out.println("pvId.equalsIgnoreCase(person.getPvId()) : " + pvId.equalsIgnoreCase(person.getPvId()));
 					Long id = person.getId();
-					System.out.println(id);
+					System.out.println("id : " + id);
 					PersonType pType = person.getPersonType();
 					String personType = pType.toString();
-					System.out.println(personType);
+					System.out.println("personType : " + personType);
 					if (personType.equalsIgnoreCase("Customer")) {
 						for (int j = 0; j < accommodationList.size(); j++) {
 							Accommodation accomm = accommodationList.get(j);
 							if (id == accomm.person.getId()) {
 								Room room = accomm.getRoom();
 								Long roomId = room.getId();
-								System.out.println(roomId);
+								System.out.println("roomId : " + roomId);
 								for (int k = 0; k < doorList.size(); k++) {
 									Door door = doorList.get(k);
-									System.out.println(door);
+									System.out.println("door : " + door);
 									if (roomId == door.room.getId()) {
 										String palmussId = door.getPalmusId();
 										if (palmusId.equalsIgnoreCase(palmussId)) {
-											isauthorized = "True";
-											System.out.println(isauthorized);
+											isauthorized = "VALID";
+											System.out.println("isauthorized : " + isauthorized);
 										}
-										}
+									}
 								}
 							}
 						}

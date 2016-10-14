@@ -12,8 +12,8 @@
 		    <div class="container-fluid">
 				<div>
 					<ol class="breadcrumb">
-						<li class="disabled"><a>Person</a></li>
-						<li class="active"><span>List of Persons</span></li>
+						<li class="disabled"><a>Shift</a></li>
+						<li class="active"><span>List of Shifts</span></li>
 					</ol>
 				</div>
 		

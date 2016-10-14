@@ -98,11 +98,7 @@
                 </a>
               </c:if>
             </span>
-		
-		<c:out vslue"[${object.pvId}]" />
-	  <c:if test="${not empty conditionParam}">
-            
-            <span>
+		<span>
               <c:if test="${enroll}">
                 <spring:url value="${path}/${itemId}" var="enroll_form_url" >
                   <spring:param name="enrollForm" />
@@ -115,8 +111,6 @@
                 </a>
               </c:if>
             </span>
-         </c:if>
-            
           </div>
           </center>
         </c:when>

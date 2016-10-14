@@ -10,7 +10,7 @@
             <div>
                 <ol class="breadcrumb">
                   <li class="disabled"><a>Door</a></li>
-                  <li><a href="/hms/rooms?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Doors</a></li>
+                  <li><a href="/hms/doors?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Doors</a></li>
                   <li class="active"><span>Update Door</span></li>
                  </ol>
             </div>
