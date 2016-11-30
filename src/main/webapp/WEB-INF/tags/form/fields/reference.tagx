@@ -33,7 +33,7 @@
       <a href="${create_url}">
         <spring:url value="/resources/images/addicon.png" var="create_img_url" />
         <spring:message arguments="${field}" code="global_menu_new" var="add_message" htmlEscape="false" />
-        <img alt="${fn:escapeXml(add_message)}" src="${create_img_url}" title="${fn:escapeXml(add_message)}" class="shadowEffect" height="20" width="20" />
+        <img alt="${fn:escapeXml(add_message)}" src="${create_img_url}" class="shadowEffect" height="20" width="20" />
       </a>
       <c:out value=" " />
       <spring:message arguments="${label}" code="entity_not_found" />

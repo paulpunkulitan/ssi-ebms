@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div 
+xmlns:jsp="http://java.sun.com/JSP/Page" 
+xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+xmlns:display="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+       <div id="wrapper">
+           <div class="container-fluid">
+                     <div>
+                           <ol class="breadcrumb">
+                                  <li class="disabled"><a>Industry Type</a></li>
+                                  <li class="active"><span>List of Industry Types</span></li>
+                           </ol>
+                     </div>
+                     
+                     <page:list id="pl_ph_com_smesoft_ebms_domain_Industrytype" items="${industrytypes}" buttonAction="/ebms/industrytypes?form" buttonLabel="Register Industry Type" searchAction="/ebms/industrytypes/search">
+                      <table:table data="${industrytypes}" id="l_ph_com_smesoft_ebms_domain_Industrytype" path="/industrytypes" >
+                          <table:column id="c_ph_com_smesoft_ebms_domain_Industrytype_industryTypeName" property="industryTypeName" />
+                      </table:table>
+                  </page:list>
+
+           </div>   
+       </div>   
+</div>

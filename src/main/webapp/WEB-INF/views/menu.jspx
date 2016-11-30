@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" 
+xmlns:spring="http://www.springframework.org/tags" version="2.0">
 
-	<spring:url var="home" value="/resources/images/homeicon.png" />
+	<spring:url var="customer" value="/resources/images/CRM.png" />
 	<spring:url var="floor" value="/resources/images/floors.png" />  		          	 	
 	<spring:url var="room" value="/resources/images/rooms.png" />  	
 	<spring:url var="person" value="/resources/images/personnel.png" />
 	<spring:url var="shift" value="/resources/images/shift.png" />  		          	 	
 	<spring:url var="accommodation" value="/resources/images/accommodation.png" />  
-	<spring:url var="door" value="/resources/images/dooricon.png" />  
+	<spring:url var="door" value="/resources/images/dooricon.png" />
+	 
+	<spring:url var="city" value="/resources/images/city.png" /> 
+	<spring:url var="barangay" value="/resources/images/barangay.png" /> 
+	<spring:url var="home" value="/resources/images/home.png" /> 
+	<spring:url var="street" value="/resources/images/street.png" /> 
+	<spring:url var="customer" value="/resources/images/customer.png" /> 
+	<spring:url var="location" value="/resources/images/location.png" />  
 	
 	<div class="collapse navbar-collapse navbar-ex1-collapse">
 	  	<center>     	 	
 		     <ul id="style-10" class="nav nav-pills navbar-nav side-nav nav-size">
-		         <li><a href="/hms" class="hvr-bounce-to-right"><img src="${home}" alt="eqweqw Inc." height="40" width="40" class="shadowEffect"/><p>Home</p></a></li>
-		         <li><a href="/hms/floors?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${floor}" height="40" width="40" class="shadowEffect"/><p>Floor</p></a></li>
-		         <li><a href="/hms/rooms?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${room}" alt="eqweqw Inc." height="40" width="40" class="shadowEffect"/><p>Room</p></a></li>
-		         <li><a href="/hms/doors?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${door}" height="40" width="40" class="shadowEffect"/><p>Door</p></a></li>
-		         <li><a href="/hms/people?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${person}" height="40" width="40" class="shadowEffect"/><p>Person</p></a></li>
-		         <li><a href="/hms/accommodations?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${accommodation}" class="shadowEffect" alt="eqweqw Inc." height="40" width="40"/><p>Accommodation</p></a></li>
-		         <li><a href="/hms/shifts?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${shift}" height="40" width="40" class="shadowEffect"/><p>Shift</p></a></li>
-		     </ul>
+		         <li><a href="/ebms/home/statistics" class="hvr-bounce-to-right"><img src="${home}" height="40" width="40" class="shadowEffect"/><p>Home</p></a></li>
+		         <li><a href="/ebms/customer?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${customer}" height="40" width="40" class="shadowEffect"/><p>Customer</p></a></li>
+		         <li><a href="/ebms/cities?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${city}" height="40" width="40" class="shadowEffect"/><p>City</p></a></li>
+		         <li><a href="/ebms/barangays?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${barangay}" height="40" width="40" class="shadowEffect"/><p>Barangay</p></a></li>
+		         <li><a href="/ebms/streets?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${street}" height="40" width="40" class="shadowEffect"/><p>Street</p></a></li>
+		         <li><a href="/ebms/locationtypes?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${location}" alt="eqweqw Inc." height="40" width="40" class="shadowEffect"/><p>Location</p></a></li>
+		         <li><a href="/ebms/customertypes?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${customer}" height="40" width="40" class="shadowEffect"/><p>Customer Type</p></a></li>
+		         <li><a href="/ebms/industrytypes?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${industrytype}" height="40" width="40" class="shadowEffect"/><p>Industry Type</p></a></li>
+			</ul>
 		</center>	     
 	</div>
 </div>

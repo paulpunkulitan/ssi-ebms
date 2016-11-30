@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div 
+xmlns:jsp="http://java.sun.com/JSP/Page" 
+xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/custom" 
+xmlns:display="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+       <div id="wrapper">
+           <div class="container-fluid">
+                     <div>
+                           <ol class="breadcrumb">
+                                  <li class="active"><a>Customer</a></li>
+                                  <li class="active"><span>List of Registered Customer</span></li>
+                           </ol>
+                     </div>
+                      
+                      <form:create id="fc_ph_com_smesoft_ebms_domain_customer" modelAttribute="customer" path="/customer" render="${empty dependencies}"  >
+                 	  <field:select field="CustomerType" id="c_ph_com_smesoft_ebms_domain_customer_customerType" items="${customertypes}" itemValue="id" required="true" path="/customertypes" ></field:select>                                  
+                     </form:create>                     
+                     
+                     <page:list id="pl_ph_com_smesoft_ebms_domain_customer" items="${customer}" buttonAction="/ebms/customer?form" buttonLabel="Register New Customer" searchAction="/ebms/customer/search">
+                      <table:table data="${customer}" id="l_ph_com_smesoft_ebms_domain_customer" path="/customer" >
+                          <table:column id="c_ph_com_smesoft_ebms_domain_customer_id" property="id" />
+                          <table:column id="c_ph_com_smesoft_ebms_domain_customer_customerName" property="CustomerName" />
+                      </table:table>
+                  	</page:list>
+
+           </div>   
+       </div>   
+</div>

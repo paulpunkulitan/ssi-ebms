@@ -8,17 +8,18 @@
             <div>
                 <ol class="breadcrumb">
                   <li class="disabled"><a>Floor</a></li>
-                  <li><a href="/hms/floors?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Floors</a></li>
+                  <li><a href="/ebms/floors?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Floors</a></li>
                   <li class="active"><span>Register Floor</span></li>
                  </ol>
             </div>
     
-		    <form:create id="fc_ph_com_smesoft_hms_domain_Floor" modelAttribute="floor" path="/floors" render="${empty dependencies}" >
-		        <field:input field="floorNumber" id="c_ph_com_smesoft_hms_domain_Floor_floorNumber" max="30" min="3" required="true" />
-		        <field:textarea field="description" id="c_ph_com_smesoft_hms_domain_Floor_description" required="true" />
-		    </form:create>
-		    <form:dependency dependencies="${dependencies}" id="d_ph_com_smesoft_hms_domain_Floor" render="${not empty dependencies}" />
+                  <form:create id="fc_ph_com_smesoft_ebms_domain_Floor" modelAttribute="floor" path="/floors" render="${empty dependencies}" >
+                      <field:input field="floorNumber" id="c_ph_com_smesoft_ebms_domain_Floor_floorNumber" max="30" min="3" required="true" />
+                      <field:textarea field="description" id="c_ph_com_smesoft_ebms_domain_Floor_description" required="true" />
+                      <field:textarea field="floorComments" id="c_ph_com_smesoft_ebms_domain_Floor_floorComments" required="true" />
+                  </form:create>
+                  <form:dependency dependencies="${dependencies}" id="d_ph_com_smesoft_ebms_domain_Floor" render="${not empty dependencies}" />
 
-	    </div>   
-	</div>   
+           </div>   
+       </div>   
 </div>

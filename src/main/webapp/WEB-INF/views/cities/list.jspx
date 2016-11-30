@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div 
+xmlns:jsp="http://java.sun.com/JSP/Page" 
+xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+xmlns:display="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+       <div id="wrapper">
+           <div class="container-fluid">
+                     <div>
+                           <ol class="breadcrumb">
+                                  <li class="disabled"><a>City</a></li>
+                                  <li class="active"><span>List of Cities</span></li>
+                           </ol>
+                     </div>
+                     
+                     <page:list id="pl_ph_com_smesoft_ebms_domain_City" items="${cities}" buttonAction="/ebms/cities?form" buttonLabel="Register City" searchAction="/ebms/cities/search">
+                      <table:table data="${cities}" id="l_ph_com_smesoft_ebms_domain_City" path="/cities" >
+                          <table:column id="c_ph_com_smesoft_ebms_domain_City_cityName" property="cityName" />
+                      	  <table:column id="c_ph_com_smesoft_ebms_domain_City_cityState" property="state" />
+                      </table:table>
+                  </page:list>
+
+           </div>   
+       </div>   
+</div>

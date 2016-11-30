@@ -154,9 +154,9 @@ input[type=text]:disabled {
 
 .centerHeader
 {
-    
-    text-shadow: #717276 0 4px 5px;
-    font-size:46px;
+	font-weight: bold;
+    text-shadow: #000 0 4px 5px;
+    font-size: 90px;
 }
 
 
@@ -296,3 +296,157 @@ input[type=text]:disabled {
     display: block;
     margin-left: 105px;
 }
+.tealColor
+{
+  margin-top:10px;
+  border-radius:10px;
+  text-shadow: 1px 1px #000;
+
+  background: #485563; / fallback for old browsers /
+  background: -webkit-linear-gradient(to left, #485563 , #29323c); / Chrome 10-25, Safari 5.1-6 /
+  background: linear-gradient(to left, #485563 , #29323c); / W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ /
+         
+ 
+}
+
+.imageMarginCustomer
+{
+ -webkit-filter: drop-shadow(3px 3px 3px #222);
+    filter: drop-shadow(3px 3px 3px #000);
+}
+
+
+.marginTop
+{
+ margin-top:40px;
+ 
+ 
+
+background: #485563; / fallback for old browsers /
+background: -webkit-linear-gradient(to left, #485563 , #29323c); / Chrome 10-25, Safari 5.1-6 /
+background: linear-gradient(to left, #485563 , #29323c); / W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ /
+        
+ 
+ /* 
+ background: #7cbc42; fallback for old browsers
+ background: -webkit-linear-gradient(to left, #7cbc42 , #eef2f3); Chrome 10-25, Safari 5.1-6
+ background: linear-gradient(to left, #717276 , #d1d6eb); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+
+
+
+
+    div.fileinputs {
+            position: relative;
+        }
+
+        div.fakefile {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            z-index: 1;
+        }
+
+        div.fakefile input[type=button] {
+            / enough width to completely overlap the real hidden file control /
+            cursor: pointer;
+            width: 148px;
+        }
+
+        div.fileinputs input.file {
+            position: relative;
+            text-align: right;
+            -moz-opacity:0 ;
+            filter:alpha(opacity: 0);
+            opacity: 0;
+            z-index: 2;
+        }
+        
+        
+.enrolLabel
+{
+ margin-top: 40px;
+ text-shadow: #000 0 4px 5px;
+    font-size:30px;
+}
+
+.personnelLabel
+{
+ text-shadow: #000 0 4px 5px;
+    font-size:24px;
+    padding-top:20px;
+    padding-right:20px;
+}
+
+.personnelStat
+{
+ text-shadow: #000 0 4px 5px;
+    font-size:32px;
+    font-weight:bold;
+    padding-top:20px;
+    padding-right:20px;
+}
+
+.personnelIcon
+{
+ text-shadow: #000 0 4px 5px;
+    font-size:24px;
+    font-weight:bold;
+    padding-top:20px;
+    padding-right:20px;
+    margin-bottom:20px;
+ margin-left: 20px;
+ -webkit-filter: drop-shadow(3px 3px 3px #222);
+    filter: drop-shadow(3px 3px 3px #000);
+}
+.uploadIcon
+{
+	margin-top: 10px;
+}
+
+.regButton
+{
+	margin-right: 10px;
+}
+
+.chooseButton
+{
+	margin-right: 10px;
+}
+
+.formClass
+{
+	margin-top: -35px;
+}
+
+.inputfile {
+ width: 0.1px;
+ height: 0.1px;
+ opacity: 0;
+ overflow: hidden;
+ position: absolute;
+ z-index: -1;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+}
+
+.inputfile + label {
+ cursor: pointer; "hand" cursor
+}
+
+.inputfile:focus + label {
+ outline: 1px dotted #000;
+ outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile + label * {
+ pointer-events: none;
+}
+
+.style-1 input[type="text"] {
+  max-width: 100%;
+}
+

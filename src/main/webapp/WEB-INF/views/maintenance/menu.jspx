@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div 
+xmlns:jsp="http://java.sun.com/JSP/Page" 
+xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+xmlns:display="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    	<div id="wrapper">
+       		<div class="container-fluid">
+				<ul class="nav nav-pills">
+					<li><a href="/ebms/cities?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${city}" height="40" width="40" class="shadowEffect"/><p>City</p></a></li>
+		         	<li><a href="/ebms/barangays?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${barangay}" height="40" width="40" class="shadowEffect"/><p>Barangay</p></a></li>
+		         	<li><a href="/ebms/streets?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${street}" height="40" width="40" class="shadowEffect"/><p>Street</p></a></li>
+		         	<li><a href="/ebms/location?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${location}" alt="eqweqw Inc." height="40" width="40" class="shadowEffect"/><p>Location</p></a></li>
+		         	<li><a href="/ebms/customertype?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${customertype}" height="40" width="40" class="shadowEffect"/><p>Customer Type</p></a></li>
+		         	<li><a href="/ebms/industrytype?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${industrytype}" height="40" width="40" class="shadowEffect"/><p>Industry Type</p></a></li>
+				</ul>           
+           	</div>   
+       	</div>   
+</div>

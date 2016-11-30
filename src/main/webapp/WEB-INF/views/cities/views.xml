@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="defaultHome" name="cities/list">
+        <put-attribute name="body" value="/WEB-INF/views/cities/list.jspx"/>
+    </definition>
+<definition extends="defaultHome" name="cities/show">
+        <put-attribute name="body" value="/WEB-INF/views/cities/show.jspx"/>
+    </definition>
+<definition extends="defaultHome" name="cities/create">
+        <put-attribute name="body" value="/WEB-INF/views/cities/create.jspx"/>
+    </definition>
+<definition extends="defaultHome" name="cities/update">
+        <put-attribute name="body" value="/WEB-INF/views/cities/update.jspx"/>
+    </definition>
+</tiles-definitions>
+

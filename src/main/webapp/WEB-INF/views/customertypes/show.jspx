@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+        xmlns:jsp="http://java.sun.com/JSP/Page" 
+        xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+        version="2.0">
+       
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+    <div id="wrapper">
+        <div class="container-fluid">
+            <div>
+                <ol class="breadcrumb">
+                  <li class="disabled"><a>Customer Type</a></li>
+                  <li><a href="/ebms/customertypes?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Customer Types</a></li>
+                  <li class="active"><span>Customer Type Information</span></li>
+                 </ol>
+            </div>
+        
+                  <page:show id="ps_ph_com_smesoft_ebms_domain_Customertype" object="${customertype}" path="/customertypes" z="XmgSUNTaw/S287IKejvqSXTBaWA=">
+                      <field:display field="customerTypeName" id="s_ph_com_smesoft_ebms_domain_Customertype_customerTypeName" object="${customertype}" z="bpSs/fEBb5fUYBhFsl15fVNLxh0="/>
+                  </page:show>
+
+        </div>   
+    </div>   
+</div>

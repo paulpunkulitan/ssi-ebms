@@ -2,56 +2,56 @@
 <div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" id="footer" version="2.0">
 
 <footer>
-            <div class="footer">
-                <div id="wrapper">
+		<div class="footer">
+				
+                <div class="container">
                     <div class="row">
-                        <div class="col-lg-offset-1 col-lg-5  col-md-4 col-sm-4 col-xs-4">
+                        <div class="col-lg-5  col-md-4 col-sm-4 col-xs-4">
                             <h3> Company Background </h3>
                             <p>
                                 SMESoft Inc. (SSI) is a duly registered company in the Philippines Securities and Exchange Commission (SEC). Established in 2008 and registered in 2011, the company has developed its product line of Business Management Solutions for Small to Medium Enterprise.
-                                Part of the company's expansion is the acquisition of authority to distribute the products and trainings of the internationally renowned RMC Project Management Inc. headquartered in Minnesota, USA. It encompasses product distribution and training conduct with RMC trademark across the country and nearby territories (subject to RMC approval).
+                                Part of the company's expansion is the acquisition of authority to distribute the products and trainings of the internationally renowned RMC Project Management Inc. headquartered in Minnesota, USA.
                                 Two years ago, SSI started extending an advocacy campaign to raise awareness of the Project Management discipline which the founder believes will benefit the people by applying the necessary skills and concepts for a better future.
-
                             </p>
                         </div>
 
-                        <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 ">
+                        <div class="col-lg-3  col-md-3 col-sm-4 col-xs-4 ">
                             <h3> Keep Connected </h3>
                             <ul class="social">
-                             
-                                <li><a href="#" class="icoFacebook">Like Us on Facebook</a></li>
-                                <li><a href="#" class="icoInstagram">Follow Us on Instagram</a> </li>
-                                <li><a href="#" class="icoLinkedin">Follow Us on LinkedIn</a></li>
-                                <li><a href="#" class="icoPinterest">Follow Us on Pinterest</a></li>
-                                <li><a href="#" class="icoTwitter">Follow Us on Twitter</a></li>
+                                <li> <a href="#" class="icoFacebook"> Like Us on Facebook </a></li>
+                                <li> <a href="#" class="icoInstagram"> Follow Us on Instagram </a> </li>
+                                <li> <a href="#" class="icoLinkedin">  Follow Us on LinkedIn </a></li>
+                                <li> <a href="#" class="icoPinterest">  Follow Us on Pinterest  </a></li>
+                                <li> <a href="#" class="icoTwitter"> Follow Us on Twitter  </a></li>
                             </ul>
                         </div>
 
-                        <div class="col-lg-3  col-md-3 col-sm-4 col-xs-4">
+                        <div class="col-lg-4 col-md-3 col-sm-4 col-xs-4">
                             <h3> Contact Information </h3>
                             <ul>
                                 <li>
-                                 Unit 511-512 VGP Center,
+                                   
+                                    <p>Unit 511-512 VGP Center,</p>
                                     <p>Legaspi Ayala Avenue,</p>
                                     <p>Village Makati City </p>
                                 </li>
 
                                 <li>
-                                    +63 933.049.8890 (SMART)
+                                 
+                                   <p>+63 933.049.8890 (SMART)</p>
                                     <p>+63 906.297.0995 (GLOBE)</p>
                                 </li>
 
                                 <li>
-                                    
+                                    <span class="fa fa-phone" aria-hidden="true">
                                     886-9775 | 512-5955
+                                   </span>
                                 </li>
 
                                 <li>
-                                    
-                                    inquire@smesoft.com.ph
+                                    <p>inquire@smesoft.com.ph</p>
                                     <p>marketing@smesoft.com.ph</p>
-                                    <p>sales@smesoft.com.ph</p>
-                                    <p>support@smesoft.com.ph</p>
+
                                 </li>
                             </ul>
                         </div>
@@ -63,11 +63,10 @@
             </div>
             <!--/.footer-->
 
-            <div class="footer-bottomHome">
+            <div class="footer-bottom">
                 <div class="container">
                     <center><p>2016 SMESoft Inc. All Rights Reserved</p></center>
                 </div>
             </div>
-            <!--/.footer-bottom-->
-        </footer>
+		</footer>
 </div>

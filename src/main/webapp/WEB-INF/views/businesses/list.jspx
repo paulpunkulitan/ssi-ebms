@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div 
+xmlns:jsp="http://java.sun.com/JSP/Page" 
+xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+xmlns:display="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+       <div id="wrapper">
+           <div class="container-fluid">
+                     <div>
+                           <ol class="breadcrumb">
+                                  <li class="disabled"><a>Business</a></li>
+                                  <li class="active"><span>List of Business</span></li>
+                           </ol>
+                     </div>
+                     
+                     <page:list id="pl_ph_com_smesoft_ebms_domain_Business" items="${businesses}" buttonAction="/ebms/businesses?form" buttonLabel="Register Business" searchAction="/ebms/businesses/search">
+                      <table:table data="${businesses}" id="l_ph_com_smesoft_ebms_domain_Business" path="/businesses" >
+                          <table:column id="c_ph_com_smesoft_ebms_domain_Business_businessName" property="businessName" />
+                          <table:column id="c_ph_com_smesoft_ebms_domain_Business_businessAddress" property="businessAddress" />
+                          <table:column id="c_ph_com_smesoft_ebms_domain_Business_businessEmailAddress" property="businessEmailAddress" />
+                          <table:column id="c_ph_com_smesoft_ebms_domain_Business_businessTelephoneNumber" property="businessTelephoneNumber" />
+                      </table:table>
+                  </page:list>
+
+           </div>   
+       </div>   
+</div>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+        xmlns:jsp="http://java.sun.com/JSP/Page" 
+        xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+        xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/custom" 
+		version="2.0">
+       
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+    <div id="wrapper">
+        <div class="container-fluid">
+            <div>
+                <ol class="breadcrumb">
+                  <li class="disabled"><a>Customer</a></li>
+                  <li><a href="/ebms/customer?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Customer</a></li>
+                  <li class="active"><span>Customer Information</span></li>
+                 </ol>
+            </div>
+        
+                  <page:show id="ps_ph_com_smesoft_ebms_domain_customer" object="${customer}" path="/customer" z="XmgSUNTaw/S287IKejvqSXTBaWA=">
+                      <field:display field="id" id="s_ph_com_smesoft_ebms_domain_customer_id" object="${customer}" z="bpSs/fEBb5fUYBhFsl15fVNLxh0="/>
+                      <field:display field="CustomerName" id="s_ph_com_smesoft_ebms_domain_customer_customerName" object="${customer}" z="WiR3MbBW/TqqoI5bvdXG5bAI594="/>
+                      <field:display field="IndustryType" id="s_ph_com_smesoft_ebms_domain_customer_industryType" object="${customer}" />
+                  	  <field:display field="CustomerType" id="s_ph_com_smesoft_ebms_domain_customer_customerType" object="${customer}" />
+                  	  <field:display field="LocationType" id="s_ph_com_smesoft_ebms_domain_customer_locationType" object="${customer}" />
+                  	  <field:display field="Street" id="s_ph_com_smesoft_ebms_domain_customer_street" object="${customer}" />
+                  	  <field:display field="Barangay" id="s_ph_com_smesoft_ebms_domain_customer_barangay" object="${customer}" />
+                  	  <field:display field="City" id="s_ph_com_smesoft_ebms_domain_customer_city" object="${customer}" />
+                  	  
+                  <!--  	  <page:list id="pl_ph_com_smesoft_ebms_domain_customer" items="${list}" buttonAction="/ebms/contact/${customer.id}" buttonLabel="Save New Contact">
+                  	   <table:table data="${list}" id="l_ph_com_smesoft_ebms_domain_customer" path="/customer" >
+                          <table:column id="c_ph_com_smesoft_ebms_domain_customer_fax" property="fax" />
+                          <table:column id="c_ph_com_smesoft_ebms_domain_customer_mobile" property="mobile" />
+                     	  <table:column id="c_ph_com_smesoft_ebms_domain_customer_phone" property="phone" />
+                     	  <table:column id="c_ph_com_smesoft_ebms_domain_customer_email" property="email" />
+                       </table:table>
+                      </page:list>-->
+                  </page:show>
+                  
+                    
+                  
+        </div>   
+    </div>   
+</div>

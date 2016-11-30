@@ -97,6 +97,16 @@
                 </a>
               </c:if>
             </span>
+            <span>
+              <c:if test="${enroll}">
+                <spring:url value="${path}" var="enroll_form_url" />
+                <spring:url value="/resources/images/enrollsmall.png" var="list_image_url" />
+                <spring:message arguments="${typeNamePlural}" code="entity_enroll" var="list_label" htmlEscape="false" />
+                <a href="/hms/enroll/callDetailsEnroll" alt="${fn:escapeXml(list_label)}" title="${fn:escapeXml(list_label)}" class="utilbtnHover">
+                  <img alt="${fn:escapeXml(list_label)}" class="shadowEffect" src="${list_image_url}" title="${fn:escapeXml(list_label)}" height="20" width="30" />
+                </a>
+              </c:if>
+            </span>
           </div>
           </center>
         </c:when>

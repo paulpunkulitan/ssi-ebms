@@ -2,7 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd                 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd                 http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
                 
     <!-- The controllers are autodetected POJOs labeled with the @Controller annotation. -->
-    <context:component-scan base-package="ph.com.smesoft.hms" use-default-filters="false">
+    <context:component-scan base-package="ph.com.smesoft.ebms" use-default-filters="false">
         <context:include-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
     </context:component-scan>
     
@@ -24,7 +24,7 @@
     </mvc:interceptors>
 
     <!-- Selects a static view for rendering without the need for an explicit controller -->
-    <mvc:view-controller path="/" view-name="dashboard"/>
+     <mvc:view-controller path="/home/statistics" view-name="home/home"/>
     <mvc:view-controller path="/uncaughtException"/>
     <mvc:view-controller path="/resourceNotFound"/>
     <mvc:view-controller path="/dataAccessFailure"/>
@@ -71,5 +71,5 @@
       </list>
     </property>
   </bean>
-<bean class="ph.com.smesoft.hms.web.ApplicationConversionServiceFactoryBean" id="applicationConversionService"/>
+<bean class="ph.com.smesoft.ebms.web.ApplicationConversionServiceFactoryBean" id="applicationConversionService"/>
 </beans>

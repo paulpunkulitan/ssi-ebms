@@ -6,6 +6,7 @@
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
   <jsp:directive.attribute name="buttonAction" type="java.lang.String" required="false" description="Optional Action Button on the List level" />
   <jsp:directive.attribute name="buttonLabel" type="java.lang.String" required="false" description="Label of the optional Action Button on the List level" />
+  <jsp:directive.attribute name="searchAction" type="java.lang.String" required="false" description="Action of the search box" />
   
   <c:if test="${empty render or render}">
   
@@ -17,16 +18,28 @@
       <spring:escapeBody javaScriptEscape="true" >${title}</spring:escapeBody>
     </c:set>
     
-    <div id="_title_${sec_id}_id">
+     <div id="_title_${sec_id}_id">
         <header class="row">
             <div class="col-lg-12">
-                <h1>${title}<c:if test="${not empty buttonAction}">
-                        <a href="${buttonAction}" type="button" class="btn btn-primary pull-right">${buttonLabel}</a>
-                    </c:if>
+               <h1>${title}<c:if test="${not empty buttonAction}">        
+                    <div class="col-lg-3 pull-right">
+                        <form modelAttribute="" method="GET" action="${searchAction}">      
+                        <div class="input-group style-1">
+							<input type="text" name="searchString" class="form-control"/>
+							<div class="input-group-btn">
+								<button class="btn btn-primary" type="submit">
+								<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</div>         
+                        </div>              
+                        </form> 
+                    </div>
+                            <a href="${buttonAction}" type="button" class="btn btn-primary pull-right">${buttonLabel}</a>
+								</c:if>
                 </h1>
             </div>
         </header>
-	    <hr class="hrdesign"/>  
+     <hr class="hrdesign"/>  
         <jsp:doBody />
     </div>
   </c:if>

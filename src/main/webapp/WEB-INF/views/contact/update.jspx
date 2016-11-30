@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <div id="wrapper">
+        <div class="container-fluid">
+            <div>
+                <ol class="breadcrumb">
+                  <li class="disabled"><a>Customer</a></li>
+                  <li><a href="/ebms/customer?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Customer</a></li>
+                  <li class="active"><span>Update Customer Information</span></li>
+                 </ol>
+            </div>
+    
+                  <form:update id="fu_ph_com_smesoft_ebms_domain_customer" modelAttribute="contact" path="/contact" versionField="Version" z="Vz89WdEXcv2QOn4oTHTRJPOwEP0=">
+                     <field:input field="FirstName" id="c_ph_com_smesoft_ebms_domain_customer_customerfirstName" max="30" min="3" required="true"  />
+					  <field:input field="MiddleName" id="c_ph_com_smesoft_ebms_domain_customer_customerMiddleName" max="30" min="3" required="true" />
+					  <field:input field="LastName" id="c_ph_com_smesoft_ebms_domain_customer_customerlastName" max="30" min="3" required="true" />
+					  <field:input field="Mobile" id="c_ph_com_smesoft_ebms_domain_customer_mobile" max="30" min="3" required="true" />
+                 	  <field:input field="Phone" id="c_ph_com_smesoft_ebms_domain_customer_phone" max="30" min="3" required="true" />
+                 	  <field:input field="Email" id="c_ph_com_smesoft_ebms_domain_customer_email" max="30" min="3" required="true" />
+                  	  <field:input field="Fax" id="c_ph_com_smesoft_ebms_domain_customer_fax" max="30" min="3" required="true" />
+               
+                  </form:update>
+    
+        </div>   
+    </div>   
+</div>

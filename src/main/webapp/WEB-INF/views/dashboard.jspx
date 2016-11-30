@@ -6,7 +6,7 @@
      version="2.0">
 
 	<spring:url var="Enroll" value="/resources/images/enrollicon.png" />
-	<spring:url var="Identify" value="/resources/images/identify1.png" />
+	<spring:url var="Identify" value="/resources/images/identify.png" />
 
 	 <div id="wrapper">
 	 <div class="container-fluid">
@@ -16,16 +16,15 @@
 	   </div>
 	  </header>
 	  <hr class="hrdesign"/>
-	  <br />
 	  
 		  <center>
 			   <div class="col-lg-6 hovereffect">
-			    <a href="/hms/enroll/callEnroll" class="hvr-bounce-to-right">
+			    <a href="/ebms/enroll/callEnroll" class="hvr-bounce-to-right">
 			    <img src="${Enroll}" alt="Enroll" width="550" height="auto"/></a> <br />
 			   </div>
 			
 			   <div class="col-lg-6 hovereffect">
-			    <a href="/hms/identify/callIdentify" class="hvr-bounce-to-right"><img src="${Identify}" alt="Identify" width="550" height="auto" /></a> <br />
+			    <a href="/ebms/identify/callIdentify" class="hvr-bounce-to-right"><img src="${Identify}" alt="Identify" width="550" height="auto" /></a> <br />
 			   </div>
 			   
 		  </center>

@@ -45,7 +45,7 @@
       </label>
       <form:textarea id="_${sec_field}_id" path="${sec_field}" disabled="${disabled}" class="form-control" />
       <br />
-      <form:errors cssClass="errors" id="_${sec_field}_error_id" path="${sec_field}" />
+      <form:errors cssClass="errors col-lg-offset-3 col-lg-10" id="_${sec_field}_error_id" path="${sec_field}" />
     </div>
 
   </c:if>

@@ -8,15 +8,16 @@
             <div>
                 <ol class="breadcrumb">
                   <li class="disabled"><a>Floor</a></li>
-                  <li><a href="/hms/floors?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Floors</a></li>
-                  <li class="active"><span>Update Floor</span></li>
+                  <li><a href="/ebms/floors?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Floors</a></li>
+                  <li class="active"><span>Update Floor Information</span></li>
                  </ol>
             </div>
     
-		    <form:update id="fu_ph_com_smesoft_hms_domain_Floor" modelAttribute="floor" path="/floors" versionField="Version" z="Vz89WdEXcv2QOn4oTHTRJPOwEP0=">
-		        <field:input field="floorNumber" id="c_ph_com_smesoft_hms_domain_Floor_floorNumber" max="30" min="3" required="true" z="hFaIf05Zh3DHyjRgHSJ6T2PgcIs="/>
-		        <field:textarea field="description" id="c_ph_com_smesoft_hms_domain_Floor_description" required="true" z="+k+C7Kql5zHEuFKgpHr3fEtD6YQ="/>
-		    </form:update>
+                  <form:update id="fu_ph_com_smesoft_ebms_domain_Floor" modelAttribute="floor" path="/floors" versionField="Version" z="Vz89WdEXcv2QOn4oTHTRJPOwEP0=">
+                      <field:input field="floorNumber" id="c_ph_com_smesoft_ebms_domain_Floor_floorNumber" max="30" min="3" required="true" z="hFaIf05Zh3DHyjRgHSJ6T2PgcIs="/>
+                      <field:textarea field="description" id="c_ph_com_smesoft_ebms_domain_Floor_description" required="true" z="+k+C7Kql5zHEuFKgpHr3fEtD6YQ="/>
+                      <field:textarea field="floorComments" id="c_ph_com_smesoft_ebms_domain_Floor_floorComments" required="true"/>
+                  </form:update>
     
         </div>   
     </div>   

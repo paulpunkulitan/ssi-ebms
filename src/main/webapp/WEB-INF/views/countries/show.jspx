@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+        xmlns:jsp="http://java.sun.com/JSP/Page" 
+        xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+        version="2.0">
+       
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+    <div id="wrapper">
+        <div class="container-fluid">
+            <div>
+                <ol class="breadcrumb">
+                  <li class="disabled"><a>Country</a></li>
+                  <li><a href="/ebms/countries?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Countries</a></li>
+                  <li class="active"><span>Country Information</span></li>
+                 </ol>
+            </div>
+        
+                  <page:show id="ps_ph_com_smesoft_ebms_domain_Country" object="${country}" path="/countries" z="XmgSUNTaw/S287IKejvqSXTBaWA=">
+                      <field:display field="countryName" id="s_ph_com_smesoft_ebms_domain_Country_countryName" object="${country}" z="bpSs/fEBb5fUYBhFsl15fVNLxh0="/>
+                  </page:show>
+        </div>   
+    </div>   
+</div>

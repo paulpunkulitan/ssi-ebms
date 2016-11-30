@@ -10,14 +10,14 @@
 
 	<spring:url value="/resources/styles/bootstrap-3.3.7/css/bootstrap.min.css" var="bootstrap_min_css_url" />
 	<link href="${bootstrap_min_css_url}" media="screen,print" rel="stylesheet" type="text/css" />
+	
+	<spring:url value="/scripts/jquery-3.1.1/jquery-3.1.1.min.js" var="jqueryJs" />
+    <script src="${jqueryJs}" type="text/javascript"></script>
 
 	<spring:url value="/scripts/bootstrap-3.3.7/js/bootstrap.min.js" var="bootstrapJs" />
 	<link href="${bootstrapJs}" rel="stylesheet" type="text/css" media="screen" />
 
-	<spring:url value="/scripts/jquery-3.1.1/jquery-3.1.1.min.js" var="jqueryJs" />
-    <script src="${jqueryJs}" type="text/javascript"></script>
-    
-    <spring:url value="/resources/styles/dataTables-1.10.12/css/dataTables.bootstrap.min.css" var="datatableCss" />
+	<spring:url value="/resources/styles/dataTables-1.10.12/css/dataTables.bootstrap.min.css" var="datatableCss" />
     <link href="${datatableCss}" rel="stylesheet" type="text/css" />
 
     <spring:url value="/resources/scripts/dataTables-1.10.12/js/dataTables.bootstrap.min.js" var="jquerydatatableJs" /> 
@@ -31,10 +31,11 @@
     <link href="${dashboardCss}" rel="stylesheet" type="text/css" media="screen" />
 
    
-       <script type="text/javascript">
+   	<script type="text/javascript">
     $(document).ready(function() {
-     $('#tblDesign').DataTable();
-    } );
+    	$('.dropdown-toggle').dropdown();
+     	$('#tblDesign').DataTable();
+    });
     
    </script>
    
