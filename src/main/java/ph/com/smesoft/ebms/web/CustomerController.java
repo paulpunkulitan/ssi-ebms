@@ -121,7 +121,7 @@ public class CustomerController {
             uiModel.addAttribute("list", Contact.findContactEntries(firstResult, sizeNo, sortFieldName, sortOrder));
             
            // uiModel.addAttribute("customertypes", customerTypeService.findAllCustomertypes());
-            uiModel.addAttribute("customertypes", Customertype.findCustomertypeEntries(firstResult, sizeNo, sortFieldName, sortOrder)); //.findAllCustomertypesName());
+            uiModel.addAttribute("customertypes", Customertype.findCustomertypeNameEntries(firstResult, sizeNo, sortFieldName, sortOrder)); //.findAllCustomertypesName());
             
             float nrOfPages = (float) customerService.countAllCustomer() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
@@ -131,7 +131,7 @@ public class CustomerController {
         	 int sizeNo = size == null ? 10 : size.intValue();
              final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
             
-        	uiModel.addAttribute("customertypes", Customertype.findCustomertypeEntries(firstResult, sizeNo, sortFieldName, sortOrder)); //.findAllCustomertypesName());
+        	uiModel.addAttribute("customertypes", Customertype.findCustomertypeNameEntries(firstResult, sizeNo, sortFieldName, sortOrder)); //.findAllCustomertypesName());
                 
          }
        // uiModel.addAttribute("customertypes", customerTypeService.findAllCustomertypes());
