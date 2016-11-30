@@ -13,7 +13,7 @@ xmlns:spring="http://www.springframework.org/tags" version="2.0">
 	<spring:url var="city" value="/resources/images/city.png" /> 
 	<spring:url var="barangay" value="/resources/images/barangay.png" /> 
 	<spring:url var="home" value="/resources/images/home.png" /> 
-	<spring:url var="street" value="/resources/images/street.png" /> 
+	<spring:url var="maintenance" value="/resources/images/maintenance.png" /> 
 	<spring:url var="customer" value="/resources/images/customer.png" /> 
 	<spring:url var="location" value="/resources/images/location.png" />  
 	
@@ -22,12 +22,8 @@ xmlns:spring="http://www.springframework.org/tags" version="2.0">
 		     <ul id="style-10" class="nav nav-pills navbar-nav side-nav nav-size">
 		         <li><a href="/ebms/home/statistics" class="hvr-bounce-to-right"><img src="${home}" height="40" width="40" class="shadowEffect"/><p>Home</p></a></li>
 		         <li><a href="/ebms/customer?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${customer}" height="40" width="40" class="shadowEffect"/><p>Customer</p></a></li>
-		         <li><a href="/ebms/cities?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${city}" height="40" width="40" class="shadowEffect"/><p>City</p></a></li>
-		         <li><a href="/ebms/barangays?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${barangay}" height="40" width="40" class="shadowEffect"/><p>Barangay</p></a></li>
-		         <li><a href="/ebms/streets?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${street}" height="40" width="40" class="shadowEffect"/><p>Street</p></a></li>
-		         <li><a href="/ebms/locationtypes?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${location}" alt="eqweqw Inc." height="40" width="40" class="shadowEffect"/><p>Location</p></a></li>
-		         <li><a href="/ebms/customertypes?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${customer}" height="40" width="40" class="shadowEffect"/><p>Customer Type</p></a></li>
-		         <li><a href="/ebms/industrytypes?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${industrytype}" height="40" width="40" class="shadowEffect"/><p>Industry Type</p></a></li>
+		         <li><a href="/ebms/maintenance" class="hvr-bounce-to-right"><img src="${maintenance}" height="40" width="40" class="shadowEffect"/><p>Maintenance</p></a></li>
+		         
 			</ul>
 		</center>	     
 	</div>

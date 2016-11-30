@@ -4,19 +4,59 @@ xmlns:jsp="http://java.sun.com/JSP/Page"
 xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
 xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" 
 xmlns:display="urn:jsptagdir:/WEB-INF/tags/form/fields" 
-version="2.0">
+xmlns:spring="http://www.springframework.org/tags" version="2.0">
+
+	<spring:url var="country" value="/resources/images/country.png" /> 
+	<spring:url var="state" value="/resources/images/state.png" /> 
+	<spring:url var="city" value="/resources/images/city.png" /> 
+	<spring:url var="barangay" value="/resources/images/barangay.png" /> 
+	<spring:url var="home" value="/resources/images/home.png" /> 
+	<spring:url var="street" value="/resources/images/street.png" /> 
+	<spring:url var="customer" value="/resources/images/customer.png" /> 
+	<spring:url var="location" value="/resources/images/location.png" />
+	<spring:url var="industry" value="/resources/images/industryType.png" />
+	
+
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     	<div id="wrapper">
        		<div class="container-fluid">
-				<ul class="nav nav-pills">
-					<li><a href="/ebms/cities?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${city}" height="40" width="40" class="shadowEffect"/><p>City</p></a></li>
-		         	<li><a href="/ebms/barangays?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${barangay}" height="40" width="40" class="shadowEffect"/><p>Barangay</p></a></li>
-		         	<li><a href="/ebms/streets?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${street}" height="40" width="40" class="shadowEffect"/><p>Street</p></a></li>
-		         	<li><a href="/ebms/location?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${location}" alt="eqweqw Inc." height="40" width="40" class="shadowEffect"/><p>Location</p></a></li>
-		         	<li><a href="/ebms/customertype?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${customertype}" height="40" width="40" class="shadowEffect"/><p>Customer Type</p></a></li>
-		         	<li><a href="/ebms/industrytype?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${industrytype}" height="40" width="40" class="shadowEffect"/><p>Industry Type</p></a></li>
-				</ul>           
-           	</div>   
+       		
+       			<div class="row">
+       				<div class="col-xs-6 col-sm-6 col-lg-6">
+	       				<div class="row">
+							<div class="col-xs-3 col-sm-2 col-lg-5 btn btn-default hvr-bounce-to-right" style="margin:2px;">
+								<a href="/ebms/countries?page=1&amp;size=${empty param.size ? 10 : param.size}" class=""><center><img src="${country}" class="shadowEffect img-responsive"/><h3>Country</h3></center></a>
+							</div>
+							<div class="col-xs-3 col-sm-2 col-lg-5 btn btn-default hvr-bounce-to-right" style="margin:2px;">
+								<a href= "/ebms/states?page=1&amp;size=${empty param.size ? 10 : param.size}" class=""><center><img src="${state}" class="shadowEffect img-responsive"/><h3>State</h3></center></a>
+							</div>
+							<div class="col-xs-3 col-sm-2 col-lg-5 btn btn-default hvr-bounce-to-right" style="margin:2px;">
+								<a href="/ebms/cities?pa3e=1&amp;size=${empty param.size ? 10 : param.size}" class=""><center><img src="${city}" class="shadowEffect img-responsive"/><h3>City</h3></center></a>
+							</div>
+							<div class="col-xs-3 col-sm-2 col-lg-5 btn btn-default hvr-bounce-to-right" style="margin:2px;">
+								<a href="/ebms/barangays?page=1&amp;size=${empty param.size ? 10 : param.size}" class=""><center><img src="${barangay}"  class="shadowEffect img-responsive"/><h3>Barangay</h3></center></a>
+							</div>
+							<div class="col-xs-3 col-sm-2 col-lg-5 btn btn-default hvr-bounce-to-right" style="margin:2px;">
+								<a href="/ebms/streets?page=1&amp;size=${empty param.size ? 10 : param.size}" class=""><center><img src="${street}" class="shadowEffect img-responsive"/><h3>Street</h3></center></a>
+							</div>
+						</div>
+       				</div>
+       				<div class="col-xs-6 col-sm-6 col-lg-6">
+       					<div class="row">
+							
+							<div class="col-xs-3 col-sm-2 col-lg-5 btn btn-default hvr-bounce-to-right" style="margin:3px;">
+								<a href= "/ebms/customertypes?page=1&amp;size=${empty param.size ? 10 : param.size}" class=""><center><img src="${customer}" class="shadowEffect img-responsive"/><h3>Customer Type</h3></center></a>
+							</div>
+							<div class="col-xs-3 col-sm-2 col-lg-5 btn btn-default hvr-bounce-to-right" style="margin:3px;">
+								<a href="/ebms/locationtypes?pa3e=1&amp;size=${empty param.size ? 10 : param.size}" class=""><center><img src="${location}" class="shadowEffect img-responsive"/><h3>Location Type</h3></center></a>
+							</div>
+							<div class="col-xs-3 col-sm-2 col-lg-5 btn btn-default hvr-bounce-to-right" style="margin:3px;">
+								<a href="/ebms/industrytypes?page=1&amp;size=${empty param.size ? 10 : param.size}" class=""><center><img src="${industry}" class="shadowEffect img-responsive"/><h3>Industry Type</h3></center></a>
+							</div>
+						</div>
+       				</div>
+       			</div>	 
+			</div>   
        	</div>   
 </div>
