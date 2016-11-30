@@ -22,7 +22,7 @@
 	
      <c:if test="${empty onChange}">
       <c:set value="false" var="disabled" />
-    `</c:if>
+      </c:if>
     
     <c:if test="${empty disabled}">
       <c:set value="false" var="disabled" />
@@ -52,16 +52,12 @@
     <div id="_${fn:escapeXml(id)}_id" class="form-group row">
       <c:choose>
         <c:when test="${not empty items}">
-          <label for="_${sec_field}_id" class="col-lg-offset-2 col-lg-4 control-label" >
+          <label for="_${sec_field}_id" class="col-lg-2 col-lg-offset-4 control-label" >
             <c:choose>
               <c:when test="${empty renderLabel or renderLabel}">
                 <c:out value="${fn:escapeXml(label)}" />
-       
-                :
-              </c:when>
-              <c:otherwise>
-                &amp;nbsp;
-              </c:otherwise>
+       		   </c:when>
+          
             </c:choose>
           </label>
           

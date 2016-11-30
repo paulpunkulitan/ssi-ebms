@@ -95,7 +95,7 @@ public class CustomertypeServiceImpl implements CustomertypeService{
 	}
 
 	public List<Customertype> filterCustomerType(String searchString) {
-		  TypedQuery<Customertype> searchResult = em.createNamedQuery("filterByCustomerType", Customertype.class);
+		  TypedQuery<Customertype> searchResult = em.createNamedQuery("filterCustomerByCustomerType", Customertype.class);
 		    searchResult.setParameter("search", searchString);
 		    List<Customertype> result=searchResult.getResultList();
 		    return result;

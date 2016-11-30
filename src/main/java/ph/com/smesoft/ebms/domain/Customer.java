@@ -37,11 +37,24 @@ import flexjson.JSONSerializer;
 	   name = "findCustomerByid",
 	   query = "SELECT c FROM Customer c WHERE LOWER(c.CustomerName) LIKE LOWER(:searchString) "
 	   ),
-	//,
-	//@NamedQuery(
-	   //name = "findCustomerWhereCustomerType",
-	   //query = "SELECT c FROM Customer c WHERE LOWER(customerType) LIKE LOWER(:searchString)"
-	   //)
+	@NamedQuery(
+	    name = "filterCustomerByCustomerType",
+	    query = "SELECT c FROM Customer c, Customertype y"
+	    		+ " where c.customerType = y"
+	    		+ " and LOWER(y.customerTypeName) = LOWER(:search)"
+	 ),
+	@NamedQuery(
+		    name = "filterCustomerByIndustryType",
+		    query = "SELECT c FROM Customer c, Industrytype y"
+		    		+ " where c.industryType = y"
+		    		+ " and LOWER(y.industryTypeName) = LOWER(:search)"
+		 ),
+	@NamedQuery(
+		    name = "filterCustomerByLocationType",
+		    query = "SELECT c FROM Customer c, Locationtype y"
+		    		+ " where c.locationType = y"
+		    		+ " and LOWER(y.locationTypeName) = LOWER(:search)"
+		 )
 	
 })
 
@@ -51,17 +64,6 @@ public class Customer {
 	@Size(max = 100)
 	private String CustomerName;
 
-	/*@NotEmpty
-	private String Street;
-	@NotEmpty
-	private String Barangay;   
-	@NotEmpty
-	private String City;
-	@NotEmpty
-	private String State;
-	@NotEmpty
-	private String Country;*/
-	
 	@ManyToOne
 	private State state;
 	@ManyToOne
@@ -155,15 +157,6 @@ public class Customer {
 			this.street = street;
 		}
 
-
-
-
-
-
-
-
-
-
 	@PersistenceContext
     transient EntityManager entityManager;
 	
@@ -203,7 +196,7 @@ public class Customer {
 	 
 	public static List<Customer> findCustomerEntries(int firstResult, int maxResults) {
 	        return entityManager().createQuery("SELECT o FROM Customer o", Customer.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
-		}
+    }
 	
 	public static List<Customer> findCustomerEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
         String jpaQuery = "SELECT o FROM Customer o";

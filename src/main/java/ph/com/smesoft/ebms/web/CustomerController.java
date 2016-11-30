@@ -286,4 +286,12 @@ public class CustomerController {
 		return "customer/list";
 	}
 	
+	@RequestMapping(value="/{customerTypeName}", method=RequestMethod.GET)
+	  public ResponseEntity<String> passCustomerTypeName(@PathVariable String customerTypeName, Model uiModel) {
+	  HttpHeaders headers = new HttpHeaders();
+	  String stringCustomerType = customerTypeName;
+	  System.out.println(stringCustomerType);
+	  uiModel.addAttribute("customer", customerTypeService.filterCustomerType(stringCustomerType));
+	  return new ResponseEntity<String>(stringCustomerType, headers, HttpStatus.OK);
+	}
 }
