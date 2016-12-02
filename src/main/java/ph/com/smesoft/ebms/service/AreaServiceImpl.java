@@ -69,4 +69,11 @@ public class AreaServiceImpl implements AreaService {
 	    List<Area> result=searchResult.getResultList();
 	    return result;
 	 }
+	
+	public List<Area> findAllAreasByStreetId(Long search){
+		TypedQuery<Area> searchResult = em.createNamedQuery("areaByStreetId", Area.class);
+		searchResult.setParameter("streetId", search);
+		List<Area> result = searchResult.getResultList();
+		return result;
+	}
 }

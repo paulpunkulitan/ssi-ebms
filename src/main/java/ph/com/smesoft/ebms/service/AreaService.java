@@ -30,5 +30,7 @@ public interface AreaService {
     //public abstract String findFloorbyFloorNumber(String searchString);
 	
 	public abstract List<Area> findAllAreasBySearch(String searchString);
+	
+	public abstract List<Area> findAllAreasByStreetId(Long search);
 
 }

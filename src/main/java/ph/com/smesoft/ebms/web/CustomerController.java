@@ -32,6 +32,7 @@ import org.springframework.web.util.WebUtils;
 
 import com.google.gson.Gson;
 
+import ph.com.smesoft.ebms.domain.Area;
 import ph.com.smesoft.ebms.domain.Barangay;
 import ph.com.smesoft.ebms.domain.City;
 import ph.com.smesoft.ebms.domain.Contact;
@@ -40,6 +41,7 @@ import ph.com.smesoft.ebms.domain.Customer;
 import ph.com.smesoft.ebms.domain.Customertype;
 import ph.com.smesoft.ebms.dto.SearchForm;
 import ph.com.smesoft.ebms.repository.IndustrytypeRepository;
+import ph.com.smesoft.ebms.service.AreaService;
 import ph.com.smesoft.ebms.service.BarangayService;
 import ph.com.smesoft.ebms.service.CityService;
 import ph.com.smesoft.ebms.service.CountryService;
@@ -81,7 +83,8 @@ public class CustomerController {
 	BarangayService barangayService;
 	@Autowired
 	StreetService streetService;
-	
+	@Autowired
+	AreaService areaService;
 	
 	
 	
@@ -322,6 +325,17 @@ public class CustomerController {
 		List<Street> streetName = streetService.findStreetByBarangayId(barangayIdtoLong);
 		String json = new Gson().toJson(streetName);
 		return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="{streetId}", method = RequestMethod.GET, params="area")
+	 public ResponseEntity<String> passAreaList(@PathVariable Integer streetId, Model uiModel){
+		HttpHeaders headers = new HttpHeaders();
+		Long streetIdtoLong = Long.valueOf(streetId.longValue());
+		List<Area> areaName = areaService.findAllAreasByStreetId(streetIdtoLong);
+		String json = new Gson().toJson(areaName);
+		
+		return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+		
 	}
 	
 	

@@ -27,7 +27,8 @@
                   	  <field:display field="Street" id="s_ph_com_smesoft_ebms_domain_customer_street" object="${customer}" />
                   	  <field:display field="Barangay" id="s_ph_com_smesoft_ebms_domain_customer_barangay" object="${customer}" />
                   	  <field:display field="City" id="s_ph_com_smesoft_ebms_domain_customer_city" object="${customer}" />
-                  	  
+                  	  <field:display field="Area" id="s_ph_com_smesoft_ebms_domain_customer_area" object="${customer}" />
+                  	 
                   <!--  	  <page:list id="pl_ph_com_smesoft_ebms_domain_customer" items="${list}" buttonAction="/ebms/contact/${customer.id}" buttonLabel="Save New Contact">
                   	   <table:table data="${list}" id="l_ph_com_smesoft_ebms_domain_customer" path="/customer" >
                           <table:column id="c_ph_com_smesoft_ebms_domain_customer_fax" property="fax" />

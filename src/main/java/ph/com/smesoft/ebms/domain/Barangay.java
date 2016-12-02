@@ -48,8 +48,7 @@ import flexjson.JSONSerializer;
 	    @NamedQuery(
 	    		name = "barangayByCityId",
 	    		query = "SELECT b.id, b.barangayName FROM Barangay b, City c "
-		            		+ "WHERE b.city = c and c.id = :cityId"
-		           
+		            		+ "WHERE b.city = c and c.id = :cityId"     
 	        )
 })
 
@@ -60,7 +59,6 @@ public class Barangay {
 	/**
 	 */
 	@NotEmpty
-	@Column(unique=true, nullable=false) 
 	@Size(max = 1000)
 	private String barangayName;
 

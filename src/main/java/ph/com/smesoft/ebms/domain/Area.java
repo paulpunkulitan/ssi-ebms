@@ -45,7 +45,12 @@ import flexjson.JSONSerializer;
 	    @NamedQuery(
 	            name = "findAllAreasByStreetId",
 	            query = "SELECT a FROM Area a WHERE a.street.id = :streetId"
-	            )
+	            ),
+	    @NamedQuery(
+	    		name = "areaByStreetId",
+	    		query = "SELECT a.id, a.areaName FROM Area a, Street s "
+		            		+ "WHERE a.street = s and s.id = :streetId"     
+	        )
 })
 
 @Entity
@@ -56,7 +61,6 @@ public class Area {
 	 */
 	@NotEmpty
 	@Size(max = 1000)
-	@Column(nullable=false) 
 	private String areaName;
 
 	/**

@@ -40,7 +40,14 @@ $(document).ready(
 				    	getAllStreet();
 				      }   
 				    );
-				    
+			
+			$("#_street_id").change(
+				       function() {
+				       value = $("#_street_id").val();
+				        console.log(value)
+				    	getAllArea();
+				      }   
+				    );
 				    
 				    
 				    function getAllState() {
@@ -170,6 +177,37 @@ $(document).ready(
 				    	            }
 				    	        });
 				     }
+				    
+				    function getAllArea() {
+				    	 $.ajax({
+				    		   
+				    	       type: "GET",
+				    	             url: "/ebms/customer/" + value + "?area",
+				    	             data: {streetId : value},
+				    	             success: function (data) {
+				    	            	  alert(data);
+					    	              
+				    	              var areaName = eval('(' + data + ')');
+				    	              $('#_area_id').empty();
+					    	            
+				    	              for (i in areaName)
+				    	              {
+				    	                   $('#_area_id').append(
+						    	               $('<option></option>', 
+							    	              { 
+							    	                  value: areaName[i][0],
+							    	                  text: areaName[i][1]
+							    	              }
+					    	              		)
+				    	             		 );
+				    	              }
+				    	              
+				    	             },
+				    	            error: function (e){
+				    	             alert("Error" + e)
+				    	            }
+				    	        });
+				     }
 		    
 }
 );
@@ -198,8 +236,9 @@ $(document).ready(
                 	  <field:select field="city" id="c_ph_com_smesoft_ebms_domain_customer_city" required="true" itemValue="id" path="/cities" ></field:select>
                       <field:select field="barangay" id="c_ph_com_smesoft_ebms_domain_customer_barangay" required="true" itemValue="id" path="/barangays" ></field:select>
                       <field:select field="street" id="c_ph_com_smesoft_ebms_domain_customer_street" itemValue="id" path="/streets" required="true"></field:select>
-                                                              
-                     </form:create>
+                      <field:select field="area" id="c_ph_com_smesoft_ebms_domain_customer_area" itemValue="id" path="/areas" required="true"></field:select>
+                                                             
+                  </form:create>
                   <form:dependency dependencies="${dependencies}" id="d_ph_com_smesoft_ebms_domain_customer" render="${not empty dependencies}" />
                   
                   

@@ -60,7 +60,6 @@ public class City {
 	/**
 	 */
 	@NotEmpty
-	@Column(unique=true, nullable=false) 
 	@Size(max = 1000)
 	private String cityName;
 

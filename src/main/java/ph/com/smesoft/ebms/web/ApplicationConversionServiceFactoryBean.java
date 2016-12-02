@@ -452,7 +452,10 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         registry.addConverter(getContactToStringConverter());
         registry.addConverter(getIdToContactConverter());
         registry.addConverter(getStringToContactConverter());
-    
+        
+        registry.addConverter(getAreaToStringConverter());
+        registry.addConverter(getIdToAreaConverter());
+        registry.addConverter(getStringToAreaConverter());
     }
 
 	public void afterPropertiesSet() {

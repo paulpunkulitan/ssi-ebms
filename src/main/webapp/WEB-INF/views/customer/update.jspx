@@ -1,30 +1,248 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" 
+xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/custom" 
+xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" 
+xmlns:jsp="http://java.sun.com/JSP/Page" 
+xmlns:spring="http://www.springframework.org/tags" version="2.0">
+
+<script>
+$(document).ready(
+		function() {
+
+			$("#_country_id").change(
+				       function() {
+				       value = $("#_country_id").val();
+				        console.log(value)
+				       getAllState();
+				      }   
+				    );
+			
+			$("#_state_id").change(
+				       function() {
+				       value = $("#_state_id").val();
+				        console.log(value)
+				    	getAllCity();
+				      }   
+				    );
+
+			$("#_city_id").change(
+				       function() {
+				       value = $("#_city_id").val();
+				        console.log(value)
+				    	getAllBarangay();
+				      }   
+				    );
+			
+			$("#_barangay_id").change(
+				       function() {
+				       value = $("#_barangay_id").val();
+				        console.log(value)
+				    	getAllStreet();
+				      }   
+				    );
+			
+			$("#_street_id").change(
+				       function() {
+				       value = $("#_street_id").val();
+				        console.log(value)
+				    	getAllArea();
+				      }   
+				    );
+				    
+				    
+				    function getAllState() {
+				    	 $.ajax({
+				    		   
+				    	       type: "GET",
+				    	             url: "/ebms/customer/" + value + "?state",
+				    	             data: {countryId : value},
+				    	             success: function (data) {
+				    	            //	  alert(data);
+					    	              
+				    	              var stateName = eval('(' + data + ')');
+				    	              //alert("obj " + myObject)
+				    	              $('#_state_id').empty();
+					    	            
+				    	              for (i in stateName)
+				    	              {
+				    	                   $('#_state_id').append(
+						    	               $('<option></option>', 
+							    	              { 
+							    	                  value: stateName[i][0],
+							    	                  text: stateName[i][1]
+							    	              }
+					    	              		)
+				    	             		 );
+				    	              }
+				    	              
+				    	             },
+				    	            error: function (e){
+				    	             alert("Error" + e)
+				    	            }
+				    	        });
+				     }
+				    
+				    function getAllCity() {
+				    	 $.ajax({
+				    		   
+				    	       type: "GET",
+				    	             url: "/ebms/customer/" + value + "?city",
+				    	             data: {stateId : value},
+				    	             success: function (data) {
+				    	            	  alert(data);
+					    	              
+				    	              var cityName = eval('(' + data + ')');
+				    	              //alert("obj " + myObject)
+				    	              $('#_city_id').empty();
+					    	            
+				    	              for (i in cityName)
+				    	              {
+				    	                   $('#_city_id').append(
+						    	               $('<option></option>', 
+							    	              { 
+							    	                  value: cityName[i][0],
+							    	                  text: cityName[i][1]
+							    	              }
+					    	              		)
+				    	             		 );
+				    	              }
+				    	              
+				    	             },
+				    	            error: function (e){
+				    	             alert("Error" + e)
+				    	            }
+				    	        });
+				     }
+				    
+				    function getAllBarangay() {
+				    	 $.ajax({
+				    		   
+				    	       type: "GET",
+				    	             url: "/ebms/customer/" + value + "?barangay",
+				    	             data: {cityId : value},
+				    	             success: function (data) {
+				    	            	//  alert(data);
+					    	              
+				    	              var barangayName = eval('(' + data + ')');
+				    	              //alert("obj " + myObject)
+				    	              $('#_barangay_id').empty();
+					    	            
+				    	              for (i in barangayName)
+				    	              {
+				    	                   $('#_barangay_id').append(
+						    	               $('<option></option>', 
+							    	              { 
+							    	                  value: barangayName[i][0],
+							    	                  text: barangayName[i][1]
+							    	              }
+					    	              		)
+				    	             		 );
+				    	              }
+				    	              
+				    	             },
+				    	            error: function (e){
+				    	             alert("Error" + e)
+				    	            }
+				    	        });
+				     }
+				    
+				    function getAllStreet() {
+				    	 $.ajax({
+				    		   
+				    	       type: "GET",
+				    	             url: "/ebms/customer/" + value + "?street",
+				    	             data: {barangayId : value},
+				    	             success: function (data) {
+				    	            	//  alert(data);
+					    	              
+				    	              var streetName = eval('(' + data + ')');
+				    	              //alert("obj " + myObject)
+				    	              $('#_street_id').empty();
+					    	            
+				    	              for (i in streetName)
+				    	              {
+				    	                   $('#_street_id').append(
+						    	               $('<option></option>', 
+							    	              { 
+							    	                  value: streetName[i][0],
+							    	                  text: streetName[i][1]
+							    	              }
+					    	              		)
+				    	             		 );
+				    	              }
+				    	              
+				    	             },
+				    	            error: function (e){
+				    	             alert("Error" + e)
+				    	            }
+				    	        });
+				     }
+				    
+				    function getAllArea() {
+				    	 $.ajax({
+				    		   
+				    	       type: "GET",
+				    	             url: "/ebms/customer/" + value + "?area",
+				    	             data: {streetId : value},
+				    	             success: function (data) {
+				    	            	 // alert(data);
+					    	              
+				    	              var areaName = eval('(' + data + ')');
+				    	              $('#_area_id').empty();
+					    	            
+				    	              for (i in areaName)
+				    	              {
+				    	                   $('#_area_id').append(
+						    	               $('<option></option>', 
+							    	              { 
+							    	                  value: areaName[i][0],
+							    	                  text: areaName[i][1]
+							    	              }
+					    	              		)
+				    	             		 );
+				    	              }
+				    	              
+				    	             },
+				    	            error: function (e){
+				    	             alert("Error" + e)
+				    	            }
+				    	        });
+				     }
+		    
+}
+);
+</script>
+
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-
+    
     <div id="wrapper">
         <div class="container-fluid">
             <div>
                 <ol class="breadcrumb">
-                  <li class="disabled"><a>Customer</a></li>
+                  <li class="disabled"><a>customer</a></li>
                   <li><a href="/ebms/customer?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Customer</a></li>
-                  <li class="active"><span>Update Customer Information</span></li>
+                  <li class="active"><span>Register customer</span></li>
                  </ol>
             </div>
-    
-                  <form:update id="fu_ph_com_smesoft_ebms_domain_customer" modelAttribute="customer" path="/customer" versionField="Version" z="Vz89WdEXcv2QOn4oTHTRJPOwEP0=">
-                     <field:input field="CustomerName" id="c_ph_com_smesoft_ebms_domain_customer_customerName" max="30" min="3" required="true" />
+        
+                  <form:create id="fc_ph_com_smesoft_ebms_domain_customer" modelAttribute="customer" path="/customer" render="${empty dependencies}"  >
+                      <field:input field="CustomerName" id="c_ph_com_smesoft_ebms_domain_customer_customerName" max="30" min="3" required="true" />
                  	  <field:select field="CustomerType" id="c_ph_com_smesoft_ebms_domain_customer_customerType" items="${customertypes}" itemValue="id" required="true" path="/customertypes" ></field:select> 
                  	  <field:select field="IndustryType" id="c_ph_com_smesoft_ebms_domain_customer_industryType" items="${industrytypes}" itemValue="id" required="true" path="/industrytypes" ></field:select>
                  	  <field:select field="LocationType" id="c_ph_com_smesoft_ebms_domain_customer_locationType" items="${locationtypes}" itemValue="id" required="true" path="/locationtypes" ></field:select>
-                      <field:select field="state" id="c_ph_com_smesoft_ebms_domain_customer_state" items="${states}" required="true" itemValue="id" path="/states" ></field:select>
-                	  <field:select field="country" id="c_ph_com_smesoft_ebms_domain_customer_country" items="${countries}" itemValue="id" required="true" path="/countries" ></field:select>
-                      <field:select field="city" id="c_ph_com_smesoft_ebms_domain_customer_city" items="${cities}" required="true" itemValue="id" path="/cities" ></field:select>
-                      <field:select field="barangay" id="c_ph_com_smesoft_ebms_domain_customer_barangay" items="${barangays}" required="true" itemValue="id" path="/barangays" ></field:select>
-                      <field:select field="street" id="c_ph_com_smesoft_ebms_domain_customer_street" items="${street}" itemValue="id" path="/streets" required="true"></field:select>
-                </form:update>
-    
-        </div>   
-    </div>   
+                      <field:select field="country" id="c_ph_com_smesoft_ebms_domain_customer_country" items="${countries}" itemValue="id" required="true" path="/countries" ></field:select>
+                      <field:select field="state" id="c_ph_com_smesoft_ebms_domain_customer_state" required="true" itemValue="id" path="/states" ></field:select>
+                	  <field:select field="city" id="c_ph_com_smesoft_ebms_domain_customer_city" required="true" itemValue="id" path="/cities" ></field:select>
+                      <field:select field="barangay" id="c_ph_com_smesoft_ebms_domain_customer_barangay" required="true" itemValue="id" path="/barangays" ></field:select>
+                      <field:select field="street" id="c_ph_com_smesoft_ebms_domain_customer_street" itemValue="id" path="/streets" required="true"></field:select>
+                      <field:select field="area" id="c_ph_com_smesoft_ebms_domain_customer_area" itemValue="id" path="/areas" required="true"></field:select>
+                                                             
+                  </form:create>
+                  <form:dependency dependencies="${dependencies}" id="d_ph_com_smesoft_ebms_domain_customer" render="${not empty dependencies}" />
+                  
+                  
+
+           </div>   
+       </div>   
 </div>

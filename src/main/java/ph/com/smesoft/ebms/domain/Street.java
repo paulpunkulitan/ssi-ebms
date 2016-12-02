@@ -59,7 +59,6 @@ public class Street {
 	/**
 	 */
 	@NotEmpty
-	@Column(unique=true, nullable=false) 
 	@Size(max = 1000)
 	private String streetName;
 

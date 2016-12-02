@@ -74,6 +74,8 @@ public class Customer {
 	private Barangay barangay;
 	@ManyToOne
 	private Street street;
+	@ManyToOne
+	private Area area;
 	
 	@ManyToOne
 	private Industrytype industryType;
@@ -81,6 +83,7 @@ public class Customer {
 	private Customertype customerType;
 	@ManyToOne
 	private Locationtype locationType;
+	
 	
 	
 	
@@ -156,6 +159,15 @@ public class Customer {
 		public void setStreet(Street street) {
 			this.street = street;
 		}
+		
+		public Area getArea() {
+			return area;
+		}
+
+		public void setArea(Area area) {
+			this.area = area;
+		}
+
 
 	@PersistenceContext
     transient EntityManager entityManager;

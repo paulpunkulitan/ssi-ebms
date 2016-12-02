@@ -61,7 +61,6 @@ public class State {
 	/**
 	 */
 	@NotEmpty
-	@Column(unique=true, nullable=false) 
 	@Size(max = 1000)
 	private String stateName;
 	
