@@ -14,7 +14,7 @@
             </div>
     
                   <form:create id="fc_ph_com_smesoft_ebms_domain_Street" modelAttribute="street" path="/streets" render="${empty dependencies}" >
-                      <field:select field="barangay" id="c_ph_com_smesoft_ebms_domain_State_stateCountry" itemValue="id" items="${barangays}" required="true" path="/barangays" ></field:select>
+                      <field:select field="barangay" id="c_ph_com_smesoft_ebms_domain_Street_streetBarangay" itemValue="id" items="${barangays}" required="true" path="/barangays" ></field:select>
                       <field:textarea field="streetName" id="c_ph_com_smesoft_ebms_domain_Street_streetName" required="true" />
                   </form:create>
                   <form:dependency dependencies="${dependencies}" id="d_ph_com_smesoft_ebms_domain_Street" render="${not empty dependencies}" />

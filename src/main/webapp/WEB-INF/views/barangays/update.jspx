@@ -14,7 +14,7 @@
             </div>
     
                   <form:update id="fu_ph_com_smesoft_ebms_domain_Barangay" modelAttribute="barangay" path="/barangays" versionField="Version" z="Vz89WdEXcv2QOn4oTHTRJPOwEP0=">
-                      <field:select field="barangayCity" id="c_ph_com_smesoft_ebms_domain_Barangay_barangayCity" items="${cities}" required="true" path="/barangays" ></field:select>
+                      <field:select field="city" id="c_ph_com_smesoft_ebms_domain_Barangay_barangayCity" items="${cities}" itemValue="id" required="true" path="/barangays" ></field:select>
                       <field:input field="barangayName" id="c_ph_com_smesoft_ebms_domain_Barangay_barangayName" required="true" />
                   </form:update>
     

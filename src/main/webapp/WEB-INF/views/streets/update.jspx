@@ -14,9 +14,8 @@
             </div>
     
                   <form:update id="fu_ph_com_smesoft_ebms_domain_Street" modelAttribute="street" path="/streets" versionField="Version" z="Vz89WdEXcv2QOn4oTHTRJPOwEP0=">
-                      <field:input field="streetNumber" id="c_ph_com_smesoft_ebms_domain_Street_streetNumber" max="30" min="3" required="true" z="hFaIf05Zh3DHyjRgHSJ6T2PgcIs="/>
-                      <field:textarea field="streetCode" id="c_ph_com_smesoft_ebms_domain_Street_streetCode" required="true" z="+k+C7Kql5zHEuFKgpHr3fEtD6YQ="/>
-                      <field:textarea field="streetName" id="c_ph_com_smesoft_ebms_domain_Street_streetName" required="true"/>
+                      <field:select field="barangay" id="c_ph_com_smesoft_ebms_domain_Street_streetBarangay" itemValue="id" items="${barangays}" required="true" path="/barangays" ></field:select>
+                      <field:textarea field="streetName" id="c_ph_com_smesoft_ebms_domain_Street_streetName" required="true" />
                   </form:update>
     
         </div>   
