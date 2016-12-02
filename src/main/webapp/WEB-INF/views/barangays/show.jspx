@@ -18,7 +18,7 @@
             </div>
         
                   <page:show id="ps_ph_com_smesoft_ebms_domain_Barangay" object="${barangay}" path="/barangays" z="XmgSUNTaw/S287IKejvqSXTBaWA=">
-                      <field:display field="city" id="s_ph_com_smesoft_ebms_domain_Barangay_barangayCity" object="${cities}" z="WiR3MbBW/TqqoI5bvdXG5bAI594="/>
+                      <field:display field="city" id="s_ph_com_smesoft_ebms_domain_Barangay_barangayCity" object="${barangay}"/>
                       <field:display field="barangayName" id="s_ph_com_smesoft_ebms_domain_Barangay_barangayName" object="${barangay}" />
                   </page:show>
 

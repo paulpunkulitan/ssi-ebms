@@ -18,8 +18,8 @@
             </div>
         
                   <page:show id="ps_ph_com_smesoft_ebms_domain_State" object="${state}" path="/states" z="XmgSUNTaw/S287IKejvqSXTBaWA=">
-                      <field:display field="stateName" id="s_ph_com_smesoft_ebms_domain_State_stateName" object="${state}" />
                       <field:display field="country" id="s_ph_com_smesoft_ebms_domain_State_stateCountry" object="${state}" />
+                      <field:display field="stateName" id="s_ph_com_smesoft_ebms_domain_State_stateName" object="${state}" />
                   </page:show>
 
         </div>   

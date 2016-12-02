@@ -18,10 +18,9 @@
             </div>
         
                   <page:show id="ps_ph_com_smesoft_ebms_domain_City" object="${city}" path="/cities" z="XmgSUNTaw/S287IKejvqSXTBaWA=">
-                      <field:display field="cityName" id="s_ph_com_smesoft_ebms_domain_City_cityName" object="${city}" />
                       <field:display field="state" id="s_ph_com_smesoft_ebms_domain_City_cityState" object="${city}" />
+                      <field:display field="cityName" id="s_ph_com_smesoft_ebms_domain_City_cityName" object="${city}" />
                   </page:show>
-
         </div>   
     </div>   
 </div>

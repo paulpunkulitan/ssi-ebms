@@ -18,8 +18,7 @@
             </div>
         
                   <page:show id="ps_ph_com_smesoft_ebms_domain_Street" object="${street}" path="/streets" z="XmgSUNTaw/S287IKejvqSXTBaWA=">
-                      <field:display field="streetNumber" id="s_ph_com_smesoft_ebms_domain_Street_streetNumber" object="${street}" z="bpSs/fEBb5fUYBhFsl15fVNLxh0="/>
-                      <field:display field="streetCode" id="s_ph_com_smesoft_ebms_domain_Street_streetCode" object="${street}" z="WiR3MbBW/TqqoI5bvdXG5bAI594="/>
+                      <field:display field="barangay" id="s_ph_com_smesoft_ebms_domain_Street_streetBarangay" object="${street}" z="WiR3MbBW/TqqoI5bvdXG5bAI594="/>
                       <field:display field="streetName" id="s_ph_com_smesoft_ebms_domain_Street_streetName" object="${street}" />
                   </page:show>
 

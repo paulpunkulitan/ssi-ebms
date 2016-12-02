@@ -18,6 +18,7 @@ import ph.com.smesoft.ebms.domain.Industrytype;
 import ph.com.smesoft.ebms.domain.Locationtype;
 import ph.com.smesoft.ebms.domain.State;
 import ph.com.smesoft.ebms.domain.Street;
+import ph.com.smesoft.ebms.domain.Area;
 import ph.com.smesoft.ebms.service.BarangayService;
 import ph.com.smesoft.ebms.service.BusinessService;
 import ph.com.smesoft.ebms.service.CityService;
@@ -30,6 +31,7 @@ import ph.com.smesoft.ebms.service.IndustrytypeService;
 import ph.com.smesoft.ebms.service.LocationtypeService;
 import ph.com.smesoft.ebms.service.StateService;
 import ph.com.smesoft.ebms.service.StreetService;
+import ph.com.smesoft.ebms.service.AreaService;
 
 @Configurable
 /**
@@ -66,6 +68,33 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         return new org.springframework.core.convert.converter.Converter<java.lang.String, ph.com.smesoft.ebms.domain.Floor>() {
             public ph.com.smesoft.ebms.domain.Floor convert(String id) {
                 return getObject().convert(getObject().convert(id, Long.class), Floor.class);
+            }
+        };
+    }
+
+	@Autowired
+    AreaService areaService;
+
+	public Converter<Area, String> getAreaToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<ph.com.smesoft.ebms.domain.Area, java.lang.String>() {
+            public String convert(Area area) {
+                return new StringBuilder().append(area.getAreaName()).toString();
+            }
+        };
+    }
+
+	public Converter<Long, Area> getIdToAreaConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, ph.com.smesoft.ebms.domain.Area>() {
+            public ph.com.smesoft.ebms.domain.Area convert(java.lang.Long id) {
+                return areaService.findArea(id);
+            }
+        };
+    }
+
+	public Converter<String, Area> getStringToAreaConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, ph.com.smesoft.ebms.domain.Area>() {
+            public ph.com.smesoft.ebms.domain.Area convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Area.class);
             }
         };
     }
