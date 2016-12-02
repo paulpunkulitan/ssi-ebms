@@ -2,14 +2,19 @@ package ph.com.smesoft.ebms.web;
 
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,9 +30,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
+import com.google.gson.Gson;
+
 import ph.com.smesoft.ebms.domain.Barangay;
 import ph.com.smesoft.ebms.domain.City;
 import ph.com.smesoft.ebms.domain.Contact;
+import ph.com.smesoft.ebms.domain.Country;
 import ph.com.smesoft.ebms.domain.Customer;
 import ph.com.smesoft.ebms.domain.Customertype;
 import ph.com.smesoft.ebms.dto.SearchForm;
@@ -46,6 +54,7 @@ import ph.com.smesoft.ebms.service.StreetService;
 import ph.com.smesoft.ebms.domain.Floor;
 import ph.com.smesoft.ebms.domain.Industrytype;
 import ph.com.smesoft.ebms.domain.Locationtype;
+import ph.com.smesoft.ebms.domain.State;
 import ph.com.smesoft.ebms.domain.Street;
 
 
@@ -102,14 +111,6 @@ public class CustomerController {
         uiModel.addAttribute("itemId", id);
         return "customer/show";
     }
-		
-	
-	@RequestMapping(params = "/{id}/add", produces = "text/html")
-    public String addForm(Model uiModel) {
-        populateEditForm(uiModel, new Customer());
-        return "customer/add";
-    }
-	
 
 	
 	@RequestMapping(produces = "text/html")
@@ -172,12 +173,9 @@ public class CustomerController {
         uiModel.addAttribute("customertypes", customerTypeService.findAllCustomertypes());
         uiModel.addAttribute("industrytypes", industryTypeService.findAllIndustrytypes());
         uiModel.addAttribute("locationtypes", locationTypeService.findAllLocationTypes());
-        uiModel.addAttribute("countries", countryService.findAllCountries());
-        uiModel.addAttribute("states", stateService.findAllStates());
-        uiModel.addAttribute("cities",  cityService.findAllCities());
-        uiModel.addAttribute("barangays", barangayService.findAllBarangays());
-        uiModel.addAttribute("street", streetService.findAllStreets());     
+        uiModel.addAttribute("countries",  countryService.findAllCountries());
     }
+	
 
 	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
         String enc = httpServletRequest.getCharacterEncoding();
@@ -286,12 +284,50 @@ public class CustomerController {
 		return "customer/list";
 	}
 	
-	@RequestMapping(value="/{customerTypeName}", method=RequestMethod.GET)
-	  public ResponseEntity<String> passCustomerTypeName(@PathVariable String customerTypeName, Model uiModel) {
+	@RequestMapping(value="/{countryId}", method=RequestMethod.GET, params="state")
+	  public ResponseEntity<String> passStateList(@PathVariable Integer countryId, Model uiModel) {
 	  HttpHeaders headers = new HttpHeaders();
-	  String stringCustomerType = customerTypeName;
-	  System.out.println(stringCustomerType);
-	  uiModel.addAttribute("customer", customerTypeService.filterCustomerType(stringCustomerType));
-	  return new ResponseEntity<String>(stringCustomerType, headers, HttpStatus.OK);
+	  Long countryIdtoLong = Long.valueOf(countryId.longValue());
+	  	
+	  List<State> stateName = stateService.findAllStatesByCountryId(countryIdtoLong);
+	  String json = new Gson().toJson(stateName);
+	  System.out.println(json);
+	  return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+	} 
+	
+	@RequestMapping(value="/{stateId}", method=RequestMethod.GET, params="city")
+	  public ResponseEntity<String> passCityList (@PathVariable Integer stateId, Model uiModel) {
+	  HttpHeaders headers = new HttpHeaders();
+	  Long stateIdtoLong = Long.valueOf(stateId.longValue());
+	  System.out.print(stateId);
+	  List<City> cityName = cityService.findAllCitiesByStateId(stateIdtoLong);
+	  String json = new Gson().toJson(cityName);
+	  System.out.println(json);
+	  return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+	} 
+	
+	@RequestMapping(value="/{cityId}", method=RequestMethod.GET, params="barangay")
+	  public ResponseEntity<String> passBarangayList(@PathVariable Integer cityId, Model uiModel){
+		HttpHeaders headers = new HttpHeaders();
+		Long barangayIdtoLong = Long.valueOf(cityId.longValue());
+		List<Barangay> barangayName = barangayService.findAllBarangayByCityId(barangayIdtoLong);
+		String json = new Gson().toJson(barangayName);
+		return new ResponseEntity<String>(json, headers, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value="/{barangayId}", method = RequestMethod.GET, params="street")
+	 public ResponseEntity<String> passStreetList(@PathVariable Integer barangayId, Model uiModel){
+		HttpHeaders headers = new HttpHeaders();
+		Long barangayIdtoLong = Long.valueOf(barangayId.longValue());
+		List<Street> streetName = streetService.findStreetByBarangayId(barangayIdtoLong);
+		String json = new Gson().toJson(streetName);
+		return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+	}
+	
+	
+	
+
+
+
+
 }

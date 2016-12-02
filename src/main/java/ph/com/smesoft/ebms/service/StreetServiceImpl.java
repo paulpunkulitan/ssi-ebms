@@ -69,4 +69,11 @@ public class StreetServiceImpl implements StreetService {
 	    List<Street> result=searchResult.getResultList();
 	    return result;
 	 }
+	
+	public List<Street> findStreetByBarangayId(Long search){
+		TypedQuery<Street> searchResult = em.createNamedQuery("streetByBarangayId", Street.class);
+		searchResult.setParameter("barangayId", search);
+		List<Street> result = searchResult.getResultList();
+		return result;
+	}
 }

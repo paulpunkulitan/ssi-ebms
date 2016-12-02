@@ -44,7 +44,13 @@ import flexjson.JSONSerializer;
 	    @NamedQuery(
 	            name = "findAllBarangaysByCityId",
 	            query = "SELECT b FROM Barangay b WHERE b.city.id = :cityId"
-	            )
+	        ),
+	    @NamedQuery(
+	    		name = "barangayByCityId",
+	    		query = "SELECT b.id, b.barangayName FROM Barangay b, City c "
+		            		+ "WHERE b.city = c and c.id = :cityId"
+		           
+	        )
 })
 
 @Entity

@@ -46,9 +46,14 @@ import flexjson.JSONSerializer;
 	    @NamedQuery(
 	            name = "findAllStatesByCountryId",
 	            query = "SELECT s FROM State s WHERE s.country.id = :countryId"
+	            ),
+		@NamedQuery(
+	            name = "statesByCountryId",
+	            query = "SELECT s.id, s.stateName FROM State s, Country c "
+	            		+ "WHERE s.country = c and c.id = :countryId"
 	            )
 })
-
+		
 @Entity
 @Configurable
 public class State {

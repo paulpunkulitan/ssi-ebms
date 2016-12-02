@@ -30,5 +30,8 @@ public interface StreetService {
     //public abstract String findFloorbyFloorNumber(String searchString);
 	
 	public abstract List<Street> findStreetbyStreetNumber(String searchString);
+	
+	public abstract List<Street> findStreetByBarangayId(Long search);
+		
 
 }

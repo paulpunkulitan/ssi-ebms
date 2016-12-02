@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div 
+xmlns:jsp="http://java.sun.com/JSP/Page" 
+xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+xmlns:display="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+xmlns:spring="http://www.springframework.org/tags" version="2.0">
+
+
+	<spring:url var="customerRecord" value="/resources/images/record.png" /> 
+	<spring:url var="customerStatistics" value="/resources/images/statistics.png" /> 
+	
+
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+    	<div id="wrapper">
+       		<div class="container-fluid">
+       		
+       			<div class="row">
+       				<div class=" col-xs-3 col-sm-3 col-lg-4 btn btn-default hvr-bounce-to-right" style="margin:50px 100px 50px 80px;">
+       						<a href="/ebms/countries?page=1&amp;size=${empty param.size ? 10 : param.size}" class=""><center><img src="${customerStatistics}" class="shadowEffect img-responsive"/><h3>Customer Statistics</h3></center></a>
+							
+					</div>
+       				<div class=" col-xs-3 col-sm-3 col-lg-4 btn btn-default hvr-bounce-to-right" style="margin:50px 50px 100px 80px;" >
+       							<a href= "/ebms/customer?page=1&amp;size=${empty param.size ? 10 : param.size}" class=""><center><img src="${customerRecord}" class="shadowEffect img-responsive"/><h3 class="hidden-sm-down">Customer Records</h3></center></a>
+					</div>
+       			</div>	 
+			</div>   
+       	</div>   
+</div>

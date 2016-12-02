@@ -45,6 +45,11 @@ import flexjson.JSONSerializer;
 	    @NamedQuery(
 	            name = "findAllCitiesByStateId",
 	            query = "SELECT c FROM City c WHERE c.state.id = :stateId"
+	            ),
+		@NamedQuery(
+	            name = "cityByStateId",
+	            query = "SELECT c.id, c.cityName FROM City c, State s "
+	            		+ "WHERE c.state = s and s.id = :stateId"
 	            )
 })
 
