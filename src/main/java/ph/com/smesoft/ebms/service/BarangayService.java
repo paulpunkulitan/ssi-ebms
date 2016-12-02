@@ -30,5 +30,7 @@ public interface BarangayService {
     //public abstract String findFloorbyFloorNumber(String searchString);
 	
 	public abstract List<Barangay> findBarangaybyBarangayNumber(String searchString);
+	
+	public List<Barangay> findAllBarangayByCityId(Long search);
 
 }

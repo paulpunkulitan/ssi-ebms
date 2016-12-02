@@ -69,4 +69,11 @@ public class StateServiceImpl implements StateService {
 	    List<State> result=searchResult.getResultList();
 	    return result;
 	 }
+	
+	public List<State> findAllStatesByCountryId(Long countryId){
+	    TypedQuery<State> searchResult = em.createNamedQuery("statesByCountryId", State.class);
+	    searchResult.setParameter("countryId",countryId);
+	    List<State> result=searchResult.getResultList();
+	    return result;
+	 }
 }

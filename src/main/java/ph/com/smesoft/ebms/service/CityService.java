@@ -31,7 +31,7 @@ public interface CityService {
 	
 	public abstract List<City> findAllCitiesBySearch(String searchString);
 
-
+	public abstract List<City> findAllCitiesByStateId(Long searchString);
 	
 
 }

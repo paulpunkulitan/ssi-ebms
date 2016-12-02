@@ -3,6 +3,7 @@
 <tiles-definitions>
 
 
+
 <definition extends="defaultHome" name="customer/create">
         <put-attribute name="body" value="/WEB-INF/views/customer/create.jspx"/>
 </definition>

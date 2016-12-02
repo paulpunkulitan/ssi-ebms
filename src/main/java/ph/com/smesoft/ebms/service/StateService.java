@@ -30,5 +30,7 @@ public interface StateService {
     //public abstract String findFloorbyFloorNumber(String searchString);
 	
 	public abstract List<State> findAllStatesBySearch(String searchString);
+	
+	public abstract List<State> findAllStatesByCountryId(Long countryId);
 
 }

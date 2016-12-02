@@ -69,4 +69,11 @@ public class CityServiceImpl implements CityService {
 	    List<City> result=searchResult.getResultList();
 	    return result;
 	 }
+	
+	public List<City> findAllCitiesByStateId(Long searchString){
+		TypedQuery<City> searchResult = em.createNamedQuery("cityByStateId", City.class);
+		searchResult.setParameter("stateId", searchString);
+		List<City> result = searchResult.getResultList();
+		return result;
+	}
 }

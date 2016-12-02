@@ -17,13 +17,20 @@ xmlns:spring="http://www.springframework.org/tags" version="2.0">
 	<spring:url var="customer" value="/resources/images/customer.png" /> 
 	<spring:url var="location" value="/resources/images/location.png" />  
 	
+	<spring:url var="reports" value="/resources/images/report.png" />  
+	<spring:url var="sales" value="/resources/images/sales.png" />  
+	
+	
+	
 	<div class="collapse navbar-collapse navbar-ex1-collapse">
 	  	<center>     	 	
 		     <ul id="style-10" class="nav nav-pills navbar-nav side-nav nav-size">
 		         <li><a href="/ebms/home/statistics" class="hvr-bounce-to-right"><img src="${home}" height="40" width="40" class="shadowEffect"/><p>Home</p></a></li>
-		         <li><a href="/ebms/customer?page=1&amp;size=${empty param.size ? 10 : param.size}" class="hvr-bounce-to-right"><img src="${customer}" height="40" width="40" class="shadowEffect"/><p>Customer</p></a></li>
-		         <li><a href="/ebms/maintenance" class="hvr-bounce-to-right"><img src="${maintenance}" height="40" width="40" class="shadowEffect"/><p>Maintenance</p></a></li>
-		         
+		          <li><a href="/ebms/maintenance" class="hvr-bounce-to-right"><img src="${maintenance}" height="40" width="40" class="shadowEffect"/><p>Maintenance</p></a></li>
+		         <li><a href="/ebms/crm" class="hvr-bounce-to-right"><img src="${customer}" height="40" width="40" class="shadowEffect"/><p>Customer</p></a></li>
+		         <li><a href="/ebms/maintenance" class="hvr-bounce-to-right"><img src="${sales}" height="40" width="40" class="shadowEffect"/><p>Sales</p></a></li>
+		         <li><a href="/ebms/maintenance" class="hvr-bounce-to-right"><img src="${reports}" height="40" width="40" class="shadowEffect"/><p>Reports</p></a></li>
+		        
 			</ul>
 		</center>	     
 	</div>

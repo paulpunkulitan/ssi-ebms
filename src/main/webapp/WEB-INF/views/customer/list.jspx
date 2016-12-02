@@ -26,9 +26,9 @@ function() {
 		               url: "/ebms/customer/" + value ,
 		                data: {customerTypeName : value}, 
 		               success: function (data) {
-		            	   handleData(data); 
+		            	  // handleData(data); 
 		         	 alert(data + " " +value);
-		          $("#_customertypes_id").val(data);
+		          $("#pl_ph_com_smesoft_ebms_domain_customer").val(data);
 		       }
 		           });
 		     }
@@ -50,9 +50,10 @@ function() {
                                   <li class="active"><span>List of Registered Customer</span></li>
                            </ol>
                      </div>                     
-                     <div class="col-sm-6" style="float:right;">
+                  <!--    <div class="col-sm-6" style="float:right;">
                      <table:selectCustomerTypeFilter field="customertypes" id="c_ph_com_smesoft_ebms_domain_customer_customerType" items="${customertypes}"  path="/customertypes"></table:selectCustomerTypeFilter>                	                                                  
                      </div>
+                      -->
                      <div stype="top-margin:-30px;">
                      
 	                    <page:list id="pl_ph_com_smesoft_ebms_domain_customer" items="${customer}" buttonAction="/ebms/customer?form" buttonLabel="Register New Customer" searchAction="/ebms/customer/search">
