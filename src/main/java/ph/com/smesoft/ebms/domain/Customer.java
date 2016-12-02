@@ -84,9 +84,7 @@ public class Customer {
 	@ManyToOne
 	private Locationtype locationType;
 	
-	
-	
-	
+
     
 		public String getCustomerName() {
 			return this.CustomerName;
