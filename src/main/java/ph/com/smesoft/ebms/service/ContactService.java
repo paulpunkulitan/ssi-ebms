@@ -29,4 +29,6 @@ public interface ContactService {
 	
 	public abstract List<Contact> findContactbyid(String searchString);
 	
+	public abstract List<Contact> findContactDetailsByCustomerId(Long search);
+	
 }

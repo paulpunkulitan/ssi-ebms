@@ -1,5 +1,4 @@
 package ph.com.smesoft.ebms.web;
-
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -24,47 +23,41 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
-import ph.com.smesoft.ebms.domain.Contact;
-import ph.com.smesoft.ebms.domain.Customertype;
+import ph.com.smesoft.ebms.domain.Floor;
+import ph.com.smesoft.ebms.domain.ItemCategory;
 import ph.com.smesoft.ebms.dto.SearchForm;
-import ph.com.smesoft.ebms.service.ContactService;
-import ph.com.smesoft.ebms.service.CustomerService;
-import ph.com.smesoft.ebms.service.CustomertypeService;
+import ph.com.smesoft.ebms.service.FloorService;
+import ph.com.smesoft.ebms.service.ItemcategoryService;
 
 @Controller
-@RequestMapping("/contact")
-public class ContactController{
+@RequestMapping("/Itemcategory")
+public class ItemcategoryController {
 
 	@Autowired
-    ContactService contactService;
-	@Autowired
-	CustomerService customerService;
+    ItemcategoryService itemCategoryService;
 
-	
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    public String create(@Valid Contact contact, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-		
-		if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, contact);
-            return "contact/create";
-        } 
-         
+    public String create(@Valid ItemCategory itemCategory, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        if (bindingResult.hasErrors()) {
+            populateEditForm(uiModel, itemCategory);
+            return "itemcategory/create";
+        }
         uiModel.asMap().clear();
-        contactService.saveContact(contact);
-        return "redirect:/contact/" + encodeUrlPathSegment(contact.getId().toString(), httpServletRequest);
+        itemCategoryService.saveItemCategory(itemCategory);
+        return "redirect:/itemcategory/" + encodeUrlPathSegment(itemCategory.getId().toString(), httpServletRequest);
     }
-	
+
 	@RequestMapping(params = "form", produces = "text/html")
     public String createForm(Model uiModel) {
-        populateEditForm(uiModel, new Contact());
-        return "contact/create";
+        populateEditForm(uiModel, new ItemCategory());
+        return "itemcategory/create";
     }
 
 	@RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("contact", contactService.findContact(id));
+        uiModel.addAttribute("itemCategory", itemCategoryService.findItemCategory(id));
         uiModel.addAttribute("itemId", id);
-        return "contact/show";
+        return "itemcategory/show";
     }
 
 	@RequestMapping(produces = "text/html")
@@ -72,47 +65,44 @@ public class ContactController{
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("contact", Contact.findContactEntries(firstResult, sizeNo, sortFieldName, sortOrder));
-            float nrOfPages = (float) contactService.countAllContact()/ sizeNo;
+            uiModel.addAttribute("itemCategory", ItemCategory.findItemCategoryNameEntries(firstResult, sizeNo, sortFieldName, sortOrder));
+            float nrOfPages = (float) itemCategoryService.countAllItemCategory() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-   
-            
-            uiModel.addAttribute("contact",  Contact.findAllContact(sortFieldName, sortOrder));
+            uiModel.addAttribute("itemCategory", ItemCategory.findAllItemCategory(sortFieldName, sortOrder));
         }
-        return "contact/list";
+        return "itemcategory/list";
     }
 
 	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
-    public String update(@Valid Contact contact, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+    public String update(@Valid ItemCategory itemCategory, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, contact);
-            return "contact/update";
+            populateEditForm(uiModel, itemCategory);
+            return "itemcategory/update";
         }
         uiModel.asMap().clear();
-        contactService.updateContact(contact);
-        return "redirect:/contact/" + encodeUrlPathSegment(contact.getId().toString(), httpServletRequest);
+        itemCategoryService.updateItemCategory(itemCategory);
+        return "redirect:/itemcategory/" + encodeUrlPathSegment(itemCategory.getId().toString(), httpServletRequest);
     }
 
 	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, contactService.findContact(id));
-        return "contact/update";
+        populateEditForm(uiModel, itemCategoryService.findItemCategory(id));
+        return "itemcategory/update";
     }
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        Contact contact = contactService.findContact(id);
-        contactService.deleteContact(contact);
+        ItemCategory itemCategory = itemCategoryService.findItemCategory(id);
+        itemCategoryService.deleteItemCategory(itemCategory);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/contact";
+        return "redirect:/itemcategory";
     }
 
-	void populateEditForm(Model uiModel, Contact contact) {
-        uiModel.addAttribute("contact", contact);
-        uiModel.addAttribute("customer", customerService.findAllCustomer());
+	void populateEditForm(Model uiModel, ItemCategory itemCategory) {
+        uiModel.addAttribute("itemCategory", itemCategory);
     }
 
 	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
@@ -132,11 +122,11 @@ public class ContactController{
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         try {
-            Contact contact = contactService.findContact(id);
-            if (contact == null) {
+            ItemCategory itemCategory = itemCategoryService.findItemCategory(id);
+            if (itemCategory == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
-            return new ResponseEntity<String>(contact.toJson(), headers, HttpStatus.OK);
+            return new ResponseEntity<String>(itemCategory.toJson(), headers, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -148,8 +138,8 @@ public class ContactController{
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         try {
-            List<Contact>result = contactService.findAllContact();
-            return new ResponseEntity<String>(Contact.toJsonArray(result), headers, HttpStatus.OK);
+            List<ItemCategory> result = itemCategoryService.findAllItemCategory();
+            return new ResponseEntity<String>(ItemCategory.toJsonArray(result), headers, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -160,66 +150,72 @@ public class ContactController{
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         try {
-            Contact contact = Contact.fromJsonToContact(json);
-            contactService.saveContact(contact);
+            ItemCategory itemCategory = ItemCategory.fromJsonToItemCategory(json);
+            itemCategoryService.saveItemCategory(itemCategory);
             RequestMapping a = (RequestMapping) getClass().getAnnotation(RequestMapping.class);
-            headers.add("Location",uriBuilder.path(a.value()[0]+"/"+contact.getId().toString()).build().toUriString());
+            headers.add("Location",uriBuilder.path(a.value()[0]+"/"+itemCategory.getId().toString()).build().toUriString());
             return new ResponseEntity<String>(headers, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+    } 
 
 	@RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> createFromJsonArray(@RequestBody String json) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         try {
-            for (Contact contact: Contact.fromJsonArrayToCustomer(json)) {
-                contactService.saveContact(contact);
+            for (ItemCategory itemCategory: ItemCategory.fromJsonArrayToItemCategory(json)) {
+            	itemCategoryService.saveItemCategory(itemCategory);
+                
             }
             return new ResponseEntity<String>(headers, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+    } 
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, headers = "Accept=application/json")
+	 @RequestMapping(value = "/{id}", method = RequestMethod.PUT, headers = "Accept=application/json")
     public ResponseEntity<String> updateFromJson(@RequestBody String json, @PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         try {
-            Contact contact = Contact.fromJsonToContact(json);
-            contact.setId(id);
-            if (contactService.updateContact(contact) == null) {
+            Floor floor = Floor.fromJsonToFloor(json);
+            
+            ItemCategory itemCategory = ItemCategory.fromJsonToItemCategory(json);
+            itemCategory.setId(id);
+            
+            if (itemCategoryService.updateItemCategory(itemCategory) == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<String>(headers, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+    } 
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
+	 @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
     public ResponseEntity<String> deleteFromJson(@PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         try {
-            
-            Contact contact = contactService.findContact(id);
-            if (contact == null) {
+            ItemCategory itemCategory =  itemCategoryService.findItemCategory(id);
+            if (itemCategory == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
-            contactService.deleteContact(contact); 
+            itemCategoryService.deleteItemCategory(itemCategory);
+            
             return new ResponseEntity<String>(headers, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+    } 
 
-	@RequestMapping(value = "/search", method = { RequestMethod.GET })
-	public String listofContact(@ModelAttribute("SearchCriteria") SearchForm searchForm, Model uiModel) {
-		uiModel.addAttribute("contacts", contactService.findContactbyid(searchForm.getSearchString()));
-		return "contact/list";
-	}
+/*	@RequestMapping(value = "/search", method = { RequestMethod.GET })
+	 public String listofFloor(@ModelAttribute("SearchCriteria") SearchForm searchForm, Model uiModel) {
+		uiModel.addAttribute("itemCategory", itemCategoryService  floorService.findFloorbyFloorNumber(searchForm.getSearchString()));
+		return "itemcategory/list";
+	} 
+	*/
+	
 }

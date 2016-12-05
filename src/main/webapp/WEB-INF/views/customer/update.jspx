@@ -89,7 +89,7 @@ $(document).ready(
 				    	             url: "/ebms/customer/" + value + "?city",
 				    	             data: {stateId : value},
 				    	             success: function (data) {
-				    	            	  alert(data);
+				    	            	//  alert(data);
 					    	              
 				    	              var cityName = eval('(' + data + ')');
 				    	              //alert("obj " + myObject)
@@ -226,19 +226,19 @@ $(document).ready(
                  </ol>
             </div>
         
-                  <form:create id="fc_ph_com_smesoft_ebms_domain_customer" modelAttribute="customer" path="/customer" render="${empty dependencies}"  >
+                  <form:update id="fc_ph_com_smesoft_ebms_domain_customer" modelAttribute="customer" path="/customer" render="${empty dependencies}"  >
                       <field:input field="CustomerName" id="c_ph_com_smesoft_ebms_domain_customer_customerName" max="30" min="3" required="true" />
                  	  <field:select field="CustomerType" id="c_ph_com_smesoft_ebms_domain_customer_customerType" items="${customertypes}" itemValue="id" required="true" path="/customertypes" ></field:select> 
                  	  <field:select field="IndustryType" id="c_ph_com_smesoft_ebms_domain_customer_industryType" items="${industrytypes}" itemValue="id" required="true" path="/industrytypes" ></field:select>
                  	  <field:select field="LocationType" id="c_ph_com_smesoft_ebms_domain_customer_locationType" items="${locationtypes}" itemValue="id" required="true" path="/locationtypes" ></field:select>
                       <field:select field="country" id="c_ph_com_smesoft_ebms_domain_customer_country" items="${countries}" itemValue="id" required="true" path="/countries" ></field:select>
-                      <field:select field="state" id="c_ph_com_smesoft_ebms_domain_customer_state" required="true" itemValue="id" path="/states" ></field:select>
-                	  <field:select field="city" id="c_ph_com_smesoft_ebms_domain_customer_city" required="true" itemValue="id" path="/cities" ></field:select>
-                      <field:select field="barangay" id="c_ph_com_smesoft_ebms_domain_customer_barangay" required="true" itemValue="id" path="/barangays" ></field:select>
-                      <field:select field="street" id="c_ph_com_smesoft_ebms_domain_customer_street" itemValue="id" path="/streets" required="true"></field:select>
-                      <field:select field="area" id="c_ph_com_smesoft_ebms_domain_customer_area" itemValue="id" path="/areas" required="true"></field:select>
+                      <field:select field="state" id="c_ph_com_smesoft_ebms_domain_customer_state" items="${states}" required="true" itemValue="id" path="/states" ></field:select>
+                	  <field:select field="city" id="c_ph_com_smesoft_ebms_domain_customer_city" items="${cities}" required="true" itemValue="id" path="/cities" ></field:select>
+                      <field:select field="barangay" id="c_ph_com_smesoft_ebms_domain_customer_barangay" items="${barangays}" required="true" itemValue="id" path="/barangays" ></field:select>
+                      <field:select field="street" id="c_ph_com_smesoft_ebms_domain_customer_street" items="${streets}" itemValue="id" path="/streets" required="true"></field:select>
+                      <field:select field="area" id="c_ph_com_smesoft_ebms_domain_customer_area" items="${area}" itemValue="id" path="/areas" required="true"></field:select>
                                                              
-                  </form:create>
+                  </form:update>
                   <form:dependency dependencies="${dependencies}" id="d_ph_com_smesoft_ebms_domain_customer" render="${not empty dependencies}" />
                   
                   

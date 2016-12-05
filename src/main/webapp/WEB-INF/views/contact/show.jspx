@@ -19,6 +19,7 @@
             </div>
         
                   <page:show id="ps_ph_com_smesoft_ebms_domain_customer" object="${contact}" path="/contact" z="XmgSUNTaw/S287IKejvqSXTBaWA=">
+                      <field:display field="customer" id="s_ph_com_smesoft_ebms_domain_customer_customerfirstname" object="${contact}" z="WiR3MbBW/TqqoI5bvdXG5bAI594="/>
                       <field:display field="firstName" id="s_ph_com_smesoft_ebms_domain_customer_customerfirstname" object="${contact}" z="WiR3MbBW/TqqoI5bvdXG5bAI594="/>
                        <field:display field="middleName" id="s_ph_com_smesoft_ebms_domain_customer_customermiddleName" object="${contact}" z="WiR3MbBW/TqqoI5bvdXG5bAI594="/>
                        <field:display field="lastName" id="s_ph_com_smesoft_ebms_domain_customer_customerlastname" object="${contact}" z="WiR3MbBW/TqqoI5bvdXG5bAI594="/>

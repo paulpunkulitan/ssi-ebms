@@ -35,6 +35,7 @@ import flexjson.JSONSerializer;
 @Entity
 @Embeddable
 @NamedQueries({
+	
 @NamedQuery(
    name = "findContactByid",
    query = "SELECT c FROM Contact c WHERE LOWER(c.FirstName) LIKE LOWER(:searchString) "
@@ -44,9 +45,22 @@ import flexjson.JSONSerializer;
            + "OR LOWER(c.Phone) LIKE LOWER(:searchString)"
            + "OR LOWER(c.Fax) LIKE LOWER(:searchString)"
            + "OR LOWER(c.Email) LIKE LOWER(:searchString)"
-)})
+		),
+
+@NamedQuery(
+	name = "findAllContactByCustomerId",
+	 query = "SELECT c FROM Contact c, Customer s "
+     		+ "WHERE c.customer = s and s.id = :customerId"
+			
+		)
+
+
+})
 
 public class Contact {
+	
+	@ManyToOne
+	Customer customer;
 	
 	@NotEmpty
 	@Size(max = 30)
@@ -66,6 +80,8 @@ public class Contact {
 	private String Fax;   
 	@Size(max = 30)
 	private String Email; 
+	
+	
 	
 	
 
@@ -243,14 +259,15 @@ public class Contact {
 		}
 
 
-
-	/*	public Customer getCustomer() {
+	public Customer getCustomer() {
 			return customer;
 		}
 
 		public void setCustomer(Customer customer) {
 			this.customer = customer;
-		} */
+		}
+
+
 
 
 

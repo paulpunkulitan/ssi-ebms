@@ -44,6 +44,7 @@ import ph.com.smesoft.ebms.repository.IndustrytypeRepository;
 import ph.com.smesoft.ebms.service.AreaService;
 import ph.com.smesoft.ebms.service.BarangayService;
 import ph.com.smesoft.ebms.service.CityService;
+import ph.com.smesoft.ebms.service.ContactService;
 import ph.com.smesoft.ebms.service.CountryService;
 import ph.com.smesoft.ebms.service.CustomerService;
 import ph.com.smesoft.ebms.service.CustomertypeService;
@@ -72,7 +73,8 @@ public class CustomerController {
 	LocationtypeService locationTypeService;
 	@Autowired
 	IndustrytypeService industryTypeService;
-	
+	@Autowired
+	ContactService contactService;
 	@Autowired
 	StateService stateService;
 	@Autowired
@@ -85,6 +87,7 @@ public class CustomerController {
 	StreetService streetService;
 	@Autowired
 	AreaService areaService;
+	
 	
 	
 	
@@ -112,6 +115,8 @@ public class CustomerController {
     public String show(@PathVariable("id") Long id, Model uiModel) {
         uiModel.addAttribute("customer", customerService.findCustomer(id));
         uiModel.addAttribute("itemId", id);
+        uiModel.addAttribute("contact", contactService.findContactDetailsByCustomerId(id));
+        System.out.println(id);
         return "customer/show";
     }
 
@@ -147,7 +152,7 @@ public class CustomerController {
 	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String update(@Valid Customer customer, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, customer);
+            populateEditForm2(uiModel, customer);
             return "customer/update";
         }
         uiModel.asMap().clear();
@@ -157,7 +162,7 @@ public class CustomerController {
 
 	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, customerService.findCustomer(id));
+        populateEditForm2(uiModel, customerService.findCustomer(id));
         return "customer/update";
     }
 
@@ -177,6 +182,20 @@ public class CustomerController {
         uiModel.addAttribute("industrytypes", industryTypeService.findAllIndustrytypes());
         uiModel.addAttribute("locationtypes", locationTypeService.findAllLocationTypes());
         uiModel.addAttribute("countries",  countryService.findAllCountries());
+    }
+	
+	void populateEditForm2(Model uiModel, Customer customer) {
+			 uiModel.addAttribute("customer", customer);
+	        uiModel.addAttribute("customertypes", customerTypeService.findAllCustomertypes());
+	        uiModel.addAttribute("industrytypes", industryTypeService.findAllIndustrytypes());
+	        uiModel.addAttribute("locationtypes", locationTypeService.findAllLocationTypes());
+	        uiModel.addAttribute("countries", countryService.findAllCountries());
+	        uiModel.addAttribute("states", stateService.findAllStates());
+	        uiModel.addAttribute("cities",  cityService.findAllCities());
+	        uiModel.addAttribute("barangays", barangayService.findAllBarangays());
+	        uiModel.addAttribute("streets", streetService.findAllStreets()); 
+	        uiModel.addAttribute("area", areaService.findAllAreas()); 
+	        
     }
 	
 
@@ -217,7 +236,7 @@ public class CustomerController {
             return new ResponseEntity<String>(Customer.toJsonArray(result), headers, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        }	
     }
 
 	@RequestMapping(method = RequestMethod.POST, headers = "Accept=application/json")
@@ -294,7 +313,6 @@ public class CustomerController {
 	  	
 	  List<State> stateName = stateService.findAllStatesByCountryId(countryIdtoLong);
 	  String json = new Gson().toJson(stateName);
-	  System.out.println(json);
 	  return new ResponseEntity<String>(json, headers, HttpStatus.OK);
 	} 
 	
@@ -305,7 +323,6 @@ public class CustomerController {
 	  System.out.print(stateId);
 	  List<City> cityName = cityService.findAllCitiesByStateId(stateIdtoLong);
 	  String json = new Gson().toJson(cityName);
-	  System.out.println(json);
 	  return new ResponseEntity<String>(json, headers, HttpStatus.OK);
 	} 
 	
