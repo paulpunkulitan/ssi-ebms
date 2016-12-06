@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
@@ -28,93 +29,96 @@ import flexjson.JSONSerializer;
 
 @NamedQueries({
 @NamedQuery(
-   name = "findCategoryById",
-   query = "SELECT b FROM ItemCategory b WHERE LOWER(b.categoryName) LIKE LOWER(:searchString) "
+   name = "findSubCategoryById",
+   query = "SELECT b FROM SubCategory b WHERE LOWER(b.subCategoryName) LIKE LOWER(:searchString) "
    )
 })
 
 @Configurable
 @Entity
-public class ItemCategory{
+public class SubCategory{
 
     /**
      */
+	@ManyToOne
+	private ItemCategory itemCategory;
+	
 	@Size(min=1, max=30)
-    private String categoryName;
+    private String subCategoryName;
 	@Size(min=1, max=30)
 	private String description;
 		
     @PersistenceContext
     transient EntityManager entityManager;
 
-    public static final List<String> fieldNames4OrderClauseFilter = java.util.Arrays.asList("categoryName");
+    public static final List<String> fieldNames4OrderClauseFilter = java.util.Arrays.asList("subCategoryName", "description");
 
     public static final EntityManager entityManager() {
-        EntityManager em = new ItemCategory().entityManager;
+        EntityManager em = new SubCategory().entityManager;
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
         return em;
     }
 
-    public static long countItemCategory() {
-        return entityManager().createQuery("SELECT COUNT(o) FROM ItemCategory o", Long.class).getSingleResult();
+    public static long countSubCategory() {
+        return entityManager().createQuery("SELECT COUNT(o) FROM SubCategory o", Long.class).getSingleResult();
     }
 
-    public static List<ItemCategory> findAllItemCategory() {
-        return entityManager().createQuery("SELECT o FROM ItemCategory o", ItemCategory.class).getResultList();
+    public static List<SubCategory> findAllSubCategory() {
+        return entityManager().createQuery("SELECT o FROM SubCategory o", SubCategory.class).getResultList();
     }
 
     
-    public static List<ItemCategory> findAllItemCategory(String sortFieldName, String sortOrder) {
-        String jpaQuery = "SELECT o FROM ItemCategory o";
+    public static List<SubCategory> findAllSubCategory(String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM SubCategory o";
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
             if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
                 jpaQuery = jpaQuery + " " + sortOrder;
             }
         }
-        return entityManager().createQuery(jpaQuery, ItemCategory.class).getResultList();
+        return entityManager().createQuery(jpaQuery, SubCategory.class).getResultList();
     }
     
-    public static List<ItemCategory> findAllItemCategoryName(String sortFieldName, String sortOrder) {
-        String jpaQuery = "SELECT o FROM ItemCategory o";
+    public static List<SubCategory> findAllSubCategoryName(String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM SubCategory o";
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
             if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
                 jpaQuery = jpaQuery + " " + sortOrder;
             }
         }
-        return entityManager().createQuery(jpaQuery, ItemCategory.class).getResultList();
+        return entityManager().createQuery(jpaQuery, SubCategory.class).getResultList();
     }
 
-    public static ItemCategory findItemCategory(Long id) {
+    public static SubCategory findSubCategory(Long id) {
         if (id == null) return null;
-        return entityManager().find(ItemCategory.class, id);
+        return entityManager().find(SubCategory.class, id);
     }
 
-    public static List<ItemCategory> findItemCategoryEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM ItemCategory o", ItemCategory.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    public static List<SubCategory> findSubCategoryEntries(int firstResult, int maxResults) {
+        return entityManager().createQuery("SELECT o FROM SubCategory o", SubCategory.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
 
-    public static List<ItemCategory> findItemCategoryEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
-        String jpaQuery = "SELECT o FROM ItemCategory o";
+    public static List<SubCategory> findSubCategoryEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM SubCategory o";
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
             if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
                 jpaQuery = jpaQuery + " " + sortOrder;
             }
         }
-        return entityManager().createQuery(jpaQuery, ItemCategory.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+        return entityManager().createQuery(jpaQuery, SubCategory.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
-    public static List<ItemCategory> findItemCategoryNameEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
-        String jpaQuery = "SELECT o FROM ItemCategory o";
+    public static List<SubCategory> findSubCategoryNameEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM SubCategory o";
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
             if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
                 jpaQuery = jpaQuery + " " + sortOrder;
             }
         }
-        return entityManager().createQuery(jpaQuery, ItemCategory.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+        return entityManager().createQuery(jpaQuery, SubCategory.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
 
     @Transactional
@@ -147,9 +151,9 @@ public class ItemCategory{
     }
 
     @Transactional
-    public ItemCategory merge() {
+    public SubCategory merge() {
         if (this.entityManager == null) this.entityManager = entityManager();
-        ItemCategory merged = this.entityManager.merge(this);
+        SubCategory merged = this.entityManager.merge(this);
         this.entityManager.flush();
         return merged;
     }
@@ -160,12 +164,20 @@ public class ItemCategory{
 
     
 
-	public String getCategoryName() {
-		return categoryName;
+	public ItemCategory getItemCategory() {
+		return itemCategory;
 	}
 
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
+	public void setItemCategory(ItemCategory itemCategory) {
+		this.itemCategory = itemCategory;
+	}
+
+	public String getSubCategoryName() {
+		return subCategoryName;
+	}
+
+	public void setSubCategoryName(String subCategoryName) {
+		this.subCategoryName = subCategoryName;
 	}
 
 	public String getDescription() {
@@ -212,23 +224,23 @@ public class ItemCategory{
         .include(fields).exclude("*.class").deepSerialize(this);
     }
 
-    public static ItemCategory fromJsonToItemCategory(String json) {
-        return new JSONDeserializer<ItemCategory>()
-        .use(null, ItemCategory.class).deserialize(json);
+    public static SubCategory fromJsonToSubCategory(String json) {
+        return new JSONDeserializer<SubCategory>()
+        .use(null, SubCategory.class).deserialize(json);
     }
 
-    public static String toJsonArray(Collection<ItemCategory> collection) {
+    public static String toJsonArray(Collection<SubCategory> collection) {
         return new JSONSerializer()
         .exclude("*.class").deepSerialize(collection);
     }
 
-    public static String toJsonArray(Collection<ItemCategory> collection, String[] fields) {
+    public static String toJsonArray(Collection<SubCategory> collection, String[] fields) {
         return new JSONSerializer()
         .include(fields).exclude("*.class").deepSerialize(collection);
     }
 
-    public static Collection<ItemCategory> fromJsonArrayToItemCategory(String json) {
-        return new JSONDeserializer<List<ItemCategory>>()
-        .use("values", ItemCategory.class).deserialize(json);
+    public static Collection<SubCategory> fromJsonArrayToSubCategory(String json) {
+        return new JSONDeserializer<List<SubCategory>>()
+        .use("values", SubCategory.class).deserialize(json);
     }
 }

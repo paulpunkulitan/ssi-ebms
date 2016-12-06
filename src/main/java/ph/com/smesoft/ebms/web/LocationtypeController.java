@@ -93,7 +93,7 @@ public class LocationtypeController {
             float nrOfPages = (float) locationtypeService.countAllLocationTypes() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("locationtype", Locationtype.findAllLocationtypes(sortFieldName, sortOrder));
+            uiModel.addAttribute("locationtypes", Locationtype.findAllLocationtypes(sortFieldName, sortOrder));
         }
         return "locationtypes/list";
     }
@@ -105,6 +105,14 @@ public class LocationtypeController {
             populateEditForm(uiModel, location);
             return "locationtypes/update";
         }
+    	if(!locationtypeService.checkRegex(location.getLocationTypeName().trim(), "^([^0-9]*)$")){
+       	 populateEditForm(uiModel, location);
+       	 //uiModel.asMap().clear();
+       	 bindingResult.reject("industrytype", "Invalid entry of Characters");
+        	
+       	  return "locationtypes/update";
+       }
+   
         uiModel.asMap().clear();
         locationtypeService.updateLocationType(location);
         return "redirect:/locationtypes/" + encodeUrlPathSegment(location.getId().toString(), httpServletRequest);

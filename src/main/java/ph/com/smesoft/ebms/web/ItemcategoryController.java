@@ -30,7 +30,7 @@ import ph.com.smesoft.ebms.service.FloorService;
 import ph.com.smesoft.ebms.service.ItemcategoryService;
 
 @Controller
-@RequestMapping("/Itemcategory")
+@RequestMapping("/itemcategory")
 public class ItemcategoryController {
 
 	@Autowired
@@ -55,7 +55,7 @@ public class ItemcategoryController {
 
 	@RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("itemCategory", itemCategoryService.findItemCategory(id));
+        uiModel.addAttribute("itemcategory", itemCategoryService.findItemCategory(id));
         uiModel.addAttribute("itemId", id);
         return "itemcategory/show";
     }
@@ -65,11 +65,11 @@ public class ItemcategoryController {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("itemCategory", ItemCategory.findItemCategoryNameEntries(firstResult, sizeNo, sortFieldName, sortOrder));
+            uiModel.addAttribute("itemcategory", ItemCategory.findItemCategoryNameEntries(firstResult, sizeNo, sortFieldName, sortOrder));
             float nrOfPages = (float) itemCategoryService.countAllItemCategory() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("itemCategory", ItemCategory.findAllItemCategory(sortFieldName, sortOrder));
+            uiModel.addAttribute("itemcategory", ItemCategory.findAllItemCategory(sortFieldName, sortOrder));
         }
         return "itemcategory/list";
     }
@@ -102,7 +102,7 @@ public class ItemcategoryController {
     }
 
 	void populateEditForm(Model uiModel, ItemCategory itemCategory) {
-        uiModel.addAttribute("itemCategory", itemCategory);
+        uiModel.addAttribute("itemcategory", itemCategory);
     }
 
 	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
@@ -211,11 +211,11 @@ public class ItemcategoryController {
         }
     } 
 
-/*	@RequestMapping(value = "/search", method = { RequestMethod.GET })
+	@RequestMapping(value = "/search", method = { RequestMethod.GET })
 	 public String listofFloor(@ModelAttribute("SearchCriteria") SearchForm searchForm, Model uiModel) {
-		uiModel.addAttribute("itemCategory", itemCategoryService  floorService.findFloorbyFloorNumber(searchForm.getSearchString()));
+		uiModel.addAttribute("itemCategory", itemCategoryService.findItemCategorybyItemCategoryId(searchForm.getSearchString()));
 		return "itemcategory/list";
 	} 
-	*/
+	
 	
 }

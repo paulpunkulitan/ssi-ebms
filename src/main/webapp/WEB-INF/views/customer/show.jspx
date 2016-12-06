@@ -30,7 +30,7 @@
                   	  <field:display field="Area" id="s_ph_com_smesoft_ebms_domain_customer_area" object="${customer}" />
                   </page:show>
                    
-               <page:list id="pl_ph_com_smesoft_ebms_domain_contact" items="${contact}" buttonAction="/ebms/contact" buttonLabel="Save New Contact">
+               <page:list id="pl_ph_com_smesoft_ebms_domain_contact" items="${contact}" buttonAction="/ebms/contact?form" buttonLabel="Save New Contact">
                   	   <table:table data="${contact}" id="l_ph_com_smesoft_ebms_domain_customer" path="/contact" >
                           <table:column id="c_ph_com_smesoft_ebms_domain_customer_customerFirstName" property="FirstName" />
                           <table:column id="c_ph_com_smesoft_ebms_domain_customer_customerMiddleName" property="MiddleName" />

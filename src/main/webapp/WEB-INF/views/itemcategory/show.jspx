@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+        xmlns:jsp="http://java.sun.com/JSP/Page" 
+        xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+        version="2.0">
+       
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+    <div id="wrapper">
+        <div class="container-fluid">
+            <div>
+                <ol class="breadcrumb">
+                  <li class="disabled"><a>Item Category</a></li>
+                  <li><a href="/ebms/locationtypes?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Item Category</a></li>
+                  <li class="active"><span>Item Category Information</span></li>
+                 </ol>
+            </div>
+        
+                  <page:show id="ps_ph_com_smesoft_ebms_domain_itemcategory" object="${itemcategory}" path="/itemcategory" z="XmgSUNTaw/S287IKejvqSXTBaWA=">
+                      <field:display field="categoryName" id="s_ph_com_smesoft_ebms_domain_itemcategory_itemcategoryname" object="${itemcategory}" z="bpSs/fEBb5fUYBhFsl15fVNLxh0="/>
+                 	  <field:display field="description" id="c_ph_com_smesoft_ebms_domain_itemcategory_itemcategorydescription" object="${itemcategory}" z="bpSs/fEBb5fUYBhFsl15fVNLxh0="/>
+                  </page:show>
+
+        </div>   
+    </div>   
+</div>

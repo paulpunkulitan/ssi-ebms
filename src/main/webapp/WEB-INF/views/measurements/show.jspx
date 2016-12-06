@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+        xmlns:jsp="http://java.sun.com/JSP/Page" 
+        xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+        version="2.0">
+       
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+    <div id="wrapper">
+        <div class="container-fluid">
+            <div>
+                <ol class="breadcrumb">
+                  <li class="disabled"><a>Measurement</a></li>
+                  <li><a href="/ebms/measurements?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Measurements</a></li>
+                  <li class="active"><span>Measurement Information</span></li>
+                 </ol>
+            </div>
+        
+                  <page:show id="ps_ph_com_smesoft_ebms_domain_Measurement" object="${measurement}" path="/measurements" z="XmgSUNTaw/S287IKejvqSXTBaWA=">
+                      <field:display field="business" id="s_ph_com_smesoft_ebms_domain_Business_businessName" object="${measurement}" />
+                      <field:display field="measurementName" id="s_ph_com_smesoft_ebms_domain_Measurement_measurementName" object="${measurement}" z="bpSs/fEBb5fUYBhFsl15fVNLxh0="/>
+                  </page:show>
+
+        </div>   
+    </div>   
+</div>

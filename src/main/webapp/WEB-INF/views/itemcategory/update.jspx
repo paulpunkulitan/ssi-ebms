@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+
+    <div id="wrapper">
+        <div class="container-fluid">
+            <div>
+                <ol class="breadcrumb">
+                  <li class="disabled"><a>Item Category</a></li>
+                  <li><a href="/ebms/itemcategory?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Item Categories</a></li>
+                  <li class="active"><span>Update Item Category</span></li>
+                 </ol>
+            </div>
+    
+                  <form:update id="fu_ph_com_smesoft_ebms_domain_ItemCategory" modelAttribute="itemcategory" path="/itemcategory" versionField="Version" z="Vz89WdEXcv2QOn4oTHTRJPOwEP0=">
+                  
+                      <field:input field="categoryName" id="c_ph_com_smesoft_ebms_domain_itemcategory_itemcategoryname" max="30" min="3" required="true"/>
+                  	  <field:textarea field="description" id="c_ph_com_smesoft_ebms_domain_itemcategory_itemcategorydescription" required="true"/>
+                  
+                  </form:update>
+    
+        </div>   
+    </div>   
+</div>

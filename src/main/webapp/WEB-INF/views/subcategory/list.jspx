@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div 
+xmlns:jsp="http://java.sun.com/JSP/Page" 
+xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+xmlns:display="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+       <div id="wrapper">
+           <div class="container-fluid">
+                     <div>
+                           <ol class="breadcrumb">
+                                  <li class="disabled"><a>Sub Category</a></li>
+                                  <li class="active"><span>List of Sub Category</span></li>
+                           </ol>
+                     </div>
+                     
+                     <page:list id="pl_ph_com_smesoft_ebms_domain_subcategory" items="${subcategory}" buttonAction="/ebms/subcategory?form" buttonLabel="Register New Category" searchAction="/ebms/subcategory/search">
+                      <table:table data="${subcategory}" id="l_ph_com_smesoft_ebms_domain_subcategory" path="/subcategory" >
+                          <table:column id="c_ph_com_smesoft_ebms_domain_subcategory_subcategorydescription" property="subCategoryName" />
+                      </table:table>
+                  </page:list>
+
+           </div>   
+       </div>   
+</div>

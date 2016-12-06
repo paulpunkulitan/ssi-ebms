@@ -15,9 +15,11 @@ import ph.com.smesoft.ebms.domain.Customer;
 import ph.com.smesoft.ebms.domain.Customertype;
 import ph.com.smesoft.ebms.domain.Floor;
 import ph.com.smesoft.ebms.domain.Industrytype;
+import ph.com.smesoft.ebms.domain.ItemCategory;
 import ph.com.smesoft.ebms.domain.Locationtype;
 import ph.com.smesoft.ebms.domain.State;
 import ph.com.smesoft.ebms.domain.Street;
+import ph.com.smesoft.ebms.domain.SubCategory;
 import ph.com.smesoft.ebms.domain.Area;
 import ph.com.smesoft.ebms.service.BarangayService;
 import ph.com.smesoft.ebms.service.BusinessService;
@@ -28,9 +30,11 @@ import ph.com.smesoft.ebms.service.CustomerService;
 import ph.com.smesoft.ebms.service.CustomertypeService;
 import ph.com.smesoft.ebms.service.FloorService;
 import ph.com.smesoft.ebms.service.IndustrytypeService;
+import ph.com.smesoft.ebms.service.ItemcategoryService;
 import ph.com.smesoft.ebms.service.LocationtypeService;
 import ph.com.smesoft.ebms.service.StateService;
 import ph.com.smesoft.ebms.service.StreetService;
+import ph.com.smesoft.ebms.service.SubcategoryService;
 import ph.com.smesoft.ebms.service.AreaService;
 
 @Configurable
@@ -402,6 +406,63 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         };
     }
 	
+	@Autowired
+    ItemcategoryService itemCategoryService;
+
+	public Converter<ItemCategory, String> getItemCategoryToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<ph.com.smesoft.ebms.domain.ItemCategory, java.lang.String>() {
+            public String convert(ItemCategory itemCategory) {
+                return new StringBuilder().append(itemCategory.getCategoryName()).toString();
+            }
+        };
+    }
+	
+	public Converter<Long, ItemCategory> getIdToItemCategoryConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, ph.com.smesoft.ebms.domain.ItemCategory>() {
+            public ph.com.smesoft.ebms.domain.ItemCategory convert(java.lang.Long id) {
+                return itemCategoryService.findItemCategory(id);
+            }
+        };
+    }
+	
+	public Converter<String, ItemCategory> getStringToItemCategoryConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, ph.com.smesoft.ebms.domain.ItemCategory>() {
+            public ph.com.smesoft.ebms.domain.ItemCategory convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), ItemCategory.class);
+            }
+        };
+    }
+
+	
+	
+	@Autowired
+    SubcategoryService subCategoryService;
+	
+	public Converter<SubCategory, String> getSubCategoryToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<ph.com.smesoft.ebms.domain.SubCategory, java.lang.String>() {
+            public String convert(SubCategory subCategory) {
+                return new StringBuilder().append(subCategory.getSubCategoryName()).toString();
+            }
+        };
+    }
+	
+	public Converter<Long, SubCategory> getIdToSubCategoryConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, ph.com.smesoft.ebms.domain.SubCategory>() {
+            public ph.com.smesoft.ebms.domain.SubCategory convert(java.lang.Long id) {
+                return subCategoryService.findSubCategory(id);
+            }
+        };
+    }
+	
+	public Converter<String, SubCategory> getStringToSubCategoryConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, ph.com.smesoft.ebms.domain.SubCategory>() {
+            public ph.com.smesoft.ebms.domain.SubCategory convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), SubCategory.class);
+            }
+        };
+    }
+	
+	
 	
 	public void installLabelConverters(FormatterRegistry registry) {
       
@@ -456,6 +517,15 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         registry.addConverter(getAreaToStringConverter());
         registry.addConverter(getIdToAreaConverter());
         registry.addConverter(getStringToAreaConverter());
+        
+        registry.addConverter(getItemCategoryToStringConverter());
+        registry.addConverter(getIdToItemCategoryConverter());
+        registry.addConverter(getStringToItemCategoryConverter());
+        
+        registry.addConverter(getSubCategoryToStringConverter());
+        registry.addConverter(getIdToSubCategoryConverter());
+        registry.addConverter(getStringToSubCategoryConverter());
+        
     }
 
 	public void afterPropertiesSet() {

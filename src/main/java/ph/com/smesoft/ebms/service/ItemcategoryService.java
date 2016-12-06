@@ -20,6 +20,8 @@ public interface ItemcategoryService {
 	
 	public abstract ItemCategory updateItemCategory(ItemCategory itemCategory);
 	
+	public abstract List<ItemCategory> findItemCategorybyItemCategoryId(String searchString);
+	
 	public abstract boolean checkRegex(String input, String user_pattern);
 
 }

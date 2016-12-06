@@ -47,12 +47,13 @@ public class CustomertypeController {
 	             
              return "customertypes/create";
         }
-	     if(!customertypeService.checkRegex(customertype.getCustomerTypeName().trim(), "^([^0-9]*)$")){
+	    if(!customertypeService.checkRegex(customertype.getCustomerTypeName().trim(), "^([^0-9]*)$")){
 	    	 bindingResult.reject("customertype", "Invalid entry of Characters");
 	    	 populateEditForm(uiModel, customertype);
 	        	 //uiModel.asMap().clear();
 	         return "customertypes/create";
 	    } 
+	     
 		if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, customertype);
             return "customertypes/create";
@@ -118,6 +119,14 @@ public class CustomertypeController {
             populateEditForm(uiModel, customertype);
             return "customertypes/update";
         }
+     
+	    if(!customertypeService.checkRegex(customertype.getCustomerTypeName().trim(), "^([^0-9]*)$")){
+	    	 bindingResult.reject("customertype", "Invalid entry of Characters");
+	    	 populateEditForm(uiModel, customertype);
+	        	 //uiModel.asMap().clear();
+	         return "customertypes/update";
+	    } 
+	    
         uiModel.asMap().clear();
         customertypeService.updateCustomertype(customertype);
         return "redirect:/customertypes/" + encodeUrlPathSegment(customertype.getId().toString(), httpServletRequest);
