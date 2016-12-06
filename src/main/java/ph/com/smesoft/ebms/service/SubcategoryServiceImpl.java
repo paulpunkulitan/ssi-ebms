@@ -61,6 +61,12 @@ public class SubcategoryServiceImpl implements SubcategoryService{
 		    return result;
 		 }
 		
+		public List<SubCategory> findSubCategoryByCategoryId(Long id){
+			TypedQuery<SubCategory> searchResult = em.createNamedQuery("findSubCategoryByCategoryId", SubCategory.class);
+			searchResult.setParameter("categoryId", id);
+			List<SubCategory> result = searchResult.getResultList();
+			return result;
+		}
 		
 		public boolean checkRegex(String input, String user_pattern){
 			Pattern pattern = Pattern.compile(user_pattern);

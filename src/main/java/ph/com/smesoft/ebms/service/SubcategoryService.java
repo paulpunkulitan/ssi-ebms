@@ -23,5 +23,7 @@ public interface SubcategoryService {
 	public abstract List<SubCategory> findSubCategorybySubCategoryId(String searchString);
 	
 	public abstract boolean checkRegex(String input, String user_pattern);
+	
+	public  abstract List<SubCategory> findSubCategoryByCategoryId(Long id);
 
 }

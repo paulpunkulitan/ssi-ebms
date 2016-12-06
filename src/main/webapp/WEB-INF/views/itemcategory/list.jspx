@@ -11,14 +11,15 @@ version="2.0">
            <div class="container-fluid">
                      <div>
                            <ol class="breadcrumb">
-                                  <li class="disabled"><a>Location Type</a></li>
-                                  <li class="active"><span>List of Location Types</span></li>
+                                  <li class="disabled"><a>Item Category</a></li>
+                                  <li class="active"><span>List of Item Category</span></li>
                            </ol>
                      </div>
                      
-                     <page:list id="pl_ph_com_smesoft_ebms_domain_itemCategory" items="${itemcategory}" buttonAction="/ebms/itemcategory?form" buttonLabel="Register New Category" searchAction="/ebms/itemcategory/search">
-                      <table:table data="${itemcategory}" id="l_ph_com_smesoft_ebms_domain_itemCategory" path="/itemcategory" >
-                          <table:column id="c_ph_com_smesoft_ebms_domain_itemCategory_itemcategorydescription" property="categoryName" />
+                     <page:list id="pl_ph_com_smesoft_ebms_domain_itemcategory" items="${itemcategory}" buttonAction="/ebms/itemcategory?form" buttonLabel="Register New Category" searchAction="/ebms/itemcategory/search">
+                      <table:table data="${itemcategory}" id="l_ph_com_smesoft_ebms_domain_itemcategory" path="/itemcategory" >
+                      	  <table:column id="c_ph_com_smesoft_ebms_domain_itemcategory_itemcategoryname" property="categoryName" />
+                          <table:column id="c_ph_com_smesoft_ebms_domain_itemcategory_itemcategorydescription" property="description" />
                       </table:table>
                   </page:list>
 

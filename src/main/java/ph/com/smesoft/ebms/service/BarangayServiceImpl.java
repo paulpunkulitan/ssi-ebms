@@ -50,19 +50,6 @@ public class BarangayServiceImpl implements BarangayService {
         return barangayRepository.save(barangay);
     }
 	
-	/*public List<Floor> findFloorbyFloorNumber(String searchKeyword){
-	    TypedQuery<Floor> searchResult = em.createNamedQuery("findFloorByFloorNum", Floor.class);
-	    searchResult.setParameter("searchKeyword",'%'+searchKeyword+'%');
-	    List<Floor> result=searchResult.getResultList();
-	    return result;
-	 }*/
-/*	public String findFloorbyFloorNumber(String searchString){
-	    TypedQuery<String> searchResult = em.createNamedQuery("findFloorByFloorNum", String.class);
-	    searchResult.setParameter("searchString",'%'+searchString+'%');
-	    String result=searchResult.getSingleResult();
-	    return result;
-	 }*/
-	
 	public List<Barangay> findBarangaybyBarangayNumber(String searchString){
 	    TypedQuery<Barangay> searchResult = em.createNamedQuery("findBarangayByBarangayNum", Barangay.class);
 	    searchResult.setParameter("searchString",'%'+searchString+'%');

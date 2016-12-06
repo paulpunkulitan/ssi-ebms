@@ -12,7 +12,7 @@
             <div>
                 <ol class="breadcrumb">
                   <li class="disabled"><a>Item Category</a></li>
-                  <li><a href="/ebms/locationtypes?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Item Category</a></li>
+                  <li><a href="/ebms/itemcategory?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Item Category</a></li>
                   <li class="active"><span>Item Category Information</span></li>
                  </ol>
             </div>

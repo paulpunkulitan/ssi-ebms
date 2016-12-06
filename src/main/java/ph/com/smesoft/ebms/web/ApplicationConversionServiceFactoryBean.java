@@ -7,6 +7,7 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.format.support.FormattingConversionServiceFactoryBean;
 
 import ph.com.smesoft.ebms.domain.Barangay;
+import ph.com.smesoft.ebms.domain.Brand;
 import ph.com.smesoft.ebms.domain.Business;
 import ph.com.smesoft.ebms.domain.City;
 import ph.com.smesoft.ebms.domain.Contact;
@@ -22,6 +23,7 @@ import ph.com.smesoft.ebms.domain.Street;
 import ph.com.smesoft.ebms.domain.SubCategory;
 import ph.com.smesoft.ebms.domain.Area;
 import ph.com.smesoft.ebms.service.BarangayService;
+import ph.com.smesoft.ebms.service.BrandService;
 import ph.com.smesoft.ebms.service.BusinessService;
 import ph.com.smesoft.ebms.service.CityService;
 import ph.com.smesoft.ebms.service.ContactService;
@@ -462,6 +464,32 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         };
     }
 	
+	@Autowired
+    BrandService brandService;
+	
+	public Converter<Brand, String> getBrandToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<ph.com.smesoft.ebms.domain.Brand, java.lang.String>() {
+            public String convert(Brand brand) {
+                return new StringBuilder().append(brand.getBrandName()).toString();
+            }
+        };
+    }
+	
+	public Converter<Long, Brand> getIdToBrandConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, ph.com.smesoft.ebms.domain.Brand>() {
+            public ph.com.smesoft.ebms.domain.Brand convert(java.lang.Long id) {
+                return brandService.findBrand(id);
+            }
+        };
+    }
+	
+	public Converter<String, Brand> getStringToBrandConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, ph.com.smesoft.ebms.domain.Brand>() {
+            public ph.com.smesoft.ebms.domain.Brand convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Brand.class);
+            }
+        };
+    }
 	
 	
 	public void installLabelConverters(FormatterRegistry registry) {
@@ -525,6 +553,11 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         registry.addConverter(getSubCategoryToStringConverter());
         registry.addConverter(getIdToSubCategoryConverter());
         registry.addConverter(getStringToSubCategoryConverter());
+        
+        registry.addConverter(getBrandToStringConverter());
+        registry.addConverter(getIdToBrandConverter());
+        registry.addConverter(getStringToBrandConverter());
+        
         
     }
 
