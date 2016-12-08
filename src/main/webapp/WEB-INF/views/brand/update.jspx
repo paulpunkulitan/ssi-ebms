@@ -14,8 +14,6 @@
             </div>
     
                   <form:update id="fu_ph_com_smesoft_ebms_domain_Brand" modelAttribute="brand" path="/brand" versionField="Version" z="Vz89WdEXcv2QOn4oTHTRJPOwEP0=">
-                      <field:select field="itemCategory" id="c_ph_com_smesoft_ebms_domain_itemcategory_itemcategoryname" itemValue="id" items="${category}" required="true" path="/itemcategory" ></field:select>
-                      <field:select field="subCategory" id="c_ph_com_smesoft_ebms_domain_subcategory_subcategoryname" itemValue="id" items="${subcategory}" required="true" path="/subcategory" ></field:select>
                       <field:input field="brandName" id="c_ph_com_smesoft_ebms_domain_brand_brandName" required="true" />
                       <field:textarea field="description" id="c_ph_com_smesoft_ebms_domain_brand_description" required="true" />
                

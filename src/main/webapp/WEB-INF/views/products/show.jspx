@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+        xmlns:jsp="http://java.sun.com/JSP/Page" 
+        xmlns:page="urn:jsptagdir:/WEB-INF/tags/form"
+        xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/custom" 
+		version="2.0">
+       
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    
+    <div id="wrapper">
+        <div class="container-fluid">
+            <div>
+                <ol class="breadcrumb">
+                  <li class="disabled"><a>Product</a></li>
+                  <li><a href="/ebms/products?page=1&amp;size=${empty param.size ? 10 : param.size}">List of Products</a></li>
+                  <li class="active"><span>Product Information</span></li>
+                 </ol>
+            </div>
+        
+                  <page:show id="ps_ph_com_smesoft_ebms_domain_product" object="${products}" path="/products" z="XmgSUNTaw/S287IKejvqSXTBaWA=">
+                      <field:display field="business" id="c_ph_com_smesoft_ebms_domain_business_businessname" object="${products}" z="WiR3MbBW/TqqoI5bvdXG5bAI594="/>
+                      <field:display field="itemCategory" id="c_ph_com_smesoft_ebms_domain_itemcategory_itemcategoryname" object="${products}" z="WiR3MbBW/TqqoI5bvdXG5bAI594="/>
+                      <field:display field="subCategory" id="c_ph_com_smesoft_ebms_domain_subcategory_subcategoryname" object="${products}" z="WiR3MbBW/TqqoI5bvdXG5bAI594="/>
+                      <field:display field="productName" id="c_ph_com_smesoft_ebms_domain_product_productName"  object="${products}" z="WiR3MbBW/TqqoI5bvdXG5bAI594="/>
+                      <field:display field="unitPrice" id="c_ph_com_smesoft_ebms_domain_product_unitPrice" object="${products}" z="WiR3MbBW/TqqoI5bvdXG5bAI594="/>
+                      <field:display field="measurement" id="c_ph_com_smesoft_ebms_domain_measurement_measurementName" object="${products}" z="WiR3MbBW/TqqoI5bvdXG5bAI594="/>
+                     
+                  </page:show>
+           
+        </div>   
+    </div>   
+</div>

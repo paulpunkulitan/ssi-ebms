@@ -18,8 +18,6 @@
             </div>
         
                   <page:show id="ps_ph_com_smesoft_ebms_domain_Brand" object="${brand}" path="/brand" z="XmgSUNTaw/S287IKejvqSXTBaWA=">
-                      <field:display field="itemCategory" id="s_ph_com_smesoft_ebms_domain_itemcategory_itemcategoryname" object="${brand}" />
-                      <field:display field="subCategory" id="s_ph_com_smesoft_ebms_domain_subcategory_subcategoryname" object="${brand}" />
                       <field:display field="brandName" id="s_ph_com_smesoft_ebms_domain_brand_brandName" object="${brand}" />
                       <field:display field="description" id="s_ph_com_smesoft_ebms_domain_brand_description" object="${brand}" />
                   </page:show>

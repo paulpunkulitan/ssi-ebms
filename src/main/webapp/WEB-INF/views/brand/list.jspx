@@ -18,8 +18,6 @@ version="2.0">
                      
                     <page:list id="pl_ph_com_smesoft_ebms_domain_brand" items="${brand}" buttonAction="/ebms/brand?form" buttonLabel="Register New Brand" searchAction="/ebms/brand/search">
                       <table:table data="${brand}" id="l_ph_com_smesoft_ebms_domain_itemCategory" path="/brand" >
-                      	  <table:column id="c_ph_com_smesoft_ebms_domain_itemcategory_itemcategoryname" property="itemCategory" />
-                          <table:column id="c_ph_com_smesoft_ebms_domain_subcategory_subcategoryname" property="subCategory" />
                           <table:column id="c_ph_com_smesoft_ebms_domain_brand_brandName" property="brandName" />
                           <table:column id="c_ph_com_smesoft_ebms_domain_brand_description" property="description" />
                       </table:table>

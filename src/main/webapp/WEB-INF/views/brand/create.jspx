@@ -70,8 +70,6 @@ $(document).ready(
     
                   <form:create id="fc_ph_com_smesoft_ebms_domain_brand" modelAttribute="brand" path="/brand" render="${empty dependencies}" >
                     
-                      <fields:select field="itemCategory" id="c_ph_com_smesoft_ebms_domain_itemcategory_itemcategoryname" itemValue="id" items="${category}" required="true" path="/itemcategory" ></fields:select>
-                      <fields:select field="subCategory" id="c_ph_com_smesoft_ebms_domain_subcategory_subcategoryname" itemValue="id" required="true" path="/subcategory" ></fields:select>
                       <field:input field="brandName" id="c_ph_com_smesoft_ebms_domain_brand_brandName" required="true" />
                       <field:textarea field="description" id="c_ph_com_smesoft_ebms_domain_brand_description" required="true" />
                   </form:create>

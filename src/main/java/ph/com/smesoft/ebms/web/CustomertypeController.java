@@ -67,9 +67,10 @@ public class CustomertypeController {
         if(!customertypeService.checkRegex(customertype.getCustomerTypeName().trim(), "^([^0-9]*)$")){
         	 populateEditForm(uiModel, customertype);
         	 //uiModel.asMap().clear();
-             
+        	 bindingResult.reject("customertype", "Invalid Set of Characters");
+			 
         	  return "customertypes/create";
-        }
+        } 
         
         uiModel.asMap().clear();
         customertypeService.saveCustomertype(customertype);

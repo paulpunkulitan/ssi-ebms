@@ -18,6 +18,8 @@ import ph.com.smesoft.ebms.domain.Floor;
 import ph.com.smesoft.ebms.domain.Industrytype;
 import ph.com.smesoft.ebms.domain.ItemCategory;
 import ph.com.smesoft.ebms.domain.Locationtype;
+import ph.com.smesoft.ebms.domain.Measurement;
+import ph.com.smesoft.ebms.domain.Product;
 import ph.com.smesoft.ebms.domain.State;
 import ph.com.smesoft.ebms.domain.Street;
 import ph.com.smesoft.ebms.domain.SubCategory;
@@ -34,6 +36,8 @@ import ph.com.smesoft.ebms.service.FloorService;
 import ph.com.smesoft.ebms.service.IndustrytypeService;
 import ph.com.smesoft.ebms.service.ItemcategoryService;
 import ph.com.smesoft.ebms.service.LocationtypeService;
+import ph.com.smesoft.ebms.service.MeasurementService;
+import ph.com.smesoft.ebms.service.ProductService;
 import ph.com.smesoft.ebms.service.StateService;
 import ph.com.smesoft.ebms.service.StreetService;
 import ph.com.smesoft.ebms.service.SubcategoryService;
@@ -491,6 +495,78 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         };
     }
 	
+	@Autowired
+    ProductService productService;
+	
+	public Converter<Product, String> getProductToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<ph.com.smesoft.ebms.domain.Product, java.lang.String>() {
+            public String convert(Product brand) {
+                return new StringBuilder().append(brand.getProductName()).toString();
+            }
+        };
+    }
+	
+	public Converter<Long, Product> getIdToProductConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, ph.com.smesoft.ebms.domain.Product>() {
+            public ph.com.smesoft.ebms.domain.Product convert(java.lang.Long id) {
+                return productService.findProduct(id);
+            }
+        };
+    }
+	
+	public Converter<String, Product> getStringToProductConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, ph.com.smesoft.ebms.domain.Product>() {
+            public ph.com.smesoft.ebms.domain.Product convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Product.class);
+            }
+        };
+    }
+	
+	public Converter<Double, Product> getDoubleToProductConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Double, ph.com.smesoft.ebms.domain.Product>() {
+            public ph.com.smesoft.ebms.domain.Product convert(Double id) {
+                return getObject().convert(getObject().convert(id, Double.class), Product.class);
+            }
+        };
+    }
+	
+
+	
+	
+	@Autowired
+	MeasurementService measurementService;
+	
+	public Converter<Measurement, String> getMeasurementToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<ph.com.smesoft.ebms.domain.Measurement, java.lang.String>() {
+            public String convert(Measurement measurement) {
+                return new StringBuilder().append(measurement.getMeasurementName()).toString();
+            }
+        };
+    }
+	
+	public Converter<Long, Measurement> getIdToMeasurementConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, ph.com.smesoft.ebms.domain.Measurement>() {
+            public ph.com.smesoft.ebms.domain.Measurement convert(java.lang.Long id) {
+                return measurementService.findMeasurement(id);
+            }
+        };
+    }
+	
+	public Converter<String, Measurement> getStringToMeasurementConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, ph.com.smesoft.ebms.domain.Measurement>() {
+            public ph.com.smesoft.ebms.domain.Measurement convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Measurement.class);
+            }
+        };
+    }
+	
+
+	
+	
+
+	
+	
+  
 	
 	public void installLabelConverters(FormatterRegistry registry) {
       
@@ -557,6 +633,16 @@ public class ApplicationConversionServiceFactoryBean extends FormattingConversio
         registry.addConverter(getBrandToStringConverter());
         registry.addConverter(getIdToBrandConverter());
         registry.addConverter(getStringToBrandConverter());
+        
+        registry.addConverter(getProductToStringConverter());
+        registry.addConverter(getIdToProductConverter());
+        registry.addConverter(getStringToProductConverter());
+        registry.addConverter(getDoubleToProductConverter());
+        
+        
+        registry.addConverter(getMeasurementToStringConverter());
+        registry.addConverter(getIdToMeasurementConverter());
+        registry.addConverter(getStringToMeasurementConverter());
         
         
     }

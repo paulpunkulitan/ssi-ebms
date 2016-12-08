@@ -1,4 +1,5 @@
 package ph.com.smesoft.ebms.web;
+
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -23,52 +24,56 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
-import com.google.gson.Gson;
-
-import ph.com.smesoft.ebms.domain.Floor;
-import ph.com.smesoft.ebms.domain.ItemCategory;
-import ph.com.smesoft.ebms.domain.SubCategory;
-import ph.com.smesoft.ebms.domain.Area;
-import ph.com.smesoft.ebms.domain.Brand;
+import ph.com.smesoft.ebms.domain.Product;
 import ph.com.smesoft.ebms.dto.SearchForm;
 import ph.com.smesoft.ebms.service.BrandService;
-import ph.com.smesoft.ebms.service.FloorService;
+import ph.com.smesoft.ebms.service.BusinessService;
 import ph.com.smesoft.ebms.service.ItemcategoryService;
+import ph.com.smesoft.ebms.service.MeasurementService;
+import ph.com.smesoft.ebms.service.ProductService;
 import ph.com.smesoft.ebms.service.SubcategoryService;
 
 @Controller
-@RequestMapping("/brand")
-public class BrandController {
+@RequestMapping("/products")
+public class ProductController {
 
 	@Autowired
-    BrandService brandService;
+    ProductService productsService;
+	@Autowired
+	BusinessService businessService;
 	@Autowired
 	ItemcategoryService itemCategoryService;
 	@Autowired
 	SubcategoryService subCategoryService;
+	@Autowired
+	MeasurementService measurementService;
+	@Autowired
+	BrandService brandService;
 
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    public String create(@Valid Brand brand, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, brand);
-            return "brand/create";
+    public String create(@Valid Product products, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+       
+		if (bindingResult.hasErrors()) {
+            populateEditForm(uiModel, products);
+            return "products/create";
         }
+        
         uiModel.asMap().clear();
-        brandService.saveBrand(brand);
-        return "redirect:/brand/" + encodeUrlPathSegment(brand.getId().toString(), httpServletRequest);
+        productsService.saveProduct(products);
+        return "redirect:/products/" + encodeUrlPathSegment(products.getId().toString(), httpServletRequest);
     }
 
 	@RequestMapping(params = "form", produces = "text/html")
     public String createForm(Model uiModel) {
-        populateEditForm(uiModel, new Brand());
-        return "brand/create";
+        populateEditForm(uiModel, new Product());
+        return "products/create";
     }
 
 	@RequestMapping(value = "/{id}", produces = "text/html")
     public String show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("brand", brandService.findBrand(id));
+        uiModel.addAttribute("products", productsService.findProduct(id));
         uiModel.addAttribute("itemId", id);
-        return "brand/show";
+        return "products/show";
     }
 
 	@RequestMapping(produces = "text/html")
@@ -76,51 +81,53 @@ public class BrandController {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("brand", Brand.findBrandNameEntries(firstResult, sizeNo, sortFieldName, sortOrder));
-            float nrOfPages = (float) brandService.countAllBrands() / sizeNo;
+            uiModel.addAttribute("products", Product.findProductEntries(firstResult, sizeNo, sortFieldName, sortOrder));
+            float nrOfPages = (float) productsService.countAllProducts() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("brand", Brand.findAllBrand(sortFieldName, sortOrder));
+            uiModel.addAttribute("products", Product.findAllProduct(sortFieldName, sortOrder));
         }
-        return "brand/list";
+        return "products/list";
     }
 
 	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
-    public String update(@Valid Brand brand, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+    public String update(@Valid Product products, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
-            populateEditForm2(uiModel, brand);
-            return "brand/update";
+            populateEditForm(uiModel, products);
+            return "products/update";
         }
         uiModel.asMap().clear();
-        brandService.updateBrand(brand);
-        return "redirect:/brand/" + encodeUrlPathSegment(brand.getId().toString(), httpServletRequest);
+        productsService.updateProduct(products);
+        return "redirect:/products/" + encodeUrlPathSegment(products.getId().toString(), httpServletRequest);
     }
 
 	@RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm2(uiModel, brandService.findBrand(id));
-        return "brand/update";
+        populateEditForm(uiModel, productsService.findProduct(id));
+        return "products/update";
     }
 
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        Brand brand = brandService.findBrand(id);
-        brandService.deleteBrand(brand);
+        Product products = productsService.findProduct(id);
+        productsService.deleteProduct(products);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/brand";
+        return "redirect:/products";
     }
 
-	void populateEditForm(Model uiModel, Brand brand) {
-        uiModel.addAttribute("brand", brand);
-      //  uiModel.addAttribute("subcategory", subCategoryService.findAllSubCategory());
-    }
+	void populateEditForm(Model uiModel, Product products) {
+        uiModel.addAttribute("products", products);
+        uiModel.addAttribute("business", businessService.findAllBusinesses());
+        uiModel.addAttribute("itemcategory", itemCategoryService.findAllItemCategory());
+        uiModel.addAttribute("subcategory", subCategoryService.findAllSubCategory());
+        uiModel.addAttribute("measurement", measurementService.findAllMeasurements());
+        uiModel.addAttribute("brand", brandService.findAllBrands());
+    
+	}
 
-	void populateEditForm2(Model uiModel, Brand brand) {
-        uiModel.addAttribute("brand", brand);
-    }
-	
 	String encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {
         String enc = httpServletRequest.getCharacterEncoding();
         if (enc == null) {
@@ -138,11 +145,11 @@ public class BrandController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         try {
-            Brand brand = brandService.findBrand(id);
-            if (brand == null) {
+            Product products = productsService.findProduct(id);
+            if (products == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
-            return new ResponseEntity<String>(brand.toJson(), headers, HttpStatus.OK);
+            return new ResponseEntity<String>(products.toJson(), headers, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -154,8 +161,8 @@ public class BrandController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json; charset=utf-8");
         try {
-            List<Brand> result = brandService.findAllBrands();
-            return new ResponseEntity<String>(Brand.toJsonArray(result), headers, HttpStatus.OK);
+            List<Product> result = productsService.findAllProducts();
+            return new ResponseEntity<String>(Product.toJsonArray(result), headers, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -166,79 +173,85 @@ public class BrandController {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         try {
-            Brand brand = Brand.fromJsonToBrand(json);
-            brandService.saveBrand(brand);
+            Product products = Product.fromJsonToProduct(json);
+            productsService.saveProduct(products);
             RequestMapping a = (RequestMapping) getClass().getAnnotation(RequestMapping.class);
-            headers.add("Location",uriBuilder.path(a.value()[0]+"/"+brand.getId().toString()).build().toUriString());
+            headers.add("Location",uriBuilder.path(a.value()[0]+"/"+products.getId().toString()).build().toUriString());
             return new ResponseEntity<String>(headers, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    } 
+    }
 
 	@RequestMapping(value = "/jsonArray", method = RequestMethod.POST, headers = "Accept=application/json")
     public ResponseEntity<String> createFromJsonArray(@RequestBody String json) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         try {
-            for (Brand brand: Brand.fromJsonArrayToBrand(json)) {
-            	brandService.saveBrand(brand);
-                
+            for (Product products: Product.fromJsonArrayToProduct(json)) {
+                productsService.saveProduct(products);
             }
             return new ResponseEntity<String>(headers, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    } 
+    }
 
-	 @RequestMapping(value = "/{id}", method = RequestMethod.PUT, headers = "Accept=application/json")
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, headers = "Accept=application/json")
     public ResponseEntity<String> updateFromJson(@RequestBody String json, @PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         try {
-           
-            Brand brand = Brand.fromJsonToBrand(json);
-            brand.setId(id);
-            
-            if (brandService.updateBrand(brand) == null) {
+            Product products = Product.fromJsonToProduct(json);
+            products.setId(id);
+            if (productsService.updateProduct(products) == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<String>(headers, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    } 
+    }
 
-	 @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, headers = "Accept=application/json")
     public ResponseEntity<String> deleteFromJson(@PathVariable("id") Long id) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         try {
-            Brand brand =  brandService.findBrand(id);
-            if (brand == null) {
+            Product products = productsService.findProduct(id);
+            if (products == null) {
                 return new ResponseEntity<String>(headers, HttpStatus.NOT_FOUND);
             }
-            brandService.deleteBrand(brand);
-            
+            productsService.deleteProduct(products);
             return new ResponseEntity<String>(headers, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>("{\"ERROR\":"+e.getMessage()+"\"}", headers, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    } 
-
-	@RequestMapping(value = "/search", method = { RequestMethod.GET })
-	 public String listofFloor(@ModelAttribute("SearchCriteria") SearchForm searchForm, Model uiModel) {
-		uiModel.addAttribute("brand", brandService.findBrandbyBrandNumber(searchForm.getSearchString()));
-		return "brand/list";
-	}
+    }
+/*
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public List<Product> listofProduct(@RequestParam("productsNumber") String searchKeyword) {
+		System.out.println("First");
+		List<Product> searchResult = productsService.findProductbyProductNumber(searchKeyword);
+		System.out.println("2nd");
+		System.out.println("THird" + searchResult);
+		return searchResult;
+	}*/
 	
-	@RequestMapping(value="/{categoryId}", method = RequestMethod.GET)
-	public ResponseEntity<String> getSubCategoryByCategoryId(@PathVariable Integer categoryId, Model uiModel){
+	/*@RequestMapping(value = "/search", method = { RequestMethod.GET })
+	public ResponseEntity<String> listofProduct(@ModelAttribute("SearchCriteria") SearchForm searchForm) {
 		HttpHeaders headers = new HttpHeaders();
-		Long categoryIdtoLong  = Long.valueOf(categoryId.longValue());
-		List<SubCategory> subCategoryName = subCategoryService.findSubCategoryByCategoryId(categoryIdtoLong);
-		String json = new Gson().toJson(subCategoryName);
-		
-		return new ResponseEntity<String>(json, headers, HttpStatus.OK);
+		System.out.println("First");
+		String searchResult = productsService.findProductbyProductNumber(searchForm.getSearchString());
+		System.out.println("2nd");
+		System.out.println("THird" + searchResult);
+		//return searchResult;
+		return new ResponseEntity<String>(searchResult,headers, HttpStatus.OK);
+	}*/
+	
+	@RequestMapping(value = "/search", method = { RequestMethod.GET })
+	public String listofProduct(@ModelAttribute("SearchCriteria") SearchForm searchForm, Model uiModel) {
+		uiModel.addAttribute("products", productsService.findProductBySearch(searchForm.getSearchString()));
+		return "products/list";
 	}
 }

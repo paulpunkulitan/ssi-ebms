@@ -40,11 +40,6 @@ public class Brand{
 
     /**
      */
-	@ManyToOne
-	private ItemCategory itemCategory;
-
-	@ManyToOne
-	private SubCategory subCategory;
 	
 	@Size(min=1, max=30)
 	private String brandName;
@@ -168,21 +163,6 @@ public class Brand{
 
     
 
-	public ItemCategory getItemCategory() {
-		return itemCategory;
-	}
-
-	public void setItemCategory(ItemCategory itemCategory) {
-		this.itemCategory = itemCategory;
-	}
-
-	public SubCategory getSubCategory() {
-		return subCategory;
-	}
-
-	public void setSubCategory(SubCategory subCategory) {
-		this.subCategory = subCategory;
-	}
 
 	public String getBrandName() {
 		return brandName;

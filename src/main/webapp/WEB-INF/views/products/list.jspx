@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div 
+xmlns:jsp="http://java.sun.com/JSP/Page" 
+xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
+xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/custom" 
+xmlns:display="urn:jsptagdir:/WEB-INF/tags/form/fields" 
+version="2.0">
+
+ <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+ <jsp:output omit-xml-declaration="yes"/>
+ 
+
+	
+       <div id="wrapper">
+           <div class="container-fluid">
+                     <div>
+                           <ol class="breadcrumb">
+                                  <li class="active"><a>Customer</a></li>
+                                  <li class="active"><span>List of Registered Customer</span></li>
+                           </ol>
+                     </div>                     
+               
+                     <div stype="top-margin:-30px;">
+                     
+	                    <page:list id="pl_ph_com_smesoft_ebms_domain_product" items="${products}" buttonAction="/ebms/products?form" buttonLabel="Register New Product" searchAction="/ebms/products/search">
+	                      <table:table data="${products}" id="l_ph_com_smesoft_ebms_domain_product" path="/products" >
+	                     	 <table:column id="c_ph_com_smesoft_ebms_domain_product_productname" property="productName" />
+                         	 <table:column id="c_ph_com_smesoft_ebms_domain_product_unitprice" property="unitPrice" />
+                   </table:table>
+	                  	</page:list>
+                     
+                     </div> 
+
+           </div>   
+       </div>   
+</div>
